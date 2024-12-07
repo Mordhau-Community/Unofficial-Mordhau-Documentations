@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "uMordhau Documentations"
+  name: "وثائق موردهاو الغير رسمية"
   text: "Unofficial Mordhau Documentations"
   tagline: Built by Mordhau Community
   actions:

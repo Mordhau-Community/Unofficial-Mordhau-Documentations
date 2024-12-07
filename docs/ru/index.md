@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "uMordhau Documentations"
+  name: "Неофициальная документация по Mordhau"
   text: "Unofficial Mordhau Documentations"
   tagline: Built by Mordhau Community
   actions:
