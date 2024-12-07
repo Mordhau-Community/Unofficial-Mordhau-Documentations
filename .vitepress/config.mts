@@ -4,46 +4,9 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
   title: "uMordhau Documentation",
   description: "Mordhau Documentation",
-  locales: {
-    root: {
-      label: "English",
-      lang: "en",
-    },
-    ar: {
-      label: "Arabic",
-      lang: "ar",
-      link: "/ar/",
-      dir: "rtl",
-    },
-    ru: {
-      label: "Russian",
-      lang: "ru",
-      link: "/ru/",
-    },
-  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    nav: [
-      { text: "Home", link: "/" },
-      { text: "How to contributing", link: "/how-to-contributing/" },
-      { text: "RCON", link: "/rcon-guide/" },
-      { text: "MordhauSDK", link: "/mordhauSDK-guide/" },
-      {
-        text: "Create your own server",
-        link: "/create-your-own-server-guide/",
-      },
-    ],
     logo: "../resources/MordhauLogo.png",
-    sidebar: [
-      {
-        text: "Examples",
-        items: [
-          { text: "Markdown Examples", link: "/markdown-examples" },
-          { text: "Runtime API Examples", link: "/api-examples" },
-        ],
-      },
-    ],
-
     socialLinks: [
       {
         icon: "github",
@@ -51,6 +14,203 @@ export default defineConfig({
       },
       { icon: "discord", link: "https://discord.gg/zuX58yRV84" },
     ],
+  },
+
+  // https://vitepress.dev/guide/i18n
+  locales: {
+    root: {
+      label: "English",
+      lang: "en",
+      link: "/en/",
+      dir: "ltr",
+      themeConfig: {
+        nav: [
+          { text: "Home", link: "/en/" },
+          { text: "How to contributing", link: "/en/how-to-contributing/" },
+          { text: "RCON", link: "/en/rcon-guide/" },
+          { text: "MordhauSDK", link: "/en/mordhauSDK-guide/" },
+          {
+            text: "Create your own server",
+            link: "/en/create-your-own-server-guide/",
+          },
+        ],
+        sidebar: [
+          {
+            text: "Get Started",
+            items: [
+              {
+                text: "Contributing in Mordhau Documentations",
+                link: "/en/how-to-contributing/",
+              },
+              {
+                text: "How to understand the docs?",
+                link: "/en/mordhauSDK-guide/",
+              },
+            ],
+          },
+        ],
+      },
+    },
+    ar: {
+      label: "العربية",
+      lang: "ar",
+      dir: "rtl",
+      themeConfig: {
+        nav: [
+          { text: "الرئسية", link: "/ar/" },
+          { text: "How to contributing", link: "/ar/how-to-contributing/" },
+          { text: "RCON", link: "/ar/rcon-guide/" },
+          { text: "MordhauSDK", link: "/ar/mordhauSDK-guide/" },
+          {
+            text: "Create your own server",
+            link: "/ar/create-your-own-server-guide/",
+          },
+        ],
+        sidebar: [
+          {
+            text: "Get Started",
+            items: [
+              {
+                text: "Contributing in Mordhau Documentations",
+                link: "/en/how-to-contributing/",
+              },
+              {
+                text: "How to understand the docs?",
+                link: "/en/mordhauSDK-guide/",
+              },
+            ],
+          },
+        ],
+      },
+    },
+    ru: {
+      label: "Русский",
+      lang: "ru",
+      dir: "ltr",
+      themeConfig: {
+        nav: [
+          { text: "Home", link: "/en/" },
+          { text: "How to contributing", link: "/en/how-to-contributing/" },
+          { text: "RCON", link: "/en/rcon-guide/" },
+          { text: "MordhauSDK", link: "/en/mordhauSDK-guide/" },
+          {
+            text: "Create your own server",
+            link: "/en/create-your-own-server-guide/",
+          },
+        ],
+        sidebar: [
+          {
+            text: "Get Started",
+            items: [
+              {
+                text: "Contributing in Mordhau Documentations",
+                link: "/en/how-to-contributing/",
+              },
+              {
+                text: "How to understand the docs?",
+                link: "/en/mordhauSDK-guide/",
+              },
+            ],
+          },
+        ],
+      },
+    },
+    ja: {
+      label: "日本語",
+      lang: "ja",
+      dir: "ltr",
+      themeConfig: {
+        nav: [
+          { text: "Home", link: "/en/" },
+          { text: "How to contributing", link: "/en/how-to-contributing/" },
+          { text: "RCON", link: "/en/rcon-guide/" },
+          { text: "MordhauSDK", link: "/en/mordhauSDK-guide/" },
+          {
+            text: "Create your own server",
+            link: "/en/create-your-own-server-guide/",
+          },
+        ],
+        sidebar: [
+          {
+            text: "Get Started",
+            items: [
+              {
+                text: "Contributing in Mordhau Documentations",
+                link: "/en/how-to-contributing/",
+              },
+              {
+                text: "How to understand the docs?",
+                link: "/en/mordhauSDK-guide/",
+              },
+            ],
+          },
+        ],
+      },
+    },
+    fr: {
+      label: "Français",
+      lang: "fr",
+      dir: "ltr",
+      themeConfig: {
+        nav: [
+          { text: "Home", link: "/en/" },
+          { text: "How to contributing", link: "/en/how-to-contributing/" },
+          { text: "RCON", link: "/en/rcon-guide/" },
+          { text: "MordhauSDK", link: "/en/mordhauSDK-guide/" },
+          {
+            text: "Create your own server",
+            link: "/en/create-your-own-server-guide/",
+          },
+        ],
+        sidebar: [
+          {
+            text: "Get Started",
+            items: [
+              {
+                text: "Contributing in Mordhau Documentations",
+                link: "/en/how-to-contributing/",
+              },
+              {
+                text: "How to understand the docs?",
+                link: "/en/mordhauSDK-guide/",
+              },
+            ],
+          },
+        ],
+      },
+    },
+    zh: {
+      label: "中文",
+      lang: "zh",
+      dir: "ltr",
+      themeConfig: {
+        nav: [
+          { text: "Home", link: "/en/" },
+          { text: "How to contributing", link: "/en/how-to-contributing/" },
+          { text: "RCON", link: "/en/rcon-guide/" },
+          { text: "MordhauSDK", link: "/en/mordhauSDK-guide/" },
+          {
+            text: "Create your own server",
+            link: "/en/create-your-own-server-guide/",
+          },
+        ],
+        sidebar: [
+          {
+            text: "Get Started",
+            items: [
+              {
+                text: "Contributing in Mordhau Documentations",
+                link: "/en/how-to-contributing/",
+              },
+              {
+                text: "How to understand the docs?",
+                link: "/en/mordhauSDK-guide/",
+              },
+            ],
+          },
+        ],
+      },
+    },
   },
   srcDir: "docs",
   outDir: "./public",

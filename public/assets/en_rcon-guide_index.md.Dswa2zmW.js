@@ -1,1 +1,0 @@
-import{_ as e,c as n,o as t}from"./chunks/framework.L8INE9lh.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"en/rcon-guide/index.md","filePath":"en/rcon-guide/index.md"}'),r={name:"en/rcon-guide/index.md"};function a(o,c,d,i,s,p){return t(),n("div")}const f=e(r,[["render",a]]);export{m as __pageData,f as default};

@@ -41,7 +41,7 @@ Run the following command to start a local development server:
 npm run docs:dev
 ```
 
-then Visit http://localhost:3000 in your browser to view the documentation locally.
+then Visit localhost:3000 in your browser to view the documentation locally.
 
 ## 🛠️ Build for Production
 

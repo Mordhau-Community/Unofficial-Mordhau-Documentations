@@ -3,13 +3,13 @@
 layout: home
 
 hero:
-  name: "Неофициальная документация по Mordhau"
+  name: "uMordhau Documentations"
   text: "Unofficial Mordhau Documentations"
   tagline: Built by Mordhau Community
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Get Start Contributing
+      link: /en/how-to-contributing
     - theme: alt
       text: API Examples
       link: /api-examples
