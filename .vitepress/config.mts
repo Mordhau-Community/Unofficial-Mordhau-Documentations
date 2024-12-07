@@ -30,4 +30,5 @@ export default defineConfig({
     ],
   },
   srcDir: "docs",
+  outDir: "../public",
 });
