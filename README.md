@@ -1,2 +1,2 @@
-# Unofficial-Mordhau-documentation
+# Unofficial-Mordhau-Documentation
 Unofficial documentation for Mordhau game.
