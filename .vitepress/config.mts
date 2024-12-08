@@ -48,7 +48,7 @@ export default defineConfig({
             items: [
               {
                 text: "changelog",
-                link: "https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations",
+                link: "https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations/blob/main/CHANGELOG.md",
               },
             ],
           },
@@ -84,6 +84,15 @@ export default defineConfig({
             text: "Create your own server",
             link: "/ar/create-your-own-server-guide/",
           },
+          {
+            text: version,
+            items: [
+              {
+                text: "changelog",
+                link: "https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations/blob/main/CHANGELOG.md",
+              },
+            ],
+          },
         ],
         sidebar: [
           {
@@ -115,6 +124,15 @@ export default defineConfig({
           {
             text: "Create your own server",
             link: "/en/create-your-own-server-guide/",
+          },
+          {
+            text: version,
+            items: [
+              {
+                text: "changelog",
+                link: "https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations/blob/main/CHANGELOG.md",
+              },
+            ],
           },
         ],
         sidebar: [
@@ -148,6 +166,15 @@ export default defineConfig({
             text: "Create your own server",
             link: "/en/create-your-own-server-guide/",
           },
+          {
+            text: version,
+            items: [
+              {
+                text: "changelog",
+                link: "https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations/blob/main/CHANGELOG.md",
+              },
+            ],
+          },
         ],
         sidebar: [
           {
@@ -180,6 +207,15 @@ export default defineConfig({
             text: "Create your own server",
             link: "/en/create-your-own-server-guide/",
           },
+          {
+            text: version,
+            items: [
+              {
+                text: "changelog",
+                link: "https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations/blob/main/CHANGELOG.md",
+              },
+            ],
+          },
         ],
         sidebar: [
           {
@@ -211,6 +247,15 @@ export default defineConfig({
           {
             text: "Create your own server",
             link: "/en/create-your-own-server-guide/",
+          },
+          {
+            text: version,
+            items: [
+              {
+                text: "changelog",
+                link: "https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations/blob/main/CHANGELOG.md",
+              },
+            ],
           },
         ],
         sidebar: [
