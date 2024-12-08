@@ -63,10 +63,10 @@ Click the Fork button on the top-right of this page to create a copy of this rep
 
 #### 2. Create a New Branch
 
-Create a new branch for your changes:
+Create a new branch for your changes (e.g., improve-unofficial-mordhau-documentations).:
 
 ```bash
-git checkout -b unofficial-mordhau-documentations
+git checkout -b improve-unofficial-mordhau-documentations
 ```
 
 #### 3. Add or Update Documentation
@@ -104,6 +104,7 @@ Click on Pull Requests and submit your changes for review.
 - Follow the structure of existing documentation.
 - Add examples or images where applicable to enhance clarity.
 - If adding new files, link them in the sidebar by updating the .vitepress/config.ts file.
+- See CONTRIBUTING.md for more detailed guidelines.
 
 ## 🌍 Multilingual Support
 
