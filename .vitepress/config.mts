@@ -4,9 +4,18 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
   title: "uMordhau Documentation",
   description: "Mordhau Documentation",
+  srcDir: "docs",
+  outDir: "./public/",
+  assetsDir: "resources",
+  ignoreDeadLinks: true,
+  cleanUrls: true,
+  rewrites(id) {
+    return id.replace(/\/en\//, "/");
+  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: "../resources/MordhauLogo.png",
+    logo: "/logo.webp",
+    i18nRouting: false,
     socialLinks: [
       {
         icon: "github",
@@ -30,8 +39,8 @@ export default defineConfig({
           { text: "RCON", link: "/en/rcon-guide/" },
           { text: "MordhauSDK", link: "/en/mordhauSDK-guide/" },
           {
-            text: "Create your own server",
-            link: "/en/create-your-own-server-guide/",
+            text: "Dedicated server",
+            link: "/en/dedicated-server-guide/",
           },
         ],
         sidebar: [
@@ -212,6 +221,4 @@ export default defineConfig({
       },
     },
   },
-  srcDir: "docs",
-  outDir: "./public",
 });

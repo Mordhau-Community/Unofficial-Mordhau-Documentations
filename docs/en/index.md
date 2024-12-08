@@ -21,4 +21,6 @@ features:
     details: Providing multiple languages to enable non-English-speaking contributors to read the documentation.
   - title: 🔥 Modern Design
     details: The documentation is built with the latest designs, ensuring both a visually appealing layout and smooth browsing performance.
+  - title: 🌟 No Annoying ADs
+    details: We made sure to clean up the website and enhance its readability by removing ads. This is a unique feature that most of the scattered Mordhau documentation does not offer.
 ---

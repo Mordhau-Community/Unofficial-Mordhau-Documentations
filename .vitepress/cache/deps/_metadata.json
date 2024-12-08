@@ -7,7 +7,7 @@
     "vue": {
       "src": "../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "98c4112e",
+      "fileHash": "dafba0a9",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
@@ -19,7 +19,7 @@
     "vitepress > @vueuse/core": {
       "src": "../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "b0bfe584",
+      "fileHash": "c55d1121",
       "needsInterop": false
     }
   },
