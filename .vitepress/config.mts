@@ -1,4 +1,5 @@
 import { defineConfig } from "vitepress";
+import { version } from "../package.json";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -41,6 +42,15 @@ export default defineConfig({
           {
             text: "Dedicated server",
             link: "/en/dedicated-server-guide/",
+          },
+          {
+            text: version,
+            items: [
+              {
+                text: "changelog",
+                link: "https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations",
+              },
+            ],
           },
         ],
         sidebar: [
