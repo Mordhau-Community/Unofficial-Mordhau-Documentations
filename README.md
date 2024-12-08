@@ -98,7 +98,7 @@ git push origin unofficial-mordhau-documentations
 Go to the original repository on GitHub.
 Click on Pull Requests and submit your changes for review.
 
-## 📜 Contribution Guidelines
+## ❓ Contribution Guidelines
 
 - Ensure your changes are clear and concise.
 - Follow the structure of existing documentation.
@@ -124,3 +124,8 @@ If you have any questions or suggestions, feel free to open an Issue on GitHub. 
 ## ❤️ Acknowledgements
 
 Special thanks to all contributors who help make this documentation better for everyone.
+
+## 📜 License
+
+This project is licensed under the Custom Documentation License (CDL).
+Please ensure that your use of this repository complies with the terms outlined in the license.
