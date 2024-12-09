@@ -1,0 +1,12 @@
+[[redirects]]
+  from = "/"
+  to = "/docs/en/"
+  status = 301
+  force = false
+
+[[redirects]]
+  from = "/docs"
+  to = "/docs/en/"
+  status = 301
+  force = false
+
