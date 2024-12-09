@@ -2,7 +2,7 @@
   "version": "0.0.5.Unreleased",
   "scripts": {
     "docs:dev": "vitepress dev",
-    "docs:build": "vitepress build && node utils/copy-redirects.js",
+    "docs:build": "vitepress build",
     "docs:preview": "vitepress preview"
   },
   "devDependencies": {
