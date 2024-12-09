@@ -1,5 +1,5 @@
 {
-  "version": "0.0.5",
+  "version": "0.0.5.Unreleased",
   "scripts": {
     "server:dev": "node docs/server.js",
     "docs:dev": "vitepress dev",
