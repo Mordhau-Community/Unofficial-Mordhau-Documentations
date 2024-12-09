@@ -1,6 +1,7 @@
 {
   "version": "0.0.5",
   "scripts": {
+    "server:start": "node docs/server.js",
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview"
