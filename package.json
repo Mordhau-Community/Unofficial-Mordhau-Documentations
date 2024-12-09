@@ -1,12 +1,12 @@
 {
   "version": "0.0.5.Unreleased",
   "scripts": {
-    "server:dev": "node docs/server.js",
     "docs:dev": "vitepress dev",
-    "docs:build": "vitepress build",
+    "docs:build": "vitepress build && node utils/copy-redirects.js",
     "docs:preview": "vitepress preview"
   },
   "devDependencies": {
+    "fs-extra": "^11.2.0",
     "postcss": "^8.4.49",
     "postcss-rtlcss": "^5.5.1",
     "vitepress": "^1.5.0"
