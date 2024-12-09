@@ -6,6 +6,7 @@ export default defineConfig({
   title: "uMordhau Documentation",
   description: "Mordhau Documentation",
   srcDir: "docs",
+  outDir: ".vitepress/dist/docs",
   base: "/docs/",
   ignoreDeadLinks: true,
   cleanUrls: true,
