@@ -14,7 +14,7 @@ export default defineConfig({
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: "/logo.webp",
+    // logo: "/logo.webp",
     i18nRouting: false,
     socialLinks: [
       {
