@@ -1,5 +1,5 @@
 {
-  "version": "0.0.5.Unreleased",
+  "version": "0.0.8.Unreleased",
   "scripts": {
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
