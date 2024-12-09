@@ -6,7 +6,6 @@ export default defineConfig({
   title: "uMordhau Documentation",
   description: "Mordhau Documentation",
   srcDir: "docs",
-  outDir: "./public/",
   base: "/blog/",
   ignoreDeadLinks: true,
   cleanUrls: true,
