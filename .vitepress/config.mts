@@ -81,8 +81,8 @@ export default defineConfig({
           { text: "RCON", link: "/ar/rcon-guide/" },
           { text: "MordhauSDK", link: "/ar/mordhauSDK-guide/" },
           {
-            text: "Create your own server",
-            link: "/ar/create-your-own-server-guide/",
+            text: "Dedicated Server",
+            link: "/ar/dedicated-server-guide/",
           },
           {
             text: version,
@@ -123,7 +123,7 @@ export default defineConfig({
           { text: "MordhauSDK", link: "/ru/mordhauSDK-guide/" },
           {
             text: "Create your own server",
-            link: "/ru/create-your-own-server-guide/",
+            link: "/ru/dedicated-server-guide/",
           },
           {
             text: version,
@@ -164,7 +164,7 @@ export default defineConfig({
           { text: "MordhauSDK", link: "/ja/mordhauSDK-guide/" },
           {
             text: "Create your own server",
-            link: "/ja/create-your-own-server-guide/",
+            link: "/ja/dedicated-server-guide/",
           },
           {
             text: version,
@@ -205,7 +205,7 @@ export default defineConfig({
           { text: "MordhauSDK", link: "/fr/mordhauSDK-guide/" },
           {
             text: "Create your own server",
-            link: "/fr/create-your-own-server-guide/",
+            link: "/fr/dedicated-server-guide/",
           },
           {
             text: version,
@@ -246,7 +246,7 @@ export default defineConfig({
           { text: "MordhauSDK", link: "/zh/mordhauSDK-guide/" },
           {
             text: "Create your own server",
-            link: "/zh/create-your-own-server-guide/",
+            link: "/zh/dedicated-server-guide/",
           },
           {
             text: version,

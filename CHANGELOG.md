@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CONTRIBUTING File.
 - LICENSE File.
 - Change Project Structure.
+- Redirect System For Routes.
 
 ### Changed
 
