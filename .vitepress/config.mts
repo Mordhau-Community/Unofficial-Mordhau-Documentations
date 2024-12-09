@@ -10,6 +10,7 @@ export default defineConfig({
   assetsDir: "resources",
   ignoreDeadLinks: true,
   cleanUrls: true,
+  base: "/Docs/",
   rewrites(id) {
     return id.replace(/\/en\//, "/");
   },
