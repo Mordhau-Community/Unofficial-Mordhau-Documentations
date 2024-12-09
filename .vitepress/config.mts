@@ -7,7 +7,6 @@ export default defineConfig({
   description: "Mordhau Documentation",
   srcDir: "docs",
   outDir: "./public/",
-  assetsDir: "resources",
   ignoreDeadLinks: true,
   cleanUrls: true,
   rewrites(id) {
