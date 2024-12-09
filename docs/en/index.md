@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: Get Start Contributing
-      link: /en/how-to-contributing
+      link: /en/contributing
     - theme: alt
       text: Look to Vitepress
       link: https://vitepress.dev
