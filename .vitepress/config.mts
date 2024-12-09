@@ -36,7 +36,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "Home", link: "/en/" },
-          { text: "How to contributing", link: "/en/how-to-contributing/" },
+          { text: "contributing", link: "/en/contributing/" },
           { text: "RCON", link: "/en/rcon-guide/" },
           { text: "MordhauSDK", link: "/en/mordhauSDK-guide/" },
           {
@@ -59,7 +59,7 @@ export default defineConfig({
             items: [
               {
                 text: "Contributing in Mordhau Documentations",
-                link: "/en/how-to-contributing/",
+                link: "/en/contributing/",
               },
               {
                 text: "How to understand the docs?",
@@ -77,7 +77,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "الرئسية", link: "/ar/" },
-          { text: "How to contributing", link: "/ar/how-to-contributing/" },
+          { text: "contributing", link: "/ar/contributing/" },
           { text: "RCON", link: "/ar/rcon-guide/" },
           { text: "MordhauSDK", link: "/ar/mordhauSDK-guide/" },
           {
@@ -100,7 +100,7 @@ export default defineConfig({
             items: [
               {
                 text: "Contributing in Mordhau Documentations",
-                link: "/en/how-to-contributing/",
+                link: "/en/contributing/",
               },
               {
                 text: "How to understand the docs?",
@@ -118,7 +118,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "Home", link: "/ru/" },
-          { text: "How to contributing", link: "/ru/how-to-contributing/" },
+          { text: "contributing", link: "/ru/contributing/" },
           { text: "RCON", link: "/ru/rcon-guide/" },
           { text: "MordhauSDK", link: "/ru/mordhauSDK-guide/" },
           {
@@ -141,7 +141,7 @@ export default defineConfig({
             items: [
               {
                 text: "Contributing in Mordhau Documentations",
-                link: "/ru/how-to-contributing/",
+                link: "/ru/contributing/",
               },
               {
                 text: "How to understand the docs?",
@@ -159,7 +159,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "Home", link: "/ja/" },
-          { text: "How to contributing", link: "/ja/how-to-contributing/" },
+          { text: "contributing", link: "/ja/contributing/" },
           { text: "RCON", link: "/ja/rcon-guide/" },
           { text: "MordhauSDK", link: "/ja/mordhauSDK-guide/" },
           {
@@ -182,7 +182,7 @@ export default defineConfig({
             items: [
               {
                 text: "Contributing in Mordhau Documentations",
-                link: "/ja/how-to-contributing/",
+                link: "/ja/contributing/",
               },
               {
                 text: "How to understand the docs?",
@@ -200,7 +200,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "Home", link: "/fr/" },
-          { text: "How to contributing", link: "/fr/how-to-contributing/" },
+          { text: "contributing", link: "/fr/contributing/" },
           { text: "RCON", link: "/fr/rcon-guide/" },
           { text: "MordhauSDK", link: "/fr/mordhauSDK-guide/" },
           {
@@ -223,7 +223,7 @@ export default defineConfig({
             items: [
               {
                 text: "Contributing in Mordhau Documentations",
-                link: "/fr/how-to-contributing/",
+                link: "/fr/contributing/",
               },
               {
                 text: "How to understand the docs?",
@@ -241,7 +241,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "Home", link: "/zh/" },
-          { text: "How to contributing", link: "/zh/how-to-contributing/" },
+          { text: "contributing", link: "/zh/contributing/" },
           { text: "RCON", link: "/zh/rcon-guide/" },
           { text: "MordhauSDK", link: "/zh/mordhauSDK-guide/" },
           {
@@ -264,7 +264,7 @@ export default defineConfig({
             items: [
               {
                 text: "Contributing in Mordhau Documentations",
-                link: "/zh/how-to-contributing/",
+                link: "/zh/contributing/",
               },
               {
                 text: "How to understand the docs?",
