@@ -1,10 +1,8 @@
-# how to contributing in Mordhau Documentations!
+# How to contributing in Mordhau documentations!
 
-go to the **Mordhau Documentation Repository**.
+Go to the [**Mordhau Documentation Repository**](https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations).
 This repository uses **VitePress** to create clear and easy-to-read documentation for the game **Mordhau**.  
 Our goal is to provide a comprehensive and multilingual resource for players and developers alike.
-
----
 
 ## 🚀 Getting Started
 
@@ -12,7 +10,11 @@ Our goal is to provide a comprehensive and multilingual resource for players and
 
 - You should have knowledge about **Github** and **Vscode** and **Markdown**
 - You should have Github Account.
-- You should have install **[Nodejs LTS](https://nodejs.org/en)** and **[Git](https://git-scm.com/downloads)**
+- You should have install **[Nodejs LTS](https://nodejs.org/en)** and **[Git](https://git-scm.com/downloads)** and **[Vscode](https://code.visualstudio.com/)**
+
+::: tip RECOMENDED
+It is recommended that after installing VS Code, you download the internal extensions available within it to simplify documentation and project management processes. As soon as you open the project in VS Code, the recommended extensions will appear for you.
+:::
 
 <br>
 

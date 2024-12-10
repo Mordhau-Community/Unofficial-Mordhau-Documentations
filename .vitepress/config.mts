@@ -3,20 +3,37 @@ import { version } from "../package.json";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "uMordhau Documentation",
+  title: "uMordhau Documentations",
   description: "Mordhau Documentation",
   srcDir: "docs",
   outDir: ".vitepress/dist/docs",
   base: "/docs/",
   ignoreDeadLinks: true,
   cleanUrls: true,
+  vite: {
+    css: {
+      postcss: "./postcss.config.js",
+    },
+  },
   rewrites(id) {
     return id.replace(/\/en\//, "/");
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    // TODO: should fix it later..
     // logo: "/logo.webp",
-    i18nRouting: false,
+    // i18nRouting: false,
+    search: {
+      provider: "local",
+      options: {
+        _render(src, env, md) {
+          const html = md.render(src, env);
+          if (env.frontmatter?.title)
+            return md.render(`# ${env.frontmatter.title}`) + html;
+          return html;
+        },
+      },
+    },
     socialLinks: [
       {
         icon: "github",
@@ -36,12 +53,25 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "Home", link: "/en/" },
-          { text: "contributing", link: "/en/contributing/" },
-          { text: "RCON", link: "/en/rcon-guide/" },
-          { text: "MordhauSDK", link: "/en/mordhauSDK-guide/" },
+          { text: "Contributing", link: "/en/contributing/" },
           {
-            text: "Dedicated server",
-            link: "/en/dedicated-server-guide/",
+            text: "Informations",
+            items: [
+              { text: "About us", link: "/en/about-us/" },
+              { text: "About Mordhau", link: "/en/about-mordhau/" },
+            ],
+          },
+          {
+            text: "Docs Sections",
+            items: [
+              { text: "RCON Guide", link: "/en/rcon-guide/" },
+              { text: "MordhauSDK Guide", link: "/en/mordhauSDK-guide/" },
+              {
+                text: "Dedicated Server Guide",
+                link: "/en/dedicated-server-guide/",
+              },
+              { text: "Encountering Errors", link: "/en/encountering-errors/" },
+            ],
           },
           {
             text: version,
@@ -53,9 +83,10 @@ export default defineConfig({
             ],
           },
         ],
+        // FIXME: We should fix it.
         sidebar: [
           {
-            text: "Get Started",
+            text: "Get Started!",
             items: [
               {
                 text: "Contributing in Mordhau Documentations",
@@ -76,8 +107,8 @@ export default defineConfig({
       dir: "rtl",
       themeConfig: {
         nav: [
-          { text: "الرئسية", link: "/ar/" },
-          { text: "contributing", link: "/ar/contributing/" },
+          { text: "Home", link: "/ar/" },
+          { text: "Contributing", link: "/ar/contributing/" },
           { text: "RCON", link: "/ar/rcon-guide/" },
           { text: "MordhauSDK", link: "/ar/mordhauSDK-guide/" },
           {
@@ -118,7 +149,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "Home", link: "/ru/" },
-          { text: "contributing", link: "/ru/contributing/" },
+          { text: "Contributing", link: "/ru/contributing/" },
           { text: "RCON", link: "/ru/rcon-guide/" },
           { text: "MordhauSDK", link: "/ru/mordhauSDK-guide/" },
           {
@@ -159,7 +190,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "Home", link: "/ja/" },
-          { text: "contributing", link: "/ja/contributing/" },
+          { text: "Contributing", link: "/ja/contributing/" },
           { text: "RCON", link: "/ja/rcon-guide/" },
           { text: "MordhauSDK", link: "/ja/mordhauSDK-guide/" },
           {
@@ -200,7 +231,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "Home", link: "/fr/" },
-          { text: "contributing", link: "/fr/contributing/" },
+          { text: "Contributing", link: "/fr/contributing/" },
           { text: "RCON", link: "/fr/rcon-guide/" },
           { text: "MordhauSDK", link: "/fr/mordhauSDK-guide/" },
           {
@@ -241,7 +272,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "Home", link: "/zh/" },
-          { text: "contributing", link: "/zh/contributing/" },
+          { text: "Contributing", link: "/zh/contributing/" },
           { text: "RCON", link: "/zh/rcon-guide/" },
           { text: "MordhauSDK", link: "/zh/mordhauSDK-guide/" },
           {

@@ -1,17 +1,12 @@
 {
-  "version": "0.0.8.Unreleased",
+  "version": "0.0.9.Unreleased",
   "scripts": {
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview"
   },
   "devDependencies": {
-    "fs-extra": "^11.2.0",
-    "postcss": "^8.4.49",
     "postcss-rtlcss": "^5.5.1",
     "vitepress": "^1.5.0"
-  },
-  "dependencies": {
-    "express": "^4.21.2"
   }
 }
