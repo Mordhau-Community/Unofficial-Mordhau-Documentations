@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [0.0.10.Unreleased] (10 / 12 / 2024)
+
+### Added
+
+- Improving the website's appearance
+- More Documentations Content.
+
+## Fixed
+
+- Fix RTL ( remove old package and add postcss-rtl pkg).
+
+
+
 ## [0.0.9.Unreleased] (10 / 12 / 2024)
 
 ### Added
@@ -18,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Edited
 
 - Documentations Content.
+
 
 
 ## [0.0.8.Unreleased] (09 / 12 / 2024)

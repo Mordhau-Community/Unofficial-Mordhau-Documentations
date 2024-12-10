@@ -6,7 +6,7 @@
     "docs:preview": "vitepress preview"
   },
   "devDependencies": {
-    "postcss-rtlcss": "^5.5.1",
+    "postcss-rtl": "^2.0.0",
     "vitepress": "^1.5.0"
   }
 }

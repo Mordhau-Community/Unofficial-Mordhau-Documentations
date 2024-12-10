@@ -10,6 +10,7 @@ export default defineConfig({
   base: "/docs/",
   ignoreDeadLinks: true,
   cleanUrls: true,
+  lastUpdated: true,
   vite: {
     css: {
       postcss: "./postcss.config.js",
@@ -23,6 +24,14 @@ export default defineConfig({
     // TODO: should fix it later..
     // logo: "/logo.webp",
     // i18nRouting: false,
+    footer: {
+      message: "Released under the (CDL) License.",
+      copyright: "Copyright © 2024-present Mordhau-Community - John Brayden",
+    },
+    editLink: {
+      pattern:
+        "https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations/edit/main/docs/:path",
+    },
     search: {
       provider: "local",
       options: {
@@ -58,7 +67,10 @@ export default defineConfig({
             text: "Informations",
             items: [
               { text: "About us", link: "/en/about-us/" },
-              { text: "About Mordhau", link: "/en/about-mordhau/" },
+              {
+                text: "About Mordhau and docs",
+                link: "/en/about-mordhau-and-docs/",
+              },
             ],
           },
           {
@@ -84,21 +96,31 @@ export default defineConfig({
           },
         ],
         // FIXME: We should fix it.
-        sidebar: [
-          {
-            text: "Get Started!",
-            items: [
-              {
-                text: "Contributing in Mordhau Documentations",
-                link: "/en/contributing/",
-              },
-              {
-                text: "How to understand the docs?",
-                link: "/en/mordhauSDK-guide/",
-              },
-            ],
-          },
-        ],
+        sidebar: {
+          "/en/contributing/": [
+            {
+              text: "Guide",
+              items: [
+                { text: "hello", link: "/en/contributing/" },
+                { text: "testing", link: "/en/contributing/one" },
+                { text: "boooo", link: "/en/contributing/two" },
+              ],
+            },
+          ],
+
+          // This sidebar gets displayed when a user
+          // is on `config` directory.
+          "/config/": [
+            {
+              text: "Config",
+              items: [
+                { text: "Index", link: "/config/" },
+                { text: "Three", link: "/config/three" },
+                { text: "Four", link: "/config/four" },
+              ],
+            },
+          ],
+        },
       },
     },
     ar: {

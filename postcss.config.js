@@ -1,5 +1,5 @@
-const postcssRTLCSS = require("postcss-rtlcss");
+const postcssRTL = require("postcss-rtl");
 
 module.exports = {
-  plugins: [postcssRTLCSS()],
+  plugins: [postcssRTL()],
 };
