@@ -95,7 +95,6 @@ export default defineConfig({
             ],
           },
         ],
-        // FIXME: We should fix it.
         sidebar: {
           "/en/contributing/": [
             {
@@ -107,9 +106,6 @@ export default defineConfig({
               ],
             },
           ],
-
-          // This sidebar gets displayed when a user
-          // is on `config` directory.
           "/config/": [
             {
               text: "Config",
