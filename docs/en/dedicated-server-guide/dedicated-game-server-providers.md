@@ -1,4 +1,4 @@
-## Dedicated Game Server Providers
+# Dedicated Game Server Providers
 
 ### this is a list of providers that recommended by the Mordhau Developers
 

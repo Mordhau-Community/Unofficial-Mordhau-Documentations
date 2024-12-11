@@ -68,13 +68,17 @@ export default defineConfig({
             items: [
               { text: "About us", link: "/en/about-us/" },
               {
-                text: "About Mordhau and docs",
-                link: "/en/about-mordhau-and-docs/",
+                text: "About Mordhau",
+                link: "/en/about-mordhau/",
+              },
+              {
+                text: "How read?",
+                link: "/en/how-to-read/",
               },
             ],
           },
           {
-            text: "Docs Sections",
+            text: "Documentations",
             items: [
               { text: "RCON Guide", link: "/en/rcon-guide/" },
               { text: "MordhauSDK Guide", link: "/en/mordhauSDK-guide/" },
@@ -82,7 +86,24 @@ export default defineConfig({
                 text: "Dedicated Server Guide",
                 link: "/en/dedicated-server-guide/",
               },
-              { text: "Encountering Errors", link: "/en/encountering-errors/" },
+              {
+                text: "Encountering Errors",
+                items: [
+                  {
+                    text: "Solutions & Errors",
+                    link: "/en/solutions-and-errors/",
+                  },
+                ],
+              },
+              {
+                text: "References",
+                items: [
+                  {
+                    text: "References",
+                    link: "/en/references/",
+                  },
+                ],
+              },
             ],
           },
           {
@@ -98,11 +119,61 @@ export default defineConfig({
         sidebar: {
           "/en/contributing/": [
             {
-              text: "Guide",
+              text: "Get Started",
               items: [
-                { text: "hello", link: "/en/contributing/" },
-                { text: "testing", link: "/en/contributing/one" },
-                { text: "boooo", link: "/en/contributing/two" },
+                {
+                  text: "Introduction",
+                  link: "/en/contributing/",
+                },
+                {
+                  text: "Contribution Methods",
+                  link: "/en/contributing/methods",
+                },
+                { text: "Required Tools", link: "/en/contributing/tools" },
+                {
+                  text: "Contribution Terms & Rules",
+                  link: "/en/contributing/toasols",
+                },
+              ],
+            },
+            {
+              text: "Markdown",
+              items: [
+                {
+                  text: "What is Markdown?",
+                  link: "/en/contributing/wqes",
+                },
+                { text: "Get Started", link: "/en/contributing/get-started" },
+              ],
+            },
+            {
+              text: "Github",
+              items: [
+                {
+                  text: "What is Github?",
+                  link: "/en/contributing/asdasdc",
+                },
+                { text: "Get Started", link: "/en/contributing/get-started" },
+              ],
+            },
+            {
+              text: "Git",
+              items: [
+                {
+                  text: "What is Git?",
+                  link: "/en/contributing/asdasdasdc",
+                },
+                { text: "Get Started", link: "/en/contributing/get-started" },
+              ],
+            },
+            {
+              text: "VitePress",
+              items: [
+                {
+                  text: "What is VitePress?",
+                  link: "/en/contributing/asdas",
+                },
+                { text: "Get Started", link: "/en/contributing/get-started" },
               ],
             },
           ],

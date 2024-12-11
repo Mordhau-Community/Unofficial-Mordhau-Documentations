@@ -1,4 +1,4 @@
-# How to contributing in Mordhau documentations!
+# Contributing in Mordhau documentations!
 
 Go to the [**Mordhau Documentation Repository**](https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations).
 This repository uses **VitePress** to create clear and easy-to-read documentation for the game **Mordhau**.  
