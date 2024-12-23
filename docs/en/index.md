@@ -7,7 +7,7 @@ hero:
   text: "The complete guide for Mordhau game"
   tagline: Built by Mordhau Community
   image:
-    src: ../logo.webp
+    src: /logo.webp
     alt: MordhauLogo
   actions:
     - theme: brand
