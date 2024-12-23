@@ -3,8 +3,8 @@ import { version } from "../package.json";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "uMordhau Documentations",
-  description: "Mordhau Documentation",
+  title: "Mordhau Guides",
+  description: "Mordhau Guides",
   srcDir: "docs",
   outDir: ".vitepress/dist/docs",
   base: "/docs/",
@@ -22,11 +22,11 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     // TODO: should fix it later..
-    // logo: "/logo.webp",
+    logo: "/logo.webp",
     // i18nRouting: false,
     footer: {
       message: "Released under the (CDL) License.",
-      copyright: "Copyright © 2024-present Mordhau-Community - John Brayden",
+      copyright: "Copyright © 2024-present Mordhau Community - John Brayden",
     },
     editLink: {
       pattern:
@@ -62,7 +62,6 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "Home", link: "/en/" },
-          { text: "Contributing", link: "/en/contributing/" },
           {
             text: "Informations",
             items: [
@@ -75,28 +74,47 @@ export default defineConfig({
                 text: "How read?",
                 link: "/en/how-to-read/",
               },
+              {
+                text: "",
+                items: [{ text: "Contributing", link: "/en/contributing/" }],
+              },
             ],
           },
           {
-            text: "Documentations",
+            text: "Guides",
             items: [
-              { text: "RCON Guide", link: "/en/rcon-guide/" },
-              { text: "MordhauSDK Guide", link: "/en/mordhauSDK-guide/" },
               {
-                text: "Dedicated Server Guide",
-                link: "/en/dedicated-server-guide/",
+                text: "Players Guides and wiki",
+                items: [
+                  { text: "Mordhau Game", link: "/en/contributing/ssshkdsd" },
+                  {
+                    text: "Combat Mechanics",
+                    link: "/en/contributing/sdfsswdf",
+                  },
+                  { text: "Glossary", link: "/en/contributing/sdf5tsdf" },
+                  {
+                    text: "Release History",
+                    link: "/en/contributing/sdfsdsdf",
+                  },
+                ],
               },
               {
-                text: "Encountering Errors",
+                text: "Devs & Modders Guides",
                 items: [
+                  { text: "RCON Guide", link: "/en/rcon-guide/" },
+                  { text: "MordhauSDK Guide", link: "/en/mordhauSDK-guide/" },
                   {
-                    text: "Solutions & Errors",
+                    text: "Dedicated Server Guide",
+                    link: "/en/dedicated-server-guide/",
+                  },
+                  {
+                    text: "Encountering Errors",
                     link: "/en/solutions-and-errors/",
                   },
                 ],
               },
               {
-                text: "References",
+                text: "",
                 items: [
                   {
                     text: "References",
@@ -132,7 +150,7 @@ export default defineConfig({
                 { text: "Required Tools", link: "/en/contributing/tools" },
                 {
                   text: "Contribution Terms & Rules",
-                  link: "/en/contributing/toasols",
+                  link: "/en/contributing/terms-rules",
                 },
               ],
             },
@@ -141,9 +159,12 @@ export default defineConfig({
               items: [
                 {
                   text: "What is Markdown?",
-                  link: "/en/contributing/wqes",
+                  link: "/en/contributing/whats-markdown",
                 },
-                { text: "Get Started", link: "/en/contributing/get-started" },
+                {
+                  text: "How to use Markdown?",
+                  link: "/en/contributing/How-to-use-Markdown",
+                },
               ],
             },
             {
@@ -174,6 +195,27 @@ export default defineConfig({
                   link: "/en/contributing/asdas",
                 },
                 { text: "Get Started", link: "/en/contributing/get-started" },
+              ],
+            },
+            {
+              text: "More Resources",
+              items: [
+                {
+                  text: "Markdown Resources",
+                  link: "/en/contributing/asdas",
+                },
+                {
+                  text: "Github Resources",
+                  link: "/en/contributing/get-started",
+                },
+                {
+                  text: "Git Resources",
+                  link: "/en/contributing/get-started",
+                },
+                {
+                  text: "VitePress Resources",
+                  link: "/en/contributing/get-started",
+                },
               ],
             },
           ],

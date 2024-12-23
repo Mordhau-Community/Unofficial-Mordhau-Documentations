@@ -136,3 +136,59 @@
 .DocSearch {
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
+
+/**
+ * CUSTOMIZED STYLE
+ */
+
+[data-v-72cc4481] .image-src {
+  position: absolute;
+  top: 20%;
+  max-width: 192px;
+  max-height: 192px;
+}
+
+[data-v-4db05b78] .title {
+  line-height: 28px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--vt-c-text-3);
+  text-transform: uppercase;
+  color: gray;
+}
+
+[data-v-e0f2b3ec] .items {
+  border-radius: 8px;
+}
+
+[data-v-6c4f796b] span {
+  font-size: 12px;
+}
+
+[data-v-55e263fd] .logo {
+  margin-right: 10px;
+}
+
+/**
+ * SCROLLBAR STYLE
+ */
+
+/* width */
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #888;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: #3d3963;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #292647;
+}

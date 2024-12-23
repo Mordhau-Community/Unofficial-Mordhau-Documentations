@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [0.0.12.Unreleased] (11 / 12 / 2024)
+
+### Added
+
+- Improving the website's appearance
+- More Documentations Content.
+- Mordhau Logo.
+- Custom Style.
+
+### Changed
+
+- Project Structure.
+- Style.
+- VitePress Config.
+
+
+
 ## [0.0.11.Unreleased] (11 / 12 / 2024)
 
 ### Added
