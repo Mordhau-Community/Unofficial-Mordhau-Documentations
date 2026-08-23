@@ -110,13 +110,24 @@ function onKeydown(event: KeyboardEvent) {
   if (event.key === "Escape") open.value = false;
 }
 
+let closeTimer: ReturnType<typeof setTimeout> | undefined;
+
+function cancelClose() {
+  clearTimeout(closeTimer);
+}
+
 /*
  * Closes on the way out, the way the nav menus do.
  *
- * Focus inside the panel keeps it open: someone tabbing through the swatches
- * has no pointer in there, and a stray mouse movement should not yank the
- * panel out from under them. Focus on the button does not count, that is
- * where it lands after a click and is the normal case for closing.
+ * Deliberately delayed rather than immediate. A real pointer arrives in jumps,
+ * and any route to the panel that is not dead straight leaves the button for a
+ * frame or two; closing on the first mouseleave means the panel vanishes just
+ * as you reach for it. The grace period is cancelled the moment the pointer is
+ * back inside, so the only way to actually close it is to stay away.
+ *
+ * Focus inside the panel holds it open regardless: someone tabbing through the
+ * swatches has no pointer in there and should not lose it to a stray movement.
+ * Focus on the button does not count, that is where it lands after a click.
  *
  * mouseleave rather than pointerleave, so a touch does not dismiss it the
  * instant it opens.
@@ -124,7 +135,10 @@ function onKeydown(event: KeyboardEvent) {
 function onLeave() {
   const panel = root.value?.querySelector(".mh-prefs-panel");
   if (panel && panel.contains(document.activeElement)) return;
-  open.value = false;
+  cancelClose();
+  closeTimer = setTimeout(() => {
+    open.value = false;
+  }, 260);
 }
 
 /*
@@ -157,13 +171,20 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+  cancelClose();
   document.removeEventListener("pointerdown", onPointerDown);
   document.removeEventListener("keydown", onKeydown);
 });
 </script>
 
 <template>
-  <div ref="root" class="mh-prefs" :class="{ 'is-open': open }" @mouseleave="onLeave">
+  <div
+    ref="root"
+    class="mh-prefs"
+    :class="{ 'is-open': open }"
+    @mouseenter="cancelClose"
+    @mouseleave="onLeave"
+  >
     <button
       type="button"
       class="mh-prefs-button"
