@@ -8,7 +8,7 @@ export default defineConfig({
   srcDir: "docs",
   outDir: ".vitepress/dist/docs",
   base: "/docs/",
-  ignoreDeadLinks: true,
+  ignoreDeadLinks: false,
   cleanUrls: true,
   lastUpdated: true,
   vite: {
@@ -83,15 +83,15 @@ export default defineConfig({
               {
                 text: "Players Guides and wiki",
                 items: [
-                  { text: "Mordhau Game", link: "/en/contributing/ssshkdsd" },
+                  { text: "Mordhau Game", link: "/en/about-mordhau/" },
                   {
                     text: "Combat Mechanics",
-                    link: "/en/contributing/sdfsswdf",
+                    link: "/en/combat-mechanics/",
                   },
-                  { text: "Glossary", link: "/en/contributing/sdf5tsdf" },
+                  { text: "Glossary", link: "/en/glossary/" },
                   {
-                    text: "Release History",
-                    link: "/en/contributing/sdfsdsdf",
+                    text: "Patch Notes",
+                    link: "https://store.steampowered.com/news/app/629760",
                   },
                 ],
               },
