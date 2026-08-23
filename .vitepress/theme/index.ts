@@ -10,6 +10,7 @@ import '@fontsource-variable/jetbrains-mono'
 import '@fontsource-variable/jetbrains-mono/wght-italic.css'
 import './style.css'
 import Scrollbar from './Scrollbar.vue'
+import Landing from './Landing.vue'
 
 export default {
   extends: DefaultTheme,
@@ -21,7 +22,10 @@ export default {
       'layout-bottom': () => h(Scrollbar)
     })
   },
-  enhanceApp({ app, router, siteData }) {
-    // ...
+  enhanceApp({ app }) {
+    // VitePress hands any unrecognised `layout:` value straight to
+    // <component :is>, so registering this globally is what makes
+    // `layout: Landing` in docs/en/index.md resolve.
+    app.component('Landing', Landing)
   }
 } satisfies Theme
