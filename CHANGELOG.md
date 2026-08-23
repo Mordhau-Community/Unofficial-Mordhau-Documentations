@@ -12,9 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - English landing page rebuilt from scratch as its own component rather than
-  the VitePress home layout. Hero states what the site is for, a scale diagram
-  of a single Mordhau swing sits under it and links to the combat guide, and
-  the guides are grouped into three lanes by who is reading, each page marked
+  the VitePress home layout. Hero states what the site is for, a quick
+  reference card under it holds the values people turn up looking for (app id,
+  the three ports, the Game.ini path) with click to copy on each, and the
+  guides are grouped into three lanes by who is reading, each page marked
   written or outline. Closes on the language list and a note asking for
   corrections. Logo, palette and typefaces are unchanged.
 - New look for the landing page: steel and oxblood palette taken off the

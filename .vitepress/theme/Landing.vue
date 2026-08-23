@@ -6,18 +6,49 @@
  * unknown layout name straight to <component :is>, and VPNav and VPFooter live
  * outside that, so the nav bar and footer come along unchanged.
  */
+import { ref } from "vue";
 import { withBase } from "vitepress";
 
 /**
- * Attack phases, from docs/en/combat-mechanics. The widths are the point: the
- * parry window is a sliver next to the swing that precedes it, which is the
- * single thing that makes Mordhau's combat read as unfair until it clicks.
+ * The values people actually arrive looking for. Verified against the
+ * LinuxGSM reference config; the beacon port is flagged because a closed one
+ * is the single most common reason a working server never shows up.
  */
-const phases = [
-  { name: "Windup", hint: "feint until the last moment", width: 46 },
-  { name: "Release", hint: "the only part that hurts", width: 31 },
-  { name: "Recovery", hint: "you are stuck here", width: 23 },
+const quickref = [
+  {
+    label: "Steam app",
+    value: "629800",
+    note: "the dedicated server, not the game (629760)",
+  },
+  { label: "Game port", value: "7777/UDP", note: "" },
+  {
+    label: "Beacon port",
+    value: "15000/UDP",
+    note: "closed, and your server runs fine but never appears",
+    flagged: true,
+  },
+  { label: "Query port", value: "27015/UDP", note: "" },
+  {
+    label: "Config file",
+    value: "Mordhau/Saved/Config/LinuxServer/Game.ini",
+    note: "WindowsServer on Windows",
+  },
 ];
+
+const copied = ref("");
+let copyTimer;
+
+async function copyValue(item) {
+  try {
+    await navigator.clipboard.writeText(item.value);
+    copied.value = item.label;
+    clearTimeout(copyTimer);
+    copyTimer = setTimeout(() => (copied.value = ""), 1400);
+  } catch {
+    // Clipboard is blocked outside a secure context. The value is still
+    // selectable, so there is nothing useful to say here.
+  }
+}
 
 const lanes = [
   {
@@ -94,29 +125,42 @@ const languages = [
         <img class="hero-logo" :src="withBase('/logo.webp')" alt="" />
       </div>
 
-      <!-- Signature: one swing, to scale. -->
-      <a class="phases" :href="withBase('/en/combat-mechanics/')">
-        <p class="phases-title">One swing, to scale</p>
-
-        <div class="phases-bar">
-          <span
-            v-for="phase in phases"
-            :key="phase.name"
-            class="phases-seg"
-            :style="{ flexGrow: phase.width }"
-          >
-            <span class="phases-name">{{ phase.name }}</span>
-            <span class="phases-hint">{{ phase.hint }}</span>
-          </span>
-          <span class="phases-sweep" />
-          <span class="phases-parry"><em>parry window</em><i /></span>
+      <!-- Signature: the answers people turn up needing. -->
+      <div class="quickref">
+        <div class="quickref-head">
+          <p class="quickref-title">Quick reference &middot; server setup</p>
+          <a class="quickref-more" :href="withBase('/en/dedicated-server-guide/')">
+            Full server guide &rarr;
+          </a>
         </div>
 
-        <p class="phases-note">
-          The window to block is a sliver at the tail of a swing you watched
-          the whole way in. Read the combat guide &rarr;
-        </p>
-      </a>
+        <ul class="quickref-list">
+          <li
+            v-for="item in quickref"
+            :key="item.label"
+            class="quickref-row"
+            :class="{ 'is-flagged': item.flagged }"
+          >
+            <span class="quickref-label">{{ item.label }}</span>
+
+            <button
+              type="button"
+              class="quickref-value"
+              :aria-label="`Copy ${item.label}`"
+              @click="copyValue(item)"
+            >
+              <code>{{ item.value }}</code>
+              <span
+                class="quickref-copy"
+                :class="{ 'is-copied': copied === item.label }"
+                >{{ copied === item.label ? "copied" : "copy" }}</span
+              >
+            </button>
+
+            <span class="quickref-note">{{ item.note }}</span>
+          </li>
+        </ul>
+      </div>
     </section>
 
     <!-- Guides ---------------------------------------------------------- -->
@@ -323,19 +367,25 @@ const languages = [
   pointer-events: none;
 }
 
-/* --- Signature: one swing, to scale ----------------------------------- */
+/* --- Quick reference -------------------------------------------------- */
 
-.phases {
+.quickref {
   grid-column: 1 / -1;
-  display: block;
   margin-top: clamp(34px, 5vw, 56px);
   padding-top: 26px;
   border-top: 1px solid var(--rule);
-  text-decoration: none;
-  color: inherit;
 }
 
-.phases-title {
+.quickref-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.quickref-title {
   margin: 0;
   font-family: var(--vp-font-family-mono);
   font-size: 11px;
@@ -344,112 +394,105 @@ const languages = [
   color: var(--vp-c-text-3);
 }
 
-/* Sentence case. A line this long in all caps mono is a wall. */
-.phases-note {
+.quickref-more {
+  font-size: 13px;
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+}
+
+.quickref-more:hover {
+  text-decoration: underline;
+}
+
+.quickref-list {
   margin: 0;
-  max-width: 62ch;
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--vp-c-text-3);
-  transition: color 0.16s ease;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--rule);
 }
 
-.phases-bar {
-  position: relative;
-  display: flex;
-  margin: 18px 0 44px;
-  overflow: visible;
+.quickref-row {
+  display: grid;
+  grid-template-columns: 128px auto minmax(0, 1fr);
+  align-items: center;
+  gap: 18px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--rule);
 }
 
-.phases-seg {
-  position: relative;
-  flex-basis: 0;
-  padding: 12px 12px 0 0;
-  border-top: 2px solid var(--vp-c-text-3);
-  min-width: 0;
+.quickref-row:last-child {
+  border-bottom: 0;
 }
 
-/* Tick at the start of every phase, so the widths read as measurements. */
-.phases-seg::before {
-  content: "";
-  position: absolute;
-  top: -2px;
-  inset-inline-start: 0;
-  width: 1px;
-  height: 9px;
-  background-color: var(--vp-c-text-3);
+.quickref-label {
+  font-size: 13px;
+  color: var(--vp-c-text-2);
 }
 
-.phases-seg:first-child {
-  border-top-color: var(--vp-c-text-1);
+.quickref-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  justify-self: start;
+  margin: 0;
+  padding: 4px 9px;
+  border: 1px solid transparent;
+  background: none;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
-.phases-seg:nth-child(2) {
-  border-top-color: var(--vp-c-brand-1);
-}
-
-.phases-name {
-  display: block;
-  font-family: var(--mh-font-display);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--vp-c-text-1);
-}
-
-.phases-hint {
-  display: block;
-  margin-top: 2px;
-  font-size: 12px;
-  line-height: 1.4;
-  color: var(--vp-c-text-3);
-}
-
-/* The parry window: deliberately tiny, sitting under the end of Release. */
-/*
- * Sits at the tail of Release, where the window actually is, with the tick
- * resting on the rule so the label is clearly measuring the bar and not
- * floating beside it.
- */
-.phases-parry {
-  position: absolute;
-  top: 0;
-  inset-inline-start: 70%;
-  transform: translateY(-100%);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 5px;
-  padding-bottom: 0;
+.quickref-value code {
   font-family: var(--vp-font-family-mono);
-  font-size: 10px;
+  font-size: 13px;
+  /* The config path has nothing to break on, so let it break anywhere
+     rather than widen the whole column. */
+  overflow-wrap: anywhere;
+  text-align: start;
+  color: var(--vp-c-text-1);
+  background: none;
+  padding: 0;
+}
+
+.quickref-value:hover {
+  border-color: var(--rule);
+}
+
+.quickref-value:hover code {
+  color: var(--vp-c-brand-1);
+}
+
+/* Only surfaces on hover or keyboard focus, so the card reads as data first. */
+.quickref-copy {
+  font-family: var(--vp-font-family-mono);
+  font-size: 9px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  color: var(--vp-c-text-3);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.quickref-row:hover .quickref-copy,
+.quickref-value:focus-visible .quickref-copy {
+  opacity: 1;
+}
+
+.quickref-copy.is-copied {
+  opacity: 1;
   color: var(--vp-c-brand-1);
-  white-space: nowrap;
 }
 
-.phases-parry em {
-  font-style: normal;
+.quickref-note {
+  min-width: 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--vp-c-text-3);
 }
 
-.phases-parry i {
-  display: block;
-  width: 30px;
-  height: 5px;
-  background-color: var(--vp-c-brand-1);
-}
-
-.phases-sweep {
-  position: absolute;
-  top: -2px;
-  inset-inline-start: 0;
-  width: 2px;
-  height: 2px;
-  background-color: var(--vp-c-brand-1);
-}
-
-.phases:hover .phases-note {
+.quickref-row.is-flagged .quickref-note {
   color: var(--vp-c-brand-1);
 }
 
@@ -628,7 +671,7 @@ const languages = [
 .lede,
 .cta-row,
 .hero-mark,
-.phases {
+.quickref {
   animation: rise 0.6s cubic-bezier(0.22, 0.68, 0.31, 1) both;
 }
 
@@ -647,13 +690,8 @@ const languages = [
 .hero-mark {
   animation-delay: 0.1s;
 }
-.phases {
+.quickref {
   animation-delay: 0.36s;
-}
-
-/* The swing runs once, after the hero has settled. */
-.phases-sweep {
-  animation: swing 1.5s cubic-bezier(0.5, 0, 0.7, 1) 0.9s both;
 }
 
 @keyframes rise {
@@ -667,22 +705,11 @@ const languages = [
   }
 }
 
-@keyframes swing {
-  from {
-    width: 0;
-    opacity: 1;
-  }
-  to {
-    width: 100%;
-    opacity: 0;
-  }
-}
-
 /* --- Narrow ----------------------------------------------------------- */
 
 @media (max-width: 820px) {
   .hero {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .hero-mark {
@@ -691,16 +718,28 @@ const languages = [
   }
 
   .lane {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 16px;
   }
 
-  .phases-hint {
+  .quickref-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 12px 14px;
+  }
+
+  .quickref-value {
+    margin-inline-start: -9px;
+  }
+
+  /* No hover on touch, and dropping it gives the config path the room to
+     stay on one line. */
+  .quickref-copy {
     display: none;
   }
 
-  .phases-parry {
-    font-size: 9px;
+  .quickref-value code {
+    font-size: 12px;
   }
 }
 
@@ -711,13 +750,8 @@ const languages = [
   .lede,
   .cta-row,
   .hero-mark,
-  .phases,
-  .phases-sweep {
+  .quickref {
     animation: none;
-  }
-
-  .phases-sweep {
-    display: none;
   }
 }
 </style>
