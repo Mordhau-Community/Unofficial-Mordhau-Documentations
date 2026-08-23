@@ -1074,27 +1074,17 @@ html .VPDoc:not(.has-sidebar) .content {
 /* ----------------------------------------------------------- Sidebar ---- */
 
 /*
- * The sidebar column should read as one surface from the top of the window
- * down. VitePress leaves the nav block above it transparent, so with a frosted
- * nav the page colour showed through there and the darker column looked like
- * it started below the bar instead of behind it.
+ * Hairline down the right edge of the sidebar. VitePress ships none, so the
+ * column was separated from the content by a change of background alone.
  *
- * .title is absolutely positioned at exactly the sidebar width and .content is
- * padded by that same width, so painting it cannot move the search box.
+ * The sidebar only. The nav bar is a separate strip across the full width and
+ * is left exactly as VitePress draws it: no sidebar colour behind the logo,
+ * and no line carried up through it. The hairline therefore starts below the
+ * bar, which is where the column itself starts.
  *
- * The nav divider already stops at the sidebar edge, VitePress pads it by
- * --vp-sidebar-width, so there is nothing to switch off there.
+ * Logical property, so it moves to the other side in the Arabic locale on its
+ * own.
  */
-html .VPNavBar.has-sidebar .title {
-  background-color: var(--vp-c-bg-alt) !important;
-}
-
-/*
- * Hairline down the right edge of the column, carried through the nav block so
- * it reads as one line rather than two segments with a gap at the nav. Logical
- * property so it moves to the other side in the Arabic locale on its own.
- */
-html .VPSidebar,
-html .VPNavBar.has-sidebar .title {
+html .VPSidebar {
   border-inline-end: 1px solid var(--vp-c-divider);
 }

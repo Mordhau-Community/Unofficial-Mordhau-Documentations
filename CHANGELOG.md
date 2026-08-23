@@ -81,10 +81,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Sidebar colour stopped at the nav bar, so the darker column looked like it
-  began below the bar instead of running the height of the window. The block
-  above it is painted to match now, and the column has a hairline down its
-  right edge.
+- Sidebar had no edge of its own, only a change of background. It has a
+  hairline down its right side now. The nav bar is untouched.
 
 - Customization panel showed nothing selected in a row when the stored choice
   named an option that no longer existed. Values are validated against the
