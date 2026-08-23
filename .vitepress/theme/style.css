@@ -1109,6 +1109,16 @@ html .VPDoc:not(.has-sidebar) .content {
   html .VPNavBar.has-sidebar .divider {
     padding-left: 0 !important;
   }
+
+  /*
+   * VitePress draws a second line under the logo block on sidebar pages,
+   * because its main divider is normally indented past the sidebar and
+   * something has to close the gap. The divider runs the full width now, so
+   * that one is a duplicate sitting a pixel below it.
+   */
+  html .VPNavBarTitle.has-sidebar .title {
+    border-bottom-color: transparent !important;
+  }
 }
 
 /*
