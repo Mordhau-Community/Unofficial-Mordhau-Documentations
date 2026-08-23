@@ -27,11 +27,11 @@ const textRoles = [
   { id: "default", label: "Default", swatch: "var(--vp-c-text-1)" },
   { id: "strong", label: "Strong", swatch: "var(--mh-text-strong)" },
   { id: "muted", label: "Muted", swatch: "var(--vp-c-text-2)" },
-  { id: "accent", label: "Accent", swatch: "var(--vp-c-brand-1)" },
-  { id: "slate", label: "Slate", swatch: "var(--mh-text-slate)" },
-  { id: "sand", label: "Sand", swatch: "var(--mh-text-sand)" },
-  { id: "rose", label: "Rose", swatch: "var(--mh-text-rose)" },
-  { id: "sage", label: "Sage", swatch: "var(--mh-text-sage)" },
+  { id: "soft", label: "Soft", swatch: "var(--vp-c-text-3)" },
+  { id: "warm", label: "Warm", swatch: "var(--mh-text-warm)" },
+  { id: "cool", label: "Cool", swatch: "var(--mh-text-cool)" },
+  { id: "mono", label: "Mono", swatch: "var(--mh-text-mono)" },
+  { id: "sepia", label: "Sepia", swatch: "var(--mh-text-sepia)" },
 ];
 
 const accents = [

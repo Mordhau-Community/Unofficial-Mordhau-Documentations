@@ -933,17 +933,29 @@ html:not(.dark)[data-mh-bg-light="slate"] {
  * --vp-c-text-1, which is exactly what VitePress already renders, so
  * "Default" is a genuine no-op rather than a re-statement that drifts.
  *
- *   data-mh-heading = default | strong | muted | accent
- *   data-mh-text    = default | strong | muted | accent
+ *   data-mh-heading = default | strong | muted | soft | warm | cool | mono | sepia
+ *   data-mh-text    = same
+ *
+ * These are tones, not hues. Colour belongs to the accent row; running body
+ * copy in a brand colour is tiring to read and would make the two rows look
+ * like duplicates of each other.
  */
 :root {
   --mh-heading-color: var(--vp-c-text-1);
   --mh-body-color: var(--vp-c-text-1);
   --mh-text-strong: #0b0b0d;
+  --mh-text-warm: #5b5149;
+  --mh-text-cool: #4a5560;
+  --mh-text-mono: #4f4f55;
+  --mh-text-sepia: #6a5847;
 }
 
 .dark {
   --mh-text-strong: #ffffff;
+  --mh-text-warm: #d6cec4;
+  --mh-text-cool: #c2ccd7;
+  --mh-text-mono: #cacad0;
+  --mh-text-sepia: #e0d3bd;
 }
 
 html[data-mh-heading="strong"] {
@@ -952,8 +964,8 @@ html[data-mh-heading="strong"] {
 html[data-mh-heading="muted"] {
   --mh-heading-color: var(--vp-c-text-2);
 }
-html[data-mh-heading="accent"] {
-  --mh-heading-color: var(--vp-c-brand-1);
+html[data-mh-heading="soft"] {
+  --mh-heading-color: var(--vp-c-text-3);
 }
 
 html[data-mh-text="strong"] {
@@ -962,53 +974,37 @@ html[data-mh-text="strong"] {
 html[data-mh-text="muted"] {
   --mh-body-color: var(--vp-c-text-2);
 }
-html[data-mh-text="accent"] {
-  --mh-body-color: var(--vp-c-brand-1);
+html[data-mh-text="soft"] {
+  --mh-body-color: var(--vp-c-text-3);
 }
 
-/* Extra text tints, resolved per theme. */
-:root {
-  --mh-text-slate: #44505e;
-  --mh-text-sand: #5c5142;
-  --mh-text-rose: #6b3f4a;
-  --mh-text-sage: #45573f;
+html[data-mh-heading="warm"] {
+  --mh-heading-color: var(--mh-text-warm);
+}
+html[data-mh-text="warm"] {
+  --mh-body-color: var(--mh-text-warm);
 }
 
-.dark {
-  --mh-text-slate: #b3c2d1;
-  --mh-text-sand: #d8c9b0;
-  --mh-text-rose: #e3b6bf;
-  --mh-text-sage: #bcd0b4;
+html[data-mh-heading="cool"] {
+  --mh-heading-color: var(--mh-text-cool);
+}
+html[data-mh-text="cool"] {
+  --mh-body-color: var(--mh-text-cool);
 }
 
-html[data-mh-heading="slate"] {
-  --mh-heading-color: var(--mh-text-slate);
+html[data-mh-heading="mono"] {
+  --mh-heading-color: var(--mh-text-mono);
 }
-html[data-mh-text="slate"] {
-  --mh-body-color: var(--mh-text-slate);
-}
-
-html[data-mh-heading="sand"] {
-  --mh-heading-color: var(--mh-text-sand);
-}
-html[data-mh-text="sand"] {
-  --mh-body-color: var(--mh-text-sand);
+html[data-mh-text="mono"] {
+  --mh-body-color: var(--mh-text-mono);
 }
 
-html[data-mh-heading="rose"] {
-  --mh-heading-color: var(--mh-text-rose);
+html[data-mh-heading="sepia"] {
+  --mh-heading-color: var(--mh-text-sepia);
 }
-html[data-mh-text="rose"] {
-  --mh-body-color: var(--mh-text-rose);
+html[data-mh-text="sepia"] {
+  --mh-body-color: var(--mh-text-sepia);
 }
-
-html[data-mh-heading="sage"] {
-  --mh-heading-color: var(--mh-text-sage);
-}
-html[data-mh-text="sage"] {
-  --mh-body-color: var(--mh-text-sage);
-}
-
 
 h1,
 h2,
