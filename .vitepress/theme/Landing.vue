@@ -313,7 +313,7 @@ const languages = [
 
 .headline-heavy {
   font-weight: 800;
-  color: var(--vp-c-text-1);
+  color: var(--mh-heading-color);
 }
 
 .lede {

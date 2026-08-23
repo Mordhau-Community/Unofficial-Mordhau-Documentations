@@ -43,7 +43,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   set to square or rounded, the accent picked from oxblood, steel, brass, moss
   or iron, and the page background chosen separately for the dark theme
   (default, black, slate, warm) and the white theme (default, paper, mist,
-  sand). Everything persists and is applied before the first paint so nothing
+  sand). Heading and body text colour are separate settings again, each of
+  default, strong, muted or accent. Everything persists and is applied before
+  the first paint so nothing
   flashes on load. The theme switch itself stays a pill either way, and the
   button uses a sliders icon so it does not read as a second theme toggle.
 - Features strip on the landing page above the quick reference: no ads or

@@ -14,7 +14,21 @@ const KEYS = {
   accent: "mh-accent",
   bgDark: "mh-bg-dark",
   bgLight: "mh-bg-light",
+  heading: "mh-heading",
+  text: "mh-text",
 };
+
+/*
+ * Text roles rather than fixed hexes, so each one resolves correctly in both
+ * themes. The swatch is painted with the same variable the text will use, so
+ * it previews the real colour.
+ */
+const textRoles = [
+  { id: "default", label: "Default", swatch: "var(--vp-c-text-1)" },
+  { id: "strong", label: "Strong", swatch: "var(--mh-text-strong)" },
+  { id: "muted", label: "Muted", swatch: "var(--vp-c-text-2)" },
+  { id: "accent", label: "Accent", swatch: "var(--vp-c-brand-1)" },
+];
 
 const accents = [
   { id: "oxblood", label: "Oxblood", swatch: "#a32a38" },
@@ -44,6 +58,8 @@ const corners = ref("square");
 const accent = ref("oxblood");
 const bgDark = ref("default");
 const bgLight = ref("default");
+const heading = ref("default");
+const text = ref("default");
 const root = ref<HTMLElement | null>(null);
 
 function persist(key: string, value: string) {
@@ -65,6 +81,8 @@ const setCorners = (v: string) => set("data-mh-corners", KEYS.corners, corners, 
 const setAccent = (v: string) => set("data-mh-accent", KEYS.accent, accent, v);
 const setBgDark = (v: string) => set("data-mh-bg-dark", KEYS.bgDark, bgDark, v);
 const setBgLight = (v: string) => set("data-mh-bg-light", KEYS.bgLight, bgLight, v);
+const setHeading = (v: string) => set("data-mh-heading", KEYS.heading, heading, v);
+const setText = (v: string) => set("data-mh-text", KEYS.text, text, v);
 
 function onPointerDown(event: PointerEvent) {
   if (root.value && !root.value.contains(event.target as Node)) open.value = false;
@@ -80,6 +98,8 @@ onMounted(() => {
   accent.value = el.getAttribute("data-mh-accent") || "oxblood";
   bgDark.value = el.getAttribute("data-mh-bg-dark") || "default";
   bgLight.value = el.getAttribute("data-mh-bg-light") || "default";
+  heading.value = el.getAttribute("data-mh-heading") || "default";
+  text.value = el.getAttribute("data-mh-text") || "default";
   document.addEventListener("pointerdown", onPointerDown);
   document.addEventListener("keydown", onKeydown);
 });
@@ -156,6 +176,38 @@ onBeforeUnmount(() => {
         />
       </div>
 
+      <p class="mh-prefs-label">Headings</p>
+      <div class="mh-prefs-row mh-prefs-swatches">
+        <button
+          v-for="option in textRoles"
+          :key="'h-' + option.id"
+          type="button"
+          class="mh-prefs-swatch"
+          :class="{ 'is-on': heading === option.id }"
+          :style="{ '--swatch': option.swatch }"
+          :aria-label="option.label + ' heading text'"
+          :title="option.label"
+          :aria-pressed="heading === option.id"
+          @click="setHeading(option.id)"
+        />
+      </div>
+
+      <p class="mh-prefs-label">Body text</p>
+      <div class="mh-prefs-row mh-prefs-swatches">
+        <button
+          v-for="option in textRoles"
+          :key="'t-' + option.id"
+          type="button"
+          class="mh-prefs-swatch"
+          :class="{ 'is-on': text === option.id }"
+          :style="{ '--swatch': option.swatch }"
+          :aria-label="option.label + ' body text'"
+          :title="option.label"
+          :aria-pressed="text === option.id"
+          @click="setText(option.id)"
+        />
+      </div>
+
       <p class="mh-prefs-label">Dark theme</p>
       <div class="mh-prefs-row mh-prefs-swatches">
         <button
@@ -220,6 +272,8 @@ onBeforeUnmount(() => {
   inset-inline-end: 0;
   z-index: 100;
   width: 224px;
+  max-height: calc(100vh - var(--vp-nav-height) - 32px);
+  overflow-y: auto;
   padding: 14px;
   border: 1px solid var(--vp-c-divider);
   border-radius: var(--mh-r);

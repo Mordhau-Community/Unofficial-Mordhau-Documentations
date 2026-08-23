@@ -813,3 +813,66 @@ html:not(.dark)[data-mh-bg-light="sand"] {
   --vp-c-bg-elv: #ffffff;
   --mh-nav-glass: rgba(248, 245, 239, 0.72);
 }
+
+
+/* ------------------------------------------------------- Text colour ---- */
+
+/*
+ * Heading and body colour are separate settings. Both default to
+ * --vp-c-text-1, which is exactly what VitePress already renders, so
+ * "Default" is a genuine no-op rather than a re-statement that drifts.
+ *
+ *   data-mh-heading = default | strong | muted | accent
+ *   data-mh-text    = default | strong | muted | accent
+ */
+:root {
+  --mh-heading-color: var(--vp-c-text-1);
+  --mh-body-color: var(--vp-c-text-1);
+  --mh-text-strong: #0b0b0d;
+}
+
+.dark {
+  --mh-text-strong: #ffffff;
+}
+
+html[data-mh-heading="strong"] {
+  --mh-heading-color: var(--mh-text-strong);
+}
+html[data-mh-heading="muted"] {
+  --mh-heading-color: var(--vp-c-text-2);
+}
+html[data-mh-heading="accent"] {
+  --mh-heading-color: var(--vp-c-brand-1);
+}
+
+html[data-mh-text="strong"] {
+  --mh-body-color: var(--mh-text-strong);
+}
+html[data-mh-text="muted"] {
+  --mh-body-color: var(--vp-c-text-2);
+}
+html[data-mh-text="accent"] {
+  --mh-body-color: var(--vp-c-brand-1);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--mh-heading-color);
+}
+
+.vp-doc p,
+.vp-doc li,
+.vp-doc td,
+.vp-doc th {
+  color: var(--mh-body-color);
+}
+
+/* Callouts carry their own text colour per type; leave that alone. */
+.vp-doc .custom-block p,
+.vp-doc .custom-block li {
+  color: inherit;
+}
