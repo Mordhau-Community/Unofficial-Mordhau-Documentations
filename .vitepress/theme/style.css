@@ -443,6 +443,23 @@ html .VPNavBar:not(.home.top) .divider-line {
   }
 }
 
+/* --------------------------------------------- Images: no select, drag */
+
+/*
+ * Every image on the site, not just the logos. -webkit-user-drag covers
+ * Chrome, Edge and Safari; Firefox ignores it, so a dragstart handler in
+ * theme/index.ts cancels the drag there. Deliberately not pointer-events:
+ * none, which would also kill right-click on documentation screenshots.
+ */
+img,
+picture,
+svg {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+}
+
 /* ------------------------------------------------- Logos: no select, drag */
 
 /*

@@ -28,8 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bricolage Grotesque for headings and JetBrains Mono for code, both self
   hosted through fontsource so the site makes no Google Fonts request. Body
   and interface text stay on the Inter that VitePress already ships.
-- Hero and navbar logos can no longer be selected or dragged off the page.
-  Clicking the navbar logo still goes home.
+- No image anywhere on the site can be selected or dragged off the page,
+  screenshots included. Right-click still works on them, and clicking the
+  navbar logo still goes home.
 - Overlay scrollbar in place of the native page one, on every route. Square,
   no stepper arrows, 6px wide, and it floats over the content instead of
   reserving a gutter, so pages no longer shift sideways depending on whether

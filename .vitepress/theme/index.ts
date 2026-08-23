@@ -31,5 +31,15 @@ export default {
     // <component :is>, so registering this globally is what makes
     // `layout: Landing` in docs/en/index.md resolve.
     app.component('Landing', Landing)
+
+    // Firefox ignores -webkit-user-drag, and honours the draggable attribute
+    // instead. One delegated listener covers every image on every route,
+    // including any added later, without walking the DOM.
+    if (!import.meta.env.SSR) {
+      document.addEventListener('dragstart', (event) => {
+        const target = event.target as HTMLElement | null
+        if (target && target.tagName === 'IMG') event.preventDefault()
+      })
+    }
   }
 } satisfies Theme
