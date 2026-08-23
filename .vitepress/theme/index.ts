@@ -2,6 +2,12 @@
 import { h } from 'vue'
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
+// Self hosted so the site does not depend on the Google Fonts CDN, same as
+// the Inter that VitePress already bundles. Imported before style.css so the
+// font stacks in there win.
+import '@fontsource-variable/bricolage-grotesque'
+import '@fontsource-variable/jetbrains-mono'
+import '@fontsource-variable/jetbrains-mono/wght-italic.css'
 import './style.css'
 
 export default {

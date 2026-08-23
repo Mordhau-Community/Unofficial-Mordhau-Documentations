@@ -9,6 +9,62 @@
  * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
  */
 
+/* ----------------------------------------------------------- Typography */
+
+/*
+ * Bricolage Grotesque for headings and the hero, Inter for everything else,
+ * JetBrains Mono kept for code only.
+ *
+ * None of the three cover Arabic or CJK, and Bricolage has no Cyrillic
+ * either, so the stacks carry real fallbacks rather than dropping to a
+ * default serif. Russian headings land on Inter, which does have Cyrillic and
+ * which VitePress already ships. Arabic and CJK fall through per glyph to the
+ * system faces named at the end of each stack.
+ */
+:root {
+  --mh-font-display:
+    "Bricolage Grotesque Variable", Inter, ui-sans-serif, system-ui,
+    "Segoe UI", Roboto, "Noto Sans Arabic", "Noto Sans JP", "Hiragino Sans",
+    "Yu Gothic UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei",
+    sans-serif;
+
+  --vp-font-family-base:
+    Inter, ui-sans-serif, system-ui, "Segoe UI", Roboto, "Noto Sans Arabic",
+    "Noto Sans JP", "Hiragino Sans", "Yu Gothic UI", "Noto Sans SC",
+    "PingFang SC", "Microsoft YaHei", sans-serif;
+
+  --vp-font-family-mono:
+    "JetBrains Mono Variable", ui-monospace, SFMono-Regular, "SF Mono", Menlo,
+    Consolas, "Liberation Mono", "Noto Sans Mono", monospace;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.VPHero .name,
+.VPHero .text,
+.VPNavBarTitle .title,
+.VPFeature .title {
+  font-family: var(--mh-font-display);
+  font-synthesis-weight: none;
+}
+
+h1,
+h2,
+.VPHero .name,
+.VPHero .text {
+  letter-spacing: -0.8px;
+}
+
+h3,
+h4,
+.VPFeature .title {
+  letter-spacing: -0.3px;
+}
+
 /* --------------------------------------------------------------- Colors */
 
 :root {
@@ -166,14 +222,10 @@
   }
 }
 
-.VPHero .name,
-.VPHero .text {
-  letter-spacing: -0.6px;
-}
-
 .VPHero .tagline {
   color: var(--vp-c-text-2);
 }
+
 
 /*
  * The glow and the logo drift on different periods so they never line up,
@@ -335,6 +387,23 @@
 
 .VPNavBarTitle .logo {
   margin-right: 10px;
+}
+
+/* ------------------------------------------------- Logos: no select, drag */
+
+/*
+ * pointer-events: none is the part that stops the drag in Firefox, which
+ * ignores -webkit-user-drag. The navbar logo sits inside the brand link, and
+ * making the image transparent to hit testing simply hands the click to that
+ * <a>, so clicking the logo still goes home.
+ */
+.VPHero .image-src,
+.VPNavBarTitle .logo {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+  pointer-events: none;
 }
 
 /* --------------------------------------------------------------- Search */

@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   prefers-reduced-motion.
 - Hero logo on the Arabic, French, Japanese, Russian and Chinese home pages,
   they had no image at all.
+- Bricolage Grotesque for headings and JetBrains Mono for code, both self
+  hosted through fontsource so the site makes no Google Fonts request. Body
+  and interface text stay on the Inter that VitePress already ships.
+- Hero and navbar logos can no longer be selected or dragged off the page.
+  Clicking the navbar logo still goes home.
 - Combat Mechanics page.
 - Glossary page.
 - Git, Github, VitePress and Resources pages in the contributing section.
