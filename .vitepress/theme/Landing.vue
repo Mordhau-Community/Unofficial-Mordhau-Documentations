@@ -117,8 +117,8 @@ const languages = [
         <p class="eyebrow">Unofficial &middot; written by the community</p>
 
         <h1 class="headline">
-          <span class="headline-thin">The parts of Mordhau</span>
-          <span class="headline-heavy">nobody wrote down.</span>
+          <span class="headline-heavy">Mordhau Guides</span>
+          <span class="headline-thin">The complete guide for Mordhau game</span>
         </h1>
 
         <p class="lede">
@@ -306,8 +306,18 @@ const languages = [
   display: block;
 }
 
+/*
+ * The second line reads as a description of the first rather than the other
+ * half of a sentence, so it is set as a subtitle. It also has to be: at the
+ * display size it measures about 1190px against a 820px column, and there is
+ * no size that holds both lines without gutting the name above it.
+ */
 .headline-thin {
+  margin-top: 14px;
+  font-size: clamp(17px, 2.1vw, 25px);
   font-weight: 300;
+  letter-spacing: -0.005em;
+  line-height: 1.25;
   color: var(--vp-c-text-2);
 }
 
@@ -761,10 +771,12 @@ const languages = [
   animation: rise 0.6s cubic-bezier(0.22, 0.68, 0.31, 1) both;
 }
 
-.headline-thin {
+/* Keyed on position, not on weight. The two were the same thing until the
+   heavy line moved to the top, and then the second line was arriving first. */
+.headline span:nth-child(1) {
   animation-delay: 0.06s;
 }
-.headline-heavy {
+.headline span:nth-child(2) {
   animation-delay: 0.12s;
 }
 .lede {
