@@ -107,14 +107,30 @@ function onKeydown(event: KeyboardEvent) {
   if (event.key === "Escape") open.value = false;
 }
 
-onMounted(() => {
+/*
+ * Reads a stored setting, falling back when the value names an option that no
+ * longer exists. Without this a stale choice from an older build leaves every
+ * swatch in the row unselected, so the panel looks like nothing is set.
+ */
+function restore(attr: string, key: string, ids: string[], fallback: string) {
   const el = document.documentElement;
-  corners.value = el.getAttribute("data-mh-corners") || "square";
-  accent.value = el.getAttribute("data-mh-accent") || "oxblood";
-  bgDark.value = el.getAttribute("data-mh-bg-dark") || "default";
-  bgLight.value = el.getAttribute("data-mh-bg-light") || "default";
-  heading.value = el.getAttribute("data-mh-heading") || "default";
-  text.value = el.getAttribute("data-mh-text") || "default";
+  const raw = el.getAttribute(attr) || fallback;
+  const value = ids.includes(raw) ? raw : fallback;
+  if (value !== raw) {
+    el.setAttribute(attr, value);
+    persist(key, value);
+  }
+  return value;
+}
+
+onMounted(() => {
+  const ids = (list: { id: string }[]) => list.map((o) => o.id);
+  corners.value = restore("data-mh-corners", KEYS.corners, ["square", "rounded"], "square");
+  accent.value = restore("data-mh-accent", KEYS.accent, ids(accents), "oxblood");
+  bgDark.value = restore("data-mh-bg-dark", KEYS.bgDark, ids(darkBackgrounds), "default");
+  bgLight.value = restore("data-mh-bg-light", KEYS.bgLight, ids(lightBackgrounds), "default");
+  heading.value = restore("data-mh-heading", KEYS.heading, ids(textRoles), "default");
+  text.value = restore("data-mh-text", KEYS.text, ids(textRoles), "default");
   document.addEventListener("pointerdown", onPointerDown);
   document.addEventListener("keydown", onKeydown);
 });
@@ -358,8 +374,15 @@ onBeforeUnmount(() => {
   transform: translateY(-1px);
 }
 
+/*
+ * The ring gets a gap on both sides: outline-offset holds the panel colour
+ * outside it, and the inset shadow holds the same colour inside. Without the
+ * inner gap a pale ring sat straight against a pale swatch and the selection
+ * was impossible to read.
+ */
 .mh-prefs-swatch.is-on {
   outline-color: var(--vp-c-text-1);
+  box-shadow: inset 0 0 0 2px var(--vp-c-bg-elv);
 }
 
 .mh-prefs-button:focus-visible,
