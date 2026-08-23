@@ -20,11 +20,16 @@ export default defineConfig({
       "script",
       {},
       [
-        "(function(){var e=document.documentElement,c='square',a='oxblood';",
-        "try{c=localStorage.getItem('mh-corners')||c;",
-        "a=localStorage.getItem('mh-accent')||a;}catch(_){}",
+        "(function(){var e=document.documentElement,c='square',d='oxblood',l='oxblood';",
+        // mh-accent is the old single-accent key, read once so an existing
+        // choice carries over into both themes rather than being dropped.
+        "try{var o=localStorage.getItem('mh-accent');",
+        "c=localStorage.getItem('mh-corners')||c;",
+        "d=localStorage.getItem('mh-accent-dark')||o||d;",
+        "l=localStorage.getItem('mh-accent-light')||o||l;}catch(_){}",
         "e.setAttribute('data-mh-corners',c);",
-        "e.setAttribute('data-mh-accent',a);})();",
+        "e.setAttribute('data-mh-accent-dark',d);",
+        "e.setAttribute('data-mh-accent-light',l);})();",
       ].join(""),
     ],
   ],

@@ -39,9 +39,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The hero logo drifts again on the rebuilt landing page, with the glow
   behind it pulsing on a longer period. Both stop under prefers-reduced-motion.
 - Appearance button in the nav bar, beside the theme switch. Corners can be
-  set to square or rounded, and the accent colour picked from oxblood, steel,
-  brass, moss or iron. Both persist and are applied before the first paint so
-  neither flashes on load.
+  set to square or rounded, and the accent picked from oxblood, steel, brass,
+  moss or iron, separately for the dark and the white theme. Each swatch is
+  drawn in the colour that accent resolves to in that theme. Everything
+  persists and is applied before the first paint so nothing flashes on load.
   The theme switch itself stays a pill either way, and the button uses a
   sliders icon so it does not read as a second theme toggle.
 - Features strip on the landing page above the quick reference: no ads or

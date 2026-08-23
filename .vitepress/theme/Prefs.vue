@@ -2,47 +2,54 @@
 /**
  * Corner and accent picker, mounted beside the appearance switch.
  *
- * Both settings live as attributes on <html> and are written to localStorage.
- * The inline script in config.mts reads them back and stamps them before the
- * first paint, so nothing flashes the wrong shape or colour on load.
+ * Accent is stored per theme, so a colour that reads well on white and one
+ * that reads well on near black can be picked independently. Everything lives
+ * as attributes on <html> and in localStorage; the inline script in config.mts
+ * stamps them before the first paint so nothing flashes on load.
  */
 import { onBeforeUnmount, onMounted, ref } from "vue";
 
-const CORNERS_KEY = "mh-corners";
-const ACCENT_KEY = "mh-accent";
+const KEYS = {
+  corners: "mh-corners",
+  dark: "mh-accent-dark",
+  light: "mh-accent-light",
+};
 
+/** Swatches show the value each accent actually resolves to in that theme. */
 const accents = [
-  { id: "oxblood", label: "Oxblood", swatch: "#a32a38" },
-  { id: "steel", label: "Steel", swatch: "#2f6f8f" },
-  { id: "brass", label: "Brass", swatch: "#8a6a1f" },
-  { id: "moss", label: "Moss", swatch: "#3f6b3a" },
-  { id: "iron", label: "Iron", swatch: "#4a4f57" },
+  { id: "oxblood", label: "Oxblood", light: "#a32a38", dark: "#ec949b" },
+  { id: "steel", label: "Steel", light: "#2f6f8f", dark: "#8fc4de" },
+  { id: "brass", label: "Brass", light: "#8a6a1f", dark: "#dfc07a" },
+  { id: "moss", label: "Moss", light: "#3f6b3a", dark: "#9dc79a" },
+  { id: "iron", label: "Iron", light: "#4a4f57", dark: "#b9bfc8" },
 ];
 
 const open = ref(false);
 const corners = ref("square");
-const accent = ref("oxblood");
+const accentDark = ref("oxblood");
+const accentLight = ref("oxblood");
 const root = ref<HTMLElement | null>(null);
 
 function persist(key: string, value: string) {
   try {
     localStorage.setItem(key, value);
   } catch {
-    // Private mode or blocked storage. The choice still applies for this
-    // page view, it just will not survive a reload.
+    // Private mode or blocked storage. The choice still applies to this page
+    // view, it just will not survive a reload.
   }
 }
 
 function setCorners(value: string) {
   corners.value = value;
   document.documentElement.setAttribute("data-mh-corners", value);
-  persist(CORNERS_KEY, value);
+  persist(KEYS.corners, value);
 }
 
-function setAccent(value: string) {
-  accent.value = value;
-  document.documentElement.setAttribute("data-mh-accent", value);
-  persist(ACCENT_KEY, value);
+function setAccent(theme: "dark" | "light", value: string) {
+  if (theme === "dark") accentDark.value = value;
+  else accentLight.value = value;
+  document.documentElement.setAttribute(`data-mh-accent-${theme}`, value);
+  persist(KEYS[theme], value);
 }
 
 function onPointerDown(event: PointerEvent) {
@@ -56,7 +63,8 @@ function onKeydown(event: KeyboardEvent) {
 onMounted(() => {
   const el = document.documentElement;
   corners.value = el.getAttribute("data-mh-corners") || "square";
-  accent.value = el.getAttribute("data-mh-accent") || "oxblood";
+  accentDark.value = el.getAttribute("data-mh-accent-dark") || "oxblood";
+  accentLight.value = el.getAttribute("data-mh-accent-light") || "oxblood";
   document.addEventListener("pointerdown", onPointerDown);
   document.addEventListener("keydown", onKeydown);
 });
@@ -95,8 +103,6 @@ onBeforeUnmount(() => {
     </button>
 
     <div v-show="open" class="mh-prefs-panel" role="group" aria-label="Customization">
-      <p class="mh-prefs-title">Customization</p>
-
       <p class="mh-prefs-label">Corners</p>
       <div class="mh-prefs-row">
         <button
@@ -119,19 +125,35 @@ onBeforeUnmount(() => {
         </button>
       </div>
 
-      <p class="mh-prefs-label">Accent</p>
+      <p class="mh-prefs-label">Dark theme</p>
       <div class="mh-prefs-row mh-prefs-swatches">
         <button
           v-for="option in accents"
-          :key="option.id"
+          :key="'dark-' + option.id"
           type="button"
           class="mh-prefs-swatch"
-          :class="{ 'is-on': accent === option.id }"
-          :style="{ '--swatch': option.swatch }"
-          :aria-label="option.label"
+          :class="{ 'is-on': accentDark === option.id }"
+          :style="{ '--swatch': option.dark }"
+          :aria-label="option.label + ' in dark theme'"
           :title="option.label"
-          :aria-pressed="accent === option.id"
-          @click="setAccent(option.id)"
+          :aria-pressed="accentDark === option.id"
+          @click="setAccent('dark', option.id)"
+        />
+      </div>
+
+      <p class="mh-prefs-label">White theme</p>
+      <div class="mh-prefs-row mh-prefs-swatches">
+        <button
+          v-for="option in accents"
+          :key="'light-' + option.id"
+          type="button"
+          class="mh-prefs-swatch"
+          :class="{ 'is-on': accentLight === option.id }"
+          :style="{ '--swatch': option.light }"
+          :aria-label="option.label + ' in white theme'"
+          :title="option.label"
+          :aria-pressed="accentLight === option.id"
+          @click="setAccent('light', option.id)"
         />
       </div>
     </div>
@@ -172,17 +194,6 @@ onBeforeUnmount(() => {
   border-radius: var(--mh-r);
   background-color: var(--vp-c-bg-elv);
   box-shadow: var(--vp-shadow-3);
-}
-
-/* Panel heading. Same size as the group titles below it, separated by weight
-   of colour and a rule rather than by scale. */
-.mh-prefs-title {
-  margin: 0 0 12px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--vp-c-divider);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--vp-c-text-1);
 }
 
 /* Matches .VPMenuGroup .title in the nav dropdowns: 14px, 600, text-2. */
