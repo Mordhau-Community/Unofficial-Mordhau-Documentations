@@ -128,9 +128,20 @@ watch(on, apply);
   top: var(--mh-dock-top, var(--vp-nav-height));
   left: 0;
   right: 0;
-  /* Over the nav (30) and over the desktop sidebar (25), under the mobile
-     drawer and its backdrop so an open menu still covers it. */
-  z-index: 35;
+  /*
+   * Under both bars, over the article.
+   *
+   * The nav is a stacking context of its own at 30, so anything it opens, a
+   * dropdown or the appearance panel, is trapped inside it and cannot climb
+   * over a button sitting above 30. At 35 the button painted straight through
+   * an open nav menu. One below the sticky utility bar puts it under
+   * everything pinned at the top and still well clear of the article, where
+   * the highest thing VitePress uses is the outline curtain at 10.
+   *
+   * It also matters below 960px, where the button scrolls with the page: it
+   * has to pass behind that bar rather than over it.
+   */
+  z-index: calc(var(--vp-z-index-local-nav) - 1);
   display: flex;
   justify-content: center;
   pointer-events: none;

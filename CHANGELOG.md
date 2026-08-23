@@ -11,6 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Read mode. A button under the nav bar clears the page down to the article:
+  the nav slides up out of frame, the sidebar leaves by its own outer edge,
+  the outline leaves by the other, and the text spreads into the space and
+  recentres. While it is on the button floats at the top of the window, since
+  it is the only way back out. Documentation pages only, remembered between
+  visits and applied before the first paint, and the movement stops under
+  prefers-reduced-motion.
+
 - English landing page rebuilt from scratch as its own component rather than
   the VitePress home layout. Hero states what the site is for, a quick
   reference card under it holds the values people turn up looking for (app id,
@@ -72,6 +80,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Project Structure section in the README.
 
 ### Changed
+
+- "On this page" is a right hand sidebar now, not a column floating in the
+  article. Same width as the sidebar on the left, same darker surface and
+  hairline, pinned to the edge of the window and running its full height. No
+  grey rail down the list, and it only scrolls when the outline is genuinely
+  too long for the panel.
 
 - Corners are square everywhere by default. VitePress shipped radii of 4, 6,
   8, 12 and 20px that disagreed with each other, so buttons, the search box,
