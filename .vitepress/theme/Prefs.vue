@@ -77,9 +77,20 @@ onBeforeUnmount(() => {
       :aria-expanded="open"
       @click="open = !open"
     >
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-        <circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.6" />
-        <path d="M12 3.75a8.25 8.25 0 0 1 0 16.5z" fill="currentColor" />
+      <!-- Sliders: this adjusts things, it is not a second theme toggle. -->
+      <svg
+        viewBox="0 0 24 24"
+        width="18"
+        height="18"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+        stroke-linecap="round"
+        aria-hidden="true"
+      >
+        <path d="M3.75 7.5h7.5M16.5 7.5h3.75M3.75 16.5h3.75M12.75 16.5h7.5" />
+        <circle cx="13.5" cy="7.5" r="2.4" />
+        <circle cx="10" cy="16.5" r="2.4" />
       </svg>
     </button>
 

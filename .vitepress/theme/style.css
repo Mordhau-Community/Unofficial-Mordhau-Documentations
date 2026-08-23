@@ -617,7 +617,6 @@ html .VPMenu .items,
 html .VPFlyout .menu,
 html .VPFeature,
 html .VPSocialLink,
-html .VPSwitch,
 html .VPSkipLink,
 html .VPNavScreenAppearance,
 html .VPTeamMembersItem,
@@ -642,6 +641,15 @@ html .search-keyboard-shortcuts kbd,
 html .VPLocalSearchBox .titles mark,
 html .VPLocalSearchBox .excerpt mark {
   border-radius: var(--mh-r-sm) !important;
+}
+
+/*
+ * The theme switch is a physical toggle with a round knob, so it stays a pill
+ * whatever the corner setting is. Squaring the track around a circular knob
+ * just looked broken.
+ */
+html .VPSwitch {
+  border-radius: 999px !important;
 }
 
 /* --------------------------------------------------------- Accents ---- */
