@@ -11,6 +11,7 @@ import '@fontsource-variable/jetbrains-mono/wght-italic.css'
 import './style.css'
 import Scrollbar from './Scrollbar.vue'
 import Landing from './Landing.vue'
+import Prefs from './Prefs.vue'
 
 export default {
   extends: DefaultTheme,
@@ -19,7 +20,10 @@ export default {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
       // Layout wraps every route, so the overlay scrollbar is mounted once
       // here rather than per page.
-      'layout-bottom': () => h(Scrollbar)
+      'layout-bottom': () => h(Scrollbar),
+      // Slot renders past the social links; style.css reorders the flex
+      // row so the button lands beside the appearance switch.
+      'nav-bar-content-after': () => h(Prefs)
     })
   },
   enhanceApp({ app }) {

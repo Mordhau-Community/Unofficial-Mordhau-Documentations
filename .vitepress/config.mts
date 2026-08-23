@@ -11,6 +11,23 @@ export default defineConfig({
   ignoreDeadLinks: false,
   cleanUrls: true,
   lastUpdated: true,
+
+  // Stamps the reader's corner and accent choices on <html> before the first
+  // paint, so neither flashes the default on load. Keys match the ones
+  // written by .vitepress/theme/Prefs.vue.
+  head: [
+    [
+      "script",
+      {},
+      [
+        "(function(){var e=document.documentElement,c='square',a='oxblood';",
+        "try{c=localStorage.getItem('mh-corners')||c;",
+        "a=localStorage.getItem('mh-accent')||a;}catch(_){}",
+        "e.setAttribute('data-mh-corners',c);",
+        "e.setAttribute('data-mh-accent',a);})();",
+      ].join(""),
+    ],
+  ],
   vite: {
     css: {
       postcss: "./postcss.config.js",

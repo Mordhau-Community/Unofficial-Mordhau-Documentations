@@ -332,6 +332,7 @@ const languages = [
 }
 
 .cta {
+  border-radius: var(--mh-r);
   display: inline-flex;
   align-items: center;
   height: 42px;
@@ -486,6 +487,7 @@ const languages = [
 }
 
 .quickref-list {
+  border-radius: var(--mh-r);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -511,6 +513,7 @@ const languages = [
 }
 
 .quickref-value {
+  border-radius: var(--mh-r-sm);
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -708,6 +711,7 @@ const languages = [
 }
 
 .langs a {
+  border-radius: var(--mh-r-sm);
   display: inline-flex;
   align-items: baseline;
   gap: 8px;

@@ -164,9 +164,9 @@ h4,
    */
   --vp-home-hero-image-background-image: radial-gradient(
     circle at 50% 50%,
-    rgba(170, 54, 68, 0.1) 0%,
-    rgba(170, 54, 68, 0.32) 42%,
-    rgba(134, 62, 76, 0.22) 62%,
+    rgba(var(--mh-accent-rgb), 0.1) 0%,
+    rgba(var(--mh-accent-rgb), 0.32) 42%,
+    rgba(var(--mh-accent-rgb), 0.2) 62%,
     rgba(104, 116, 128, 0.11) 80%,
     rgba(104, 116, 128, 0) 100%
   );
@@ -202,9 +202,9 @@ h4,
 
   --vp-home-hero-image-background-image: radial-gradient(
     circle at 50% 50%,
-    rgba(198, 64, 80, 0.12) 0%,
-    rgba(198, 64, 80, 0.34) 42%,
-    rgba(152, 66, 82, 0.24) 62%,
+    rgba(var(--mh-accent-rgb), 0.12) 0%,
+    rgba(var(--mh-accent-rgb), 0.34) 42%,
+    rgba(var(--mh-accent-rgb), 0.22) 62%,
     rgba(130, 144, 158, 0.12) 80%,
     rgba(130, 144, 158, 0) 100%
   );
@@ -575,3 +575,153 @@ body::-webkit-scrollbar {
     transform: none;
   }
 }
+
+
+/* ==================================================== Shape and accent ==
+ *
+ * Two settings the reader controls from the nav bar. An inline script in
+ * config.mts reads them out of localStorage and stamps them on <html> before
+ * first paint, so there is no flash of the wrong shape or colour:
+ *
+ *   data-mh-corners = square | rounded
+ *   data-mh-accent  = oxblood | steel | brass | moss | iron
+ *
+ * Square is the default. VitePress ships radii of 4, 6, 8, 12 and 20px that
+ * never agreed with each other, which is the inconsistency this replaces.
+ * Rounded is capped at 13px.
+ * ===================================================================== */
+
+:root {
+  --mh-r: 0px;
+  --mh-r-sm: 0px;
+  --mh-accent-rgb: 170, 54, 68;
+}
+
+html[data-mh-corners="rounded"] {
+  --mh-r: 13px;
+  --mh-r-sm: 6px;
+}
+
+/*
+ * Everything VitePress rounds, pulled onto the two tokens. !important because
+ * these are scoped component styles carrying an extra attribute selector.
+ * Circles are deliberately excluded: the switch knob, avatars and the hero
+ * glow all need to stay round.
+ */
+html .VPButton,
+html .DocSearch-Button,
+html .DocSearch-Modal,
+html .DocSearch-Form,
+html .VPMenu,
+html .VPMenu .items,
+html .VPFlyout .menu,
+html .VPFeature,
+html .VPSocialLink,
+html .VPSwitch,
+html .VPSkipLink,
+html .VPNavScreenAppearance,
+html .VPTeamMembersItem,
+html .custom-block,
+html .pager-link,
+html .vp-sponsor,
+html .vp-doc div[class*="language-"],
+html .vp-doc .custom-block div[class*="language-"],
+html .VPLocalSearchBox .shell,
+html .VPLocalSearchBox .search-bar,
+html .VPLocalSearchBox .result {
+  border-radius: var(--mh-r) !important;
+}
+
+html .VPBadge,
+html .vp-doc :not(pre) > code,
+html .vp-doc [class*="language-"] > button.copy,
+html .DocSearch-Hit,
+html .DocSearch-Hit a,
+html .DocSearch-Commands-Key,
+html .search-keyboard-shortcuts kbd,
+html .VPLocalSearchBox .titles mark,
+html .VPLocalSearchBox .excerpt mark {
+  border-radius: var(--mh-r-sm) !important;
+}
+
+/* --------------------------------------------------------- Accents ---- */
+
+html[data-mh-accent="steel"] {
+  --vp-c-brand-1: #2f6f8f;
+  --vp-c-brand-2: #3a83a6;
+  --vp-c-brand-3: #2a6280;
+  --vp-c-brand-soft: rgba(47, 111, 143, 0.14);
+  --mh-accent-rgb: 60, 120, 150;
+}
+
+html.dark[data-mh-accent="steel"] {
+  --vp-c-brand-1: #8fc4de;
+  --vp-c-brand-2: #74b1cf;
+  --vp-c-brand-3: #2f6a88;
+  --vp-c-brand-soft: rgba(116, 177, 207, 0.16);
+  --mh-accent-rgb: 96, 160, 195;
+}
+
+html[data-mh-accent="brass"] {
+  --vp-c-brand-1: #8a6a1f;
+  --vp-c-brand-2: #a37f26;
+  --vp-c-brand-3: #7a5d1a;
+  --vp-c-brand-soft: rgba(138, 106, 31, 0.14);
+  --mh-accent-rgb: 163, 127, 38;
+}
+
+html.dark[data-mh-accent="brass"] {
+  --vp-c-brand-1: #dfc07a;
+  --vp-c-brand-2: #cfae63;
+  --vp-c-brand-3: #7d621f;
+  --vp-c-brand-soft: rgba(207, 174, 99, 0.16);
+  --mh-accent-rgb: 200, 165, 90;
+}
+
+html[data-mh-accent="moss"] {
+  --vp-c-brand-1: #3f6b3a;
+  --vp-c-brand-2: #4c8046;
+  --vp-c-brand-3: #365e32;
+  --vp-c-brand-soft: rgba(63, 107, 58, 0.14);
+  --mh-accent-rgb: 76, 128, 70;
+}
+
+html.dark[data-mh-accent="moss"] {
+  --vp-c-brand-1: #9dc79a;
+  --vp-c-brand-2: #86b483;
+  --vp-c-brand-3: #3d6b39;
+  --vp-c-brand-soft: rgba(134, 180, 131, 0.16);
+  --mh-accent-rgb: 120, 165, 116;
+}
+
+html[data-mh-accent="iron"] {
+  --vp-c-brand-1: #4a4f57;
+  --vp-c-brand-2: #5a6069;
+  --vp-c-brand-3: #3f444b;
+  --vp-c-brand-soft: rgba(74, 79, 87, 0.14);
+  --mh-accent-rgb: 90, 96, 105;
+}
+
+html.dark[data-mh-accent="iron"] {
+  --vp-c-brand-1: #b9bfc8;
+  --vp-c-brand-2: #a3aab4;
+  --vp-c-brand-3: #4a5058;
+  --vp-c-brand-soft: rgba(163, 170, 180, 0.16);
+  --mh-accent-rgb: 150, 158, 168;
+}
+
+/* ------------------------------------------------- Nav bar ordering ---- */
+
+/*
+ * The nav-bar-content-after slot renders past the social links, but the
+ * preferences button belongs beside the appearance switch. .content-body is
+ * a flex row, so an explicit order puts it there.
+ */
+html .VPNavBar .content-body > .search { order: 1; }
+html .VPNavBar .content-body > .menu { order: 2; }
+html .VPNavBar .content-body > .translations { order: 3; }
+html .VPNavBar .content-body > .appearance { order: 4; }
+html .VPNavBar .content-body > .mh-prefs { order: 5; }
+html .VPNavBar .content-body > .social-links { order: 6; }
+html .VPNavBar .content-body > .extra { order: 7; }
+html .VPNavBar .content-body > .hamburger { order: 8; }

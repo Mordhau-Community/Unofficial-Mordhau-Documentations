@@ -38,6 +38,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   thinned to match.
 - The hero logo drifts again on the rebuilt landing page, with the glow
   behind it pulsing on a longer period. Both stop under prefers-reduced-motion.
+- Appearance button in the nav bar, beside the theme switch. Corners can be
+  set to square or rounded, and the accent colour picked from oxblood, steel,
+  brass, moss or iron. Both persist and are applied before the first paint so
+  neither flashes on load.
 - Features strip on the landing page above the quick reference: no ads or
   trackers, one ordered page per topic, and walkthroughs shown rather than
   only described.
@@ -52,6 +56,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Project Structure section in the README.
 
 ### Changed
+
+- Corners are square everywhere by default. VitePress shipped radii of 4, 6,
+  8, 12 and 20px that disagreed with each other, so buttons, the search box,
+  code blocks, callouts, badges and menus all run off two tokens now. Rounded
+  mode caps at 13px.
 
 - VitePress 1.5.0 to 1.6.4.
 - Wrote the Dedicated Server guide properly (SteamCMD, Game.ini, ports).
