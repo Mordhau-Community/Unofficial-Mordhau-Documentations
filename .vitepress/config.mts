@@ -361,34 +361,12 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "Home", link: "/zh/" },
-          { text: "Contributing", link: "/zh/contributing/" },
-          { text: "RCON", link: "/zh/rcon-guide/" },
-          { text: "MordhauSDK", link: "/zh/mordhauSDK-guide/" },
-          {
-            text: "Create your own server",
-            link: "/zh/dedicated-server-guide/",
-          },
           {
             text: version,
             items: [
               {
                 text: "changelog",
                 link: "https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations/blob/main/CHANGELOG.md",
-              },
-            ],
-          },
-        ],
-        sidebar: [
-          {
-            text: "Get Started",
-            items: [
-              {
-                text: "Contributing in Mordhau Documentations",
-                link: "/zh/contributing/",
-              },
-              {
-                text: "How to understand the docs?",
-                link: "/zh/mordhauSDK-guide/",
               },
             ],
           },

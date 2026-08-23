@@ -46,6 +46,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The /config/ sidebar left over from the VitePress starter template.
 - The rewrites hook, its regex never matched anything.
 - docs/en/encountering-errors, a duplicate of solutions-and-errors.
+- Chinese menu entries for pages that do not exist yet, only the homepage
+  has been translated so far.
 
 
 
