@@ -36,6 +36,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   they are long enough to scroll. Scrolling itself is untouched and still
   native. Scrollbars inside the sidebar and code blocks are squared off and
   thinned to match.
+- The hero logo drifts again on the rebuilt landing page, with the glow
+  behind it pulsing on a longer period. Both stop under prefers-reduced-motion.
 - Features strip on the landing page above the quick reference: no ads or
   trackers, one ordered page per topic, and walkthroughs shown rather than
   only described.

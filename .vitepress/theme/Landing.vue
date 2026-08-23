@@ -380,11 +380,14 @@ const languages = [
   border-radius: 50%;
   background-image: var(--vp-home-hero-image-background-image);
   filter: var(--vp-home-hero-image-filter);
+  /* Longer period than the logo so the two never settle into lockstep. */
+  animation: logo-glow 9s ease-in-out 0.9s infinite;
 }
 
 .hero-logo {
   position: relative;
   width: 100%;
+  animation: logo-float 7s ease-in-out 0.9s infinite;
   filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.4));
   -webkit-user-select: none;
   user-select: none;
@@ -776,6 +779,36 @@ const languages = [
   animation-delay: 0.42s;
 }
 
+@keyframes logo-float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(8px) rotate(1deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes logo-glow {
+  0% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.09);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+}
+
 @keyframes rise {
   from {
     opacity: 0;
@@ -844,6 +877,8 @@ const languages = [
   .lede,
   .cta-row,
   .hero-mark,
+  .hero-logo,
+  .hero-glow,
   .features,
   .quickref {
     animation: none;
