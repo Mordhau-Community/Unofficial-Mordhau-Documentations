@@ -1071,21 +1071,55 @@ html .VPDoc:not(.has-sidebar) .content {
 }
 
 
-/* ----------------------------------------------------------- Sidebar ---- */
+/* ------------------------------------------- Sidebar and nav bar ---- */
 
 /*
- * Keep the sidebar out of the nav bar.
+ * The nav bar is the same on every page, and the sidebar is a box under it.
  *
- * .VPSidebar is fixed at top: 0, so its background runs the full height of the
- * window and sits behind the nav. Stock VitePress hides that with an opaque
- * bar, but ours is frosted, so the darker column and its edge showed through
- * and the left of the nav read as part of the sidebar box.
+ * VitePress builds the nav around the sidebar instead: with one present it
+ * pads .content by --vp-sidebar-width, pins .title to that width, widens
+ * .container to 100% and indents the divider. So the search box, the logo and
+ * the underline all sit somewhere different depending on whether the page has
+ * a sidebar, and they jump as you navigate between the two.
  *
- * Clipping is the light touch here. Painting over it cannot work, the sidebar
- * is z-index 60 against the nav's 30, and --vp-layout-top-height is read by
- * six other components so moving the sidebar with it would shift the whole
- * layout. Clipping changes nothing but where the column starts drawing, and
- * the content inside is already padded clear of the nav so none of it is lost.
+ * Every one of those is reset below, so the bar lays out identically whatever
+ * the page is.
+ */
+@media (min-width: 960px) {
+  html .VPNavBar.has-sidebar .wrapper {
+    padding: 0 32px !important;
+  }
+
+  html .VPNavBar.has-sidebar .container {
+    max-width: calc(var(--vp-layout-max-width) - 64px) !important;
+  }
+
+  html .VPNavBar.has-sidebar .title {
+    position: static !important;
+    width: auto !important;
+    padding: 0 !important;
+    background-color: transparent !important;
+  }
+
+  html .VPNavBar.has-sidebar .content {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  html .VPNavBar.has-sidebar .divider {
+    padding-left: 0 !important;
+  }
+}
+
+/*
+ * .VPSidebar is fixed at top: 0, so its background runs the height of the
+ * window and sits behind the bar. Painting over it is not possible, it is
+ * z-index 60 against the nav at 30, and --vp-layout-top-height is read by six
+ * other components so moving it that way would shift the whole layout.
+ * Clipping only changes where it starts drawing, and its content is already
+ * padded clear of the nav, so nothing is lost.
+ *
+ * Desktop only: below 960px the sidebar is a drawer that should cover the bar.
  */
 @media (min-width: 960px) {
   html .VPSidebar {
@@ -1093,11 +1127,8 @@ html .VPDoc:not(.has-sidebar) .content {
   }
 }
 
-/*
- * Hairline down the right edge. Clipped along with the rest, so it starts
- * where the column does rather than running up through the nav. Logical
- * property, so it moves to the other side in the Arabic locale on its own.
- */
+/* Hairline down the right edge, clipped with the rest so it starts where the
+   column does. Logical property, so it flips for the Arabic locale. */
 html .VPSidebar {
   border-inline-end: 1px solid var(--vp-c-divider);
 }

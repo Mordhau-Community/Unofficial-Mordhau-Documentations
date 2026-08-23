@@ -81,10 +81,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Sidebar background ran up behind the nav bar, which showed through the
-  frosted bar and made the left of it look like part of the sidebar. The
-  column is clipped to start below the bar now, and it has a hairline down
-  its right side.
+- Nav bar was laid out around the sidebar, so the search box, logo and
+  underline all sat somewhere different on pages that had one and jumped as
+  you navigated. The bar is identical on every page now, and the sidebar is a
+  box beneath it with a hairline down its right side.
 
 - Customization panel showed nothing selected in a row when the stored choice
   named an option that no longer existed. Values are validated against the
