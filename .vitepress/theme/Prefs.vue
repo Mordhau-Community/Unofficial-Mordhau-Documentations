@@ -73,7 +73,7 @@ onBeforeUnmount(() => {
       type="button"
       class="mh-prefs-button"
       :class="{ 'is-open': open }"
-      aria-label="Appearance settings"
+      aria-label="Customization"
       :aria-expanded="open"
       @click="open = !open"
     >
@@ -94,7 +94,9 @@ onBeforeUnmount(() => {
       </svg>
     </button>
 
-    <div v-show="open" class="mh-prefs-panel" role="group" aria-label="Appearance settings">
+    <div v-show="open" class="mh-prefs-panel" role="group" aria-label="Customization">
+      <p class="mh-prefs-title">Customization</p>
+
       <p class="mh-prefs-label">Corners</p>
       <div class="mh-prefs-row">
         <button
@@ -164,7 +166,7 @@ onBeforeUnmount(() => {
   top: calc(100% + 12px);
   inset-inline-end: 0;
   z-index: 100;
-  width: 208px;
+  width: 224px;
   padding: 14px;
   border: 1px solid var(--vp-c-divider);
   border-radius: var(--mh-r);
@@ -172,13 +174,23 @@ onBeforeUnmount(() => {
   box-shadow: var(--vp-shadow-3);
 }
 
+/* Panel heading. Same size as the group titles below it, separated by weight
+   of colour and a rule rather than by scale. */
+.mh-prefs-title {
+  margin: 0 0 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--vp-c-divider);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+}
+
+/* Matches .VPMenuGroup .title in the nav dropdowns: 14px, 600, text-2. */
 .mh-prefs-label {
   margin: 0 0 8px;
-  font-family: var(--vp-font-family-mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--vp-c-text-3);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vp-c-text-2);
 }
 
 .mh-prefs-row {
@@ -187,7 +199,7 @@ onBeforeUnmount(() => {
 }
 
 .mh-prefs-row + .mh-prefs-label {
-  margin-top: 16px;
+  margin-top: 18px;
 }
 
 .mh-prefs-choice {
