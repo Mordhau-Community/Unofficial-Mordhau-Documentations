@@ -12,15 +12,17 @@ import './style.css'
 import Scrollbar from './Scrollbar.vue'
 import Landing from './Landing.vue'
 import Prefs from './Prefs.vue'
+import ReadMode from './ReadMode.vue'
 
 export default {
   extends: DefaultTheme,
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
-      // Layout wraps every route, so the overlay scrollbar is mounted once
-      // here rather than per page.
-      'layout-bottom': () => h(Scrollbar),
+      // Layout wraps every route, so the overlay scrollbar and the read mode
+      // button are mounted once here rather than per page. A slot takes an
+      // array, which renders the two as siblings.
+      'layout-bottom': () => [h(Scrollbar), h(ReadMode)],
       // Slot renders past the social links; style.css reorders the flex
       // row so the button lands beside the appearance switch.
       'nav-bar-content-after': () => h(Prefs)

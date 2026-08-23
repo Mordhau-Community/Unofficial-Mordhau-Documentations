@@ -1425,6 +1425,15 @@ html .VPSocialLink > [class^="vpi-social-"] {
     display: none;
   }
 
+}
+
+/*
+ * The gutter that holds the outline opens at 1280px, not 960px, because that
+ * is where VitePress switches .aside to display: block. Reserving it any
+ * earlier left an empty 272px strip down the side of every doc page between
+ * 960 and 1279px with nothing in it.
+ */
+@media (min-width: 1280px) {
   html .VPContent:has(.VPDoc.has-aside) {
     padding-right: var(--vp-sidebar-width);
   }
@@ -1480,4 +1489,228 @@ html .VPDocAsideOutline .content {
  */
 html .VPDoc.has-aside .aside-content {
   min-height: 0;
+}
+
+
+/* --------------------------------------------------------- Read mode ---- */
+
+/*
+ * data-mh-read=on strips the page back to the article: the nav slides up out
+ * of frame, the sidebar leaves by its own outer edge, the outline leaves by
+ * the other, and the content column spreads into the space and recentres.
+ *
+ * One attribute on <html> drives all of it, so nothing can move without the
+ * rest, and the pre-paint script in config.mts stamps it before first paint,
+ * so a reload in read mode does not flash the full chrome first.
+ *
+ * Transitions are declared on the elements themselves rather than on the on
+ * state, so the way back in is animated too and not just the way out.
+ *
+ * Horizontal distances are written for LTR and deliberately left for
+ * postcss-rtl to mirror. This is the one place its mirroring is wanted: in
+ * Arabic the sidebar sits on the right and has to leave to the right.
+ */
+
+:root {
+  --mh-read-ease: 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Outside the width blocks: the article breathes at every size. */
+html .VPContent {
+  transition: padding var(--mh-read-ease);
+}
+
+/* Named so the whole movement can be switched off in one place. The colour
+   fades further down are left alone, they are not motion. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --mh-read-ease: 0s linear;
+  }
+}
+
+@media (min-width: 960px) {
+  /* VitePress declares transition: background-color on .VPNav inside a
+     scoped block, which compiles to .VPNav[data-v-hash] and outranks this.
+     Without the important the bar jumped to -64px instead of sliding. */
+  html .VPNav {
+    transition: transform var(--mh-read-ease), background-color 0.5s !important;
+  }
+
+  /* Same scoped-specificity problem, and here it also has a transform
+     transition of its own to displace. */
+  html .VPSidebar {
+    transition: transform var(--mh-read-ease), opacity 0.5s !important;
+  }
+
+  html[data-mh-read="on"] .VPNav {
+    transform: translateY(-100%);
+  }
+
+  html[data-mh-read="on"] .VPSidebar {
+    transform: translateX(-100%);
+  }
+
+  /* The bar has gone with it, so the article can start where the button ends
+     rather than where the bar used to be. */
+  html[data-mh-read="on"] .VPContent {
+    padding-top: 24px;
+  }
+
+  /*
+   * Important because postcss-rtl rewrites the VitePress rule as
+   * [dir="ltr"] .VPContent.has-sidebar[data-v-hash], which is four classes
+   * wide and outranks anything sensible built from html plus an attribute.
+   * Measured: without it the left padding stayed at the full 272px and the
+   * article never moved out from under the departed sidebar.
+   */
+  html[data-mh-read="on"] .VPContent.has-sidebar {
+    padding-inline: 0 !important;
+  }
+}
+
+/*
+ * The outline only exists from 1280px up, which is where VitePress switches
+ * .aside to display: block. Below that there is nothing on the right to move.
+ */
+@media (min-width: 1280px) {
+  html .VPDoc.has-aside .aside-container {
+    transition: transform var(--mh-read-ease);
+  }
+
+  html[data-mh-read="on"] .VPDoc.has-aside .aside-container {
+    transform: translateX(100%);
+  }
+
+  html[data-mh-read="on"] .VPContent:has(.VPDoc.has-aside) {
+    padding-right: 0;
+  }
+}
+
+/*
+ * Below 960px the bar is in the flow rather than fixed, so hiding it has to
+ * take its space with it or the article would sit under a 65px hole. The outer
+ * box collapses while the bar inside slides up out of it.
+ *
+ * Both run on the same curve over the same time, so the bar's bottom edge and
+ * the box's bottom edge stay on exactly the same pixel the whole way. That is
+ * what keeps the bar from spilling below the box, and is why there is no
+ * overflow: hidden here: it would clip the nav's own dropdowns, which are
+ * absolutely positioned against .VPNav.
+ */
+@media (max-width: 959px) {
+  /*
+   * There is no top padding to shrink at this width, so with both bars gone
+   * the heading rose to meet the floating button. Measured at 390px: heading
+   * top 32, button bottom 39, seven pixels into one another.
+   */
+  html[data-mh-read="on"] .VPContent {
+    padding-top: 20px;
+  }
+
+  html .VPNav {
+    /* 64px bar plus the 1px divider that hangs off its bottom edge. */
+    height: calc(var(--vp-nav-height) + 1px);
+    transition: height var(--mh-read-ease);
+  }
+
+  html .VPNavBar {
+    transition: transform var(--mh-read-ease), background-color 0.25s !important;
+  }
+
+  html[data-mh-read="on"] .VPNav {
+    height: 0;
+  }
+
+  html[data-mh-read="on"] .VPNavBar {
+    transform: translateY(-100%);
+  }
+}
+
+/*
+ * Below 1280px VitePress puts a sticky utility bar under the nav carrying the
+ * sidebar toggle and the outline dropdown. Read mode hides both of the things
+ * that bar opens, so the bar goes with them.
+ *
+ * Same construction as the nav above: the outer box collapses while the row
+ * inside slides up out of it, on one curve over one duration, so the two
+ * bottom edges stay on the same pixel and nothing spills out.
+ *
+ * 48px is VitePress's own figure, not a guess: 12px + a 24px line + 11px, plus
+ * the 1px rule along the bottom. Measured at exactly 48 on both a page with a
+ * sidebar and one without, at every width from 390px to 1279px.
+ */
+@media (max-width: 1279px) {
+  html .VPLocalNav {
+    box-sizing: border-box;
+    height: 48px;
+    transition: height var(--mh-read-ease),
+      border-bottom-width var(--mh-read-ease);
+  }
+
+  html .VPLocalNav .container {
+    transition: transform var(--mh-read-ease);
+  }
+
+  html[data-mh-read="on"] .VPLocalNav {
+    height: 0;
+    /* A border still paints at height 0, and would leave a stray rule across
+       the top of the article after everything else had gone. */
+    border-bottom-width: 0;
+  }
+
+  html[data-mh-read="on"] .VPLocalNav .container {
+    transform: translateY(-48px);
+  }
+}
+
+/*
+ * Where the read mode button hangs.
+ *
+ * It hangs off the bottom edge of whatever VitePress has actually pinned at
+ * the top of the window, and that is not the same thing at every width:
+ *
+ *   1280px and up   the nav, on its own
+ *   960 to 1279     the nav, with the sticky utility bar beneath it
+ *   below 960       that utility bar alone, because the nav is in the flow at
+ *                   this width and scrolls away with the page
+ *
+ * The off-state rules all carry :not([data-mh-read="on"]) so they simply stop
+ * matching once read mode is on, rather than having to be outranked. Without
+ * that the :has() selectors are two classes wide and win, and the button stays
+ * hanging in mid air where a bar used to be.
+ */
+
+html {
+  --mh-dock-top: var(--vp-nav-height);
+}
+
+@media (min-width: 960px) and (max-width: 1279px) {
+  html:not([data-mh-read="on"]):has(.VPLocalNav:not(.empty)) {
+    --mh-dock-top: calc(var(--vp-nav-height) + 48px);
+  }
+}
+
+@media (max-width: 959px) {
+  /*
+   * The nav is not pinned here, it scrolls off with everything else, so a
+   * button fixed to a line that is no longer on screen ends up floating in the
+   * middle of the article. It rides with the page instead, and only pins
+   * itself once read mode has taken the furniture away and it is the sole way
+   * back out.
+   */
+  html:not([data-mh-read="on"]) .mh-read-dock {
+    position: absolute;
+  }
+
+  html:not([data-mh-read="on"]) {
+    --mh-dock-top: calc(var(--vp-nav-height) + 1px);
+  }
+
+  html:not([data-mh-read="on"]):has(.VPLocalNav) {
+    --mh-dock-top: calc(var(--vp-nav-height) + 1px + 48px);
+  }
+}
+
+html[data-mh-read="on"] {
+  --mh-dock-top: 10px;
 }
