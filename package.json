@@ -1,5 +1,12 @@
 {
-  "version": "0.0.12.Unreleased",
+  "name": "unofficial-mordhau-documentations",
+  "version": "0.0.13.Unreleased",
+  "private": true,
+  "description": "Community written documentation for Mordhau, built with VitePress.",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
@@ -7,6 +14,6 @@
   },
   "devDependencies": {
     "postcss-rtl": "^2.0.0",
-    "vitepress": "^1.5.0"
+    "vitepress": "^1.6.4"
   }
 }
