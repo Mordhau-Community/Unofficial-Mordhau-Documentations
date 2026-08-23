@@ -1377,3 +1377,107 @@ html .VPSocialLink > [class^="vpi-social-"] {
   width: 17px !important;
   height: 17px !important;
 }
+
+
+/* ------------------------------------------------- Outline as a column ---- */
+
+/*
+ * "On this page" becomes a right hand sidebar: same width as the left one,
+ * same darker surface, same hairline, pinned to the edge of the window and
+ * running the height of it.
+ *
+ * VitePress leaves it inside the article flow, as a 256px column with a
+ * transparent background sitting wherever the centred container puts it. So
+ * the panel stops reserving width in the flow, is pinned to the edge instead,
+ * and the content area gains matching padding on that side, exactly the way
+ * .VPContent is already padded for the left sidebar.
+ *
+ * :has() picks out only the pages that actually have an outline; a page
+ * without one keeps the full width.
+ */
+@media (min-width: 960px) {
+  html .VPDoc.has-aside .aside {
+    max-width: 0;
+    padding-left: 0;
+  }
+
+  html .VPDoc.has-aside .aside-container {
+    top: 0;
+    bottom: 0;
+    inset-inline-end: 0;
+    width: var(--vp-sidebar-width);
+    height: auto;
+    /* Outer side keeps the left column's 32px; the inner side is 20px
+       because the outline runs longer strings than a sidebar link, and an
+       even 32px clipped headings that used to fit. Measured: 32px both sides
+       overflowed the longest item by 2px. */
+    padding: calc(var(--vp-nav-height) + 32px) 32px 96px 20px;
+    background-color: var(--vp-c-bg-alt);
+    border-inline-start: 1px solid var(--vp-c-divider);
+    /* Same reason as the left column: fixed at top 0, so without this its
+       background would sit behind the frosted nav bar. */
+    clip-path: inset(var(--vp-nav-height) 0 0 0);
+  }
+
+  /* The fade at the foot assumes the page background; on a darker panel it
+     reads as a smear. */
+  html .VPDoc.has-aside .aside-curtain {
+    display: none;
+  }
+
+  html .VPContent:has(.VPDoc.has-aside) {
+    padding-right: var(--vp-sidebar-width);
+  }
+}
+
+/*
+ * Past 1440px VitePress widens the left sidebar to swallow the gutter, so the
+ * right one has to use the same formula or the two stop matching. The content
+ * padding follows the same figure its left counterpart already uses.
+ */
+@media (min-width: 1440px) {
+  html .VPDoc.has-aside .aside-container {
+    width: calc(
+      (100% - (var(--vp-layout-max-width) - 64px)) / 2 +
+        var(--vp-sidebar-width) - 32px
+    );
+    padding-right: max(
+      32px,
+      calc((100% - (var(--vp-layout-max-width) - 64px)) / 2)
+    );
+  }
+
+  html .VPContent:has(.VPDoc.has-aside) {
+    padding-right: calc(
+      (100vw - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width)
+    );
+  }
+}
+
+
+/* ----------------------------------------------- Outline rail, scroll ---- */
+
+/*
+ * The grey rail down the outline goes; the brand marker that rides on it
+ * stays.
+ *
+ * Only the colour is dropped, not the border. The marker is positioned at
+ * left: -1px, so it lives in that border's track; removing the border outright
+ * would shift the marker a pixel and change the text indent with it.
+ */
+html .VPDocAsideOutline .content {
+  border-left-color: transparent;
+}
+
+/*
+ * The outline panel scrolls only when its own content is too tall for it.
+ *
+ * VitePress gives .aside-content a min-height of nearly the full viewport so a
+ * sponsor block can be pushed to the bottom. There is no sponsor block here,
+ * and with the panel now padded top and bottom that min-height pushed the
+ * content past the panel every time, so it was always scrollable even with
+ * eight short links in it.
+ */
+html .VPDoc.has-aside .aside-content {
+  min-height: 0;
+}
