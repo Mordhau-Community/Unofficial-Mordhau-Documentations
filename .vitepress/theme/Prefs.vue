@@ -125,20 +125,22 @@ function cancelClose() {
  * as you reach for it. The grace period is cancelled the moment the pointer is
  * back inside, so the only way to actually close it is to stay away.
  *
- * Focus inside the panel holds it open regardless: someone tabbing through the
+ * Keyboard focus inside the panel holds it open: someone tabbing through the
  * swatches has no pointer in there and should not lose it to a stray movement.
- * Focus on the button does not count, that is where it lands after a click.
+ * It has to be :focus-visible, not activeElement. Clicking an option leaves
+ * that button focused, so a plain contains() check stuck the panel open for
+ * good once you had changed anything.
  *
  * mouseleave rather than pointerleave, so a touch does not dismiss it the
  * instant it opens.
  */
 function onLeave() {
   const panel = root.value?.querySelector(".mh-prefs-panel");
-  if (panel && panel.contains(document.activeElement)) return;
+  if (panel?.querySelector(":focus-visible")) return;
   cancelClose();
   closeTimer = setTimeout(() => {
     open.value = false;
-  }, 260);
+  }, 110);
 }
 
 /*
@@ -210,7 +212,12 @@ onBeforeUnmount(() => {
       </svg>
     </button>
 
-    <div v-show="open" class="mh-prefs-panel" role="group" aria-label="Customization">
+    <div
+      class="mh-prefs-panel"
+      :class="{ 'is-visible': open }"
+      role="group"
+      aria-label="Customization"
+    >
       <p class="mh-prefs-label">Corners</p>
       <div class="mh-prefs-row">
         <button
@@ -384,7 +391,19 @@ onBeforeUnmount(() => {
   color: var(--vp-c-text-1);
 }
 
+/*
+ * Faded rather than switched off, so it leaves the way the nav menus do.
+ * visibility carries the transition and also keeps the panel out of the tab
+ * order and untouchable by the pointer while it is hidden.
+ */
 .mh-prefs-panel {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition:
+    opacity 0.14s ease,
+    visibility 0.14s ease,
+    transform 0.14s ease;
   --mh-swatch-pad: rgba(0, 0, 0, 0.16);
   position: absolute;
   /* 100% is the bar, +1px clears the divider under it, +5px is the gap. */
@@ -403,6 +422,12 @@ onBeforeUnmount(() => {
   border-radius: var(--mh-r);
   background-color: var(--vp-c-bg-elv);
   box-shadow: var(--vp-shadow-3);
+}
+
+.mh-prefs-panel.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 /* Matches .VPMenuGroup .title in the nav dropdowns: 14px, 600, text-2. */
@@ -488,6 +513,15 @@ onBeforeUnmount(() => {
 
 @media (prefers-reduced-motion: reduce) {
   .mh-prefs-swatch:hover {
+    transform: none;
+  }
+
+  .mh-prefs-panel {
+    transition: none;
+    transform: none;
+  }
+
+  .mh-prefs-panel.is-visible {
     transform: none;
   }
 }

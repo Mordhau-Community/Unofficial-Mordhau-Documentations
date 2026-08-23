@@ -42,8 +42,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Nav bar groups are separated by a slash instead of a vertical bar.
 - Nav dropdowns and the customization panel open below the nav bar underline
   with a 5px gap, instead of overlapping the bar.
-- Customization panel closes when the pointer leaves it, the way the nav
-  menus do.
+- Customization panel closes when the pointer leaves it, fading out on the
+  same timing as the nav menus.
 - Width setting in the customization panel, default or wide, covering both
   the documentation pages and the landing page.
 - Appearance button in the nav bar, beside the theme switch. Corners can be
