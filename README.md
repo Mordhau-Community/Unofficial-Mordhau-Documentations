@@ -22,12 +22,12 @@ Follow these steps to set up the project locally and start contributing:
 
 ```bash
 git clone https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations.git
-cd unofficial-mordhau-documentations
+cd Unofficial-Mordhau-Documentations
 ```
 
 #### 2. Install Dependencies
 
-Ensure you have Node.js installed. Then, install the required dependencies:
+Ensure you have Node.js 18 or newer installed. Then, install the required dependencies:
 
 ```bash
 npm install
@@ -41,7 +41,7 @@ Run the following command to start a local development server:
 npm run docs:dev
 ```
 
-then Visit localhost:3000 in your browser to view the documentation locally.
+The command prints the address it is serving on, usually `http://localhost:5173`. Open that in your browser to view the documentation locally. The page reloads on its own every time you save a file.
 
 ## 🛠️ Build for Production
 
@@ -51,7 +51,24 @@ To build the documentation for production, use the following command:
 npm run docs:build
 ```
 
-The static files will be generated in the unofficial-mordhau-documentations/public directory.
+The static files are generated in `.vitepress/dist/docs`. That folder is not committed — Netlify runs the build itself on every push to `main`. To check the built output before you push:
+
+```bash
+npm run docs:preview
+```
+
+## 📁 Project Structure
+
+```
+.vitepress/
+  config.mts        site configuration: nav, sidebar, languages
+  theme/            styling overrides
+docs/
+  en/               English pages
+  ar/  fr/  ja/     translations, mirroring the English structure
+  ru/  zh/
+netlify.toml        build settings and redirects
+```
 
 ## 🤝 How to Contribute
 
@@ -63,17 +80,19 @@ Click the Fork button on the top-right of this page to create a copy of this rep
 
 #### 2. Create a New Branch
 
-Create a new branch for your changes (e.g., improve-unofficial-mordhau-documentations).:
+Create a new branch for your changes, named after what you are doing:
 
 ```bash
-git checkout -b improve-unofficial-mordhau-documentations
+git checkout -b fix-rcon-ports
 ```
 
 #### 3. Add or Update Documentation
 
-Navigate to the docs/ directory.
-Add or edit .md files for the documentation.
-For example, to add a new page, create a file like new-page.md inside docs/.
+Navigate to the `docs/` directory.
+Add or edit `.md` files for the documentation.
+For example, to add a new page, create a file like `new-page.md` inside `docs/en/`.
+
+If you add a page, link it in the navigation by updating `.vitepress/config.mts`. A page nothing links to will not be found by anyone.
 
 #### 4. Test Locally
 
@@ -83,6 +102,12 @@ Run the development server to ensure your changes appear correctly:
 npm run docs:dev
 ```
 
+Then run a production build before you push. It fails on broken internal links, so it catches a mistake that is easy to miss in the dev server:
+
+```bash
+npm run docs:build
+```
+
 #### 5. Commit and Push Changes
 
 Commit your changes and push them to your forked repository:
@@ -90,7 +115,7 @@ Commit your changes and push them to your forked repository:
 ```bash
 git add .
 git commit -m "Describe your changes"
-git push origin unofficial-mordhau-documentations
+git push origin fix-rcon-ports
 ```
 
 #### 6. Submit a Pull Request
@@ -103,23 +128,27 @@ Click on Pull Requests and submit your changes for review.
 - Ensure your changes are clear and concise.
 - Follow the structure of existing documentation.
 - Add examples or images where applicable to enhance clarity.
-- If adding new files, link them in the sidebar by updating the .vitepress/config.ts file.
-- See CONTRIBUTING.md for more detailed guidelines.
+- If adding new files, link them in the sidebar by updating the `.vitepress/config.mts` file.
+- See [CONTRIBUTING.md](CONTRIBUTING.md) for more detailed guidelines.
 
 ## 🌍 Multilingual Support
 
 We aim to provide documentation in multiple languages. If you’d like to contribute a translation:
 
-1- Create a new folder for the language under docs/.
-Example: docs/fr for French, docs/ar for Arabic.
+1- Create a new folder for the language under `docs/`.
+Example: `docs/fr` for French, `docs/ar` for Arabic.
 
 2- Translate the relevant Markdown files.
 
-3- Update the configuration in .vitepress/config.ts to include the new language.
+3- Update the configuration in `.vitepress/config.mts` to include the new language.
+
+Please do not submit machine translated pages — we have no way to review a language none of us read.
 
 ## 📬 Questions or Suggestions?
 
 If you have any questions or suggestions, feel free to open an Issue on GitHub. We'd love to hear your feedback!
+
+You can also find us on [Discord](https://discord.gg/zuX58yRV84).
 
 ## ❤️ Acknowledgements
 

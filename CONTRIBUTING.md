@@ -32,11 +32,12 @@ To ensure contributions are in line with the repository's purpose and licensing 
 1. Fork the repository to your own GitHub account.
 2. Create a new branch for your contribution (e.g., `improve-docs`).
 3. Make your changes and ensure they are properly documented.
-4. Submit a pull request (PR) with a clear description of your changes.
+4. Run `npm run docs:build` before submitting. It fails on broken internal links, which is the easiest mistake to make and the easiest to miss.
+5. Submit a pull request (PR) with a clear description of your changes.
 
 ### 6. Licensing Agreement
 
-- By submitting a contribution, you confirm that you have read and agree to abide by the repository's licensing terms as outlined in the [LICENSE](./LICENSE) file.
+- By submitting a contribution, you confirm that you have read and agree to abide by the repository's licensing terms as outlined in the [LICENSE](./LICENSE.md) file.
 - You also acknowledge that your contribution will be licensed under the repository's existing license.
 
 ### 7. Contact

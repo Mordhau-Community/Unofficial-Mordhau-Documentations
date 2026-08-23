@@ -7,6 +7,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [0.0.13.Unreleased] (23 / 08 / 2026)
+
+### Added
+
+- Combat Mechanics page.
+- Glossary page.
+- Git, Github, VitePress and Resources pages in the contributing section.
+- Build settings in netlify.toml so Netlify builds the site itself.
+- Project Structure section in the README.
+
+### Changed
+
+- VitePress 1.5.0 to 1.6.4.
+- Wrote the Dedicated Server guide properly (SteamCMD, Game.ini, ports).
+- Wrote the RCON guide properly (RconPassword, RconPort, command list).
+- Filled in Tools, Methods, Terms & Rules, How to Read, References,
+  Solutions and Errors and the MordhauSDK page, all were placeholders.
+- Finished the Markdown pages, one of them stopped mid sentence.
+- Dedicated Game Server Providers is now a table with working links.
+- Dead link checking is on, the build fails instead of shipping broken links.
+- package.json now has name, private, description, license and engines.
+
+### Fixed
+
+- Nav and sidebar links that pointed at ssshkdsd, asdasdc and similar.
+- Arabic sidebar pointed at the English pages.
+- Missing s in the GitHub social link.
+- Casing on the how-to-use-markdown link.
+- localhost:3000 in the README and contributing pages, it is 5173.
+- Build output path, it is .vitepress/dist/docs and not /public.
+- References to .vitepress/config.ts, the file is config.mts.
+
+### Removed
+
+- .vitepress/dist and .vitepress/cache from the repository, 172 files of
+  build output that should never have been committed.
+- The /config/ sidebar left over from the VitePress starter template.
+- The rewrites hook, its regex never matched anything.
+- docs/en/encountering-errors, a duplicate of solutions-and-errors.
+
+
+
 ## [0.0.12.Unreleased] (11 / 12 / 2024)
 
 ### Added

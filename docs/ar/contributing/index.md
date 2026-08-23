@@ -22,7 +22,7 @@ Follow these steps to set up the project locally and start contributing:
 
 ```bash
 git clone https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations.git
-cd unofficial-mordhau-documentations
+cd Unofficial-Mordhau-Documentations
 ```
 
 #### 2. Install Dependencies
@@ -41,7 +41,7 @@ Run the following command to start a local development server:
 npm run docs:dev
 ```
 
-then Visit localhost:3000 in your browser to view the documentation locally.
+The command prints the address it is serving on, usually `http://localhost:5173`. Open that in your browser to view the documentation locally.
 
 ## 🛠️ Build for Production
 
@@ -51,7 +51,7 @@ To build the documentation for production, use the following command:
 npm run docs:build
 ```
 
-The static files will be generated in the unofficial-mordhau-documentations/public directory.
+The static files are generated in the `.vitepress/dist/docs` directory. That folder is not committed, Netlify runs the build itself on every push to `main`.
 
 ## 🤝 How to Contribute
 
@@ -66,7 +66,7 @@ Click the Fork button on the top-right of this page to create a copy of this rep
 Create a new branch for your changes:
 
 ```bash
-git checkout -b unofficial-mordhau-documentations
+git checkout -b fix-rcon-ports
 ```
 
 #### 3. Add or Update Documentation
@@ -90,7 +90,7 @@ Commit your changes and push them to your forked repository:
 ```bash
 git add .
 git commit -m "Describe your changes"
-git push origin unofficial-mordhau-documentations
+git push origin fix-rcon-ports
 ```
 
 #### 6. Submit a Pull Request
@@ -103,7 +103,7 @@ Click on Pull Requests and submit your changes for review.
 - Ensure your changes are clear and concise.
 - Follow the structure of existing documentation.
 - Add examples or images where applicable to enhance clarity.
-- If adding new files, link them in the sidebar by updating the .vitepress/config.ts file.
+- If adding new files, link them in the sidebar by updating the .vitepress/config.mts file.
 
 ## 🌍 Multilingual Support
 
@@ -114,7 +114,7 @@ Example: docs/fr for French, docs/ar for Arabic.
 
 2- Translate the relevant Markdown files.
 
-3- Update the configuration in .vitepress/config.ts to include the new language.
+3- Update the configuration in .vitepress/config.mts to include the new language.
 
 ## 📬 Questions or Suggestions?
 
