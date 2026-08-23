@@ -40,6 +40,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The hero logo drifts again on the rebuilt landing page, with the glow
   behind it pulsing on a longer period. Both stop under prefers-reduced-motion.
 - Nav bar groups are separated by a slash instead of a vertical bar.
+- Arrow beside a nav menu turns up while the menu is open, and the arrow on an
+  external item drifts the way it points on hover.
 - Nav dropdowns and the customization panel open below the nav bar underline
   with a 5px gap, instead of overlapping the bar.
 - Customization panel closes when the pointer leaves it, fading out on the
@@ -85,6 +87,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - package.json now has name, private, description, license and engines.
 
 ### Fixed
+
+- Menu item hover, search shortcut keys, sidebar indicators and the outline
+  marker ignored the corner setting.
 
 - Nav bar was laid out around the sidebar, so the search box, logo and
   underline all sat somewhere different on pages that had one and jumped as

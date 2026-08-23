@@ -654,6 +654,11 @@ html .VPLocalSearchBox .result {
 }
 
 html .VPBadge,
+html .VPMenu .link,
+html .DocSearch-Button-Key,
+html .outline-marker,
+html .VPSidebarItem .indicator,
+html .VPDocOutlineItem a,
 html .vp-doc :not(pre) > code,
 html .vp-doc [class*="language-"] > button.copy,
 html .DocSearch-Hit,
@@ -1203,4 +1208,79 @@ html .VPFlyout .menu::before {
   right: 0;
   top: -6px;
   height: 6px;
+}
+
+
+/* ------------------------------------------------------- Nav chevron ---- */
+
+/*
+ * The arrow beside a nav menu turns up while the menu is open and drops back
+ * when it closes.
+ *
+ * It is not a "down" glyph: VitePress ships one chevron pointing right and
+ * orients it with a transform, rotate(90deg) for down and rotate(-90deg) for
+ * up, mirrored in RTL. Since transform is a single property, the open state
+ * has to state the final angle rather than add to the closed one; rotate(180deg)
+ * would point it left.
+ *
+ * The angle here is the LTR one. postcss-rtl mirrors rotations, so the Arabic
+ * build gets rotate(90deg) and points up there too.
+ *
+ * :hover covers the hover case and aria-expanded covers click and keyboard,
+ * so it also tracks correctly for anyone not using a mouse.
+ */
+html .VPFlyout .vpi-chevron-down {
+  transition: transform 0.25s ease;
+}
+
+html .VPFlyout:hover .vpi-chevron-down,
+html .VPFlyout .button[aria-expanded="true"] .vpi-chevron-down {
+  transform: rotate(-90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html .VPFlyout .vpi-chevron-down {
+    transition: none;
+  }
+}
+
+
+/* --------------------------------------------- External link arrows ---- */
+
+/*
+ * The arrow on an external item in a nav menu drifts the way it points while
+ * the item is hovered.
+ *
+ * It is an ::after on the link, not an element, so it is styled through the
+ * same pseudo VitePress uses to draw it.
+ *
+ * Both offsets go through custom properties on purpose. postcss-rtl mirrors
+ * literal numbers inside a transform and rtl:ignore does not stop it; shield
+ * only the x and it flips the y instead. It cannot evaluate a var(), so with
+ * both behind one there is nothing left for it to touch.
+ * VitePress does not mirror this glyph, so it still points up and to the right
+ * in the Arabic build; a flipped nudge would send it away from where it points.
+ */
+html .VPMenu .VPLink.vp-external-link-icon::after,
+html .VPNavScreen .VPLink.vp-external-link-icon::after {
+  transition: transform 0.25s ease;
+}
+
+html .VPMenu .VPLink.vp-external-link-icon:hover::after,
+html .VPNavScreen .VPLink.vp-external-link-icon:hover::after {
+  --mh-nudge-x: 2px;
+  --mh-nudge-y: -2px;
+  transform: translate(var(--mh-nudge-x), var(--mh-nudge-y));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html .VPMenu .VPLink.vp-external-link-icon::after,
+  html .VPNavScreen .VPLink.vp-external-link-icon::after {
+    transition: none;
+  }
+
+  html .VPMenu .VPLink.vp-external-link-icon:hover::after,
+  html .VPNavScreen .VPLink.vp-external-link-icon:hover::after {
+    transform: none;
+  }
 }
