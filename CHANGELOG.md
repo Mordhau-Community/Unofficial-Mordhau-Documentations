@@ -82,8 +82,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Customization panel showed nothing selected in a row when the stored choice
   named an option that no longer existed. Values are validated against the
   current list on load and fall back to the default.
-- Selection ring was hard to see on pale swatches, where a light ring sat
-  straight against a light colour. It now has a gap on both sides.
+- Selected swatch was hard to see on pale colours. Selection is now a darker
+  pad behind the chip rather than a ring around it.
 
 - The logo never loaded, anywhere. Loose files under docs/ are not copied by
   the build, only docs/public is, so both the navbar and the hero logo have

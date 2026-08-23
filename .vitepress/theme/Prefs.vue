@@ -298,6 +298,7 @@ onBeforeUnmount(() => {
 }
 
 .mh-prefs-panel {
+  --mh-swatch-pad: rgba(0, 0, 0, 0.16);
   position: absolute;
   top: calc(100% + 12px);
   inset-inline-end: 0;
@@ -313,6 +314,10 @@ onBeforeUnmount(() => {
 }
 
 /* Matches .VPMenuGroup .title in the nav dropdowns: 14px, 600, text-2. */
+.dark .mh-prefs-panel {
+  --mh-swatch-pad: rgba(0, 0, 0, 0.55);
+}
+
 .mh-prefs-label {
   margin: 0 0 8px;
   font-size: 14px;
@@ -351,7 +356,7 @@ onBeforeUnmount(() => {
 }
 
 .mh-prefs-swatches {
-  gap: 6px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
@@ -364,10 +369,8 @@ onBeforeUnmount(() => {
   border-radius: 4px;
   background-color: var(--swatch);
   transition:
-    outline-color 0.16s ease,
+    box-shadow 0.16s ease,
     transform 0.16s ease;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
 }
 
 .mh-prefs-swatch:hover {
@@ -375,14 +378,13 @@ onBeforeUnmount(() => {
 }
 
 /*
- * The ring gets a gap on both sides: outline-offset holds the panel colour
- * outside it, and the inset shadow holds the same colour inside. Without the
- * inner gap a pale ring sat straight against a pale swatch and the selection
- * was impossible to read.
+ * Selection is a darker pad behind the chip rather than a ring around it. A
+ * ring has to contrast with both the panel and the swatch, which is not
+ * possible for pale swatches; a pad only has to be darker than the panel, so
+ * it holds for every colour in the row.
  */
 .mh-prefs-swatch.is-on {
-  outline-color: var(--vp-c-text-1);
-  box-shadow: inset 0 0 0 2px var(--vp-c-bg-elv);
+  box-shadow: 0 0 0 4px var(--mh-swatch-pad);
 }
 
 .mh-prefs-button:focus-visible,
