@@ -800,11 +800,11 @@ html.dark[data-mh-accent="rust"] {
  * preferences button belongs beside the appearance switch. .content-body is
  * a flex row, so an explicit order puts it there.
  */
-html .VPNavBar .content-body > .search { order: 1; }
-html .VPNavBar .content-body > .menu { order: 2; }
-html .VPNavBar .content-body > .translations { order: 3; }
-html .VPNavBar .content-body > .appearance { order: 4; }
-html .VPNavBar .content-body > .mh-prefs { order: 5; }
+html .VPNavBar .content-body > .menu { order: 1; }
+html .VPNavBar .content-body > .translations { order: 2; }
+html .VPNavBar .content-body > .appearance { order: 3; }
+html .VPNavBar .content-body > .mh-prefs { order: 4; }
+html .VPNavBar .content-body > .search { order: 5; }
 html .VPNavBar .content-body > .social-links { order: 6; }
 html .VPNavBar .content-body > .extra { order: 7; }
 html .VPNavBar .content-body > .hamburger { order: 8; }
@@ -1283,4 +1283,97 @@ html .VPNavScreen .VPLink.vp-external-link-icon:hover::after {
   html .VPNavScreen .VPLink.vp-external-link-icon:hover::after {
     transform: none;
   }
+}
+
+
+/* -------------------------------------------------------- Search icon ---- */
+
+/*
+ * Search is an icon rather than a box. The wide field came from
+ * .VPNavBarSearch taking flex-grow: 1 across the bar, plus the button's own
+ * pill background, the "Search" label and the shortcut keys. All of it is
+ * unwound so what is left is the magnifier, sized to sit with the theme switch
+ * and the customization button.
+ *
+ * The label is hidden rather than removed, and the button already carries
+ * aria-label="Search", so it still announces properly. The Ctrl K shortcut is
+ * unaffected; only its badge is gone.
+ *
+ * Below 768px VitePress already collapses this to an icon, so this is scoped
+ * above that.
+ */
+@media (min-width: 768px) {
+  html .VPNavBarSearch {
+    flex-grow: 0;
+    padding-left: 0;
+    margin-inline-start: 8px;
+  }
+
+  html .VPNavBarSearch .DocSearch-Button {
+    width: 28px;
+    height: 28px;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    border-radius: var(--mh-r-sm);
+    background: transparent;
+    color: var(--vp-c-text-2);
+    transition: color 0.2s;
+  }
+
+  /*
+   * No box on hover or focus. VitePress lights up a brand border and a
+   * searchbox shadow, which made sense around a field and reads as a stray
+   * outline around a bare icon. Focus-visible still gets a ring, further down.
+   */
+  html .VPNavBarSearch .DocSearch-Button:hover,
+  html .VPNavBarSearch .DocSearch-Button:focus,
+  html .VPNavBarSearch .DocSearch-Button:active {
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+    color: var(--vp-c-text-1);
+  }
+
+  /*
+   * The icon carried an 8px end margin and a 1px nudge from when a label sat
+   * beside it, which left it off centre once the label went. Both cleared so
+   * the flex centring actually holds.
+   */
+  html .VPNavBarSearch .DocSearch-Button .DocSearch-Search-Icon {
+    top: 0;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    color: currentColor;
+    /* Swapped for a rounder glass with a shorter handle. */
+    --icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'%23000'%20stroke-width%3D'2'%20stroke-linecap%3D'round'%3E%3Ccircle%20cx%3D'10.5'%20cy%3D'10.5'%20r%3D'6.5'%2F%3E%3Cpath%20d%3D'M15.4%2015.4%2020%2020'%2F%3E%3C%2Fsvg%3E");
+  }
+
+  html .VPNavBarSearch .DocSearch-Button:focus-visible {
+    outline: 2px solid var(--vp-c-brand-1);
+    outline-offset: 2px;
+  }
+
+  html .VPNavBarSearch .DocSearch-Button-Placeholder,
+  html .VPNavBarSearch .DocSearch-Button-Keys {
+    display: none;
+  }
+}
+
+
+/* ------------------------------------------------------ Social icons ---- */
+
+/*
+ * GitHub and Discord marks down from 20px to 17px. The 36px link around them
+ * is untouched, so the hit area stays the size it was.
+ *
+ * !important because VitePress sets this from a scoped rule carrying its own
+ * attribute selector, which a plain class selector cannot outrank.
+ */
+html .VPSocialLink > svg,
+html .VPSocialLink > [class^="vpi-social-"] {
+  width: 17px !important;
+  height: 17px !important;
 }

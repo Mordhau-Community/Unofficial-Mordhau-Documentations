@@ -40,6 +40,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The hero logo drifts again on the rebuilt landing page, with the glow
   behind it pulsing on a longer period. Both stop under prefers-reduced-motion.
 - Nav bar groups are separated by a slash instead of a vertical bar.
+- Search is an icon in the nav bar rather than a field, sitting to the right
+  of the customization button. GitHub and Discord marks are a little smaller.
 - Arrow beside a nav menu turns up while the menu is open, and the arrow on an
   external item drifts the way it points on hover.
 - Nav dropdowns and the customization panel open below the nav bar underline
