@@ -36,3 +36,77 @@ Markdown uses plain text syntax with special characters to define formatting. He
 
 ### Heading 3
 ```
+
+A heading is a line starting with one to six `#` characters. One `#` is the page title, `##` is a section, `###` is a subsection. Leave a blank line after it.
+
+### 2- Emphasis:
+
+```md
+*italic* or _italic_
+**bold** or __bold__
+***bold italic***
+~~struck through~~
+```
+
+### 3- Lists:
+
+```md
+- first item
+- second item
+  - a nested item, indented by two spaces
+
+1. numbered
+2. list
+3. of things
+```
+
+Numbered lists renumber themselves, so you can write `1.` on every line and Markdown will still count correctly.
+
+### 4- Links:
+
+```md
+[text people click](https://example.com)
+```
+
+### 5- Images:
+
+```md
+![description of the image](/path/to/image.webp)
+```
+
+The description in the square brackets is what screen readers announce and what shows if the image fails to load, so write something real there.
+
+### 6- Code:
+
+Wrap a few words in single backticks to mark them as code — useful for file names, commands and config keys. For anything longer, use three backticks and name the language:
+
+````md
+```bash
+node -v
+```
+````
+
+### 7- Quotes:
+
+```md
+> Anything after a > is a quote block.
+```
+
+### 8- Tables:
+
+```md
+| Setting | Meaning |
+| --- | --- |
+| MaxSlots | How many players fit on the server |
+| ServerName | The name shown in the browser |
+```
+
+The dashes on the second line are what turn it into a table. The columns do not have to line up in the source.
+
+## What Markdown does not do
+
+Markdown deliberately has no syntax for colours, fonts, text alignment or layout. That is the point of it — the document describes its structure, and the site decides how structure looks. If you find yourself fighting it, you are usually trying to do something the theme should handle instead.
+
+## Next
+
+The syntax above is standard Markdown and works anywhere. This site also adds a handful of extras on top of it — callout boxes, tabbed code blocks, page frontmatter. Those are covered in [How to use Markdown](/en/contributing/how-to-use-markdown).

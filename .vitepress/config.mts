@@ -165,23 +165,10 @@ export default defineConfig({
               ],
             },
             {
-              text: "Github",
+              text: "Git & Github",
               items: [
-                {
-                  text: "What is Github?",
-                  link: "/en/contributing/asdasdc",
-                },
-                { text: "Get Started", link: "/en/contributing/get-started" },
-              ],
-            },
-            {
-              text: "Git",
-              items: [
-                {
-                  text: "What is Git?",
-                  link: "/en/contributing/asdasdasdc",
-                },
-                { text: "Get Started", link: "/en/contributing/get-started" },
+                { text: "What is Git?", link: "/en/contributing/git" },
+                { text: "What is Github?", link: "/en/contributing/github" },
               ],
             },
             {
@@ -189,30 +176,14 @@ export default defineConfig({
               items: [
                 {
                   text: "What is VitePress?",
-                  link: "/en/contributing/asdas",
+                  link: "/en/contributing/vitepress",
                 },
-                { text: "Get Started", link: "/en/contributing/get-started" },
               ],
             },
             {
               text: "More Resources",
               items: [
-                {
-                  text: "Markdown Resources",
-                  link: "/en/contributing/asdas",
-                },
-                {
-                  text: "Github Resources",
-                  link: "/en/contributing/get-started",
-                },
-                {
-                  text: "Git Resources",
-                  link: "/en/contributing/get-started",
-                },
-                {
-                  text: "VitePress Resources",
-                  link: "/en/contributing/get-started",
-                },
+                { text: "Links & Reading", link: "/en/contributing/resources" },
               ],
             },
           ],
