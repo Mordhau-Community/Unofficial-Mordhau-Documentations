@@ -1190,3 +1190,17 @@ html .VPNavBar .appearance + .social-links::before {
 html .VPFlyout .menu {
   top: calc(var(--vp-nav-height) + 1px + 5px) !important;
 }
+
+/*
+ * Those flyouts open on hover, and pushing them clear of the bar opened a
+ * strip that belongs to neither the button nor the menu. Crossing it counts as
+ * leaving, which would close the menu on the way to it. This bridges the gap.
+ */
+html .VPFlyout .menu::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -6px;
+  height: 6px;
+}

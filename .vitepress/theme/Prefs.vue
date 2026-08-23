@@ -111,6 +111,23 @@ function onKeydown(event: KeyboardEvent) {
 }
 
 /*
+ * Closes on the way out, the way the nav menus do.
+ *
+ * Focus inside the panel keeps it open: someone tabbing through the swatches
+ * has no pointer in there, and a stray mouse movement should not yank the
+ * panel out from under them. Focus on the button does not count, that is
+ * where it lands after a click and is the normal case for closing.
+ *
+ * mouseleave rather than pointerleave, so a touch does not dismiss it the
+ * instant it opens.
+ */
+function onLeave() {
+  const panel = root.value?.querySelector(".mh-prefs-panel");
+  if (panel && panel.contains(document.activeElement)) return;
+  open.value = false;
+}
+
+/*
  * Reads a stored setting, falling back when the value names an option that no
  * longer exists. Without this a stale choice from an older build leaves every
  * swatch in the row unselected, so the panel looks like nothing is set.
@@ -146,7 +163,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="root" class="mh-prefs">
+  <div ref="root" class="mh-prefs" :class="{ 'is-open': open }" @mouseleave="onLeave">
     <button
       type="button"
       class="mh-prefs-button"
@@ -302,6 +319,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .mh-prefs {
+  --mh-panel-w: 272px;
   position: relative;
   display: flex;
   align-items: center;
@@ -309,6 +327,25 @@ onBeforeUnmount(() => {
      the bar's bottom edge rather than from the middle of a 28px button. */
   align-self: stretch;
   margin-inline-start: 8px;
+}
+
+/*
+ * Bridges the 6px between the bar and the panel. Without it the pointer
+ * crosses ground belonging to neither and counts as having left, so the panel
+ * shuts on the way to it.
+ *
+ * It lives on the container rather than the panel because the panel is a
+ * scroll container, and overflow: auto clips a pseudo element sitting above
+ * its box. Only while open, otherwise an invisible strip would sit over the
+ * page swallowing clicks.
+ */
+.mh-prefs.is-open::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  inset-inline-end: 0;
+  width: var(--mh-panel-w);
+  height: 6px;
 }
 
 .mh-prefs-button {
@@ -336,7 +373,7 @@ onBeforeUnmount(() => {
   /* 8 swatches at 21px plus 7 gaps of 8px need 224px. The extra allows for
      the scrollbar that appears when the panel is taller than the window;
      without it the rows wrap, which makes the panel taller still. */
-  width: 272px;
+  width: var(--mh-panel-w);
   scrollbar-gutter: stable;
   max-height: calc(100vh - var(--vp-nav-height) - 24px);
   overflow-y: auto;
