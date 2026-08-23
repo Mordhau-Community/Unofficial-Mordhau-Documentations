@@ -1142,3 +1142,31 @@ html .VPDoc:not(.has-sidebar) .content {
 html .VPSidebar {
   border-inline-end: 1px solid var(--vp-c-divider);
 }
+
+
+/* ------------------------------------------------- Nav separators ---- */
+
+/*
+ * VitePress separates the nav groups with a 1px by 24px filled bar. Swapped
+ * for a slash. The element is a flex item in .content-body, which centres it,
+ * so only the box needs unwinding: width and height back to auto and the fill
+ * removed, otherwise the glyph sits inside a 1px box and is clipped.
+ *
+ * A slash renders lighter than a solid rule at the same colour, so it takes
+ * text-3 rather than the divider tone to keep the same weight on the page.
+ */
+html .VPNavBar .menu + .translations::before,
+html .VPNavBar .menu + .appearance::before,
+html .VPNavBar .menu + .social-links::before,
+html .VPNavBar .translations + .appearance::before,
+html .VPNavBar .appearance + .social-links::before {
+  width: auto !important;
+  height: auto !important;
+  background-color: transparent !important;
+  content: "/" !important;
+  color: var(--vp-c-text-3);
+  font-size: 14px;
+  line-height: 1;
+  -webkit-user-select: none;
+  user-select: none;
+}
