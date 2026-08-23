@@ -1069,3 +1069,32 @@ html .VPDoc:not(.has-sidebar) .container {
 html .VPDoc:not(.has-sidebar) .content {
   max-width: var(--mh-doc-plain) !important;
 }
+
+
+/* ----------------------------------------------------------- Sidebar ---- */
+
+/*
+ * The sidebar column should read as one surface from the top of the window
+ * down. VitePress leaves the nav block above it transparent, so with a frosted
+ * nav the page colour showed through there and the darker column looked like
+ * it started below the bar instead of behind it.
+ *
+ * .title is absolutely positioned at exactly the sidebar width and .content is
+ * padded by that same width, so painting it cannot move the search box.
+ *
+ * The nav divider already stops at the sidebar edge, VitePress pads it by
+ * --vp-sidebar-width, so there is nothing to switch off there.
+ */
+html .VPNavBar.has-sidebar .title {
+  background-color: var(--vp-c-bg-alt) !important;
+}
+
+/*
+ * Hairline down the right edge of the column, carried through the nav block so
+ * it reads as one line rather than two segments with a gap at the nav. Logical
+ * property so it moves to the other side in the Arabic locale on its own.
+ */
+html .VPSidebar,
+html .VPNavBar.has-sidebar .title {
+  border-inline-end: 1px solid var(--vp-c-divider);
+}
