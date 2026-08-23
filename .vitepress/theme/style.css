@@ -1509,6 +1509,13 @@ html .VPDoc.has-aside .aside-content {
  * Horizontal distances are written for LTR and deliberately left for
  * postcss-rtl to mirror. This is the one place its mirroring is wanted: in
  * Arabic the sidebar sits on the right and has to leave to the right.
+ *
+ * :has(.VPDoc) keeps all of this to documentation pages. The button is not
+ * rendered on a landing page, so without the guard a reader who left read mode
+ * on and then loaded a landing page directly would get a hidden nav from first
+ * paint until Vue hydrated and put it back. .VPDoc is in the server rendered
+ * HTML, so the guard is right on that first paint; the landing layouts render
+ * .VPHome or their own component and never match.
  */
 
 :root {
@@ -1542,17 +1549,17 @@ html .VPContent {
     transition: transform var(--mh-read-ease), opacity 0.5s !important;
   }
 
-  html[data-mh-read="on"] .VPNav {
+  html[data-mh-read="on"]:has(.VPDoc) .VPNav {
     transform: translateY(-100%);
   }
 
-  html[data-mh-read="on"] .VPSidebar {
+  html[data-mh-read="on"]:has(.VPDoc) .VPSidebar {
     transform: translateX(-100%);
   }
 
   /* The bar has gone with it, so the article can start where the button ends
      rather than where the bar used to be. */
-  html[data-mh-read="on"] .VPContent {
+  html[data-mh-read="on"]:has(.VPDoc) .VPContent {
     padding-top: 24px;
   }
 
@@ -1563,7 +1570,7 @@ html .VPContent {
    * Measured: without it the left padding stayed at the full 272px and the
    * article never moved out from under the departed sidebar.
    */
-  html[data-mh-read="on"] .VPContent.has-sidebar {
+  html[data-mh-read="on"]:has(.VPDoc) .VPContent.has-sidebar {
     padding-inline: 0 !important;
   }
 }
@@ -1603,7 +1610,7 @@ html .VPContent {
    * the heading rose to meet the floating button. Measured at 390px: heading
    * top 32, button bottom 39, seven pixels into one another.
    */
-  html[data-mh-read="on"] .VPContent {
+  html[data-mh-read="on"]:has(.VPDoc) .VPContent {
     padding-top: 20px;
   }
 
@@ -1617,11 +1624,11 @@ html .VPContent {
     transition: transform var(--mh-read-ease), background-color 0.25s !important;
   }
 
-  html[data-mh-read="on"] .VPNav {
+  html[data-mh-read="on"]:has(.VPDoc) .VPNav {
     height: 0;
   }
 
-  html[data-mh-read="on"] .VPNavBar {
+  html[data-mh-read="on"]:has(.VPDoc) .VPNavBar {
     transform: translateY(-100%);
   }
 }
@@ -1651,14 +1658,14 @@ html .VPContent {
     transition: transform var(--mh-read-ease);
   }
 
-  html[data-mh-read="on"] .VPLocalNav {
+  html[data-mh-read="on"]:has(.VPDoc) .VPLocalNav {
     height: 0;
     /* A border still paints at height 0, and would leave a stray rule across
        the top of the article after everything else had gone. */
     border-bottom-width: 0;
   }
 
-  html[data-mh-read="on"] .VPLocalNav .container {
+  html[data-mh-read="on"]:has(.VPDoc) .VPLocalNav .container {
     transform: translateY(-48px);
   }
 }

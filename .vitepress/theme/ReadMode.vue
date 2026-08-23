@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
+import { useData } from "vitepress";
 
 /*
  * Read mode strips the page back to the article.
@@ -13,7 +14,28 @@ import { onMounted, ref } from "vue";
  * column all move off a single attribute and cannot fall out of step.
  */
 
-const on = ref(false);
+const { frontmatter, page } = useData();
+
+/*
+ * Documentation pages only. A landing page has no sidebar and no outline for
+ * read mode to clear away, and dropping the button there while the flag was
+ * still set would strand a reader on a page with no nav and nothing to press
+ * to bring it back.
+ *
+ * Written as an allow list rather than a list of exclusions, so a layout added
+ * later is left out by default instead of quietly inheriting this.
+ */
+const isDoc = computed(() => {
+  const layout = frontmatter.value.layout;
+  return !page.value.isNotFound && (layout === undefined || layout === "doc");
+});
+
+// What the reader chose. It outlives any one page.
+const pref = ref(false);
+
+// What this page actually shows: that choice, but only where it means
+// something.
+const on = computed(() => pref.value && isDoc.value);
 
 function persist(value: boolean) {
   try {
@@ -24,22 +46,27 @@ function persist(value: boolean) {
   }
 }
 
+function apply(value: boolean) {
+  document.documentElement.setAttribute("data-mh-read", value ? "on" : "off");
+}
+
 function toggle() {
-  on.value = !on.value;
-  document.documentElement.setAttribute(
-    "data-mh-read",
-    on.value ? "on" : "off"
-  );
-  persist(on.value);
+  pref.value = !pref.value;
+  persist(pref.value);
 }
 
 onMounted(() => {
   // The pre-paint script in config.mts has already stamped the attribute from
-  // storage, so read the state back off the document rather than going to
-  // storage a second time. That way the button can never disagree with what
-  // is actually on screen.
-  on.value = document.documentElement.getAttribute("data-mh-read") === "on";
+  // storage, so read the choice back off the document rather than going to
+  // storage a second time. Whether this particular page honours it is then up
+  // to the computed above.
+  pref.value = document.documentElement.getAttribute("data-mh-read") === "on";
+  apply(on.value);
 });
+
+// Covers pressing the button and walking onto a page where read mode does not
+// apply, which is the same thing as far as the document is concerned.
+watch(on, apply);
 </script>
 
 <template>
@@ -49,7 +76,7 @@ onMounted(() => {
     which postcss-rtl mirrors; flex centring is direction agnostic and needs no
     guarding.
   -->
-  <div class="mh-read-dock" :class="{ 'is-on': on }">
+  <div v-if="isDoc" class="mh-read-dock" :class="{ 'is-on': on }">
     <button
       type="button"
       class="mh-read"
@@ -120,7 +147,9 @@ onMounted(() => {
   border: 1px solid var(--vp-c-divider);
   border-top-color: transparent;
   border-radius: 0 0 var(--mh-r-sm) var(--mh-r-sm);
-  background-color: var(--vp-c-bg-elv);
+  /* Where backdrop-filter is not supported this is what is left, so it is the
+     bar colour rather than a panel colour. */
+  background-color: var(--vp-nav-bg-color);
   color: var(--vp-c-text-2);
   font-family: var(--vp-font-family-base);
   font-size: 12px;
@@ -132,10 +161,33 @@ onMounted(() => {
     border-radius 0.25s, box-shadow 0.25s;
 }
 
-/* Deliberately no border change on hover: the top border is transparent while
-   the button is docked, and a shorthand here would light it up. */
+/*
+ * The same frosted surface the nav bar wears, off the same token and the same
+ * blur, so the button matches it in every theme and follows the background
+ * presets along with it. --mh-nav-glass in dark is rgba(27, 27, 31, 0.66),
+ * which over the page ground lands within a hair of the bar at rest as well as
+ * scrolled, so it reads right in both.
+ */
+@supports (
+  (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
+) {
+  .mh-read {
+    background-color: var(--mh-nav-glass);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    backdrop-filter: blur(14px) saturate(180%);
+  }
+}
+
+/*
+ * Hover lifts the text and nothing else, which is what the nav bar links
+ * already do. Tinting the background instead would either fight the frosting
+ * or, with one of the translucent soft tokens, make the button look less solid
+ * the moment it is pointed at.
+ *
+ * No border change either: the top border is transparent while the button is
+ * docked, and a shorthand here would light it up.
+ */
 .mh-read:hover {
-  background-color: var(--vp-c-default-soft);
   color: var(--vp-c-text-1);
 }
 
