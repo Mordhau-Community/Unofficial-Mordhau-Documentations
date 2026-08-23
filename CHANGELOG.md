@@ -11,6 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- New look for the landing page: steel and oxblood palette taken off the
+  logo, replacing the purple and cyan from the VitePress starter.
+- Slow float on the hero logo and a slower pulse on the glow behind it, on
+  different periods so they do not sync up. Both stop under
+  prefers-reduced-motion.
+- Hero logo on the Arabic, French, Japanese, Russian and Chinese home pages,
+  they had no image at all.
 - Combat Mechanics page.
 - Glossary page.
 - Git, Github, VitePress and Resources pages in the contributing section.
@@ -31,6 +38,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- The logo never loaded, anywhere. Loose files under docs/ are not copied by
+  the build, only docs/public is, so both the navbar and the hero logo have
+  been 404ing. Moved it to docs/public/logo.webp.
+- Hero logo sat half its own width off centre. postcss-rtl rewrites the
+  :deep() rule VitePress centres it with into [dir=ltr][data-v-hash], which
+  matches nothing, so the centering silently never applied. Restated it with
+  a selector postcss-rtl handles.
+- "Get Start Contributing" on all five translated home pages pointed at
+  /en/how-to-contributing, which has never existed.
 - Nav and sidebar links that pointed at ssshkdsd, asdasdc and similar.
 - Arabic sidebar pointed at the English pages.
 - Missing s in the GitHub social link.
@@ -45,6 +61,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   build output that should never have been committed.
 - The /config/ sidebar left over from the VitePress starter template.
 - The rewrites hook, its regex never matched anything.
+- The dead [data-v-hash] rules in style.css. Those hashes stopped matching
+  several VitePress versions ago, so none of them were doing anything.
 - docs/en/encountering-errors, a duplicate of solutions-and-errors.
 - Chinese menu entries for pages that do not exist yet, only the homepage
   has been translated so far.

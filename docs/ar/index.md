@@ -6,10 +6,13 @@ hero:
   name: "uMordhau Documentations"
   text: "Unofficial Mordhau Documentations"
   tagline: Built by Mordhau Community
+  image:
+    src: /logo.webp
+    alt: MordhauLogo
   actions:
     - theme: brand
       text: Get Start Contributing
-      link: /en/how-to-contributing
+      link: /ar/contributing/
     - theme: alt
       text: Look to Vitepress
       link: https://vitepress.dev

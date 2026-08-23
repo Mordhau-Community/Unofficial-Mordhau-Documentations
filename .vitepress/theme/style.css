@@ -1,47 +1,15 @@
 /**
- * Customize default theme styling by overriding CSS variables:
+ * Mordhau Guides theme overrides.
+ *
+ * Palette comes off the logo: dark steel with oxblood. Brand red is the
+ * accent, tip boxes are steel so they do not read as a warning, and the
+ * hero glow is kept desaturated on purpose.
+ *
+ * VitePress variable reference:
  * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
  */
 
-/**
- * Colors
- *
- * Each colors have exact same color scale system with 3 levels of solid
- * colors with different brightness, and 1 soft color.
- *
- * - `XXX-1`: The most solid color used mainly for colored text. It must
- *   satisfy the contrast ratio against when used on top of `XXX-soft`.
- *
- * - `XXX-2`: The color used mainly for hover state of the button.
- *
- * - `XXX-3`: The color for solid background, such as bg color of the button.
- *   It must satisfy the contrast ratio with pure white (#ffffff) text on
- *   top of it.
- *
- * - `XXX-soft`: The color used for subtle background such as custom container
- *   or badges. It must satisfy the contrast ratio when putting `XXX-1` colors
- *   on top of it.
- *
- *   The soft color must be semi transparent alpha channel. This is crucial
- *   because it allows adding multiple "soft" colors on top of each other
- *   to create a accent, such as when having inline code block inside
- *   custom containers.
- *
- * - `default`: The color used purely for subtle indication without any
- *   special meanings attached to it such as bg color for menu hover state.
- *
- * - `brand`: Used for primary brand colors, such as link text, button with
- *   brand theme, etc.
- *
- * - `tip`: Used to indicate useful information. The default theme uses the
- *   brand color for this by default.
- *
- * - `warning`: Used to indicate warning to the users. Used in custom
- *   container, badges, etc.
- *
- * - `danger`: Used to show error, or dangerous message to the users. Used
- *   in custom container, badges, etc.
- * -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------- Colors */
 
 :root {
   --vp-c-default-1: var(--vp-c-gray-1);
@@ -49,15 +17,17 @@
   --vp-c-default-3: var(--vp-c-gray-3);
   --vp-c-default-soft: var(--vp-c-gray-soft);
 
-  --vp-c-brand-1: var(--vp-c-indigo-1);
-  --vp-c-brand-2: var(--vp-c-indigo-2);
-  --vp-c-brand-3: var(--vp-c-indigo-3);
-  --vp-c-brand-soft: var(--vp-c-indigo-soft);
+  /* Oxblood. Dark enough to read as body link text on white. */
+  --vp-c-brand-1: #a32a38;
+  --vp-c-brand-2: #bb3341;
+  --vp-c-brand-3: #8e2230;
+  --vp-c-brand-soft: rgba(163, 42, 56, 0.12);
 
-  --vp-c-tip-1: var(--vp-c-brand-1);
-  --vp-c-tip-2: var(--vp-c-brand-2);
-  --vp-c-tip-3: var(--vp-c-brand-3);
-  --vp-c-tip-soft: var(--vp-c-brand-soft);
+  /* Steel, so a tip does not look like a danger box. */
+  --vp-c-tip-1: #35566f;
+  --vp-c-tip-2: #416680;
+  --vp-c-tip-3: #4d7a99;
+  --vp-c-tip-soft: rgba(64, 102, 128, 0.12);
 
   --vp-c-warning-1: var(--vp-c-yellow-1);
   --vp-c-warning-2: var(--vp-c-yellow-2);
@@ -70,9 +40,19 @@
   --vp-c-danger-soft: var(--vp-c-red-soft);
 }
 
-/**
- * Component: Button
- * -------------------------------------------------------------------------- */
+.dark {
+  --vp-c-brand-1: #ec949b;
+  --vp-c-brand-2: #dd7b85;
+  --vp-c-brand-3: #a02736;
+  --vp-c-brand-soft: rgba(216, 74, 92, 0.16);
+
+  --vp-c-tip-1: #9dbdd6;
+  --vp-c-tip-2: #82a7c4;
+  --vp-c-tip-3: #3d6180;
+  --vp-c-tip-soft: rgba(120, 160, 195, 0.14);
+}
+
+/* --------------------------------------------------------------- Buttons */
 
 :root {
   --vp-button-brand-border: transparent;
@@ -86,109 +66,326 @@
   --vp-button-brand-active-bg: var(--vp-c-brand-1);
 }
 
-/**
- * Component: Home
- * -------------------------------------------------------------------------- */
+.VPButton {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.VPButton.brand {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16);
+}
+
+.VPButton:hover {
+  transform: translateY(-2px);
+}
+
+.VPButton.brand:hover {
+  box-shadow: 0 8px 20px -6px rgba(142, 34, 48, 0.55);
+}
+
+.VPButton:active {
+  transform: translateY(0);
+}
+
+/* ------------------------------------------------------------ Home hero */
 
 :root {
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(
+  --vp-home-hero-name-background: linear-gradient(
     120deg,
-    #bd34fe 30%,
-    #41d1ff
+    #8e2230 5%,
+    #5c6672 95%
   );
 
-  --vp-home-hero-image-background-image: linear-gradient(
-    -45deg,
-    #bd34fe 50%,
-    #47caff 50%
+  /*
+   * Soft radial instead of the old hard two tone diagonal. The logo is an
+   * opaque rounded square, so the colour is weighted towards the middle of
+   * the circle where it clears the logo edge, and fades to steel and then
+   * to nothing. It reads as an aura around the logo, not a coloured blob.
+   */
+  --vp-home-hero-image-background-image: radial-gradient(
+    circle at 50% 50%,
+    rgba(170, 54, 68, 0.1) 0%,
+    rgba(170, 54, 68, 0.32) 42%,
+    rgba(134, 62, 76, 0.22) 62%,
+    rgba(104, 116, 128, 0.11) 80%,
+    rgba(104, 116, 128, 0) 100%
   );
-  --vp-home-hero-image-filter: blur(44px);
+  --vp-home-hero-image-filter: blur(38px);
+}
+
+/* Bigger than the logo it sits behind, otherwise the logo hides all of it. */
+.VPHero .image-bg {
+  width: 250px;
+  height: 250px;
+}
+
+@media (min-width: 640px) {
+  .VPHero .image-bg {
+    width: 330px;
+    height: 330px;
+  }
+}
+
+@media (min-width: 960px) {
+  .VPHero .image-bg {
+    width: 410px;
+    height: 410px;
+  }
+}
+
+.dark {
+  --vp-home-hero-name-background: linear-gradient(
+    120deg,
+    #f0a0a6 5%,
+    #a9b7c4 95%
+  );
+
+  --vp-home-hero-image-background-image: radial-gradient(
+    circle at 50% 50%,
+    rgba(198, 64, 80, 0.12) 0%,
+    rgba(198, 64, 80, 0.34) 42%,
+    rgba(152, 66, 82, 0.24) 62%,
+    rgba(130, 144, 158, 0.12) 80%,
+    rgba(130, 144, 158, 0) 100%
+  );
 }
 
 @media (min-width: 640px) {
   :root {
-    --vp-home-hero-image-filter: blur(56px);
+    --vp-home-hero-image-filter: blur(46px);
   }
 }
 
 @media (min-width: 960px) {
   :root {
-    --vp-home-hero-image-filter: blur(68px);
+    --vp-home-hero-image-filter: blur(56px);
   }
 }
 
-/**
- * Component: Custom Block
- * -------------------------------------------------------------------------- */
+.VPHero .name,
+.VPHero .text {
+  letter-spacing: -0.6px;
+}
+
+.VPHero .tagline {
+  color: var(--vp-c-text-2);
+}
+
+/*
+ * The glow and the logo drift on different periods so they never line up,
+ * which stops it looking like a single element pulsing.
+ */
+.VPHero .image-bg {
+  /*rtl:ignore*/
+  animation: mh-hero-glow 9s ease-in-out infinite;
+}
+
+/*
+ * left: 50% is VitePress's own centering, restated here because postcss-rtl
+ * mangles the rule it ships. VitePress writes :deep(.image-src), which
+ * compiles to "[data-v-hash] .image-src", and postcss-rtl fuses its direction
+ * attribute onto the first compound to give "[dir=ltr][data-v-hash]
+ * .image-src". That needs one element carrying both attributes and no element
+ * does, so the rule never matches and the logo drifts half its width off
+ * centre. Our selector starts with a class, so postcss-rtl keeps [dir] as a
+ * separate ancestor and the mirrored right: 50% still comes out correct.
+ */
+.VPHero .image-src {
+  left: 50%;
+  filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.42));
+  /*rtl:ignore*/
+  animation: mh-hero-float 7s ease-in-out infinite;
+}
+
+.dark .VPHero .image-src {
+  filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.62));
+}
+
+@keyframes mh-hero-glow {
+  0%,
+  100% {
+    /*rtl:ignore*/
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    /*rtl:ignore*/
+    transform: translate(-50%, -50%) scale(1.09);
+    opacity: 1;
+  }
+}
+
+/* Keeps the -50%/-50% centering VitePress relies on. */
+@keyframes mh-hero-float {
+  0%,
+  100% {
+    /*rtl:ignore*/
+    transform: translate(-50%, calc(-50% - 9px)) rotate(-0.9deg);
+  }
+  50% {
+    /*rtl:ignore*/
+    transform: translate(-50%, calc(-50% + 9px)) rotate(0.9deg);
+  }
+}
+
+/* Entrance, staggered down the hero. */
+.VPHero .name,
+.VPHero .text,
+.VPHero .tagline,
+.VPHero .actions {
+  animation: mh-rise 0.62s cubic-bezier(0.22, 0.68, 0.31, 1) both;
+}
+
+.VPHero .text {
+  animation-delay: 0.07s;
+}
+
+.VPHero .tagline {
+  animation-delay: 0.14s;
+}
+
+.VPHero .actions {
+  animation-delay: 0.21s;
+}
+
+.VPHero .image {
+  animation: mh-fade 0.9s ease-out 0.1s both;
+}
+
+@keyframes mh-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mh-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* --------------------------------------------------------- Home features */
+
+.VPFeatures .VPFeature {
+  border-color: var(--vp-c-divider);
+  background-color: var(--vp-c-bg-soft);
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.VPFeatures .VPFeature:hover {
+  transform: translateY(-4px);
+  border-color: var(--vp-c-brand-soft);
+  box-shadow: 0 12px 28px -14px rgba(0, 0, 0, 0.3);
+}
+
+.dark .VPFeatures .VPFeature:hover {
+  box-shadow: 0 12px 28px -12px rgba(0, 0, 0, 0.6);
+}
+
+.VPFeatures .VPFeature .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: var(--vp-c-brand-soft);
+  transition: transform 0.22s ease;
+}
+
+.VPFeatures .VPFeature:hover .icon {
+  transform: scale(1.06);
+}
+
+.VPFeatures .VPFeature .title {
+  letter-spacing: -0.2px;
+}
+
+.VPFeatures .VPFeature .details {
+  color: var(--vp-c-text-2);
+}
+
+/* ------------------------------------------------------------ Custom blocks */
 
 :root {
   --vp-custom-block-tip-border: transparent;
   --vp-custom-block-tip-text: var(--vp-c-text-1);
-  --vp-custom-block-tip-bg: var(--vp-c-brand-soft);
-  --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
+  --vp-custom-block-tip-bg: var(--vp-c-tip-soft);
+  --vp-custom-block-tip-code-bg: var(--vp-c-tip-soft);
 }
 
-/**
- * Component: Algolia
- * -------------------------------------------------------------------------- */
+.custom-block {
+  border-radius: 10px;
+}
+
+/* ------------------------------------------------------------------ Nav */
+
+.VPNavBarTitle .logo {
+  margin-right: 10px;
+}
+
+/* --------------------------------------------------------------- Search */
 
 .DocSearch {
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
 
-/**
- * CUSTOMIZED STYLE
- */
+/* ------------------------------------------------------------ Scrollbar */
 
-[data-v-72cc4481] .image-src {
-  position: absolute;
-  top: 20%;
-  max-width: 192px;
-  max-height: 192px;
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--vp-c-gray-3) transparent;
 }
 
-[data-v-4db05b78] .title {
-  line-height: 28px;
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--vt-c-text-3);
-  text-transform: uppercase;
-  color: gray;
-}
-
-[data-v-e0f2b3ec] .items {
-  border-radius: 8px;
-}
-
-[data-v-6c4f796b] span {
-  font-size: 12px;
-}
-
-[data-v-55e263fd] .logo {
-  margin-right: 10px;
-}
-
-/**
- * SCROLLBAR STYLE
- */
-
-/* width */
 ::-webkit-scrollbar {
-  width: 2px;
+  width: 9px;
+  height: 9px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
-  background: #888;
+  background: transparent;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
-  background-color: #3d3963;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-clip: content-box;
+  background-color: var(--vp-c-gray-3);
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #292647;
+  background-color: var(--vp-c-brand-3);
+}
+
+/* ------------------------------------------------------- Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .VPHero .image-bg,
+  .VPHero .image-src,
+  .VPHero .name,
+  .VPHero .text,
+  .VPHero .tagline,
+  .VPHero .actions,
+  .VPHero .image {
+    animation: none;
+  }
+
+  .VPButton:hover,
+  .VPFeatures .VPFeature:hover,
+  .VPFeatures .VPFeature:hover .icon {
+    transform: none;
+  }
 }
