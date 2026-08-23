@@ -23,6 +23,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and interface text stay on the Inter that VitePress already ships.
 - Hero and navbar logos can no longer be selected or dragged off the page.
   Clicking the navbar logo still goes home.
+- Overlay scrollbar in place of the native page one, on every route. Square,
+  no stepper arrows, 6px wide, and it floats over the content instead of
+  reserving a gutter, so pages no longer shift sideways depending on whether
+  they are long enough to scroll. Scrolling itself is untouched and still
+  native. Scrollbars inside the sidebar and code blocks are squared off and
+  thinned to match.
 - Combat Mechanics page.
 - Glossary page.
 - Git, Github, VitePress and Resources pages in the contributing section.

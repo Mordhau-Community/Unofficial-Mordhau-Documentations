@@ -414,24 +414,87 @@ h4,
 
 /* ------------------------------------------------------------ Scrollbar */
 
+/*
+ * The page scrollbar is drawn by Scrollbar.vue instead of the browser. Hiding
+ * the native one is the part that stops it reserving a gutter and pushing the
+ * content sideways, and it also kills the jump you got moving between a short
+ * route and a long one.
+ *
+ * Only the bar is hidden, not the overflow, so the document still scrolls
+ * natively and nothing that listens to the real scroll position breaks.
+ */
+html,
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.mh-scrollbar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  inset-inline-end: 0;
+  z-index: 50;
+  width: 12px;
+  /* The strip must never eat a click meant for the page behind it. Only the
+     thumb takes pointer events. */
+  pointer-events: none;
+}
+
+/*
+ * Drawn 6px wide but grabbable across 12px: the inline-start border is
+ * transparent and the background is clipped to the padding box, so the hit
+ * area stays usable at a width that would otherwise be fiddly to catch.
+ */
+.mh-scrollbar-thumb {
+  width: 100%;
+  border-inline-start: 6px solid transparent;
+  background-color: var(--vp-c-gray-3);
+  background-clip: padding-box;
+  pointer-events: auto;
+  transition: background-color 0.15s ease;
+  will-change: transform;
+}
+
+.mh-scrollbar-thumb:hover,
+.mh-scrollbar-thumb.is-dragging {
+  background-color: var(--vp-c-brand-3);
+}
+
+/*
+ * Everything that scrolls inside its own box keeps a native bar: the sidebar,
+ * the search results, code blocks that run wide. Squared off, no stepper
+ * arrows. These are inside their own containers so they are not shifting the
+ * page the way the document bar was.
+ */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--vp-c-gray-3) transparent;
 }
 
 ::-webkit-scrollbar {
-  width: 9px;
-  height: 9px;
+  width: 6px;
+  height: 6px;
 }
 
-::-webkit-scrollbar-track {
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
   background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  border: 2px solid transparent;
-  border-radius: 8px;
-  background-clip: content-box;
+  border-radius: 0;
   background-color: var(--vp-c-gray-3);
 }
 
