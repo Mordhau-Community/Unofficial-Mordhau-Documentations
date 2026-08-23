@@ -16,9 +16,6 @@ export default defineConfig({
       postcss: "./postcss.config.js",
     },
   },
-  rewrites(id) {
-    return id.replace(/\/en\//, "/");
-  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     // TODO: should fix it later..
@@ -46,7 +43,7 @@ export default defineConfig({
     socialLinks: [
       {
         icon: "github",
-        link: "https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentation",
+        link: "https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations",
       },
       { icon: "discord", link: "https://discord.gg/zuX58yRV84" },
     ],
@@ -163,7 +160,7 @@ export default defineConfig({
                 },
                 {
                   text: "How to use Markdown?",
-                  link: "/en/contributing/How-to-use-Markdown",
+                  link: "/en/contributing/how-to-use-markdown",
                 },
               ],
             },
@@ -219,16 +216,6 @@ export default defineConfig({
               ],
             },
           ],
-          "/config/": [
-            {
-              text: "Config",
-              items: [
-                { text: "Index", link: "/config/" },
-                { text: "Three", link: "/config/three" },
-                { text: "Four", link: "/config/four" },
-              ],
-            },
-          ],
         },
       },
     },
@@ -262,11 +249,11 @@ export default defineConfig({
             items: [
               {
                 text: "Contributing in Mordhau Documentations",
-                link: "/en/contributing/",
+                link: "/ar/contributing/",
               },
               {
                 text: "How to understand the docs?",
-                link: "/en/mordhauSDK-guide/",
+                link: "/ar/mordhauSDK-guide/",
               },
             ],
           },
