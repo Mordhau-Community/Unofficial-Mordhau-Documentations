@@ -158,7 +158,18 @@ watch(on, apply);
   height: 29px;
   padding: 0 12px;
   border: 1px solid var(--vp-c-divider);
-  border-top-color: transparent;
+  /*
+   * The bar sits directly on top of this edge, so the top border takes the
+   * button's own colour rather than being left transparent. Transparent let
+   * the nav's underline paint straight through the button's first row and
+   * read as a line drawn across its top. Painting it hides the rule for the
+   * width of the button, which is what makes the button look like a tab of the
+   * bar rather than a separate box pinned under it.
+   *
+   * A colour rather than border-top: 0 so the box keeps its height, and
+   * nothing shifts by a pixel when the border shows in read mode.
+   */
+  border-top-color: var(--vp-nav-bg-color);
   border-radius: 0 0 var(--mh-r-sm) var(--mh-r-sm);
   /*
    * The nav bar's own background token, at full strength rather than frosted.

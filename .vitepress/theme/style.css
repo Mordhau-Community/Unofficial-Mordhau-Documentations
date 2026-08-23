@@ -1688,7 +1688,20 @@ html .VPContent {
  */
 
 html {
-  --mh-dock-top: var(--vp-nav-height);
+  /*
+   * Below the bar's underline, not on it.
+   *
+   * The button used to start on the same row as that 1px rule, with a
+   * transparent top border so the rule showed through. Now that the button
+   * sits under the nav in the stacking order the nav paints the rule over it
+   * anyway, and either way it read as a line drawn across the top of the
+   * button. One pixel lower and the rule is the bar's own underline again,
+   * with the button hanging off it.
+   *
+   * The other two figures below already clear their bar's bottom border for
+   * the same reason.
+   */
+  --mh-dock-top: calc(var(--vp-nav-height) + 1px);
 }
 
 @media (min-width: 960px) and (max-width: 1279px) {
@@ -1720,4 +1733,79 @@ html {
 
 html[data-mh-read="on"] {
   --mh-dock-top: 10px;
+}
+
+/* ------------------------------------------------------------- Donate ---- */
+
+/*
+ * The single call to action on the support page. Written here rather than as a
+ * VPButton because that page is markdown and has no access to the theme's
+ * components, and because .vp-doc styles every anchor as underlined body text,
+ * which this is not.
+ *
+ * a.mh-donate-button rather than .mh-donate-button: .vp-doc a is a class and
+ * an element wide, so a bare class loses to it and the button would come out
+ * underlined and unpainted.
+ */
+.mh-donate {
+  margin: 26px 0 8px;
+}
+
+html .vp-doc a.mh-donate-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: var(--mh-r);
+  /*
+   * The site's own primary button tokens rather than --vp-c-brand-1. In dark
+   * mode brand-1 is the pale link shade, and white text on it does not carry:
+   * measured rgb(236, 148, 155) behind #fff. These are the same tokens the
+   * landing page's calls to action resolve to, in both themes.
+   */
+  background-color: var(--vp-button-brand-bg);
+  color: var(--vp-button-brand-text);
+  font-family: var(--mh-font-display);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16);
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* Same lift the landing page's calls to action use, so the site has one idea
+   of what a primary button does when you point at it. */
+html .vp-doc a.mh-donate-button:hover {
+  background-color: var(--vp-button-brand-hover-bg);
+  color: var(--vp-button-brand-hover-text);
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -6px rgba(142, 34, 48, 0.55);
+}
+
+html .vp-doc a.mh-donate-button:active {
+  transform: translateY(0);
+}
+
+html .vp-doc a.mh-donate-button:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 3px;
+}
+
+html .vp-doc .mh-donate-note {
+  margin: 12px 0 0;
+  color: var(--vp-c-text-3);
+  font-size: 13px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html .vp-doc a.mh-donate-button {
+    transition: background-color 0.2s ease;
+  }
+
+  html .vp-doc a.mh-donate-button:hover {
+    transform: none;
+  }
 }

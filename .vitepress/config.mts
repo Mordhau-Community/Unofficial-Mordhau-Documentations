@@ -44,7 +44,11 @@ export default defineConfig({
     logo: "/logo.webp",
     // i18nRouting: false,
     footer: {
-      message: "Released under the (CDL) License.",
+      // Rendered through v-html, so the anchor comes out as a link. The
+      // footer is hidden on pages that carry a sidebar, which is VitePress's
+      // own default, so this shows everywhere except the contributing series.
+      message:
+        "Released under the (CDL) License. &middot; <a href=\"https://buymeacoffee.com/mordhaucommunity\" target=\"_blank\" rel=\"noreferrer\">&#10084;&#65039; Support the docs</a>",
       copyright: "Copyright © 2024-present Mordhau Community - John Brayden",
     },
     editLink: {
@@ -95,7 +99,10 @@ export default defineConfig({
               },
               {
                 text: "",
-                items: [{ text: "Contributing", link: "/en/contributing/" }],
+                items: [
+                  { text: "Contributing", link: "/en/contributing/" },
+                  { text: "Support the docs", link: "/en/donate/" },
+                ],
               },
             ],
           },

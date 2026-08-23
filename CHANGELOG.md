@@ -11,6 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Support page, setting out what donations pay for: keeping the site online,
+  keeping the guides true as Mordhau patches move values and rename config
+  keys, and filling in the pages that are still outlines or untranslated. It
+  says plainly what the money does not go to, and it makes the point that
+  time is scarcer than money here, with three ways to help that cost nothing.
+  Reached from the footer with a heart, and from Informations in the top bar.
+
 - Read mode. A button under the nav bar clears the page down to the article:
   the nav slides up out of frame, the sidebar leaves by its own outer edge,
   the outline leaves by the other, and the text spreads into the space and
