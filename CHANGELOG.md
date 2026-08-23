@@ -40,10 +40,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The hero logo drifts again on the rebuilt landing page, with the glow
   behind it pulsing on a longer period. Both stop under prefers-reduced-motion.
 - Appearance button in the nav bar, beside the theme switch. Corners can be
-  set to square or rounded, the accent picked from oxblood, steel, brass, moss
-  or iron, and the page background chosen separately for the dark theme
-  (default, black, slate, warm) and the white theme (default, paper, mist,
-  sand). Heading and body text colour are separate settings again, each of
+  set to square or rounded, and every colour row offers eight options: the
+  accent, heading and body text colour, and the page background chosen
+  separately for the dark and the white theme. Heading and body text colour are separate settings again, each of
   default, strong, muted or accent. Everything persists and is applied before
   the first paint so nothing
   flashes on load. The theme switch itself stays a pill either way, and the

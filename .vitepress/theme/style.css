@@ -681,7 +681,7 @@ html[data-mh-accent="steel"] {
   --vp-c-brand-2: #3a83a6;
   --vp-c-brand-3: #2a6280;
   --vp-c-brand-soft: rgba(47, 111, 143, 0.14);
-  --mh-accent-rgb: 60, 120, 150;
+  --mh-accent-rgb: 58, 131, 166;
 }
 
 html.dark[data-mh-accent="steel"] {
@@ -689,7 +689,7 @@ html.dark[data-mh-accent="steel"] {
   --vp-c-brand-2: #74b1cf;
   --vp-c-brand-3: #2f6a88;
   --vp-c-brand-soft: rgba(116, 177, 207, 0.16);
-  --mh-accent-rgb: 96, 160, 195;
+  --mh-accent-rgb: 116, 177, 207;
 }
 
 html[data-mh-accent="brass"] {
@@ -705,7 +705,7 @@ html.dark[data-mh-accent="brass"] {
   --vp-c-brand-2: #cfae63;
   --vp-c-brand-3: #7d621f;
   --vp-c-brand-soft: rgba(207, 174, 99, 0.16);
-  --mh-accent-rgb: 200, 165, 90;
+  --mh-accent-rgb: 207, 174, 99;
 }
 
 html[data-mh-accent="moss"] {
@@ -721,7 +721,7 @@ html.dark[data-mh-accent="moss"] {
   --vp-c-brand-2: #86b483;
   --vp-c-brand-3: #3d6b39;
   --vp-c-brand-soft: rgba(134, 180, 131, 0.16);
-  --mh-accent-rgb: 120, 165, 116;
+  --mh-accent-rgb: 134, 180, 131;
 }
 
 html[data-mh-accent="iron"] {
@@ -737,7 +737,55 @@ html.dark[data-mh-accent="iron"] {
   --vp-c-brand-2: #a3aab4;
   --vp-c-brand-3: #4a5058;
   --vp-c-brand-soft: rgba(163, 170, 180, 0.16);
-  --mh-accent-rgb: 150, 158, 168;
+  --mh-accent-rgb: 163, 170, 180;
+}
+
+html[data-mh-accent="teal"] {
+  --vp-c-brand-1: #1f6f6a;
+  --vp-c-brand-2: #268079;
+  --vp-c-brand-3: #1b5f5b;
+  --vp-c-brand-soft: rgba(31, 111, 106, 0.14);
+  --mh-accent-rgb: 38, 128, 121;
+}
+
+html.dark[data-mh-accent="teal"] {
+  --vp-c-brand-1: #86cfc6;
+  --vp-c-brand-2: #6fbcb2;
+  --vp-c-brand-3: #1f6f6a;
+  --vp-c-brand-soft: rgba(111, 188, 178, 0.16);
+  --mh-accent-rgb: 111, 188, 178;
+}
+
+html[data-mh-accent="violet"] {
+  --vp-c-brand-1: #5c4a9e;
+  --vp-c-brand-2: #6b57b5;
+  --vp-c-brand-3: #4f4089;
+  --vp-c-brand-soft: rgba(92, 74, 158, 0.14);
+  --mh-accent-rgb: 107, 87, 181;
+}
+
+html.dark[data-mh-accent="violet"] {
+  --vp-c-brand-1: #b4a7e8;
+  --vp-c-brand-2: #9e8fdb;
+  --vp-c-brand-3: #5c4a9e;
+  --vp-c-brand-soft: rgba(158, 143, 219, 0.16);
+  --mh-accent-rgb: 158, 143, 219;
+}
+
+html[data-mh-accent="rust"] {
+  --vp-c-brand-1: #9a4a22;
+  --vp-c-brand-2: #b25729;
+  --vp-c-brand-3: #85401d;
+  --vp-c-brand-soft: rgba(154, 74, 34, 0.14);
+  --mh-accent-rgb: 178, 87, 41;
+}
+
+html.dark[data-mh-accent="rust"] {
+  --vp-c-brand-1: #e5a279;
+  --vp-c-brand-2: #d68e60;
+  --vp-c-brand-3: #9a4a22;
+  --vp-c-brand-soft: rgba(214, 142, 96, 0.16);
+  --mh-accent-rgb: 214, 142, 96;
 }
 
 /* ------------------------------------------------- Nav bar ordering ---- */
@@ -774,6 +822,22 @@ html.dark[data-mh-bg-dark="black"] {
   --mh-nav-glass: rgba(14, 14, 16, 0.66);
 }
 
+html.dark[data-mh-bg-dark="coal"] {
+  --vp-c-bg: #141414;
+  --vp-c-bg-alt: #0f0f0f;
+  --vp-c-bg-soft: #1c1c1c;
+  --vp-c-bg-elv: #1c1c1c;
+  --mh-nav-glass: rgba(20, 20, 20, 0.66);
+}
+
+html.dark[data-mh-bg-dark="ink"] {
+  --vp-c-bg: #101318;
+  --vp-c-bg-alt: #0b0e12;
+  --vp-c-bg-soft: #171b21;
+  --vp-c-bg-elv: #171b21;
+  --mh-nav-glass: rgba(16, 19, 24, 0.66);
+}
+
 html.dark[data-mh-bg-dark="slate"] {
   --vp-c-bg: #15181e;
   --vp-c-bg-alt: #101318;
@@ -790,6 +854,22 @@ html.dark[data-mh-bg-dark="warm"] {
   --mh-nav-glass: rgba(28, 26, 24, 0.66);
 }
 
+html.dark[data-mh-bg-dark="forest"] {
+  --vp-c-bg: #131a15;
+  --vp-c-bg-alt: #0e150f;
+  --vp-c-bg-soft: #1a221c;
+  --vp-c-bg-elv: #1a221c;
+  --mh-nav-glass: rgba(19, 26, 21, 0.66);
+}
+
+html.dark[data-mh-bg-dark="plum"] {
+  --vp-c-bg: #1a1419;
+  --vp-c-bg-alt: #150f14;
+  --vp-c-bg-soft: #221a20;
+  --vp-c-bg-elv: #221a20;
+  --mh-nav-glass: rgba(26, 20, 25, 0.66);
+}
+
 html:not(.dark)[data-mh-bg-light="paper"] {
   --vp-c-bg: #faf9f6;
   --vp-c-bg-alt: #f2f1ec;
@@ -799,21 +879,52 @@ html:not(.dark)[data-mh-bg-light="paper"] {
 }
 
 html:not(.dark)[data-mh-bg-light="mist"] {
-  --vp-c-bg: #f7f8fa;
-  --vp-c-bg-alt: #eef0f3;
-  --vp-c-bg-soft: #eef0f3;
+  --vp-c-bg: #f6f8fa;
+  --vp-c-bg-alt: #eef1f4;
+  --vp-c-bg-soft: #eef1f4;
   --vp-c-bg-elv: #ffffff;
-  --mh-nav-glass: rgba(247, 248, 250, 0.72);
+  --mh-nav-glass: rgba(246, 248, 250, 0.72);
 }
 
 html:not(.dark)[data-mh-bg-light="sand"] {
-  --vp-c-bg: #f8f5ef;
-  --vp-c-bg-alt: #efeae0;
-  --vp-c-bg-soft: #efeae0;
+  --vp-c-bg: #f7f3ea;
+  --vp-c-bg-alt: #efe9db;
+  --vp-c-bg-soft: #efe9db;
   --vp-c-bg-elv: #ffffff;
-  --mh-nav-glass: rgba(248, 245, 239, 0.72);
+  --mh-nav-glass: rgba(247, 243, 234, 0.72);
 }
 
+html:not(.dark)[data-mh-bg-light="rose"] {
+  --vp-c-bg: #fbf6f6;
+  --vp-c-bg-alt: #f4ecec;
+  --vp-c-bg-soft: #f4ecec;
+  --vp-c-bg-elv: #ffffff;
+  --mh-nav-glass: rgba(251, 246, 246, 0.72);
+}
+
+html:not(.dark)[data-mh-bg-light="sage"] {
+  --vp-c-bg: #f4f7f3;
+  --vp-c-bg-alt: #eaefe8;
+  --vp-c-bg-soft: #eaefe8;
+  --vp-c-bg-elv: #ffffff;
+  --mh-nav-glass: rgba(244, 247, 243, 0.72);
+}
+
+html:not(.dark)[data-mh-bg-light="lavender"] {
+  --vp-c-bg: #f7f6fb;
+  --vp-c-bg-alt: #eeecf5;
+  --vp-c-bg-soft: #eeecf5;
+  --vp-c-bg-elv: #ffffff;
+  --mh-nav-glass: rgba(247, 246, 251, 0.72);
+}
+
+html:not(.dark)[data-mh-bg-light="slate"] {
+  --vp-c-bg: #eef1f4;
+  --vp-c-bg-alt: #e5e9ee;
+  --vp-c-bg-soft: #e5e9ee;
+  --vp-c-bg-elv: #ffffff;
+  --mh-nav-glass: rgba(238, 241, 244, 0.72);
+}
 
 /* ------------------------------------------------------- Text colour ---- */
 
@@ -854,6 +965,50 @@ html[data-mh-text="muted"] {
 html[data-mh-text="accent"] {
   --mh-body-color: var(--vp-c-brand-1);
 }
+
+/* Extra text tints, resolved per theme. */
+:root {
+  --mh-text-slate: #44505e;
+  --mh-text-sand: #5c5142;
+  --mh-text-rose: #6b3f4a;
+  --mh-text-sage: #45573f;
+}
+
+.dark {
+  --mh-text-slate: #b3c2d1;
+  --mh-text-sand: #d8c9b0;
+  --mh-text-rose: #e3b6bf;
+  --mh-text-sage: #bcd0b4;
+}
+
+html[data-mh-heading="slate"] {
+  --mh-heading-color: var(--mh-text-slate);
+}
+html[data-mh-text="slate"] {
+  --mh-body-color: var(--mh-text-slate);
+}
+
+html[data-mh-heading="sand"] {
+  --mh-heading-color: var(--mh-text-sand);
+}
+html[data-mh-text="sand"] {
+  --mh-body-color: var(--mh-text-sand);
+}
+
+html[data-mh-heading="rose"] {
+  --mh-heading-color: var(--mh-text-rose);
+}
+html[data-mh-text="rose"] {
+  --mh-body-color: var(--mh-text-rose);
+}
+
+html[data-mh-heading="sage"] {
+  --mh-heading-color: var(--mh-text-sage);
+}
+html[data-mh-text="sage"] {
+  --mh-body-color: var(--mh-text-sage);
+}
+
 
 h1,
 h2,

@@ -28,6 +28,10 @@ const textRoles = [
   { id: "strong", label: "Strong", swatch: "var(--mh-text-strong)" },
   { id: "muted", label: "Muted", swatch: "var(--vp-c-text-2)" },
   { id: "accent", label: "Accent", swatch: "var(--vp-c-brand-1)" },
+  { id: "slate", label: "Slate", swatch: "var(--mh-text-slate)" },
+  { id: "sand", label: "Sand", swatch: "var(--mh-text-sand)" },
+  { id: "rose", label: "Rose", swatch: "var(--mh-text-rose)" },
+  { id: "sage", label: "Sage", swatch: "var(--mh-text-sage)" },
 ];
 
 const accents = [
@@ -36,21 +40,32 @@ const accents = [
   { id: "brass", label: "Brass", swatch: "#8a6a1f" },
   { id: "moss", label: "Moss", swatch: "#3f6b3a" },
   { id: "iron", label: "Iron", swatch: "#4a4f57" },
+  { id: "teal", label: "Teal", swatch: "#1f6f6a" },
+  { id: "violet", label: "Violet", swatch: "#5c4a9e" },
+  { id: "rust", label: "Rust", swatch: "#9a4a22" },
 ];
 
 /** Swatches are painted in the page colour each preset produces. */
 const darkBackgrounds = [
   { id: "default", label: "Default", swatch: "#1b1b1f" },
   { id: "black", label: "Black", swatch: "#0e0e10" },
+  { id: "coal", label: "Coal", swatch: "#141414" },
+  { id: "ink", label: "Ink", swatch: "#101318" },
   { id: "slate", label: "Slate", swatch: "#15181e" },
   { id: "warm", label: "Warm", swatch: "#1c1a18" },
+  { id: "forest", label: "Forest", swatch: "#131a15" },
+  { id: "plum", label: "Plum", swatch: "#1a1419" },
 ];
 
 const lightBackgrounds = [
   { id: "default", label: "Default", swatch: "#ffffff" },
   { id: "paper", label: "Paper", swatch: "#faf9f6" },
-  { id: "mist", label: "Mist", swatch: "#f7f8fa" },
-  { id: "sand", label: "Sand", swatch: "#f8f5ef" },
+  { id: "mist", label: "Mist", swatch: "#f6f8fa" },
+  { id: "sand", label: "Sand", swatch: "#f7f3ea" },
+  { id: "rose", label: "Rose", swatch: "#fbf6f6" },
+  { id: "sage", label: "Sage", swatch: "#f4f7f3" },
+  { id: "lavender", label: "Lavender", swatch: "#f7f6fb" },
+  { id: "slate", label: "Slate", swatch: "#eef1f4" },
 ];
 
 const open = ref(false);
@@ -271,7 +286,7 @@ onBeforeUnmount(() => {
   top: calc(100% + 12px);
   inset-inline-end: 0;
   z-index: 100;
-  width: 224px;
+  width: 256px;
   max-height: calc(100vh - var(--vp-nav-height) - 32px);
   overflow-y: auto;
   padding: 14px;
@@ -320,14 +335,17 @@ onBeforeUnmount(() => {
 }
 
 .mh-prefs-swatches {
-  gap: 8px;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
 .mh-prefs-swatch {
-  width: 24px;
-  height: 24px;
+  width: 21px;
+  height: 21px;
   border: 1px solid var(--vp-c-divider);
-  border-radius: var(--mh-r-sm);
+  /* Fixed on purpose: swatches stay rounded squares whatever the corner
+     setting is, so the row reads as a palette rather than restating it. */
+  border-radius: 4px;
   background-color: var(--swatch);
   transition:
     outline-color 0.16s ease,
