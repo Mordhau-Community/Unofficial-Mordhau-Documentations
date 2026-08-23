@@ -583,12 +583,13 @@ body::-webkit-scrollbar {
  * config.mts reads them out of localStorage and stamps them on <html> before
  * first paint, so there is no flash of the wrong shape or colour:
  *
- *   data-mh-corners     = square | rounded
- *   data-mh-accent-dark  = oxblood | steel | brass | moss | iron
- *   data-mh-accent-light = oxblood | steel | brass | moss | iron
+ *   data-mh-corners = square | rounded
+ *   data-mh-accent  = oxblood | steel | brass | moss | iron
+ *   data-mh-bg-dark  = default | black | slate | warm
+ *   data-mh-bg-light = default | paper | mist | sand
  *
- * Accent is per theme, so the colour used on white and the colour used on
- * near black are chosen separately.
+ * Accent applies to both themes; the background is picked per theme, since
+ * the two have nothing in common.
  *
  * Square is the default. VitePress ships radii of 4, 6, 8, 12 and 20px that
  * never agreed with each other, which is the inconsistency this replaces.
@@ -658,7 +659,7 @@ html .VPSwitch {
 
 /* --------------------------------------------------------- Accents ---- */
 
-html:not(.dark)[data-mh-accent-light="steel"] {
+html[data-mh-accent="steel"] {
   --vp-c-brand-1: #2f6f8f;
   --vp-c-brand-2: #3a83a6;
   --vp-c-brand-3: #2a6280;
@@ -666,7 +667,7 @@ html:not(.dark)[data-mh-accent-light="steel"] {
   --mh-accent-rgb: 60, 120, 150;
 }
 
-html.dark[data-mh-accent-dark="steel"] {
+html.dark[data-mh-accent="steel"] {
   --vp-c-brand-1: #8fc4de;
   --vp-c-brand-2: #74b1cf;
   --vp-c-brand-3: #2f6a88;
@@ -674,7 +675,7 @@ html.dark[data-mh-accent-dark="steel"] {
   --mh-accent-rgb: 96, 160, 195;
 }
 
-html:not(.dark)[data-mh-accent-light="brass"] {
+html[data-mh-accent="brass"] {
   --vp-c-brand-1: #8a6a1f;
   --vp-c-brand-2: #a37f26;
   --vp-c-brand-3: #7a5d1a;
@@ -682,7 +683,7 @@ html:not(.dark)[data-mh-accent-light="brass"] {
   --mh-accent-rgb: 163, 127, 38;
 }
 
-html.dark[data-mh-accent-dark="brass"] {
+html.dark[data-mh-accent="brass"] {
   --vp-c-brand-1: #dfc07a;
   --vp-c-brand-2: #cfae63;
   --vp-c-brand-3: #7d621f;
@@ -690,7 +691,7 @@ html.dark[data-mh-accent-dark="brass"] {
   --mh-accent-rgb: 200, 165, 90;
 }
 
-html:not(.dark)[data-mh-accent-light="moss"] {
+html[data-mh-accent="moss"] {
   --vp-c-brand-1: #3f6b3a;
   --vp-c-brand-2: #4c8046;
   --vp-c-brand-3: #365e32;
@@ -698,7 +699,7 @@ html:not(.dark)[data-mh-accent-light="moss"] {
   --mh-accent-rgb: 76, 128, 70;
 }
 
-html.dark[data-mh-accent-dark="moss"] {
+html.dark[data-mh-accent="moss"] {
   --vp-c-brand-1: #9dc79a;
   --vp-c-brand-2: #86b483;
   --vp-c-brand-3: #3d6b39;
@@ -706,7 +707,7 @@ html.dark[data-mh-accent-dark="moss"] {
   --mh-accent-rgb: 120, 165, 116;
 }
 
-html:not(.dark)[data-mh-accent-light="iron"] {
+html[data-mh-accent="iron"] {
   --vp-c-brand-1: #4a4f57;
   --vp-c-brand-2: #5a6069;
   --vp-c-brand-3: #3f444b;
@@ -714,7 +715,7 @@ html:not(.dark)[data-mh-accent-light="iron"] {
   --mh-accent-rgb: 90, 96, 105;
 }
 
-html.dark[data-mh-accent-dark="iron"] {
+html.dark[data-mh-accent="iron"] {
   --vp-c-brand-1: #b9bfc8;
   --vp-c-brand-2: #a3aab4;
   --vp-c-brand-3: #4a5058;
@@ -737,3 +738,61 @@ html .VPNavBar .content-body > .mh-prefs { order: 5; }
 html .VPNavBar .content-body > .social-links { order: 6; }
 html .VPNavBar .content-body > .extra { order: 7; }
 html .VPNavBar .content-body > .hamburger { order: 8; }
+
+
+/* ------------------------------------------------------- Backgrounds ---- */
+
+/*
+ * Each preset moves the whole background family together, not just --vp-c-bg:
+ * -alt is the sidebar and code surface, -soft the cards and callouts, -elv
+ * anything floating. Moving one without the others leaves seams. The nav glass
+ * is tinted from the same base so the frosted bar keeps matching the page.
+ */
+
+html.dark[data-mh-bg-dark="black"] {
+  --vp-c-bg: #0e0e10;
+  --vp-c-bg-alt: #08080a;
+  --vp-c-bg-soft: #17171a;
+  --vp-c-bg-elv: #17171a;
+  --mh-nav-glass: rgba(14, 14, 16, 0.66);
+}
+
+html.dark[data-mh-bg-dark="slate"] {
+  --vp-c-bg: #15181e;
+  --vp-c-bg-alt: #101318;
+  --vp-c-bg-soft: #1b1f26;
+  --vp-c-bg-elv: #1b1f26;
+  --mh-nav-glass: rgba(21, 24, 30, 0.66);
+}
+
+html.dark[data-mh-bg-dark="warm"] {
+  --vp-c-bg: #1c1a18;
+  --vp-c-bg-alt: #171514;
+  --vp-c-bg-soft: #232020;
+  --vp-c-bg-elv: #232020;
+  --mh-nav-glass: rgba(28, 26, 24, 0.66);
+}
+
+html:not(.dark)[data-mh-bg-light="paper"] {
+  --vp-c-bg: #faf9f6;
+  --vp-c-bg-alt: #f2f1ec;
+  --vp-c-bg-soft: #f2f1ec;
+  --vp-c-bg-elv: #ffffff;
+  --mh-nav-glass: rgba(250, 249, 246, 0.72);
+}
+
+html:not(.dark)[data-mh-bg-light="mist"] {
+  --vp-c-bg: #f7f8fa;
+  --vp-c-bg-alt: #eef0f3;
+  --vp-c-bg-soft: #eef0f3;
+  --vp-c-bg-elv: #ffffff;
+  --mh-nav-glass: rgba(247, 248, 250, 0.72);
+}
+
+html:not(.dark)[data-mh-bg-light="sand"] {
+  --vp-c-bg: #f8f5ef;
+  --vp-c-bg-alt: #efeae0;
+  --vp-c-bg-soft: #efeae0;
+  --vp-c-bg-elv: #ffffff;
+  --mh-nav-glass: rgba(248, 245, 239, 0.72);
+}
