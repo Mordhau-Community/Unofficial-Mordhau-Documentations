@@ -50,6 +50,21 @@ async function copyValue(item) {
   }
 }
 
+const features = [
+  {
+    title: "No ads, no trackers",
+    body: "Nothing sits between you and the answer. No pop-ups, no newsletter wall, no autoplay video in front of the command you came for.",
+  },
+  {
+    title: "In order, not scattered",
+    body: "One page per topic, start to finish, with the exact commands and file paths. Not forty Discord threads and a forum post from 2019.",
+  },
+  {
+    title: "Shown, not just told",
+    body: "Screenshots and video walkthroughs where a paragraph will not do, so you can see the setting you are being told to change.",
+  },
+];
+
 const lanes = [
   {
     audience: "Players",
@@ -123,6 +138,16 @@ const languages = [
       <div class="hero-mark" aria-hidden="true">
         <span class="hero-glow" />
         <img class="hero-logo" :src="withBase('/logo.webp')" alt="" />
+      </div>
+
+      <div class="features">
+        <p class="features-title">What you get here</p>
+        <ul class="features-list">
+          <li v-for="feature in features" :key="feature.title">
+            <h2 class="features-name">{{ feature.title }}</h2>
+            <p class="features-body">{{ feature.body }}</p>
+          </li>
+        </ul>
       </div>
 
       <!-- Signature: the answers people turn up needing. -->
@@ -365,6 +390,59 @@ const languages = [
   user-select: none;
   -webkit-user-drag: none;
   pointer-events: none;
+}
+
+/* --- Features --------------------------------------------------------- */
+
+.features {
+  grid-column: 1 / -1;
+  margin-top: clamp(34px, 5vw, 56px);
+  padding-top: 26px;
+  border-top: 1px solid var(--rule);
+}
+
+.features-title {
+  margin: 0 0 20px;
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-3);
+}
+
+.features-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Hairline between the columns rather than boxes around them, so this reads
+   as part of the same ruled page as everything below it. */
+.features-list li + li {
+  padding-inline-start: 28px;
+  border-inline-start: 1px solid var(--rule);
+}
+
+.features-name {
+  margin: 0;
+  font-family: var(--mh-font-display);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--vp-c-text-1);
+  border: 0;
+  padding: 0;
+}
+
+.features-body {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--vp-c-text-2);
 }
 
 /* --- Quick reference -------------------------------------------------- */
@@ -671,6 +749,7 @@ const languages = [
 .lede,
 .cta-row,
 .hero-mark,
+.features,
 .quickref {
   animation: rise 0.6s cubic-bezier(0.22, 0.68, 0.31, 1) both;
 }
@@ -690,8 +769,11 @@ const languages = [
 .hero-mark {
   animation-delay: 0.1s;
 }
+.features {
+  animation-delay: 0.34s;
+}
 .quickref {
-  animation-delay: 0.36s;
+  animation-delay: 0.42s;
 }
 
 @keyframes rise {
@@ -722,6 +804,18 @@ const languages = [
     gap: 16px;
   }
 
+  .features-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+  }
+
+  .features-list li + li {
+    padding-inline-start: 0;
+    border-inline-start: 0;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+  }
+
   .quickref-row {
     grid-template-columns: 1fr;
     gap: 4px;
@@ -750,6 +844,7 @@ const languages = [
   .lede,
   .cta-row,
   .hero-mark,
+  .features,
   .quickref {
     animation: none;
   }

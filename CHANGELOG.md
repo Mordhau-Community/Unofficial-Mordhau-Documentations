@@ -36,6 +36,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   they are long enough to scroll. Scrolling itself is untouched and still
   native. Scrollbars inside the sidebar and code blocks are squared off and
   thinned to match.
+- Features strip on the landing page above the quick reference: no ads or
+  trackers, one ordered page per topic, and walkthroughs shown rather than
+  only described.
 - Frosted nav bar once the page is scrolled. Translucent with a backdrop
   blur so the content reads through it, and it stays fully opaque at the top
   of the page. Falls back to the old solid bar where backdrop-filter is not
