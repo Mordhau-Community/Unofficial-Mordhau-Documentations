@@ -1,1 +1,58 @@
-node_modules
+# Dependencies
+node_modules/
+
+# VitePress build output and cache
+.vitepress/dist/
+.vitepress/cache/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Netlify
+.netlify/
+
+# Editors
+.idea/
+*.swp
+*.swo
+.vscode/*
+!.vscode/extensions.json
+
+# OS generated files
+.DS_Store
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# AI assistants and agent tooling
+CLAUDE.md
+CLAUDE.local.md
+.claude/
+AGENTS.md
+AGENT.md
+GEMINI.md
+.gemini/
+.cursor/
+.cursorrules
+.cursorignore
+.aider*
+.windsurf/
+.windsurfrules
+.continue/
+.clinerules
+.cline/
+.roo/
+.codeium/
+.specstory/
+copilot-instructions.md
+.github/copilot-instructions.md

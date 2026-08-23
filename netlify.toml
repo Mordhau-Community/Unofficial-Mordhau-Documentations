@@ -1,3 +1,10 @@
+[build]
+  command = "npm run docs:build"
+  publish = ".vitepress/dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
 [[redirects]]
   from = "/"
   to = "/docs/en/"
@@ -9,4 +16,3 @@
   to = "/docs/en/"
   status = 301
   force = false
-
