@@ -305,6 +305,9 @@ onBeforeUnmount(() => {
   position: relative;
   display: flex;
   align-items: center;
+  /* Stretched to the full height of the bar so the panel can be offset from
+     the bar's bottom edge rather than from the middle of a 28px button. */
+  align-self: stretch;
   margin-inline-start: 8px;
 }
 
@@ -326,7 +329,8 @@ onBeforeUnmount(() => {
 .mh-prefs-panel {
   --mh-swatch-pad: rgba(0, 0, 0, 0.16);
   position: absolute;
-  top: calc(100% + 12px);
+  /* 100% is the bar, +1px clears the divider under it, +5px is the gap. */
+  top: calc(100% + 1px + 5px);
   inset-inline-end: 0;
   z-index: 100;
   /* 8 swatches at 21px plus 7 gaps of 8px need 224px. The extra allows for
@@ -334,7 +338,7 @@ onBeforeUnmount(() => {
      without it the rows wrap, which makes the panel taller still. */
   width: 272px;
   scrollbar-gutter: stable;
-  max-height: calc(100vh - var(--vp-nav-height) - 32px);
+  max-height: calc(100vh - var(--vp-nav-height) - 24px);
   overflow-y: auto;
   padding: 14px;
   border: 1px solid var(--vp-c-divider);

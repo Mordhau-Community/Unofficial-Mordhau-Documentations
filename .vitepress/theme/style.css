@@ -1170,3 +1170,23 @@ html .VPNavBar .appearance + .social-links::before {
   -webkit-user-select: none;
   user-select: none;
 }
+
+
+/* --------------------------------------------------- Dropdown offset ---- */
+
+/*
+ * Everything that opens from the nav clears the bar and its underline, with a
+ * 3px gap.
+ *
+ * VitePress opens its flyouts at half the nav height plus 20px, which is 52px
+ * against a 64px bar, so they started 12px above the underline and overlapped
+ * it. .VPFlyout is position: relative and its button is the full nav height,
+ * so the container top is the bar top and this offset is measured from there.
+ *
+ * The 1px is the divider itself, which sits below the bar rather than inside
+ * it: offsetting by the nav height alone lands on the line, not past it. So
+ * nav height clears the bar, 1px clears the line, and 5px is the gap.
+ */
+html .VPFlyout .menu {
+  top: calc(var(--vp-nav-height) + 1px + 5px) !important;
+}

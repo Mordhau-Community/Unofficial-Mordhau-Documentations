@@ -40,6 +40,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The hero logo drifts again on the rebuilt landing page, with the glow
   behind it pulsing on a longer period. Both stop under prefers-reduced-motion.
 - Nav bar groups are separated by a slash instead of a vertical bar.
+- Nav dropdowns and the customization panel open below the nav bar underline
+  with a 5px gap, instead of overlapping the bar.
 - Width setting in the customization panel, default or wide, covering both
   the documentation pages and the landing page.
 - Appearance button in the nav bar, beside the theme switch. Corners can be
