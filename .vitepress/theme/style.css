@@ -1074,16 +1074,29 @@ html .VPDoc:not(.has-sidebar) .content {
 /* ----------------------------------------------------------- Sidebar ---- */
 
 /*
- * Hairline down the right edge of the sidebar. VitePress ships none, so the
- * column was separated from the content by a change of background alone.
+ * Keep the sidebar out of the nav bar.
  *
- * The sidebar only. The nav bar is a separate strip across the full width and
- * is left exactly as VitePress draws it: no sidebar colour behind the logo,
- * and no line carried up through it. The hairline therefore starts below the
- * bar, which is where the column itself starts.
+ * .VPSidebar is fixed at top: 0, so its background runs the full height of the
+ * window and sits behind the nav. Stock VitePress hides that with an opaque
+ * bar, but ours is frosted, so the darker column and its edge showed through
+ * and the left of the nav read as part of the sidebar box.
  *
- * Logical property, so it moves to the other side in the Arabic locale on its
- * own.
+ * Clipping is the light touch here. Painting over it cannot work, the sidebar
+ * is z-index 60 against the nav's 30, and --vp-layout-top-height is read by
+ * six other components so moving the sidebar with it would shift the whole
+ * layout. Clipping changes nothing but where the column starts drawing, and
+ * the content inside is already padded clear of the nav so none of it is lost.
+ */
+@media (min-width: 960px) {
+  html .VPSidebar {
+    clip-path: inset(var(--vp-nav-height) 0 0 0);
+  }
+}
+
+/*
+ * Hairline down the right edge. Clipped along with the rest, so it starts
+ * where the column does rather than running up through the nav. Logical
+ * property, so it moves to the other side in the Arabic locale on its own.
  */
 html .VPSidebar {
   border-inline-end: 1px solid var(--vp-c-divider);
