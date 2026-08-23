@@ -389,6 +389,26 @@ h4,
   margin-right: 10px;
 }
 
+/*
+ * VitePress paints the line under the nav bar with --vp-c-gutter, which in
+ * dark mode is pure #000 against a #1b1b1f page. Both that line and the rules
+ * in the content are 1px, but the black one reads as a heavy bar rather than
+ * a hairline. Point it at --vp-c-divider so it matches every other rule on
+ * the site. In light mode the two tokens are already the same colour, so
+ * nothing changes there.
+ *
+ * !important because VitePress's rule is scoped and sits inside a min-width
+ * media query, landing as .VPNavBar:not(.home.top) .divider-line[data-v-hash]
+ * at four classes plus an attribute. Adding a type selector does not beat
+ * that, since class count is compared before element count.
+ *
+ * The :not is kept so a home layout hero still gets its transparent nav with
+ * no line, which is deliberate on VitePress's part.
+ */
+html .VPNavBar:not(.home.top) .divider-line {
+  background-color: var(--vp-c-divider) !important;
+}
+
 /* ------------------------------------------------- Logos: no select, drag */
 
 /*

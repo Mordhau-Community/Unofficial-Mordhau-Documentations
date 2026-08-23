@@ -65,6 +65,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   a selector postcss-rtl handles.
 - "Get Start Contributing" on all five translated home pages pointed at
   /en/how-to-contributing, which has never existed.
+- The line under the nav bar was drawn with --vp-c-gutter, pure black in dark
+  mode, so it read as a heavy bar next to the hairlines in the content. It is
+  --vp-c-divider now and matches them. Light mode was already correct.
 - Nav and sidebar links that pointed at ssshkdsd, asdasdc and similar.
 - Arabic sidebar pointed at the English pages.
 - Missing s in the GitHub social link.
