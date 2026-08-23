@@ -82,6 +82,8 @@ watch(on, apply);
       class="mh-read"
       :class="{ 'is-on': on }"
       :aria-pressed="on"
+      draggable="false"
+      @dragstart.prevent
       :title="
         on
           ? 'Bring the navigation and sidebars back'
@@ -147,9 +149,26 @@ watch(on, apply);
   border: 1px solid var(--vp-c-divider);
   border-top-color: transparent;
   border-radius: 0 0 var(--mh-r-sm) var(--mh-r-sm);
-  /* Where backdrop-filter is not supported this is what is left, so it is the
-     bar colour rather than a panel colour. */
+  /*
+   * The nav bar's own background token, at full strength rather than frosted.
+   *
+   * Frosting was the obvious way to match the bar and it did match it
+   * declaration for declaration, but a backdrop-filter takes its colour from
+   * whatever happens to be behind it. The bar has the page ground behind it
+   * while the button hangs over the article, so the same glass sitting over a
+   * tip block came out visibly lighter than the bar directly above it. Opaque
+   * is the only way the two read as one surface wherever the button lands.
+   *
+   * --vp-nav-bg-color is var(--vp-c-bg), which every background preset
+   * redefines, so this still follows the theme along with the bar.
+   */
   background-color: var(--vp-nav-bg-color);
+  /* A control, not content: no text selection, no drag, no tap flash. */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
   color: var(--vp-c-text-2);
   font-family: var(--vp-font-family-base);
   font-size: 12px;
@@ -159,23 +178,6 @@ watch(on, apply);
   cursor: pointer;
   transition: color 0.25s, background-color 0.25s, border-color 0.25s,
     border-radius 0.25s, box-shadow 0.25s;
-}
-
-/*
- * The same frosted surface the nav bar wears, off the same token and the same
- * blur, so the button matches it in every theme and follows the background
- * presets along with it. --mh-nav-glass in dark is rgba(27, 27, 31, 0.66),
- * which over the page ground lands within a hair of the bar at rest as well as
- * scrolled, so it reads right in both.
- */
-@supports (
-  (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
-) {
-  .mh-read {
-    background-color: var(--mh-nav-glass);
-    -webkit-backdrop-filter: blur(14px) saturate(180%);
-    backdrop-filter: blur(14px) saturate(180%);
-  }
 }
 
 /*
