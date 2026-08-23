@@ -39,6 +39,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   thinned to match.
 - The hero logo drifts again on the rebuilt landing page, with the glow
   behind it pulsing on a longer period. Both stop under prefers-reduced-motion.
+- Width setting in the customization panel, default or wide, covering both
+  the documentation pages and the landing page.
 - Appearance button in the nav bar, beside the theme switch. Corners can be
   set to square or rounded, and every colour row offers eight options: the
   accent, heading and body text colour, and the page background chosen

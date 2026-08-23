@@ -262,7 +262,7 @@ const languages = [
 .landing {
   --bleed: clamp(20px, 6vw, 96px);
   --rule: var(--vp-c-divider);
-  max-width: 1200px;
+  max-width: var(--mh-landing-max, 1200px);
   margin: 0 auto;
   padding: 0 var(--bleed) 96px;
 }

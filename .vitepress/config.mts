@@ -24,6 +24,7 @@ export default defineConfig({
         "try{return localStorage.getItem(k)||d}catch(_){return d}};",
         "e.setAttribute('data-mh-corners',g('mh-corners','square'));",
         "e.setAttribute('data-mh-accent',g('mh-accent','oxblood'));",
+        "e.setAttribute('data-mh-width',g('mh-width','default'));",
         "e.setAttribute('data-mh-bg-dark',g('mh-bg-dark','default'));",
         "e.setAttribute('data-mh-bg-light',g('mh-bg-light','default'));",
         "e.setAttribute('data-mh-heading',g('mh-heading','default'));",

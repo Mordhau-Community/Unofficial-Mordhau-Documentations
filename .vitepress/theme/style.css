@@ -1027,3 +1027,45 @@ h6 {
 .vp-doc .custom-block li {
   color: inherit;
 }
+
+
+/* ------------------------------------------------------------- Width ---- */
+
+/*
+ * Content width, data-mh-width = default | wide.
+ *
+ * Defaults restate what VitePress already uses, so "Default" is a no-op. Wide
+ * lifts the layout cap and every column that sits inside it; raising only
+ * --vp-layout-max-width would widen the shell and leave the text column the
+ * same size in the middle of it.
+ *
+ * The overrides are deliberately outside a media query. VitePress sets these
+ * inside min-width blocks, but a max-width larger than the viewport does
+ * nothing, so narrow screens are unaffected.
+ */
+:root {
+  --mh-doc-column: 688px;
+  --mh-doc-container: 1104px;
+  --mh-doc-plain: 784px;
+  --mh-landing-max: 1200px;
+}
+
+html[data-mh-width="wide"] {
+  --vp-layout-max-width: 1728px;
+  --mh-doc-column: 880px;
+  --mh-doc-container: 1360px;
+  --mh-doc-plain: 980px;
+  --mh-landing-max: 1400px;
+}
+
+html .VPDoc.has-aside .content-container {
+  max-width: var(--mh-doc-column) !important;
+}
+
+html .VPDoc:not(.has-sidebar) .container {
+  max-width: var(--mh-doc-container) !important;
+}
+
+html .VPDoc:not(.has-sidebar) .content {
+  max-width: var(--mh-doc-plain) !important;
+}

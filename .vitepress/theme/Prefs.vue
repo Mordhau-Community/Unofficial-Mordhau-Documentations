@@ -12,6 +12,7 @@ import { onBeforeUnmount, onMounted, ref } from "vue";
 const KEYS = {
   corners: "mh-corners",
   accent: "mh-accent",
+  width: "mh-width",
   bgDark: "mh-bg-dark",
   bgLight: "mh-bg-light",
   heading: "mh-heading",
@@ -70,6 +71,7 @@ const lightBackgrounds = [
 
 const open = ref(false);
 const corners = ref("square");
+const width = ref("default");
 const accent = ref("oxblood");
 const bgDark = ref("default");
 const bgLight = ref("default");
@@ -93,6 +95,7 @@ function set(attr: string, key: string, target: { value: string }, value: string
 }
 
 const setCorners = (v: string) => set("data-mh-corners", KEYS.corners, corners, v);
+const setWidth = (v: string) => set("data-mh-width", KEYS.width, width, v);
 const setAccent = (v: string) => set("data-mh-accent", KEYS.accent, accent, v);
 const setBgDark = (v: string) => set("data-mh-bg-dark", KEYS.bgDark, bgDark, v);
 const setBgLight = (v: string) => set("data-mh-bg-light", KEYS.bgLight, bgLight, v);
@@ -126,6 +129,7 @@ function restore(attr: string, key: string, ids: string[], fallback: string) {
 onMounted(() => {
   const ids = (list: { id: string }[]) => list.map((o) => o.id);
   corners.value = restore("data-mh-corners", KEYS.corners, ["square", "rounded"], "square");
+  width.value = restore("data-mh-width", KEYS.width, ["default", "wide"], "default");
   accent.value = restore("data-mh-accent", KEYS.accent, ids(accents), "oxblood");
   bgDark.value = restore("data-mh-bg-dark", KEYS.bgDark, ids(darkBackgrounds), "default");
   bgLight.value = restore("data-mh-bg-light", KEYS.bgLight, ids(lightBackgrounds), "default");
@@ -188,6 +192,28 @@ onBeforeUnmount(() => {
           @click="setCorners('rounded')"
         >
           Rounded
+        </button>
+      </div>
+
+      <p class="mh-prefs-label">Width</p>
+      <div class="mh-prefs-row">
+        <button
+          type="button"
+          class="mh-prefs-choice"
+          :class="{ 'is-on': width === 'default' }"
+          :aria-pressed="width === 'default'"
+          @click="setWidth('default')"
+        >
+          Default
+        </button>
+        <button
+          type="button"
+          class="mh-prefs-choice"
+          :class="{ 'is-on': width === 'wide' }"
+          :aria-pressed="width === 'wide'"
+          @click="setWidth('wide')"
+        >
+          Wide
         </button>
       </div>
 
@@ -303,7 +329,11 @@ onBeforeUnmount(() => {
   top: calc(100% + 12px);
   inset-inline-end: 0;
   z-index: 100;
-  width: 256px;
+  /* 8 swatches at 21px plus 7 gaps of 8px need 224px. The extra allows for
+     the scrollbar that appears when the panel is taller than the window;
+     without it the rows wrap, which makes the panel taller still. */
+  width: 272px;
+  scrollbar-gutter: stable;
   max-height: calc(100vh - var(--vp-nav-height) - 32px);
   overflow-y: auto;
   padding: 14px;
