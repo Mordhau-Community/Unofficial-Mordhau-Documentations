@@ -409,6 +409,40 @@ html .VPNavBar:not(.home.top) .divider-line {
   background-color: var(--vp-c-divider) !important;
 }
 
+/*
+ * Frosted nav once the page has moved. VitePress drops the .top class on
+ * scroll, so :not(.top) is exactly "the user has scrolled".
+ *
+ * Which element carries the nav background changes with the layout: the bar
+ * itself normally, but .content-body once there is a sidebar at 960px and up.
+ * Rather than track that, the bar is made the single glass surface and
+ * .content-body is held transparent so the two never tint over each other.
+ *
+ * Same !important reasoning as the divider above: the rules being replaced
+ * are scoped, so they carry an extra attribute selector.
+ */
+:root {
+  --mh-nav-glass: rgba(255, 255, 255, 0.72);
+}
+
+.dark {
+  --mh-nav-glass: rgba(27, 27, 31, 0.66);
+}
+
+@supports (
+  (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
+) {
+  html .VPNavBar:not(.top):not(.screen-open) {
+    background-color: var(--mh-nav-glass) !important;
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    backdrop-filter: blur(14px) saturate(180%);
+  }
+
+  html .VPNavBar:not(.top):not(.screen-open) .content-body {
+    background-color: transparent !important;
+  }
+}
+
 /* ------------------------------------------------- Logos: no select, drag */
 
 /*

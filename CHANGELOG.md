@@ -36,6 +36,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   they are long enough to scroll. Scrolling itself is untouched and still
   native. Scrollbars inside the sidebar and code blocks are squared off and
   thinned to match.
+- Frosted nav bar once the page is scrolled. Translucent with a backdrop
+  blur so the content reads through it, and it stays fully opaque at the top
+  of the page. Falls back to the old solid bar where backdrop-filter is not
+  supported.
 - Combat Mechanics page.
 - Glossary page.
 - Git, Github, VitePress and Resources pages in the contributing section.
