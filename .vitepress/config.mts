@@ -50,7 +50,7 @@ export default defineConfig({
       message:
         "Released under <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\" target=\"_blank\" rel=\"noreferrer\">CC BY-SA 4.0</a>. &middot; <a href=\"/docs/en/disclaimer/\">Disclaimer</a> &middot; <a href=\"https://buymeacoffee.com/mordhaucommunity\" target=\"_blank\" rel=\"noreferrer\">&#10084;&#65039; Support the docs</a>",
       copyright:
-        "Copyright © 2024-present Mordhau Community. Mordhau and all related content are the property of <a href=\"https://triternion.com/\" target=\"_blank\" rel=\"noreferrer\">Triternion</a>. This site is unofficial and not affiliated with them.",
+        "Mordhau &copy; <a href=\"https://triternion.com/\" target=\"_blank\" rel=\"noreferrer\">Triternion</a>. This site is unofficial and not affiliated with them.",
     },
     editLink: {
       pattern:
