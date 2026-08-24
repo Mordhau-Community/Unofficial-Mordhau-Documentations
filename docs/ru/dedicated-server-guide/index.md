@@ -1,9 +1,230 @@
-## Dedicated Server Hosting Guide
+# Руководство по хостингу выделенного сервера {#dedicated-server-hosting-guide}
 
-### introduction
+Ниже вы узнаете, как разместить выделенный сервер Mordhau на Windows и Linux.
 
-Welcome, below you will find information on how to host a Mordhau dedicated server on Linux and Windows.
+Во многом это предполагает, что вы размещаете сервер самостоятельно: либо на компьютере в вашей домашней сети, либо на VPS или выделенном сервере, который вы арендуете.Если вы не хотите управлять чем-либо из этого, есть список [выделенные игровые серверы](/ru/dedicated-server-guide/dedicated-game-server-providers), который настроит его для вас и предоставит вместо этого панель управления.
 
-While the following guides and information tries to be as helpful as possible, you can also find additional resources and assistance over on the Mordhau Server Owner's Discord
+Хотя это руководство пытается быть настолько полным, насколько это возможно, Discord владельца сервера Mordhau по-прежнему остается лучшим местом для получения помощи по решению проблемы, специфичной для вашей установки.
 
-Much of this information assumes that you are trying to host a server yourself, either on a local machine within your home network, or on a VPS or Dedicated server that you have rented. There is also a list of **Dedicated Game Server Providers** who offer their services to set up a server that can be managed more easily at an additional cost, usually through a website control panel.
+## Прежде чем начать {#before-you-start}
+
+Вам понадобится:
+
+- Машина, которая остается включенной.Сервер, который отключается при закрытии игры, никому не нужен.
+- **SteamCMD**, инструмент командной строки Valve для загрузки файлов с сервера.
+- Возможность переадресации портов на вашем роутере, если вы размещаете хостинг из дома.
+
+Вам **не** обязательно иметь Mordhau в используемой вами учетной записи.Выделенный сервер можно загрузить отдельно и установить через анонимный логин Steam.
+
+::: tip
+Бинарный файл сервера — приложение Steam **629800**.Это отличается от самой игры, номер которой составляет 629760. Загрузка неправильной игры — самая распространенная ошибка, которую здесь допускают.
+:::
+
+## Установка SteamCMD {#installing-steamcmd}
+
+::: кодовая группа
+
+```powershell [Windows]
+# Download steamcmd.zip from
+# https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip
+# and extract it somewhere sensible, for example C:\steamcmd
+```
+
+```bash [Linux]
+sudo apt update
+sudo apt install lib32gcc-s1
+mkdir -p ~/steamcmd && cd ~/steamcmd
+curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
+```
+
+:::
+
+::: warning
+SteamCMD — 32-битная программа.При установке 64-битной версии Linux она не запустится, пока не появятся 32-битные библиотеки поддержки, для чего и нужен `lib32gcc-s1`.В старых дистрибутивах этот пакет называется `lib32gcc1`.
+:::
+
+## Загрузка сервера {#downloading-the-server}
+
+::: кодовая группа
+
+```powershell [Windows]
+.\steamcmd.exe +force_install_dir C:\mordhau-server +login anonymous +app_update 629800 validate +quit
+```
+
+```bash [Linux]
+./steamcmd.sh +force_install_dir ~/mordhau-server +login anonymous +app_update 629800 validate +quit
+```
+
+:::
+
+Это несколько гигабайт, так что дайте ему время.Запустите ту же самую команду еще раз, когда захотите обновить сервер после установки патча.
+
+::: warning
+Поместите `+force_install_dir` **перед** `+login`.SteamCMD обрабатывает аргументы по порядку, и если вход в систему идет первым, он игнорирует ваш каталог установки и вместо этого загружает в свою собственную папку.
+:::
+
+## Первый запуск {#first-launch}
+
+Запустите сервер один раз без аргументов.Играть пока не получится — суть в том, что он записывает свои конфиги, а потом вы его останавливаете.
+
+::: кодовая группа
+
+```powershell [Windows]
+cd C:\mordhau-server
+.\MordhauServer.exe
+```
+
+```bash [Linux]
+cd ~/mordhau-server
+./MordhauServer.sh
+```
+
+:::
+
+Дайте ему завершить запуск, затем выключите его.
+
+## Конфигурация {#configuration}
+
+Конфигурационные файлы теперь находятся по адресу:
+
+|Платформа |Путь |
+| --- | --- |
+| Windows | `Mordhau\Saved\Config\WindowsServer\` |
+| Linux | `Mordhau/Saved/Config/LinuxServer/` |
+
+Тот, кто вас волнует, — это `Game.ini`.
+
+::: danger
+Редактируйте эти файлы только при остановленном сервере.Mordhau хранит свою конфигурацию в памяти и записывает ее обратно при выключении, поэтому все, что вы меняете во время работы, перезаписывается в тот момент, когда вы его закрываете.
+:::
+
+### Game.ini {#gameini}
+
+```ini
+[/Script/Mordhau.MordhauGameSession]
+ServerName=My Mordhau Server
+MaxSlots=32
+ServerPassword=
+AdminPassword=changethis
+BannedPlayers=()
+
+[/Script/Mordhau.MordhauGameMode]
+PlayerRespawnTime=5.000000
+BallistaRespawnTime=30.000000
+CatapultRespawnTime=30.000000
+HorseRespawnTime=30.000000
+DamageFactor=1.000000
+TeamDamageFactor=0.500000
+MapRotation=FFA_ThePit
+MapRotation=TDM_Camp
+MapRotation=SKM_Grad
+```
+
+**`[/Script/Mordhau.MordhauGameSession]`**
+
+|Ключ |Что он делает |
+| --- | --- |
+|`ServerName` |Имя, отображаемое во внутриигровом браузере |
+|`MaxSlots` |Вместимость игрока |
+|`ServerPassword` |Оставьте пустым для общедоступного сервера |
+|`AdminPassword` |Что администраторы вводят в консоли с помощью `adminlogin` |
+|`Admins` |Один идентификатор Playfab.Повторите строку один раз для администратора |
+|`BannedPlayers` |Управляется командой `ban`, вы редко редактируете это вручную |
+
+**`[/Script/Mordhau.MordhauGameMode]`**
+
+Время возрождения указано в секундах.`DamageFactor` масштабирует весь урон, где `1.0` является нормальным, а `2.0` удваивает его.`TeamDamageFactor` масштабирует дружественный огонь отдельно, поэтому значение `0.5` по умолчанию означает, что товарищи по команде получают половину урона друг от друга.
+
+### Ротация карты {#map-rotation}
+
+Добавьте одну строку `MapRotation` на карту.Порядок — это порядок, в котором они разыгрываются, и список также определяет, что отображается при голосовании за карту в игре.
+
+Имена карт представляют собой префикс режима плюс имя карты:
+
+|Префикс |Режим |
+| --- | --- |
+|`FFA_` |Бесплатно для всех |
+|`TDM_` |Командный смертельный бой |
+|`SKM_` |Стычка |
+
+Карты акций: `ThePit`, `Camp`, `Grad`, `Contraband`, `Tourney`, `MountainPeak` и `Taiga`, что дает вам такие имена, как `FFA_Grad` или`TDM_MountainPeak`.
+
+### Engine.ini {#engineini}
+
+Необязательный.Параметр, к которому в конечном итоге прибегают большинство владельцев, — это тикрейт:
+
+```ini
+[/Script/OnlineSubsystemUtils.IpNetDriver]
+NetServerMaxTickRate=60
+```
+
+Чем выше, тем плавнее и требует больше ресурсов процессора.Не повышайте его, если не уверены, что машина сможет справиться с этой задачей — сервер, который не может поддерживать свою скорость передачи, чувствует себя значительно хуже, чем более низкий, но стабильный.
+
+## Запускаем сервер правильно {#starting-the-server-properly}
+
+Теперь начнем с карты и портов:
+
+::: кодовая группа
+
+```powershell [Windows]
+.\MordhauServer.exe Mordhau FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
+```
+
+```bash [Linux]
+./MordhauServer.sh Mordhau FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
+```
+
+:::
+
+Поместите это в файл `.bat` на Windows или в сценарий оболочки на Linux, чтобы не вводить его каждый раз заново.
+
+|Параметр |Цель |
+| --- | --- |
+|`-Port` |Игровой трафик |
+|`-BeaconPort` |Как браузер серверов достигает вашего сервера |
+|`-QueryPort` |Steam запрос, как браузер считывает количество игроков |
+|`-MultiHome` ||Привязка к одному конкретному локальному IP, если у машины их несколько |
+|`-RconPort` |Прослушиватель RCON, см. [Руководство RCON](/ru/rcon-guide/) |
+|`-log` |Печать на консоль, а не только в файл |
+
+На Linux запустите его под `screen` или `tmux` — или лучше, напишите модуль systemd — чтобы он выдержал закрытие сеанса SSH:
+
+```bash
+screen -dmS mordhau ./MordhauServer.sh Mordhau FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
+```
+
+## Порты {#ports}
+
+|Порт |Протокол |Зачем |
+| --- | --- | --- |
+|7777 |UDP |Игра |
+|15000 |UDP |Маяк |
+|27015 |UDP |Запрос Steam |
+|ваш порт RCON |TCP |Удаленная консоль, только если вы ее включите |
+
+Все три порта UDP должны быть открыты и перенаправлены, а не только игровой порт.Если маяк или порт запроса заблокирован, ваш сервер работает отлично и просто никогда не отображается в браузере — это самая распространенная вещь, о которой спрашивают люди.
+
+Запуск более одного сервера на одном компьютере?Дайте каждому свой набор, разнесенный друг от друга:
+
+```bash
+-Port=7779 -BeaconPort=15002 -QueryPort=27018
+```
+
+## Проверяю, сработало {#checking-it-worked}
+
+Найдите имя своего сервера во внутриигровом браузере.Если его там нет, проработайте это по порядку:
+
+**В браузере вообще ничего.** Почти всегда это маяк или порт запроса.Проверьте правила переадресации и проверьте брандмауэр на самом компьютере — Windows Брандмауэр блокирует сервер при первом запуске, и мимо приглашения легко пройти.
+
+**Виден, но никто не может подключиться.** Игровой порт.Те же проверки, порт 7777.
+
+**В локальной сети все в порядке, невидимо снаружи.** Ваш маршрутизатор не осуществляет переадресацию, или ваш интернет-провайдер установил вас за CGNAT — в этом случае вы вообще не можете размещать хостинг через это соединение и вам понадобится VPS.
+
+**Изменения конфигурации ни к чему не привели.** Вы редактировали файл во время работы сервера.Останови это, отредактируй, начни.
+
+**Сервер запускается и сразу закрывается.** Прочтите журнал в `Mordhau/Saved/Logs/`.Обычной причиной является уже используемый порт.
+
+## Следующие шаги {#next-steps}
+
+- Настройте [КОН](/ru/rcon-guide/), чтобы вы могли модерировать сервер, не находясь в игре.
+- Взгляните на [Список поставщиков](/ru/dedicated-server-guide/dedicated-game-server-providers), если управление этим самостоятельно не для вас развлечение.

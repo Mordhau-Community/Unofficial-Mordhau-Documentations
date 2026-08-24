@@ -33,26 +33,3 @@ pnpm-debug.log*
 Thumbs.db
 ehthumbs.db
 Desktop.ini
-
-# AI assistants and agent tooling
-CLAUDE.md
-CLAUDE.local.md
-.claude/
-AGENTS.md
-AGENT.md
-GEMINI.md
-.gemini/
-.cursor/
-.cursorrules
-.cursorignore
-.aider*
-.windsurf/
-.windsurfrules
-.continue/
-.clinerules
-.cline/
-.roo/
-.codeium/
-.specstory/
-copilot-instructions.md
-.github/copilot-instructions.md

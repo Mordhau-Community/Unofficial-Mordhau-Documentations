@@ -385,6 +385,31 @@ h4,
 
 /* ------------------------------------------------------------------ Nav */
 
+/* The layout-top release notice is fixed above the nav. VitePress consumes
+ * --vp-layout-top-height throughout its nav, sidebar, and content geometry,
+ * so changing it here keeps the whole shell aligned when the notice closes.
+ */
+:root {
+  --mh-announce-h: 34px;
+  --vp-layout-top-height: var(--mh-announce-h);
+}
+
+html[data-mh-announce="off"],
+html[data-mh-read="on"]:has(.VPDoc) {
+  --vp-layout-top-height: 0px;
+}
+
+html[data-mh-announce="off"] .mh-announce {
+  display: none;
+}
+
+html[data-mh-read="on"]:has(.VPDoc) .mh-announce {
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-100%);
+  transition-delay: 0s, var(--mh-read-duration, 0.42s);
+}
+
 .VPNavBarTitle .logo {
   margin-right: 10px;
 }
@@ -1127,8 +1152,9 @@ html .VPDoc:not(.has-sidebar) .content {
 }
 
 /*
- * .VPSidebar is fixed at top: 0, so its background runs the height of the
- * window and sits behind the bar. Painting over it is not possible, it is
+ * .VPSidebar is fixed at the layout-top edge, so its background runs the
+ * remaining height of the window and sits behind the nav. Painting over it is
+ * not possible, it is
  * z-index 60 against the nav at 30, and --vp-layout-top-height is read by six
  * other components so moving it that way would shift the whole layout.
  * Clipping only changes where it starts drawing, and its content is already
@@ -1541,7 +1567,8 @@ html .VPDoc.has-aside .aside-content {
  */
 
 :root {
-  --mh-read-ease: 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  --mh-read-duration: 0.42s;
+  --mh-read-ease: var(--mh-read-duration) cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Outside the width blocks: the article breathes at every size. */
@@ -1553,6 +1580,7 @@ html .VPContent {
    fades further down are left alone, they are not motion. */
 @media (prefers-reduced-motion: reduce) {
   :root {
+    --mh-read-duration: 0s;
     --mh-read-ease: 0s linear;
   }
 }
@@ -1732,12 +1760,16 @@ html {
    * The other two figures below already clear their bar's bottom border for
    * the same reason.
    */
-  --mh-dock-top: var(--vp-nav-height);
+  --mh-dock-top: calc(
+    var(--vp-layout-top-height, 0px) + var(--vp-nav-height)
+  );
 }
 
 @media (min-width: 960px) and (max-width: 1279px) {
   html:not([data-mh-read="on"]):has(.VPLocalNav:not(.empty)) {
-    --mh-dock-top: calc(var(--vp-nav-height) + 48px);
+    --mh-dock-top: calc(
+      var(--vp-layout-top-height, 0px) + var(--vp-nav-height) + 48px
+    );
   }
 }
 
@@ -1754,18 +1786,22 @@ html {
   }
 
   html:not([data-mh-read="on"]) {
-    --mh-dock-top: var(--vp-nav-height);
+    --mh-dock-top: calc(
+      var(--vp-layout-top-height, 0px) + var(--vp-nav-height)
+    );
   }
 
   html:not([data-mh-read="on"]):has(.VPLocalNav) {
-    --mh-dock-top: calc(var(--vp-nav-height) + 47px);
+    --mh-dock-top: calc(
+      var(--vp-layout-top-height, 0px) + var(--vp-nav-height) + 47px
+    );
   }
 }
 
 /* Right up against the top of the window, hanging off the edge of the frame
    the way it hangs off the bar when the bar is there. */
 html[data-mh-read="on"] {
-  --mh-dock-top: 0px;
+  --mh-dock-top: var(--vp-layout-top-height, 0px);
 }
 
 /* ------------------------------------------------------------- Donate ---- */

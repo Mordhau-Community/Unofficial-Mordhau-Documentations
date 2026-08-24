@@ -1,130 +1,81 @@
-# how to contributing in Mordhau Documentations!
+# المساهمة {#contributing}
 
-go to the **Mordhau Documentation Repository**.
-This repository uses **VitePress** to create clear and easy-to-read documentation for the game **Mordhau**.  
-Our goal is to provide a comprehensive and multilingual resource for players and developers alike.
+هذا الموقع مكتوب بواسطة الأشخاص الذين يستخدمونه. بدأت كل صفحة فيها بشخص
+يعمل على حل شيء ما ثم يأخذ الوقت الكافي لتدوينه.
 
----
+هذه الصفحة هي الإعداد المحلي، من البداية إلى النهاية. لا تحتاج إلى أي منها لإصلاح خطأ مطبعي
+أو الإبلاغ عن شيء خاطئ — [طرق المساهمة](/ar/contributing/methods) تغطي المسارات الأسرع، ولا تتضمن أي منها
+محطة طرفية. اقرأ [الأحكام والقواعد](/ar/contributing/terms-rules)
+قبل فتح طلب السحب في كلتا الحالتين.
 
-## 🚀 Getting Started
+## ما تحتاجه {#what-you-need}
 
-#### Before dive..
+- [Node.js](https://nodejs.org/en) 18 أو أحدث
+- [Git](https://git-scm.com/downloads)
+- Aحساب [GitHub](https://github.com)
+- محرر - تم إعداد المستودع لـ [VS Code](https://code.visualstudio.com/)
 
-- You should have knowledge about **Github** and **Vscode** and **Markdown**
-- You should have Github Account.
-- You should have install **[Nodejs LTS](https://nodejs.org/en)** and **[Git](https://git-scm.com/downloads)**
+[الأدوات المطلوبة](/ar/contributing/tools) يحتوي على ملاحظات التثبيت وتكوين التشغيل الأول
+لكل منها.
 
-<br>
+## قم بالإعداد محليًا {#set-up-locally}
 
-Follow these steps to set up the project locally and start contributing:
-
-#### 1. Clone the Repository
+Fork [المستودع](https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations)
+على GitHub، ثم انسخ الشوكة وقم بتثبيت:
 
 ```bash
-git clone https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations.git
+git clone https://github.com/YOUR-USERNAME/Unofficial-Mordhau-Documentations.git
 cd Unofficial-Mordhau-Documentations
-```
-
-#### 2. Install Dependencies
-
-Ensure you have Node.js installed. Then, install the required dependencies:
-
-```bash
 npm install
 ```
 
-#### 3. Start the Development Server
-
-Run the following command to start a local development server:
+بدء تشغيل خادم التطوير:
 
 ```bash
 npm run docs:dev
 ```
 
-The command prints the address it is serving on, usually `http://localhost:5173`. Open that in your browser to view the documentation locally.
+يقوم بطباعة العنوان عليهيتم عرضه، عادةً `http://localhost:5173`. اترك
+قيد التشغيل - يتم إعادة تحميل الصفحات أثناء الحفظ.
 
-## 🛠️ Build for Production
+## قم بإجراء التغيير {#make-your-change}
 
-To build the documentation for production, use the following command:
-
-```bash
-npm run docs:build
-```
-
-The static files are generated in the `.vitepress/dist/docs` directory. That folder is not committed, Netlify runs the build itself on every push to `main`.
-
-## 🤝 How to Contribute
-
-We welcome contributions to enhance the documentation. Here's how you can help:
-
-#### 1. Fork the Repository
-
-Click the Fork button on the top-right of this page to create a copy of this repository under your account.
-
-#### 2. Create a New Branch
-
-Create a new branch for your changes:
+العمل على فرع، وليس على `main`:
 
 ```bash
 git checkout -b fix-rcon-ports
 ```
 
-#### 3. Add or Update Documentation
+الصفحات موجودة ضمن `docs/<language>/`، لذلك تنتمي الصفحة الإنجليزية إلى `docs/en/`.
+تحتاج الصفحة الجديدة أيضًا إلى إدخال في `.vitepress/config.mts`، أو لا يوجد أي رابط على موقع
+هو - هي. يغطي
 
-Navigate to the docs/ directory.
-Add or edit .md files for the documentation.
-For example, to add a new page, create a file like new-page.md inside docs/.
+[How to use Markdown](/ar/contributing/how-to-use-markdown) اصطلاحات الملف
+ونمط المنزل. يغطي [ما هو VitePress](/ar/contributing/vitepress)
+ملف التكوين وكيفية تناسب المشروع معًا.
 
-#### 4. Test Locally
-
-Run the development server to ensure your changes appear correctly:
+## تحقق منه قبل إرساله {#check-it-before-you-send-it}
 
 ```bash
-npm run docs:dev
+npm run docs:build
 ```
 
-#### 5. Commit and Push Changes
+فشل البناء على الروابط الداخلية المعطلة. هذا هو أسهل خطأ ترتكبه في
+وأسهل خطأ يمكن تفويته في المعاينة، لذا فإن الأمر يستحق التشغيل حتى لتغيير
+على سطر واحد. إذا تم اجتيازه، فإن `npm run docs:preview` يخدم بالضبط ما أنتجته نسخة
+.
 
-Commit your changes and push them to your forked repository:
+## أرسلها {#send-it}
 
 ```bash
 git add .
-git commit -m "Describe your changes"
+git commit -m "Correct the RCON port numbers"
 git push origin fix-rcon-ports
 ```
 
-#### 6. Submit a Pull Request
+GitHub يعرض فتح طلب سحب من هذا الفرع في المرة التالية التي تزور فيها
+المستودع. قل ما الذي تغير ولماذا.
 
-Go to the original repository on GitHub.
-Click on Pull Requests and submit your changes for review.
-
-## 📜 Contribution Guidelines
-
-- Ensure your changes are clear and concise.
-- Follow the structure of existing documentation.
-- Add examples or images where applicable to enhance clarity.
-- If adding new files, link them in the sidebar by updating the .vitepress/config.mts file.
-
-## 🌍 Multilingual Support
-
-We aim to provide documentation in multiple languages. If you’d like to contribute a translation:
-
-1- Create a new folder for the language under docs/.
-Example: docs/fr for French, docs/ar for Arabic.
-
-2- Translate the relevant Markdown files.
-
-3- Update the configuration in .vitepress/config.mts to include the new language.
-
-## 📬 Questions or Suggestions?
-
-If you have any questions or suggestions, feel free to open an Issue on GitHub. We'd love to hear your feedback!
-
-## ❤️ Acknowledgements
-
-Special thanks to all contributors who help make this documentation better for everyone.
-
-## 📜 License
-
-This project is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
-Share it and adapt it freely, as long as you credit this project and license what you make under the same terms.
+إذا عادت المراجعة تطلب شيئًا ما، فادفع التزامًا آخر إلى نفس فرع
+- يقوم طلب السحب بتحديث نفسه. بمجرد الدمج، تقوم Netlify بإعادة بناء
+وتنشر الموقع، الأمر الذي يستغرق دقيقة أو دقيقتين.

@@ -4,8 +4,7 @@ This site is written by the people who use it. Every page on it started as
 someone working something out and then taking the time to write it down.
 
 This page is the local setup, start to finish. You do not need any of it to fix
-a typo or report something that is wrong — [contribution
-methods](/en/contributing/methods) covers the quicker routes, and none of them
+a typo or report something that is wrong — [contribution methods](/en/contributing/methods) covers the quicker routes, and none of them
 involve a terminal. Read the [terms and rules](/en/contributing/terms-rules)
 before you open a pull request either way.
 

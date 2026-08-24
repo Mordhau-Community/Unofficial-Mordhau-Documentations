@@ -1,47 +1,42 @@
 <script setup lang="ts">
 /**
- * Landing page for the English docs.
+ * Shared localized landing page for every documentation locale.
  *
- * Rendered through `layout: Landing` in docs/en/index.md. VitePress passes any
- * unknown layout name straight to <component :is>, and VPNav and VPFooter live
- * outside that, so the nav bar and footer come along unchanged.
+ * VitePress passes `layout: Landing` to this registered component. The route
+ * map keeps translated links local when a matching page exists and marks an
+ * intentional English fallback when it does not.
  */
-import { ref } from "vue";
-import { withBase } from "vitepress";
+import { computed, ref } from "vue";
+import { useData, withBase } from "vitepress";
+import {
+  landingCopies,
+  localeOptions,
+  normalizeLandingLocale,
+  resolveLandingRoute,
+  type LandingCopy,
+} from "./landing-locales";
 
-/**
- * The values people actually arrive looking for. Verified against the
- * LinuxGSM reference config; the beacon port is flagged because a closed one
- * is the single most common reason a working server never shows up.
- */
-const quickref = [
-  {
-    label: "Steam app",
-    value: "629800",
-    note: "the dedicated server, not the game (629760)",
-  },
-  { label: "Game port", value: "7777/UDP", note: "" },
-  {
-    label: "Beacon port",
-    value: "15000/UDP",
-    note: "closed, and your server runs fine but never appears",
-    flagged: true,
-  },
-  { label: "Query port", value: "27015/UDP", note: "" },
-  {
-    label: "Config file",
-    value: "Mordhau/Saved/Config/LinuxServer/Game.ini",
-    note: "WindowsServer on Windows",
-  },
-];
+const { lang } = useData();
+const locale = computed(() => normalizeLandingLocale(lang.value));
+const copy = computed(() => landingCopies[locale.value]);
+const languages = computed(() =>
+  localeOptions.map((option) => ({
+    ...option,
+    to: `/${option.locale}/`,
+    current: option.locale === locale.value,
+  })),
+);
+
+const routeInfo = (path: string) => resolveLandingRoute(locale.value, path);
+const routeHref = (path: string) => withBase(routeInfo(path).path);
 
 const copied = ref("");
-let copyTimer;
+let copyTimer: ReturnType<typeof setTimeout> | undefined;
 
-async function copyValue(item) {
+async function copyValue(item: LandingCopy["quickref"][number]) {
   try {
     await navigator.clipboard.writeText(item.value);
-    copied.value = item.label;
+    copied.value = item.value;
     clearTimeout(copyTimer);
     copyTimer = setTimeout(() => (copied.value = ""), 1400);
   } catch {
@@ -49,90 +44,26 @@ async function copyValue(item) {
     // selectable, so there is nothing useful to say here.
   }
 }
-
-const features = [
-  {
-    title: "No ads, no trackers",
-    body: "Nothing sits between you and the answer. No pop-ups, no newsletter wall, no autoplay video in front of the command you came for.",
-  },
-  {
-    title: "In order, not scattered",
-    body: "One page per topic, start to finish, with the exact commands and file paths. Not forty Discord threads and a forum post from 2019.",
-  },
-  {
-    title: "Shown, not just told",
-    body: "Screenshots and video walkthroughs where a paragraph will not do, so you can see the setting you are being told to change.",
-  },
-];
-
-const lanes = [
-  {
-    audience: "Players",
-    line: "Why the swing that looked early still landed.",
-    links: [
-      { text: "Combat mechanics", to: "/en/combat-mechanics/", state: "written" },
-      { text: "Game modes", to: "/en/game-modes/", state: "written" },
-      { text: "Weapons and loadouts", to: "/en/weapons/", state: "written" },
-      { text: "Glossary", to: "/en/glossary/", state: "written" },
-      { text: "Mordhau game", to: "/en/mordhau-game/", state: "written" },
-    ],
-  },
-  {
-    audience: "Server owners",
-    line: "From an empty box to a server that shows up in the browser.",
-    links: [
-      { text: "Dedicated server guide", to: "/en/dedicated-server-guide/", state: "written" },
-      { text: "RCON guide", to: "/en/rcon-guide/", state: "written" },
-      { text: "Solutions and errors", to: "/en/solutions-and-errors/", state: "written" },
-      {
-        text: "Server providers",
-        to: "/en/dedicated-server-guide/dedicated-game-server-providers",
-        state: "written",
-      },
-    ],
-  },
-  {
-    audience: "Modders",
-    line: "The Editor, and an honest note about what is still missing.",
-    links: [
-      { text: "MordhauSDK guide", to: "/en/mordhauSDK-guide/", state: "outline" },
-      { text: "References", to: "/en/references/", state: "written" },
-    ],
-  },
-];
-
-const languages = [
-  { code: "EN", label: "English", to: "/en/", full: true },
-  { code: "AR", label: "العربية", to: "/ar/", full: false },
-  { code: "FR", label: "Français", to: "/fr/", full: false },
-  { code: "JA", label: "日本語", to: "/ja/", full: false },
-  { code: "RU", label: "Русский", to: "/ru/", full: false },
-  { code: "ZH", label: "中文", to: "/zh/", full: false },
-];
 </script>
 
 <template>
-  <div class="landing">
+  <main class="landing">
     <!-- Hero ------------------------------------------------------------ -->
     <section class="hero">
       <div class="hero-copy">
-        <p class="eyebrow">Unofficial &middot; written by the community</p>
+        <p class="eyebrow">{{ copy.eyebrow }}</p>
 
         <h1 class="headline">
-          <span class="headline-heavy">Mordhau Guides</span>
-          <span class="headline-thin">The complete guide for Mordhau game</span>
+          <span class="headline-heavy">{{ copy.headline }}</span>
+          <span class="headline-thin">{{ copy.subtitle }}</span>
         </h1>
 
-        <p class="lede">
-          Dedicated servers, RCON, the SDK and the combat system — pulled out of
-          Discord threads and dead forum posts, and kept somewhere you can
-          actually find them.
-        </p>
+        <p class="lede">{{ copy.lede }}</p>
 
         <div class="cta-row">
-          <a class="cta cta-primary" href="#guides">Find your guide</a>
-          <a class="cta cta-ghost" :href="withBase('/en/contributing/')">
-            Help write it
+          <a class="cta cta-primary" href="#guides">{{ copy.findGuide }}</a>
+          <a class="cta cta-ghost" :href="routeHref('contributing/')">
+            {{ copy.helpWrite }}
           </a>
         </div>
       </div>
@@ -143,9 +74,9 @@ const languages = [
       </div>
 
       <div class="features">
-        <p class="features-title">What you get here</p>
+        <p class="features-title">{{ copy.featuresTitle }}</p>
         <ul class="features-list">
-          <li v-for="feature in features" :key="feature.title">
+          <li v-for="feature in copy.features" :key="feature.title">
             <h2 class="features-name">{{ feature.title }}</h2>
             <p class="features-body">{{ feature.body }}</p>
           </li>
@@ -155,15 +86,15 @@ const languages = [
       <!-- Signature: the answers people turn up needing. -->
       <div class="quickref">
         <div class="quickref-head">
-          <p class="quickref-title">Quick reference &middot; server setup</p>
-          <a class="quickref-more" :href="withBase('/en/dedicated-server-guide/')">
-            Full server guide &rarr;
+          <p class="quickref-title">{{ copy.quickrefTitle }}</p>
+          <a class="quickref-more" :href="routeHref('dedicated-server-guide/')">
+            {{ copy.fullServerGuide }}
           </a>
         </div>
 
         <ul class="quickref-list">
           <li
-            v-for="item in quickref"
+            v-for="item in copy.quickref"
             :key="item.label"
             class="quickref-row"
             :class="{ 'is-flagged': item.flagged }"
@@ -173,14 +104,18 @@ const languages = [
             <button
               type="button"
               class="quickref-value"
-              :aria-label="`Copy ${item.label}`"
+              :aria-label="`${item.value} ${
+                copied === item.value ? copy.copiedLabel : copy.copyLabel
+              } ${item.label}`"
               @click="copyValue(item)"
             >
               <code>{{ item.value }}</code>
               <span
                 class="quickref-copy"
-                :class="{ 'is-copied': copied === item.label }"
-                >{{ copied === item.label ? "copied" : "copy" }}</span
+                :class="{ 'is-copied': copied === item.value }"
+                >{{
+                  copied === item.value ? copy.copiedLabel : copy.copyLabel
+                }}</span
               >
             </button>
 
@@ -192,20 +127,34 @@ const languages = [
 
     <!-- Guides ---------------------------------------------------------- -->
     <section id="guides" class="guides">
-      <h2 class="section-title">Start where you are</h2>
+      <h2 class="section-title">{{ copy.guidesTitle }}</h2>
 
-      <div class="lane" v-for="lane in lanes" :key="lane.audience">
+      <div class="lane" v-for="lane in copy.lanes" :key="lane.audience">
         <div class="lane-head">
           <h3 class="lane-audience">{{ lane.audience }}</h3>
           <p class="lane-line">{{ lane.line }}</p>
         </div>
 
         <ul class="lane-links">
-          <li v-for="link in lane.links" :key="link.to">
-            <a :href="withBase(link.to)">
+          <li v-for="link in lane.links" :key="link.path">
+            <a
+              :href="routeHref(link.path)"
+              :hreflang="routeInfo(link.path).fallback ? 'en' : locale"
+            >
               <span class="lane-text">{{ link.text }}</span>
-              <span class="state" :class="`state-${link.state}`">
-                {{ link.state }}
+              <span
+                class="state"
+                :class="
+                  routeInfo(link.path).fallback
+                    ? 'state-fallback'
+                    : `state-${link.state}`
+                "
+              >
+                {{
+                  routeInfo(link.path).fallback
+                    ? "EN"
+                    : copy.states[link.state]
+                }}
               </span>
             </a>
           </li>
@@ -216,14 +165,16 @@ const languages = [
     <!-- Close ----------------------------------------------------------- -->
     <section class="close">
       <div class="close-block">
-        <h2 class="close-title">Read it in your language</h2>
-        <p class="close-line">
-          English is the furthest along. The rest are only as complete as the
-          people who speak them have made them so far.
-        </p>
+        <h2 class="close-title">{{ copy.languagesTitle }}</h2>
+        <p class="close-line">{{ copy.languagesBody }}</p>
         <ul class="langs">
           <li v-for="lang in languages" :key="lang.code">
-            <a :href="withBase(lang.to)" :class="{ 'is-full': lang.full }">
+            <a
+              :href="withBase(lang.to)"
+              :class="{ 'is-current': lang.current }"
+              :aria-current="lang.current ? 'page' : undefined"
+              :hreflang="lang.locale"
+            >
               <span class="lang-code">{{ lang.code }}</span>
               <span class="lang-label">{{ lang.label }}</span>
             </a>
@@ -232,12 +183,8 @@ const languages = [
       </div>
 
       <div class="close-block">
-        <h2 class="close-title">Something here is wrong</h2>
-        <p class="close-line">
-          Probably. The game gets patched and pages go stale. Every page has an
-          edit link at the bottom, and a correction from someone who just hit
-          the problem beats anything we could guess at.
-        </p>
+        <h2 class="close-title">{{ copy.correctionTitle }}</h2>
+        <p class="close-line">{{ copy.correctionBody }}</p>
         <div class="cta-row">
           <a
             class="cta cta-primary"
@@ -256,7 +203,7 @@ const languages = [
         </div>
       </div>
     </section>
-  </div>
+  </main>
 </template>
 
 <style scoped>
@@ -423,7 +370,7 @@ const languages = [
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--vp-c-text-3);
+  color: var(--vp-c-text-2);
 }
 
 .features-list {
@@ -485,7 +432,7 @@ const languages = [
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--vp-c-text-3);
+  color: var(--vp-c-text-2);
 }
 
 .quickref-more {
@@ -585,7 +532,7 @@ const languages = [
   min-width: 0;
   font-size: 12.5px;
   line-height: 1.45;
-  color: var(--vp-c-text-3);
+  color: var(--vp-c-text-2);
 }
 
 .quickref-row.is-flagged .quickref-note {
@@ -742,16 +689,20 @@ const languages = [
   color: var(--vp-c-brand-1);
 }
 
-.langs a.is-full {
+.langs a.is-current {
   border-color: var(--vp-c-brand-1);
   color: var(--vp-c-text-1);
+}
+
+.state-fallback {
+  color: var(--vp-c-brand-1);
 }
 
 .lang-code {
   font-family: var(--vp-font-family-mono);
   font-size: 10px;
   letter-spacing: 0.1em;
-  color: var(--vp-c-text-3);
+  color: var(--vp-c-text-2);
 }
 
 /* Every interactive thing here is an anchor, so one rule covers the lot. */
