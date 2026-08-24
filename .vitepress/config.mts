@@ -120,6 +120,7 @@ export default defineConfig({
                     link: "/en/combat-mechanics/",
                   },
                   { text: "Game Modes", link: "/en/game-modes/" },
+                  { text: "Weapons & Loadouts", link: "/en/weapons/" },
                   { text: "Glossary", link: "/en/glossary/" },
                   {
                     text: "Patch Notes",

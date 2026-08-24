@@ -11,6 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Weapons and Loadouts page, written from scratch. Covers the families, why
+  reach is the first thing to look at, how windup length decides what you can
+  do with a weapon rather than only how fast you do it, and how armour and
+  perks compete for the same points. It is honest about what it does not have:
+  the per-weapon numbers are missing, and the page says so and asks for them
+  rather than carrying figures nobody measured.
+
 - Game Modes page, written from scratch. Groups the modes by what they ask of
   you rather than listing them: objective modes, team modes, everyone for
   themselves, and Horde. Says which are worth starting on and why going
