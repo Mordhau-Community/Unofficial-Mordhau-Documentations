@@ -71,6 +71,7 @@ const lanes = [
     line: "Why the swing that looked early still landed.",
     links: [
       { text: "Combat mechanics", to: "/en/combat-mechanics/", state: "written" },
+      { text: "Game modes", to: "/en/game-modes/", state: "written" },
       { text: "Glossary", to: "/en/glossary/", state: "written" },
       { text: "Mordhau game", to: "/en/mordhau-game/", state: "written" },
     ],

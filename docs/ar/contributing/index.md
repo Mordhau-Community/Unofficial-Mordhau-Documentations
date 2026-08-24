@@ -126,5 +126,5 @@ Special thanks to all contributors who help make this documentation better for e
 
 ## 📜 License
 
-This project is licensed under the Custom Documentation License (CDL).
-Please ensure that your use of this repository complies with the terms outlined in the license.
+This project is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+Share it and adapt it freely, as long as you credit this project and license what you make under the same terms.

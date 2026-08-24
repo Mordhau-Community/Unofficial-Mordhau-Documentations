@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Game Modes page, written from scratch. Groups the modes by what they ask of
+  you rather than listing them: objective modes, team modes, everyone for
+  themselves, and Horde. Says which are worth starting on and why going
+  straight to Frontline is what convinces most people the combat is random.
+  Ends on the map prefix convention, which ties back to the server guide.
+
 - Disclaimer page. Mordhau and everything that ships with it belong to
   Triternion, this site is not affiliated with or endorsed by them, and every
   page on it is written by players in their own time. It also sets out what the
@@ -95,6 +101,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Project Structure section in the README.
 
 ### Changed
+
+- Licence moved from the Custom Documentation License to
+  [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The old
+  licence claimed ownership of every contribution and forbade redistribution;
+  the new one lets anyone share and adapt the documentation, including
+  commercially, on two conditions: credit this project, and license what they
+  build under the same terms. Contributors now keep the copyright in what they
+  write rather than assigning it.
+
+  The licence is scoped explicitly. Mordhau, its name, trademarks, artwork and
+  assets belong to Triternion and are not ours to license, and material reused
+  from elsewhere keeps the licence it arrived with. LICENSE.md, README,
+  CONTRIBUTING, Terms & Rules, the disclaimer, the footer, package.json and the
+  four translated contributing pages all say the same thing now.
 
 - Contributing introduction rewritten. It walked through fork, branch and pull
   request, which Contribution Methods already covers, and listed review rules,

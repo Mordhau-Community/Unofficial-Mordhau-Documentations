@@ -1,37 +1,54 @@
-# Custom Documentation License (CDL)
+# Licence
 
-Copyright (C) 2024-present to [ Mordhau Community ] And [ John Brayden ]
+## The documentation
 
-Licensor: [ Mordhau Community ] And [ John Brayden ]
+The written documentation in this repository is licensed under the **Creative
+Commons Attribution-ShareAlike 4.0 International licence (CC BY-SA 4.0)**.
 
-Permission is hereby granted to individuals to use this repository solely for the purpose of contributing to and improving the documentation for the benefit of the public. Use of this repository is subject to the following conditions:
+- Summary: <https://creativecommons.org/licenses/by-sa/4.0/>
+- Full legal code: <https://creativecommons.org/licenses/by-sa/4.0/legalcode>
 
-## 1. **Allowed Usage**:
+You may share and adapt this material for any purpose, including commercially,
+provided that you:
 
-   - The repository may only be used to create, improve, and maintain documentation that serves the public interest and benefits readers who require these resources.
-   - The repository is intended to facilitate clear and accessible documentation.
+- **give credit**, naming Mordhau Community and linking back to the source, and
+- **license anything you build from it** under CC BY-SA 4.0 as well.
 
-## 2. **Prohibited Usage**:
+Copyright (C) 2024-present Mordhau Community and John Brayden, together with
+the individual contributors credited in the commit history.
 
-   - Copying, reproducing, or using the contents of this repository for any purpose other than its intended purpose is strictly prohibited.
-   - Redistribution of this repository or its contents in any form is not allowed without prior written consent from the repository owners.
+## What this licence does not cover
 
-## 3. **Ownership**:
+**Mordhau itself.** The game, its name, its trademarks, its artwork, its assets
+and any screenshot or capture taken from it are the property of
+[Triternion](https://triternion.com/) and are not ours to license. They appear
+here to describe and illustrate the game. Nothing above grants any right to
+them.
 
-   - All contributions made to this repository become part of the project and remain under the ownership of the repository owners and license holders.
-   - Contributors are granted no ownership rights to the project, its content, or its derivatives.
+**Material reused from elsewhere.** Where a page draws on an outside source,
+that source is credited on the page and keeps whatever licence it arrived with.
 
-## 4. **Access and Use**:
+**The site's code.** The theme and configuration under `.vitepress/` are part
+of the project rather than the documentation, and are covered by the same
+licence for want of a separate one.
 
-   - Access and use of the repository are restricted to the repository owners and licensed users only. Unauthorized use or access is prohibited.
-   - The right to use, display, and modify the content is exclusively granted to the repository owners and license holders.
+## Contributing
 
-## 5. **Liability Disclaimer**:
+Contributors keep the copyright in what they write and license it, to the
+project and to everyone else, under CC BY-SA 4.0. Credit is recorded in the
+commit history.
 
-   - The repository and its contents are provided "AS IS" without any warranty or guarantee of any kind, express or implied. The repository owners disclaim all liability for any damages resulting from the use or misuse of the content.
+## Bringing outside material in
 
-## 6. **Termination**:
-   - If any terms of this license are violated, all permissions granted under this license will be terminated immediately.
-   - Termination of this license does not affect the rights of the repository owners to enforce their ownership and licensing terms.
+Outside material may only be added to this repository if its own licence allows
+reuse and is compatible with CC BY-SA 4.0. In practice that means the source
+must be CC BY-SA, public domain, or your own work.
 
-For any inquiries or permissions not covered by this license, please contact us in Discord server [https://discord.gg/zuX58yRV84].
+Attribution to the original is not optional and goes on the page that uses it,
+naming the source and linking to it. A page that reuses someone else's writing
+without crediting them breaks both their licence and this one.
+
+## Contact
+
+For anything not covered here, reach the maintainers in the Discord server:
+<https://discord.gg/zuX58yRV84>

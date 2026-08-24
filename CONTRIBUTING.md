@@ -12,15 +12,18 @@ To ensure contributions are in line with the repository's purpose and licensing 
 - All contributions must focus on creating, improving, or maintaining documentation that benefits readers and facilitates clear and accessible resources.
 - Contributions should be relevant to the goals of the repository and not deviate from its intended purpose.
 
-### 2. Ownership of Contributions
+### 2. Your Contributions
 
-- By contributing to this repository, you agree that all contributions become part of the project and remain under the ownership of the repository owners and license holders.
-- Contributors are not granted any ownership rights to the project or its content, including derived works.
+- You keep the copyright in whatever you write.
+- By contributing, you license it to this project and to everyone else under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), the licence the documentation is published under.
+- Your credit is recorded in the commit history.
+- Only contribute material you have the right to publish. Anything reused from elsewhere must carry a licence compatible with CC BY-SA 4.0, and must credit its source on the page that uses it.
 
-### 3. Prohibited Actions
+### 3. Reusing This Documentation
 
-- Do not use this repository for purposes outside its intended scope, such as copying or redistributing the content for unrelated projects.
-- Unauthorized use of this repository's content for commercial or non-documentation purposes is prohibited.
+- Sharing and adapting this documentation is allowed, including commercially. That is what CC BY-SA 4.0 is for.
+- Two conditions come with it: credit this project and link back, and license whatever you build under the same terms.
+- Mordhau itself is not ours to license. The game, its name, its trademarks and its assets belong to [Triternion](https://triternion.com/) and none of the above applies to them.
 
 ### 4. Code of Conduct
 
@@ -37,8 +40,8 @@ To ensure contributions are in line with the repository's purpose and licensing 
 
 ### 6. Licensing Agreement
 
-- By submitting a contribution, you confirm that you have read and agree to abide by the repository's licensing terms as outlined in the [LICENSE](./LICENSE.md) file.
-- You also acknowledge that your contribution will be licensed under the repository's existing license.
+- By submitting a contribution, you confirm you have read the [LICENSE](./LICENSE.md) and agree to your work being published under CC BY-SA 4.0.
+- You confirm you have the right to publish what you are submitting.
 
 ### 7. Contact
 

@@ -3,7 +3,7 @@
   "version": "0.0.13.Unreleased",
   "private": true,
   "description": "Community written documentation for Mordhau, built with VitePress.",
-  "license": "SEE LICENSE IN LICENSE.md",
+  "license": "CC-BY-SA-4.0",
   "engines": {
     "node": ">=18"
   },

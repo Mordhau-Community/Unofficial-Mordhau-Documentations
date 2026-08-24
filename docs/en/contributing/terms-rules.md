@@ -49,6 +49,6 @@ Be civil. People here are volunteers writing documentation for a game in their f
 
 ## Licence
 
-By contributing you agree that your work is published under the project's [Custom Documentation License](https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations/blob/main/LICENSE.md). You keep credit for what you wrote through the commit history.
+You keep the copyright in what you write. By contributing you license it, to this project and to everyone else, under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), and your credit is recorded in the commit history.
 
 Do not contribute anything you do not have the right to publish.
