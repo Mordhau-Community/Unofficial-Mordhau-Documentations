@@ -182,6 +182,10 @@ export default defineConfig({
                   text: "Contribution Terms & Rules",
                   link: "/en/contributing/terms-rules",
                 },
+                {
+                  text: "What Still Needs Writing",
+                  link: "/en/contributing/what-needs-writing",
+                },
               ],
             },
             {

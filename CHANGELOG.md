@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- What Still Needs Writing, in the contributing section. Names every gap on the
+  site by area, says what closing each one takes, and is blunt that most of
+  what is left is measurement rather than writing: numbers somebody has to test
+  in game, because they move with patches and inventing them is worse than
+  leaving the space empty.
+
 - Weapons and Loadouts page, written from scratch. Covers the families, why
   reach is the first thing to look at, how windup length decides what you can
   do with a weapon rather than only how fast you do it, and how armour and
