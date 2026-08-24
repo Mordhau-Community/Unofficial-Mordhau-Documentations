@@ -6,18 +6,19 @@ aside: false
 
 # About Us
 
-We are a group of Mordhau players, server owners and modders, and this site is
-our attempt to write down what the game never documented.
+Mordhau Guides is an unofficial documentation project for the game Mordhau,
+written and maintained by volunteer contributors.
 
-Most of what you need to run a server, use RCON or work with the SDK has
-existed for years, scattered across Discord threads, forum posts and people's
-memories. It goes missing the moment a thread scrolls away or someone stops
-playing. Collecting it in one place, in order, is the whole job.
+Most of what is needed to run a dedicated server, use RCON or work with the SDK
+has existed for years, scattered across Discord threads, forum posts and
+private notes. That material is easily lost: a thread scrolls out of reach, a
+server owner stops playing. The project collects it in one place, in a fixed
+order, and keeps it current as the game is patched.
 
-The site is unofficial. It is not affiliated with Triternion or endorsed by
-them, and every page here was written by players.
+The project is independent. It is not affiliated with Triternion or endorsed by
+them, and every page is written by players rather than by the developers.
 
-Anyone can help, and most of what is useful is small: a correction, a missing
-step, a page translated into your language. [How to contribute](/en/contributing/)
-walks through it, and the [Discord](https://discord.gg/zuX58yRV84) is where
-most of it gets worked out.
+Contributions are open to anyone, and most of what is useful is small: a
+correction, a missing step, a page translated into another language.
+[How to contribute](/en/contributing/) sets out the process, and the
+[Discord](https://discord.gg/zuX58yRV84) is where it is discussed.
