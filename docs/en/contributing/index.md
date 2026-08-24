@@ -1,132 +1,82 @@
-# Contributing in Mordhau documentations!
+# Contributing
 
-Go to the [**Mordhau Documentation Repository**](https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations).
-This repository uses **VitePress** to create clear and easy-to-read documentation for the game **Mordhau**.  
-Our goal is to provide a comprehensive and multilingual resource for players and developers alike.
+This site is written by the people who use it. Every page on it started as
+someone working something out and then taking the time to write it down.
 
-## 🚀 Getting Started
+This page is the local setup, start to finish. You do not need any of it to fix
+a typo or report something that is wrong — [contribution
+methods](/en/contributing/methods) covers the quicker routes, and none of them
+involve a terminal. Read the [terms and rules](/en/contributing/terms-rules)
+before you open a pull request either way.
 
-#### Before dive..
+## What you need
 
-- You should have knowledge about **Github** and **Vscode** and **Markdown**
-- You should have Github Account.
-- You should have install **[Nodejs LTS](https://nodejs.org/en)** and **[Git](https://git-scm.com/downloads)** and **[Vscode](https://code.visualstudio.com/)**
+- [Node.js](https://nodejs.org/en) 18 or newer
+- [Git](https://git-scm.com/downloads)
+- A [GitHub](https://github.com) account
+- An editor — the repository is set up for [VS Code](https://code.visualstudio.com/)
 
-::: tip RECOMENDED
-It is recommended that after installing VS Code, you download the internal extensions available within it to simplify documentation and project management processes. As soon as you open the project in VS Code, the recommended extensions will appear for you.
-:::
+[Required tools](/en/contributing/tools) has the install notes and the
+first-run configuration for each of them.
 
-<br>
+## Set up locally
 
-Follow these steps to set up the project locally and start contributing:
-
-#### 1. Clone the Repository
+Fork [the repository](https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations)
+on GitHub, then clone your fork and install:
 
 ```bash
-git clone https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations.git
+git clone https://github.com/YOUR-USERNAME/Unofficial-Mordhau-Documentations.git
 cd Unofficial-Mordhau-Documentations
-```
-
-#### 2. Install Dependencies
-
-Ensure you have Node.js installed. Then, install the required dependencies:
-
-```bash
 npm install
 ```
 
-#### 3. Start the Development Server
-
-Run the following command to start a local development server:
+Start the development server:
 
 ```bash
 npm run docs:dev
 ```
 
-The command prints the address it is serving on, usually `http://localhost:5173`. Open that in your browser to view the documentation locally.
+It prints the address it is serving on, usually `http://localhost:5173`. Leave
+it running — pages reload as you save.
 
-## 🛠️ Build for Production
+## Make your change
 
-To build the documentation for production, use the following command:
-
-```bash
-npm run docs:build
-```
-
-The static files are generated in the `.vitepress/dist/docs` directory. That folder is not committed, Netlify runs the build itself on every push to `main`.
-
-## 🤝 How to Contribute
-
-We welcome contributions to enhance the documentation. Here's how you can help:
-
-#### 1. Fork the Repository
-
-Click the Fork button on the top-right of this page to create a copy of this repository under your account.
-
-#### 2. Create a New Branch
-
-Create a new branch for your changes:
+Work on a branch, never on `main`:
 
 ```bash
 git checkout -b fix-rcon-ports
 ```
 
-#### 3. Add or Update Documentation
+Pages live under `docs/<language>/`, so an English page belongs in `docs/en/`.
+A new page also needs an entry in `.vitepress/config.mts`, or nothing on the
+site links to it.
 
-Navigate to the docs/ directory.
-Add or edit .md files for the documentation.
-For example, to add a new page, create a file like new-page.md inside docs/.
+[How to use Markdown](/en/contributing/how-to-use-markdown) covers the file
+conventions and the house style. [What is VitePress](/en/contributing/vitepress)
+covers the config file and how the project fits together.
 
-#### 4. Test Locally
-
-Run the development server to ensure your changes appear correctly:
+## Check it before you send it
 
 ```bash
-npm run docs:dev
+npm run docs:build
 ```
 
-#### 5. Commit and Push Changes
+The build fails on broken internal links. That is the easiest mistake to make
+and the easiest one to miss in a preview, so it is worth running even for a
+one-line change. If it passes, `npm run docs:preview` serves exactly what the
+build produced.
 
-Commit your changes and push them to your forked repository:
+## Send it
 
 ```bash
 git add .
-git commit -m "Describe your changes"
+git commit -m "Correct the RCON port numbers"
 git push origin fix-rcon-ports
 ```
 
-#### 6. Submit a Pull Request
+GitHub offers to open a pull request from that branch the next time you visit
+the repository. Say what changed and why.
 
-Go to the original repository on GitHub.
-Click on Pull Requests and submit your changes for review.
-
-## 📜 Contribution Guidelines
-
-- Ensure your changes are clear and concise.
-- Follow the structure of existing documentation.
-- Add examples or images where applicable to enhance clarity.
-- If adding new files, link them in the sidebar by updating the .vitepress/config.mts file.
-
-## 🌍 Multilingual Support
-
-We aim to provide documentation in multiple languages. If you’d like to contribute a translation:
-
-1- Create a new folder for the language under docs/.
-Example: docs/fr for French, docs/ar for Arabic.
-
-2- Translate the relevant Markdown files.
-
-3- Update the configuration in .vitepress/config.mts to include the new language.
-
-## 📬 Questions or Suggestions?
-
-If you have any questions or suggestions, feel free to open an Issue on GitHub. We'd love to hear your feedback!
-
-## ❤️ Acknowledgements
-
-Special thanks to all contributors who help make this documentation better for everyone.
-
-## 📜 License
-
-This project is licensed under the Custom Documentation License (CDL).
-Please ensure that your use of this repository complies with the terms outlined in the license.
+If the review comes back asking for something, push another commit to the same
+branch — the pull request updates itself. Once it is merged, Netlify rebuilds
+and publishes the site, which takes a minute or two.

@@ -14,7 +14,7 @@ docs/
   en/               English pages
   ar/  fr/  ja/     translations, mirroring the English structure
   ru/  zh/
-  logo.webp
+  public/           images and files copied to the site root as they are
 package.json        dependencies and the npm scripts
 netlify.toml        build and redirect settings for the live site
 ```
@@ -25,7 +25,7 @@ Every `.md` file under `docs/` becomes a page. The URL follows the file path, so
 
 ```bash
 npm run docs:dev      # local server with live reload, use this while writing
-npm run docs:build    # produce the static site in .vitepress/dist
+npm run docs:build    # produce the static site in .vitepress/dist/docs
 npm run docs:preview  # serve what the build produced, to check it before pushing
 ```
 

@@ -88,6 +88,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Contributing introduction rewritten. It walked through fork, branch and pull
+  request, which Contribution Methods already covers, and listed review rules,
+  which Terms & Rules already covers, so a reader met the same material three
+  times and none of the three was clearly the one to follow. It is now the
+  local setup start to finish and defers to the pages that own the rest, with
+  the build step called out because it fails on broken internal links. 577
+  words to 383, and the sidebar calls it Contributing rather than
+  Introduction, which is what the section's own house style asks for.
+
 - About Mordhau split in two, and both halves renamed. It was one page doing
   two jobs, and both menus pointed at it: Informations called it About
   Mordhau, Guides called it Mordhau Game. The game description now sits at
@@ -122,6 +131,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - package.json now has name, private, description, license and engines.
 
 ### Fixed
+
+- Contributing introduction sent new pages to docs/ rather than the language
+  folder under it, and told readers to press a Fork button on the top right of
+  "this page", which is the documentation site and has no such button.
+
+- What is VitePress showed the logo loose under docs/ in its project tree,
+  which stopped being true when the file moved to docs/public/, and gave the
+  build output as .vitepress/dist rather than .vitepress/dist/docs.
 
 - Menu item hover, search shortcut keys, sidebar indicators and the outline
   marker ignored the corner setting.

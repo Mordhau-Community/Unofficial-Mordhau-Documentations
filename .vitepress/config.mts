@@ -166,7 +166,7 @@ export default defineConfig({
               text: "Get Started",
               items: [
                 {
-                  text: "Introduction",
+                  text: "Contributing",
                   link: "/en/contributing/",
                 },
                 {
