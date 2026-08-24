@@ -256,12 +256,12 @@ watch(on, apply);
 }
 
 /*
- * Floating free in read mode, so it closes itself off again: a full border on
- * all four sides and a shadow to lift it off the article underneath.
+ * In read mode it sits against the top of the window, so it keeps exactly the
+ * shape it has when docked: open along the top, square at the top corners,
+ * rounded only at the bottom. All it gains is a shadow, to lift it off the
+ * article it is now sitting over.
  */
 .mh-read.is-on {
-  border-top: 1px solid var(--vp-c-divider);
-  border-radius: var(--mh-r-sm);
   box-shadow: var(--vp-shadow-2);
 }
 

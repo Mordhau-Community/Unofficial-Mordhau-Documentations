@@ -1762,8 +1762,10 @@ html {
   }
 }
 
+/* Right up against the top of the window, hanging off the edge of the frame
+   the way it hangs off the bar when the bar is there. */
 html[data-mh-read="on"] {
-  --mh-dock-top: 10px;
+  --mh-dock-top: 0px;
 }
 
 /* ------------------------------------------------------------- Donate ---- */
@@ -1871,7 +1873,14 @@ html .vp-doc .mh-donate-note {
     position: absolute;
     top: 100%;
     height: 1px;
-    width: calc(50% - var(--mh-read-w, 113px) / 2);
+    /*
+     * A pixel long each, so the segment and the button's side border share
+     * their end pixel instead of leaving a gap at the corner. The button is an
+     * odd number of pixels wide, so centring lands its edges on half pixels and
+     * the segment rounds away from them; the overlap is invisible because both
+     * are drawn in --vp-c-divider.
+     */
+    width: calc(50% - var(--mh-read-w, 113px) / 2 + 1px);
     background-color: var(--vp-c-divider);
   }
 

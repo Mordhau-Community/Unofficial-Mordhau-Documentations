@@ -179,6 +179,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Corners where the bar's underline meets the read mode button's side borders
+  left a hairline gap. The button is an odd number of pixels wide, so centring
+  puts its edges on half pixels and the line rounded away from them. The
+  segments run a pixel long each now and share the corner pixel with the
+  border, which is invisible since both are drawn in the same colour.
+
 - Article sat left of centre on pages that have an outline but no sidebar. The
   outline's gutter opened on the right with nothing answering it on the left,
   so the text landed half the outline's width off centre: 136px at 1280 and
