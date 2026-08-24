@@ -191,6 +191,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- Every outbound link and mention of the Mordhau Fandom wiki: the further
+  reading at the foot of Combat Mechanics, the entry in the contributing
+  reading list, the Community documentation section of References along with
+  its entry under Learning the game, the sourcing note on the server providers
+  page, and the passing example in Terms & Rules. Nothing on this site was
+  taken from there, so none of these were attribution.
+
 - .vitepress/dist and .vitepress/cache from the repository, 172 files of
   build output that should never have been committed.
 - The /config/ sidebar left over from the VitePress starter template.

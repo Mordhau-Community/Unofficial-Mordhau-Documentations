@@ -16,7 +16,7 @@ Nothing here is complicated. It is mostly a list of things that save the people 
 
 Test what you write. If you are documenting a command, run it. If you are documenting a config key, put it in a real `Game.ini` and start the server.
 
-If you got the information from somewhere else — the wiki, a Discord message, a hosting provider's knowledge base — link it. Both so readers can go deeper and so the next person can tell how stale it is.
+If you got the information from somewhere else — another site, a Discord message, a hosting provider's knowledge base — link it. Both so readers can go deeper and so the next person can tell how stale it is.
 
 Game updates break documentation. If you notice a page describing something that no longer matches the game, fixing it counts as a contribution.
 

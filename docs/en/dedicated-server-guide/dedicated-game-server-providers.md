@@ -2,7 +2,7 @@
 
 If you would rather not run [your own server](/en/dedicated-server-guide/), these companies rent Mordhau servers with a web control panel. You pay per slot per month, they handle the machine, the updates and the ports, and you get a config editor and a console in a browser.
 
-The hosts below are the ones the Mordhau community has used over the years and are the same names listed on the game's wiki.
+The hosts below are the ones the Mordhau community has used over the years.
 
 ::: info
 We are not affiliated with any of them and none of these are affiliate links. Prices, regions and quality change over time — shop around, and ask in the [Discord](https://discord.gg/zuX58yRV84) how a host is doing lately before you commit to a long rental.

@@ -108,6 +108,4 @@ Do not try to absorb all of it at once. Roughly:
 
 ## Going deeper
 
-The [Mordhau Wiki's combat techniques page](https://mordhau.fandom.com/wiki/Combat_techniques) goes into more detail on individual mechanics, and the [basic gameplay introduction](https://mordhau.fandom.com/wiki/Basic_introduction_to_Mordhau_gameplay) is a reasonable starting point if this page moved too fast.
-
 If a term here was unfamiliar, the [glossary](/en/glossary/) covers the vocabulary.

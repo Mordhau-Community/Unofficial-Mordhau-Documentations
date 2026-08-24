@@ -13,13 +13,6 @@ Everything below is maintained by someone else. If you find one of these dead or
 - [Triternion on X](https://x.com/MordhauGame) — announcements usually land here first
 - [Steam Community Hub](https://steamcommunity.com/app/629760) — discussions, guides and the workshop
 
-## Community documentation
-
-- [Mordhau Wiki](https://mordhau.fandom.com/wiki/Mordhau_Wiki) — the largest single body of written Mordhau knowledge. Patchy in places and some pages have not been touched in years, but for a lot of subjects it is the only record there is
-- [Dedicated Server Hosting Guide](https://mordhau.fandom.com/wiki/Dedicated_Server_Hosting_Guide) — the wiki's version of our [server guide](/en/dedicated-server-guide/)
-- [Server Configuration](https://mordhau.fandom.com/wiki/Server_Configuration) — `Game.ini` keys
-- [Combat techniques](https://mordhau.fandom.com/wiki/Combat_techniques)
-
 ## Running a server
 
 - [LinuxGSM Mordhau config](https://github.com/GameServerManagers/Game-Server-Configs/tree/master/Mordhau) — a reference `Game.ini` with every default value in it. Useful for checking what a setting is supposed to look like
@@ -37,7 +30,6 @@ Everything below is maintained by someone else. If you find one of these dead or
 
 ## Learning the game
 
-- [Basic introduction to Mordhau gameplay](https://mordhau.fandom.com/wiki/Basic_introduction_to_Mordhau_gameplay)
 - [Combat Mechanics](/en/combat-mechanics/) — our own summary
 - [Glossary](/en/glossary/) — what the terminology means
 

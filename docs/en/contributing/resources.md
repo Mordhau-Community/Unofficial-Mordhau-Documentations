@@ -29,7 +29,6 @@ Everything below is external. We link out rather than restating it because these
 
 ## Mordhau
 
-- [Mordhau Wiki](https://mordhau.fandom.com/wiki/Mordhau_Wiki) — community maintained, patchy in places but often the only written record of something
 - [Official Mordhau site](https://mordhau.com)
 - [Mordhau on Steam](https://store.steampowered.com/app/629760/MORDHAU/)
 - [Triternion on X](https://x.com/MordhauGame) — where patch announcements land first
