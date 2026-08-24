@@ -88,6 +88,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- About Mordhau split in two, and both halves renamed. It was one page doing
+  two jobs, and both menus pointed at it: Informations called it About
+  Mordhau, Guides called it Mordhau Game. The game description now sits at
+  /en/mordhau-game/ under the name the Guides menu was already using, and the
+  documentation gap it described has a page of its own at /en/mordhau-lack/,
+  covering what is missing, why it stays missing, and what that costs.
+  /en/about-mordhau/ no longer resolves.
+
 - About Us cut down. Five paragraphs circling the same sentiment became four
   short ones that say who runs the site, why it exists, that it is unofficial
   and not endorsed by Triternion, and how to help. 260 words to 150.

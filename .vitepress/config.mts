@@ -90,8 +90,8 @@ export default defineConfig({
             items: [
               { text: "About us", link: "/en/about-us/" },
               {
-                text: "About Mordhau",
-                link: "/en/about-mordhau/",
+                text: "Mordhau Lack",
+                link: "/en/mordhau-lack/",
               },
               {
                 text: "How read?",
@@ -112,7 +112,7 @@ export default defineConfig({
               {
                 text: "Players Guides and wiki",
                 items: [
-                  { text: "Mordhau Game", link: "/en/about-mordhau/" },
+                  { text: "Mordhau Game", link: "/en/mordhau-game/" },
                   {
                     text: "Combat Mechanics",
                     link: "/en/combat-mechanics/",

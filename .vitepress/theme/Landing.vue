@@ -72,7 +72,7 @@ const lanes = [
     links: [
       { text: "Combat mechanics", to: "/en/combat-mechanics/", state: "written" },
       { text: "Glossary", to: "/en/glossary/", state: "written" },
-      { text: "About Mordhau", to: "/en/about-mordhau/", state: "written" },
+      { text: "Mordhau game", to: "/en/mordhau-game/", state: "written" },
     ],
   },
   {
