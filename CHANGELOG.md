@@ -88,6 +88,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- About Us cut down. Five paragraphs circling the same sentiment became four
+  short ones that say who runs the site, why it exists, that it is unofficial
+  and not endorsed by Triternion, and how to help. 260 words to 150.
+
 - "On this page" is a right hand sidebar now, not a column floating in the
   article. Same width as the sidebar on the left, same darker surface and
   hairline, pinned to the edge of the window and running its full height. No
