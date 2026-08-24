@@ -115,6 +115,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Read mode button is now a tab of the nav bar rather than a box under it. It
+  wears the bar's frosted surface off the same token and the same blur, sits
+  flush against the underside of the bar with no line along its top, and the
+  bar's underline stops either side of it. From 1280px up, where the button
+  hangs off the nav bar itself.
+
 - Licence moved from the Custom Documentation License to
   [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The old
   licence claimed ownership of every contribution and forbade redistribution;

@@ -1732,7 +1732,7 @@ html {
    * The other two figures below already clear their bar's bottom border for
    * the same reason.
    */
-  --mh-dock-top: calc(var(--vp-nav-height) + 1px);
+  --mh-dock-top: var(--vp-nav-height);
 }
 
 @media (min-width: 960px) and (max-width: 1279px) {
@@ -1754,11 +1754,11 @@ html {
   }
 
   html:not([data-mh-read="on"]) {
-    --mh-dock-top: calc(var(--vp-nav-height) + 1px);
+    --mh-dock-top: var(--vp-nav-height);
   }
 
   html:not([data-mh-read="on"]):has(.VPLocalNav) {
-    --mh-dock-top: calc(var(--vp-nav-height) + 1px + 48px);
+    --mh-dock-top: calc(var(--vp-nav-height) + 47px);
   }
 }
 
@@ -1838,5 +1838,50 @@ html .vp-doc .mh-donate-note {
 
   html .vp-doc a.mh-donate-button:hover {
     transform: none;
+  }
+}
+
+
+/* ------------------------------------------- Notch under the read button ---- */
+
+/*
+ * The bar's underline stops where the read mode button hangs off it, so the
+ * button reads as a tab of the bar rather than a box with a line drawn over it.
+ *
+ * VitePress's own .divider is taken out of the picture and the line is redrawn
+ * as two opaque segments on the bar itself. That is not decoration: measured in
+ * Chrome, leaving the divider element in place over the button's frosted
+ * surface painted that row solid black, whether the gap in it was cut with a
+ * mask, with a gradient, or by shrinking it to two pieces. Hiding the element
+ * outright was the only state that sampled correctly, so the line is drawn
+ * somewhere the button is not underneath.
+ *
+ * The gap width comes from the button, measured in ReadMode.vue and published
+ * as --mh-read-w, because the label's width moves with the font and the locale.
+ */
+@media (min-width: 1280px) {
+  html:not([data-mh-read="on"]):has(.mh-read) .VPNavBar:not(.home.top)
+    .divider {
+    display: none;
+  }
+
+  html:not([data-mh-read="on"]):has(.mh-read) .VPNavBar:not(.home.top)::before,
+  html:not([data-mh-read="on"]):has(.mh-read) .VPNavBar:not(.home.top)::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    height: 1px;
+    width: calc(50% - var(--mh-read-w, 113px) / 2);
+    background-color: var(--vp-c-divider);
+  }
+
+  html:not([data-mh-read="on"]):has(.mh-read)
+    .VPNavBar:not(.home.top)::before {
+    left: 0;
+  }
+
+  html:not([data-mh-read="on"]):has(.mh-read)
+    .VPNavBar:not(.home.top)::after {
+    right: 0;
   }
 }

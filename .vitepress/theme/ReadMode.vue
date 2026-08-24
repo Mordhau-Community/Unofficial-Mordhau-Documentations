@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 import { useData } from "vitepress";
 
 /*
@@ -55,6 +55,23 @@ function toggle() {
   persist(pref.value);
 }
 
+const root = ref<HTMLElement | null>(null);
+
+/*
+ * The bar's underline is notched to let the button hang off it seamlessly, and
+ * the notch has to be exactly as wide as the button. That width depends on the
+ * label, the font and the locale, so it is measured rather than assumed and
+ * published for the stylesheet to read.
+ */
+function measure() {
+  const button = root.value?.querySelector(".mh-read") as HTMLElement | null;
+  if (!button) return;
+  document.documentElement.style.setProperty(
+    "--mh-read-w",
+    button.offsetWidth + "px"
+  );
+}
+
 onMounted(() => {
   // The pre-paint script in config.mts has already stamped the attribute from
   // storage, so read the choice back off the document rather than going to
@@ -62,7 +79,15 @@ onMounted(() => {
   // to the computed above.
   pref.value = document.documentElement.getAttribute("data-mh-read") === "on";
   apply(on.value);
+
+  // After paint, and again once the display face has actually loaded, since
+  // the fallback font measures differently.
+  nextTick(measure);
+  document.fonts?.ready.then(measure).catch(() => {});
+  window.addEventListener("resize", measure);
 });
+
+onUnmounted(() => window.removeEventListener("resize", measure));
 
 // Covers pressing the button and walking onto a page where read mode does not
 // apply, which is the same thing as far as the document is concerned.
@@ -76,7 +101,7 @@ watch(on, apply);
     which postcss-rtl mirrors; flex centring is direction agnostic and needs no
     guarding.
   -->
-  <div v-if="isDoc" class="mh-read-dock" :class="{ 'is-on': on }">
+  <div v-if="isDoc" ref="root" class="mh-read-dock" :class="{ 'is-on': on }">
     <button
       type="button"
       class="mh-read"
@@ -159,17 +184,12 @@ watch(on, apply);
   padding: 0 12px;
   border: 1px solid var(--vp-c-divider);
   /*
-   * The bar sits directly on top of this edge, so the top border takes the
-   * button's own colour rather than being left transparent. Transparent let
-   * the nav's underline paint straight through the button's first row and
-   * read as a line drawn across its top. Painting it hides the rule for the
-   * width of the button, which is what makes the button look like a tab of the
-   * bar rather than a separate box pinned under it.
-   *
-   * A colour rather than border-top: 0 so the box keeps its height, and
-   * nothing shifts by a pixel when the border shows in read mode.
+   * No line along the top at all. The button is flush against the underside of
+   * the bar and the bar's own underline is notched to make room for it, so
+   * there is nothing to draw there: the two surfaces meet and the button reads
+   * as a tab of the bar rather than a box parked underneath it.
    */
-  border-top-color: var(--vp-nav-bg-color);
+  border-top: 0;
   border-radius: 0 0 var(--mh-r-sm) var(--mh-r-sm);
   /*
    * The nav bar's own background token, at full strength rather than frosted.
@@ -184,6 +204,7 @@ watch(on, apply);
    * --vp-nav-bg-color is var(--vp-c-bg), which every background preset
    * redefines, so this still follows the theme along with the bar.
    */
+  /* What is left where backdrop-filter is unsupported: the bar's flat colour. */
   background-color: var(--vp-nav-bg-color);
   /* A control, not content: no text selection, no drag, no tap flash. */
   -webkit-user-select: none;
@@ -215,13 +236,31 @@ watch(on, apply);
   color: var(--vp-c-text-1);
 }
 
+/*
+ * The bar's frosted surface, off the same token and the same blur, so the two
+ * match in every theme and follow the background presets together.
+ */
+@supports (
+  (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
+) {
+  .mh-read {
+    background-color: var(--mh-nav-glass);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    backdrop-filter: blur(14px) saturate(180%);
+  }
+}
+
 .mh-read:focus-visible {
   outline: 2px solid var(--vp-c-brand-1);
   outline-offset: 2px;
 }
 
+/*
+ * Floating free in read mode, so it closes itself off again: a full border on
+ * all four sides and a shadow to lift it off the article underneath.
+ */
 .mh-read.is-on {
-  border-top-color: var(--vp-c-divider);
+  border-top: 1px solid var(--vp-c-divider);
   border-radius: var(--mh-r-sm);
   box-shadow: var(--vp-shadow-2);
 }
