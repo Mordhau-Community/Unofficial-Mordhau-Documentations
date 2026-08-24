@@ -20,5 +20,4 @@ them, and every page is written by players rather than by the developers.
 
 Contributions are open to anyone, and most of what is useful is small: a
 correction, a missing step, a page translated into another language.
-[How to contribute](/en/contributing/) sets out the process, and the
-[Discord](https://discord.gg/zuX58yRV84) is where it is discussed.
+[How to contribute](/en/contributing/) sets out the process.
