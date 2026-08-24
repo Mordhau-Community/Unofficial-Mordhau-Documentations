@@ -132,6 +132,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Article sat left of centre on pages that have an outline but no sidebar. The
+  outline's gutter opened on the right with nothing answering it on the left,
+  so the text landed half the outline's width off centre: 136px at 1280 and
+  1440, 176px at 1600, 256px at 1920, while a page with a sidebar was dead
+  centre at all four. Both kinds of page now put the text column on the same
+  pixel.
+
 - Contributing introduction sent new pages to docs/ rather than the language
   folder under it, and told readers to press a Fork button on the top right of
   "this page", which is the documentation site and has no such button.

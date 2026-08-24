@@ -1437,6 +1437,22 @@ html .VPSocialLink > [class^="vpi-social-"] {
   html .VPContent:has(.VPDoc.has-aside) {
     padding-right: var(--vp-sidebar-width);
   }
+
+  /*
+   * A page with no sidebar still gets the outline's gutter on the right, and
+   * with nothing balancing it on the left the article sat off centre by half
+   * the outline's width. Measured before this: 136px left of centre at 1280
+   * and 1440, 176px at 1600, 256px at 1920, against a sidebar page that was
+   * dead centre at every one of them.
+   *
+   * VitePress used to avoid this by centring the article and the outline
+   * together as one block. That stopped applying when the outline became a
+   * panel pinned to the edge of the window, so the balance has to be put back
+   * by hand.
+   */
+  html .VPContent:not(.has-sidebar):has(.VPDoc.has-aside) {
+    padding-left: var(--vp-sidebar-width);
+  }
 }
 
 /*
@@ -1458,6 +1474,12 @@ html .VPSocialLink > [class^="vpi-social-"] {
 
   html .VPContent:has(.VPDoc.has-aside) {
     padding-right: calc(
+      (100vw - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width)
+    );
+  }
+
+  html .VPContent:not(.has-sidebar):has(.VPDoc.has-aside) {
+    padding-left: calc(
       (100vw - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width)
     );
   }
@@ -1588,8 +1610,17 @@ html .VPContent {
     transform: translateX(100%);
   }
 
+  /*
+   * Both gutters, not just the outline's: a page without a sidebar now has one
+   * on each side to clear.
+   *
+   * Important for the same reason as the sidebar rule above. postcss-rtl reads
+   * padding-left as directional and prefixes that rule with [dir="ltr"], one
+   * attribute wider than this selector, so without it the balancing gutter
+   * stayed put in read mode and the article sat 176px right of centre.
+   */
   html[data-mh-read="on"] .VPContent:has(.VPDoc.has-aside) {
-    padding-right: 0;
+    padding-inline: 0 !important;
   }
 }
 
