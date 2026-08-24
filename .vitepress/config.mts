@@ -48,8 +48,9 @@ export default defineConfig({
       // footer is hidden on pages that carry a sidebar, which is VitePress's
       // own default, so this shows everywhere except the contributing series.
       message:
-        "Released under the (CDL) License. &middot; <a href=\"https://buymeacoffee.com/mordhaucommunity\" target=\"_blank\" rel=\"noreferrer\">&#10084;&#65039; Support the docs</a>",
-      copyright: "Copyright © 2024-present Mordhau Community - John Brayden",
+        "Released under the (CDL) License. &middot; <a href=\"/docs/en/disclaimer/\">Disclaimer</a> &middot; <a href=\"https://buymeacoffee.com/mordhaucommunity\" target=\"_blank\" rel=\"noreferrer\">&#10084;&#65039; Support the docs</a>",
+      copyright:
+        "Copyright © 2024-present Mordhau Community - John Brayden. Mordhau and all related content are the property of <a href=\"https://triternion.com/\" target=\"_blank\" rel=\"noreferrer\">Triternion</a>. This site is unofficial and not affiliated with them.",
     },
     editLink: {
       pattern:
@@ -102,6 +103,7 @@ export default defineConfig({
                 items: [
                   { text: "Contributing", link: "/en/contributing/" },
                   { text: "Support the docs", link: "/en/donate/" },
+                  { text: "Disclaimer", link: "/en/disclaimer/" },
                 ],
               },
             ],

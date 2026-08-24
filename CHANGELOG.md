@@ -11,6 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Disclaimer page. Mordhau and everything that ships with it belong to
+  Triternion, this site is not affiliated with or endorsed by them, and every
+  page on it is written by players in their own time. It also sets out what the
+  documentation is not, the copyright on the writing itself, and how to reach
+  the maintainers about anything published here that should not be. The notice
+  itself moved into the footer copyright line so it appears on every page that
+  shows a footer, and the page is linked from the footer and from Informations.
+
 - Support page, setting out what donations pay for: keeping the site online,
   keeping the guides true as Mordhau patches move values and rename config
   keys, and filling in the pages that are still outlines or untranslated. It
