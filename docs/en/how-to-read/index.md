@@ -35,10 +35,6 @@ Filling one of those gaps is genuinely useful, and [contributing a translation](
 The **Read Mode** button under the top bar hides the bar, the sidebar and the
 outline, leaving just the article. Press it again to bring them back.
 
-While it is on, the button sits at the top of the window. Your choice is
-remembered between pages and visits, and it only applies to documentation
-pages.
-
 ## What the boxes mean
 
 Coloured panels appear throughout the guides and they are not decoration — the colour tells you how much attention to pay.
