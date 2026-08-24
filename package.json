@@ -1,6 +1,6 @@
 {
   "name": "unofficial-mordhau-documentations",
-  "version": "0.0.13.Unreleased",
+  "version": "1.0.0",
   "private": true,
   "description": "Community written documentation for Mordhau, built with VitePress.",
   "license": "CC-BY-SA-4.0",
