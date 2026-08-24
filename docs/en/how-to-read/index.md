@@ -26,9 +26,18 @@ The magnifying glass in the top bar, or <kbd>Ctrl</kbd> + <kbd>K</kbd>, searches
 
 ## Languages
 
-The globe icon switches language. Not every page exists in every language yet — English is the most complete, and the others are being filled in as people translate them. If a page has not been translated you will land back on the English version.
+The language icon switches language. Not every page exists in every language yet — English is the most complete, and the others are being filled in as people translate them. If a page has not been translated you will land back on the English version.
 
 Filling one of those gaps is genuinely useful, and [contributing a translation](/en/contributing/methods) does not require any technical knowledge beyond speaking the language.
+
+## Read mode
+
+The **Read Mode** button under the top bar hides the bar, the sidebar and the
+outline, leaving just the article. Press it again to bring them back.
+
+While it is on, the button sits at the top of the window. Your choice is
+remembered between pages and visits, and it only applies to documentation
+pages.
 
 ## What the boxes mean
 

@@ -24,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   recentres. While it is on the button floats at the top of the window, since
   it is the only way back out. Documentation pages only, remembered between
   visits and applied before the first paint, and the movement stops under
-  prefers-reduced-motion.
+  prefers-reduced-motion. How to Read explains it for readers.
 
 - English landing page rebuilt from scratch as its own component rather than
   the VitePress home layout. Hero states what the site is for, a quick
