@@ -39,11 +39,10 @@ property of [Triternion](https://triternion.com/). They are referred to here
 only to describe the game the documentation is about.
 
 The written documentation on this site is Copyright &copy; 2024-present Mordhau
-Community and John Brayden, together with the contributors credited in the
-commit history, and is published under
-[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). You may share
-and adapt it, including commercially, as long as you credit this site and
-license what you make under the same terms.
+Community, together with the contributors credited in the commit history, and
+is published under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+You may share and adapt it, including commercially, as long as you credit this
+site and license what you make under the same terms.
 
 Where a page here draws on an outside source, that source is credited on the
 page and keeps the licence it arrived with.

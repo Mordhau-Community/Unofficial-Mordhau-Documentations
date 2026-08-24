@@ -14,7 +14,7 @@ provided that you:
 - **give credit**, naming Mordhau Community and linking back to the source, and
 - **license anything you build from it** under CC BY-SA 4.0 as well.
 
-Copyright (C) 2024-present Mordhau Community and John Brayden, together with
+Copyright (C) 2024-present Mordhau Community, together with
 the individual contributors credited in the commit history.
 
 ## What this licence does not cover
