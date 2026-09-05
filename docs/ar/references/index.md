@@ -24,6 +24,7 @@
 
 ## Modding {#modding}
 
+- [MORDHAU Editor على Epic Games Store](https://store.epicgames.com/p/mordhau--editor) — المحرر نفسه، مجانًا، والمكان الوحيد الذي يُوزَّع منه
 - [Mordhau إعلان محرر](https://store.steampowered.com/news/app/629760/view/3147450638822972795) — منشور مرحلة التنفيذ (Release)، ديسمبر 2021
 - [mod.io](https://mod.io) — المنصة التي تستخدمها Mordhau للتوزيعmods
 - [Unreal Engine](https://dev.epicgames.com/documentation/en-us/unreal-engine) - المحرر عبارة عن إصدار UE4، لذلك تنطبق معظم مواد UE العامة

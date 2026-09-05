@@ -24,6 +24,7 @@
 
 ## Modding {#modding}
 
+- [Epic Games Store の MORDHAU Editor](https://store.epicgames.com/p/mordhau--editor) — エディター本体。無料で、配布されているのはここだけ
 - [Mordhauの特長 編集者発表](https://store.steampowered.com/news/app/629760/view/3147450638822972795) — リリースポスト、2021 年 12 月
 - [mod.io](https://mod.io) — Mordhau — MOD の配布に使用するプラットフォーム
 - [Unreal Engine ドキュメント](https://dev.epicgames.com/documentation/en-us/unreal-engine) — エディターは UE4 のビルドであるため、最も一般的な UE マテリアルが適用されます

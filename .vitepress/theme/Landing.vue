@@ -168,14 +168,22 @@ async function copyValue(item: LandingCopy["quickref"][number]) {
         <h2 class="close-title">{{ copy.languagesTitle }}</h2>
         <p class="close-line">{{ copy.languagesBody }}</p>
         <ul class="langs">
-          <li v-for="lang in languages" :key="lang.code">
+          <li v-for="lang in languages" :key="lang.locale">
             <a
               :href="withBase(lang.to)"
               :class="{ 'is-current': lang.current }"
               :aria-current="lang.current ? 'page' : undefined"
               :hreflang="lang.locale"
             >
-              <span class="lang-code">{{ lang.code }}</span>
+              <img
+                class="lang-flag"
+                :src="withBase(`/flags/${lang.locale}.svg`)"
+                alt=""
+                width="16"
+                height="12"
+                loading="lazy"
+                draggable="false"
+              />
               <span class="lang-label">{{ lang.label }}</span>
             </a>
           </li>
@@ -672,7 +680,7 @@ async function copyValue(item: LandingCopy["quickref"][number]) {
 .langs a {
   border-radius: var(--mh-r-sm);
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   gap: 8px;
   padding: 7px 12px;
   border: 1px solid var(--rule);
@@ -698,11 +706,23 @@ async function copyValue(item: LandingCopy["quickref"][number]) {
   color: var(--vp-c-brand-1);
 }
 
-.lang-code {
-  font-family: var(--vp-font-family-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  color: var(--vp-c-text-2);
+/*
+ * A flag and the language's own name, and nothing between them. The row used
+ * to carry the locale's two letters as well, set in mono at 10px, which is
+ * why it aligned on the baseline: it had two type sizes to sit on one line.
+ * With one size left there is nothing for a baseline to do that centring does
+ * not, and the flag no longer has to opt out of it.
+ *
+ * The ring keeps Japan, which is a white field, from dissolving into a light
+ * page.
+ */
+.lang-flag {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 12px;
+  border-radius: 2px;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px var(--rule);
 }
 
 /* Every interactive thing here is an anchor, so one rule covers the lot. */

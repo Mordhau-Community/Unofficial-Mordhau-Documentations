@@ -16,9 +16,25 @@ This page is an orientation, not a full tutorial. Mordhau modding is not well do
 
 Mods are distributed through **mod.io**, which is also what the in-game mod browser reads from. Players subscribe there and the game downloads the content.
 
+## In this guide
+
+- [Actors](/en/mordhauSDK-guide/actors) — what you place in a level, and the Mordhau-specific ones a map needs: spawns, capture points, push objectives
+- [Blueprints](/en/mordhauSDK-guide/blueprints) — how the game's own Blueprints are organised, which ones you subclass, and the few that matter most
+
 ## Getting it
 
-You need to own Mordhau. The Editor is a separate download that appears in your Steam library under **Tools** — change the library filter to Tools, or search for "Mordhau" with tools included, and install it from there.
+The Editor is **not on Steam**. It is a separate, free product on the **Epic Games Store**, and you install it through the Epic Games Launcher:
+
+1. Open the [MORDHAU Editor page on the Epic Games Store](https://store.epicgames.com/p/mordhau--editor), sign in with an Epic account and claim it — it costs nothing.
+2. Open the Epic Games Launcher, find **MORDHAU Editor** in your **Library**, and install it from there.
+
+That it lives on Epic rather than Steam is not a preference of Triternion's: the Editor is a build of the Unreal Editor, and Epic's engine licence only allows editor builds to be distributed through the Epic Games Store.
+
+The Editor is claimed separately from the game and is not tied to your Steam copy — you still need Mordhau itself to play what you build. It ships with a few sample maps and game modes to start from.
+
+::: warning
+Older guides tell you to look under **Tools** in your Steam library. There is nothing there — the Mordhau Editor has only ever been distributed on the Epic Games Store.
+:::
 
 ::: tip
 It is large. It is a full Unreal Engine editor plus the game's asset library, so budget considerably more disk space than the game itself takes, and expect the first launch to sit compiling shaders for a long time. This is normal and it is faster afterwards.
@@ -38,10 +54,10 @@ If you have never opened Unreal before, work through a general beginner level-de
 
 Broadly, making a map goes:
 
-1. Install the Editor from Steam Tools and let it finish its first launch.
+1. Install the Editor from the Epic Games Store and let it finish its first launch.
 2. Create a new level, or open one of the shipped maps to see how it is put together.
-3. Build your geometry, lighting and spawn points.
-4. Set up the game mode and objectives for the modes you want it to support.
+3. Build your geometry, lighting and [spawn points](/en/mordhauSDK-guide/actors#spawns-mordhauplayerstart).
+4. Set up the [game mode](/en/mordhauSDK-guide/blueprints) and [objectives](/en/mordhauSDK-guide/actors) for the modes you want it to support, one sublevel per mode.
 5. Test it locally.
 6. Package it and upload to mod.io.
 7. Load it on a [dedicated server](/en/dedicated-server-guide/) so other people can play it.

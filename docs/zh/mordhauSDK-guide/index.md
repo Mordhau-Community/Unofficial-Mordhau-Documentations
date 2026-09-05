@@ -16,9 +16,25 @@ Triternion 于2021年12月14日发布。社区中通常将其称为SDK。
 
 Mod 通过 **mod.io** 分发，这也是游戏内 Mod 浏览器读取的内容。玩家在那里订阅，游戏下载内容。
 
+## 本指南包含 {#in-this-guide}
+
+- [Actor](/zh/mordhauSDK-guide/actors) —— 你在关卡里放置的一切，以及每张地图都需要的 Mordhau 专有 Actor：出生点、占领点、推动目标
+- [蓝图](/zh/mordhauSDK-guide/blueprints) —— 游戏自带蓝图是怎么组织的、该继承哪些，以及最重要的那几个
+
 ## 获取 {#getting-it}
 
-您需要拥有 Mordhau。编辑器是一个单独的下载，出现在 **工具** 下的 Steam 库中 - 将库过滤器更改为工具，或搜索包含工具的“Mordhau”，然后从那里安装它。
+编辑器 **不在 Steam 上**。它是 **Epic Games Store** 上一个独立的免费产品，通过 Epic Games 启动器安装：
+
+1. 打开 [Epic Games Store 的 MORDHAU Editor 页面](https://store.epicgames.com/p/mordhau--editor)，用 Epic 账号登录并领取——它是免费的。
+2. 打开 Epic Games 启动器，在 **库** 中找到 **MORDHAU Editor** 并安装。
+
+它在 Epic 而不在 Steam 上，并不是 Triternion 的偏好：编辑器是 Unreal Editor 的一个构建版本，而 Epic 的引擎许可只允许通过 Epic Games Store 分发编辑器构建版本。
+
+编辑器与游戏分开领取，也不与你的 Steam 版本绑定——但要真正游玩你做出来的内容，仍然需要 Mordhau 本体。编辑器还附带了几张示例地图和游戏模式，可以作为起点。
+
+::: warning
+一些旧教程让你在 Steam 库的 **工具** 分类里找编辑器。那里什么都没有——Mordhau 的编辑器只在 Epic Games Store 上分发。
+:::
 
 ::: tip
 它很大。它是一个完整的 Unreal Engine 编辑器加上游戏的资源库，所以预算比游戏本身占用的磁盘空间要多得多，并且预计第一次发布会花费很长时间来编译着色器。这是正常现象，之后速度会更快。
@@ -38,10 +54,10 @@ Mod 通过 **mod.io** 分发，这也是游戏内 Mod 浏览器读取的内容�
 
 一般来说，制作地图的过程如下：
 
-1. 从 Steam Tools 安装编辑器并让它完成首次启动。
+1. 从 Epic Games Store 安装编辑器，并让它完成首次启动。
 2. 创建一个新关卡，或打开其中一张附带的地图以查看它是如何组合在一起的。
-3. 构建几何体、照明和生成点。
-4. 设置游戏模式以及您希望其支持的模式的目标。
+3. 构建几何体、照明和[出生点](/zh/mordhauSDK-guide/actors#spawns-mordhauplayerstart)。
+4. 为你希望支持的每个模式设置[游戏模式](/zh/mordhauSDK-guide/blueprints)和[目标物](/zh/mordhauSDK-guide/actors)，每个模式一个子关卡。
 5. 5、本地测试。
 6. 打包上传到mod.io。
 7. 将其加载到 [专用服务器](/zh/dedicated-server-guide/) 上，以便其他人可以玩它。

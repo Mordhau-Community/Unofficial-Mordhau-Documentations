@@ -24,6 +24,7 @@ Tout ce qui suit est géré par quelqu'un d'autre.Si vous en trouvez un mort ou 
 
 ## Modding {#modding}
 
+- [MORDHAU Editor sur l'Epic Games Store](https://store.epicgames.com/p/mordhau--editor) — l'éditeur lui-même, gratuit, et le seul endroit où il est distribué
 - [Mordhau Annonce de la rédaction](https://store.steampowered.com/news/app/629760/view/3147450638822972795) — la publication de décembre 2021
 - [mod.io](https://mod.io) — la plateforme utilisée par Mordhau pour distribuer les mods
 - [Unreal Engine documentation](https://dev.epicgames.com/documentation/en-us/unreal-engine) — l'éditeur est une versionde UE4, donc le matériel UE le plus général s'applique

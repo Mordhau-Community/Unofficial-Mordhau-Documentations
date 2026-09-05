@@ -434,6 +434,7 @@ html .VPNavBar:not(.home.top) .divider-line {
   background-color: var(--vp-c-divider) !important;
 }
 
+
 /*
  * Frosted nav once the page has moved. VitePress drops the .top class on
  * scroll, so :not(.top) is exactly "the user has scrolled".
@@ -540,6 +541,29 @@ body::-webkit-scrollbar {
   /* The strip must never eat a click meant for the page behind it. Only the
      thumb takes pointer events. */
   pointer-events: none;
+}
+
+/*
+ * The bar stands at the right edge of the window in every language.
+ *
+ * A native page scrollbar follows the document's direction and moves to the
+ * left on an Arabic page. Drawn here rather than by the browser, this one did
+ * the same for the same reason: its offset is logical, and a logical offset
+ * resolves against a right to left root by going left.
+ *
+ * `direction` on the strip settles it, and the offsets stay logical, which is
+ * what keeps the thumb's transparent grab margin on the inner side of the bar
+ * without a second correction — the thumb inherits this.
+ *
+ * The selector has to name the direction. postcss-rtl mirrors `direction`
+ * itself, exactly as it mirrors a physical side: written on .mh-scrollbar
+ * alone it came out as a [dir=ltr] copy saying ltr and a [dir=rtl] copy
+ * saying rtl, which is the browser's own behaviour restated. A rule whose
+ * selector already pins a direction is one it leaves alone, so pinning it
+ * here is what makes the declaration survive.
+ */
+html[dir="rtl"] .mh-scrollbar {
+  direction: ltr;
 }
 
 /*
@@ -702,6 +726,38 @@ html .VPLocalSearchBox .excerpt mark {
  */
 html .VPSwitch {
   border-radius: 999px !important;
+}
+
+/*
+ * The knob's travel, restated because VitePress's own rule for it cannot
+ * match here.
+ *
+ * VitePress slides the knob with `.dark .VPSwitchAppearance :deep(.check)`.
+ * postcss-rtl sees a transform, treats it as directional, and rewrites every
+ * rule carrying one into a [dir=ltr] copy and a [dir=rtl] copy. Where the
+ * selector starts with `html` it attaches the attribute to that compound;
+ * where it does not, it prepends `[dir=ltr] ` as an extra ancestor. VitePress
+ * starts that one with `.dark`, so it compiled to
+ *
+ *   [dir=ltr] .dark .VPSwitchAppearance[data-v-hash] .check
+ *
+ * which asks for a .dark element sitting inside a [dir=ltr] element. Both of
+ * those are <html>, and nothing contains itself, so the rule never applied.
+ * The theme changed on click and the sun turned into a moon — neither of
+ * those rules carries a direction, so postcss-rtl left them alone — and the
+ * one part of a switch that shows it has been switched never moved.
+ *
+ * Anchored on html here, so the attribute lands on the compound that carries
+ * it and both copies come out matching. The mirrored copy is wanted rather
+ * than merely tolerated: postcss-rtl flips the knob's resting `left: 1px` to
+ * `right: 1px` on an Arabic page as well, so the track fills from the other
+ * end and the travel has to follow it.
+ *
+ * No important. The rule it stands in for never matches, so there is nothing
+ * to outrank.
+ */
+html.dark .VPSwitchAppearance .check {
+  transform: var(--mh-glyph-knob);
 }
 
 /* --------------------------------------------------------- Accents ---- */
@@ -1101,6 +1157,334 @@ html .VPDoc:not(.has-sidebar) .content {
 }
 
 
+/* ------------------------------------------------ Nav bar direction ---- */
+
+/*
+ * The bar reads left to right in every language.
+ *
+ * The article mirrors on an Arabic page and the bar above it does not: the
+ * logo stays at the left, the menus and the icons stay at the right, and only
+ * the words in them change. Each label is still laid out right to left inside
+ * itself, because that is the text's own business and not the container's.
+ *
+ * `direction` on .VPNav does most of it. Every row in the bar is a flex
+ * container and a flex row lays its items along the inline axis, so one
+ * declaration puts the logo, the menus, the separators and the icons back in
+ * the order they have in English.
+ *
+ * What direction cannot reach is a physical left or right written into a
+ * declaration, and postcss-rtl has written about two dozen of those for the
+ * Arabic build — the title's pin, the flyouts' anchoring, the switch knob,
+ * the hamburger, every negative margin that pulls a group flush to the edge.
+ * Each is restated below at its English value.
+ *
+ * Two rules govern how, and neither is optional:
+ *
+ * Nothing here may be written as `left` or `right`. postcss-rtl reads this
+ * sheet too, and a physical side inside a [dir="rtl"] block is exactly what it
+ * exists to flip: it would mirror the correction straight back. Every offset
+ * is therefore logical — inset-inline, margin-inline, padding-inline — which
+ * postcss-rtl leaves alone and which the `direction` above resolves left to
+ * right.
+ *
+ * A transform has no logical form, so the angles and offsets that need one go
+ * through a custom property. postcss-rtl cannot evaluate a var(), so there is
+ * no number left in the declaration for it to mirror. That is the same shield
+ * the external link arrows and the chevrons use further down this sheet.
+ *
+ * The importants are not decoration either. Every rule being corrected carries
+ * a scoped attribute — [dir=rtl] .VPNavBarExtra[data-v-bb2aa2f0] and its like
+ * — and matching that on specificity would mean writing VitePress's private
+ * build hashes into this file, where they would rot at the next upgrade
+ * without anything failing loudly. An important outranks them without naming
+ * them.
+ *
+ * The cost is worth stating plainly: this is a hand-kept mirror of VitePress's
+ * own right-to-left geometry for one component. A VitePress upgrade that moves
+ * any of it will not break the build, it will just quietly stop matching, so
+ * the bar wants a look on an Arabic page after any upgrade.
+ */
+html[dir="rtl"] .VPNav {
+  direction: ltr;
+}
+
+/* Values the mirrored rules would have set the other way round. Held in
+   properties because a transform cannot be written logically. */
+html[dir="rtl"] .VPNav {
+  --mh-nav-knob: translateX(18px);
+  --mh-burger-rest-middle: translate(8px);
+  --mh-burger-rest-bottom: translate(4px);
+  --mh-burger-hover-top: translate(4px);
+  --mh-burger-hover-bottom: translate(8px);
+  --mh-burger-open-top: translate(0) rotate(225deg);
+  --mh-burger-open-middle: translate(16px);
+  --mh-burger-open-bottom: translate(0) rotate(135deg);
+  --mh-nav-group-shut: rotate(0deg);
+  --mh-nav-group-open: rotate(90deg);
+  --mh-nav-screen-group-open: rotate(45deg);
+}
+
+/* The shell: the bar itself, its padding, and the title block that VitePress
+   pins to a corner on a page with a sidebar. */
+html[dir="rtl"] .VPNav,
+html[dir="rtl"] .VPNavScreen {
+  inset-inline: 0 auto !important;
+}
+
+/* Only below 768px. Above it VitePress pads the wrapper evenly and there is
+   no asymmetry to put back, so an unconditional correction here would hold
+   the narrow figures on a wide screen. */
+@media (max-width: 767px) {
+  html[dir="rtl"] .VPNavBar .wrapper {
+    padding-inline: 24px 8px !important;
+  }
+}
+
+/*
+ * The title block, which VitePress pins into the sidebar's column and only
+ * there: below 960px it is an ordinary flex item and has no side to be on.
+ * The media query is VitePress's own, and the child combinator matters
+ * because .title is also the class on the anchor inside .VPNavBarTitle and on
+ * every group heading in a flyout, neither of which is pinned to anything.
+ */
+@media (min-width: 960px) {
+  html[dir="rtl"] .VPNavBar.has-sidebar .container > .title {
+    inset-inline: 0 auto !important;
+    /* Past the layout's own width VitePress grows this padding to keep the
+       logo over the sidebar's column, so the side it grows on has to be
+       corrected as well as the side the block is pinned to. */
+    padding-inline-start: max(
+      32px,
+      calc((100% - (var(--vp-layout-max-width) - 64px)) / 2)
+    ) !important;
+    padding-inline-end: 32px !important;
+  }
+}
+
+html[dir="rtl"] .VPNavBarTitle .title-line {
+  inset-inline: 0 auto !important;
+}
+
+html[dir="rtl"] .VPNavBarTitle .logo,
+html[dir="rtl"] .VPNavScreen .logo {
+  margin-inline: 0 10px !important;
+}
+
+/* The groups on the far side, each pulled flush to the edge by a negative
+   margin of its own. */
+html[dir="rtl"] .VPNavBar .content-body > .social-links {
+  margin-inline: 0 -8px !important;
+}
+
+html[dir="rtl"] .VPNavBarExtra {
+  margin-inline: 0 -12px !important;
+}
+
+/*
+ * The slashes between the groups, which are ::before pseudo-elements rather
+ * than elements.
+ *
+ * They are not evenly spaced and are not meant to be: VitePress gives the one
+ * before the appearance switch 16px on its far side and 8px on its near one,
+ * and the one before the social links the reverse, so each slash sits closer
+ * to the group it follows than to the group it introduces. Mirrored, both of
+ * those 16px land on the wrong side and the row reads as though there were
+ * stray padding in it.
+ *
+ * The symmetric 8px goes on first and the two asymmetric sides after it, in
+ * that order, which is how VitePress writes them too.
+ */
+html[dir="rtl"] .VPNavBar .menu + .translations::before,
+html[dir="rtl"] .VPNavBar .menu + .appearance::before,
+html[dir="rtl"] .VPNavBar .menu + .social-links::before,
+html[dir="rtl"] .VPNavBar .translations + .appearance::before,
+html[dir="rtl"] .VPNavBar .appearance + .social-links::before {
+  margin-inline: 8px !important;
+}
+
+html[dir="rtl"] .VPNavBar .menu + .appearance::before,
+html[dir="rtl"] .VPNavBar .translations + .appearance::before {
+  margin-inline-end: 16px !important;
+}
+
+html[dir="rtl"] .VPNavBar .appearance + .social-links::before {
+  margin-inline-start: 16px !important;
+}
+
+/* The flyouts: which edge a menu hangs from, and the chevron's own gap. */
+html[dir="rtl"] .VPFlyout .menu {
+  inset-inline: auto 0 !important;
+}
+
+/*
+ * What opens out of the bar does read right to left.
+ *
+ * The bar is chrome and holds its shape; a menu is a list of the page's own
+ * words and belongs to the language, so an Arabic reader meets each label at
+ * the right of the panel and each flag at the reading edge of its row. That
+ * is the line this theme draws: the strip across the top does not mirror, and
+ * everything that drops out of it does.
+ *
+ * Set on .VPMenu and not on .menu, which is the deliberate half of it. .menu
+ * is the positioned box, and the rule above hangs it from the button's far
+ * edge the way the English build does; direction on that box would resolve
+ * the same offset the other way and swing every panel to the wrong side of
+ * its button. .VPMenu is the panel inside it, so the box keeps the bar's
+ * geometry and the contents keep the language's.
+ *
+ * With the panel restored to the language, the mirrored paddings inside it
+ * are right again and the corrections this section used to carry for them —
+ * the action's indent, the language heading, the appearance row's margin —
+ * are gone rather than reversed a second time.
+ *
+ * The selector pins a direction, which is what stops postcss-rtl mirroring
+ * the declaration; the scrollbar comment further up this sheet has the long
+ * version of why.
+ */
+html[dir="rtl"] .VPFlyout .VPMenu {
+  direction: rtl;
+}
+
+/*
+ * Except the switch, which is a control rather than a sentence. It has a
+ * track with a left end and a right end and a knob that travels between them,
+ * and this sheet already moves that knob a fixed distance in one direction,
+ * so a mirrored track underneath it would send the knob off the end. Held
+ * left to right wherever it appears, in the bar and in the overflow menu
+ * alike, so it reads the same way in both.
+ */
+html[dir="rtl"] .VPNav .VPSwitch {
+  direction: ltr;
+}
+
+html[dir="rtl"] .VPFlyout .text-icon {
+  margin-inline: 4px 0 !important;
+}
+
+html[dir="rtl"] .VPFlyout .option-icon {
+  margin-inline: 0 !important;
+}
+
+/* The appearance switch: which end of its track the knob rests at, where the
+   sun and the moon sit inside it, and how far the knob travels when it is on.
+   The travel is the one transform in the bar that carries a distance. */
+html[dir="rtl"] .VPNav .VPSwitch .check {
+  inset-inline: 1px auto !important;
+}
+
+html[dir="rtl"] .VPNav .VPSwitch .icon [class^="vpi-"] {
+  inset-inline: 3px auto !important;
+}
+
+html[dir="rtl"].dark .VPNav .VPSwitchAppearance .check {
+  transform: var(--mh-nav-knob) !important;
+}
+
+/*
+ * Nothing here for the search. VitePress mirrors its button's margin, padding
+ * and key caps, and the Search icon section further down this sheet has
+ * already collapsed the whole thing to an icon in both directions, so there is
+ * no asymmetry left to correct. Restating the English values put spacing back
+ * that neither language has.
+ */
+
+/*
+ * The hamburger, which is three bars that slide and fold rather than a glyph,
+ * so every state of it is a distance or an angle rather than a side. It has
+ * three: a resting stagger, a hover that squares it up, and the fold into a
+ * cross when the screen is open.
+ */
+html[dir="rtl"] .VPNavBarHamburger .top,
+html[dir="rtl"] .VPNavBarHamburger .middle,
+html[dir="rtl"] .VPNavBarHamburger .bottom {
+  inset-inline: 0 auto !important;
+}
+
+html[dir="rtl"] .VPNavBarHamburger .middle {
+  transform: var(--mh-burger-rest-middle) !important;
+}
+
+html[dir="rtl"] .VPNavBarHamburger .bottom {
+  transform: var(--mh-burger-rest-bottom) !important;
+}
+
+html[dir="rtl"] .VPNavBarHamburger:hover .top {
+  transform: var(--mh-burger-hover-top) !important;
+}
+
+html[dir="rtl"] .VPNavBarHamburger:hover .middle {
+  transform: translate(0) !important;
+}
+
+html[dir="rtl"] .VPNavBarHamburger:hover .bottom {
+  transform: var(--mh-burger-hover-bottom) !important;
+}
+
+html[dir="rtl"] .VPNavBarHamburger.active .top {
+  transform: var(--mh-burger-open-top) !important;
+}
+
+html[dir="rtl"] .VPNavBarHamburger.active .middle {
+  transform: var(--mh-burger-open-middle) !important;
+}
+
+html[dir="rtl"] .VPNavBarHamburger.active .bottom {
+  transform: var(--mh-burger-open-bottom) !important;
+}
+
+/* The screen behind the hamburger: its groups, their indents and the arrow
+   that turns as one opens. */
+html[dir="rtl"] .VPNavScreenAppearance {
+  padding-inline: 16px 14px !important;
+}
+
+html[dir="rtl"] .VPNavScreenMenuGroupLink {
+  margin-inline: 12px 0 !important;
+}
+
+html[dir="rtl"] .VPNavScreen .button {
+  padding-inline: 0 4px !important;
+}
+
+html[dir="rtl"] .VPNavScreen .icon.chevron {
+  margin-inline: 4px 0 !important;
+}
+
+html[dir="rtl"] .VPNavScreen .icon.lang {
+  margin-inline: 0 8px !important;
+}
+
+html[dir="rtl"] .VPNavScreen .list {
+  padding-inline: 24px 0 !important;
+}
+
+html[dir="rtl"] .VPNavScreen .menu-icon {
+  margin-inline: 0 8px !important;
+}
+
+html[dir="rtl"] .VPNavScreen .link-text-icon {
+  margin-inline: 6px 0 !important;
+}
+
+html[dir="rtl"] .VPNavScreen .items {
+  inset-inline: 16px 16px !important;
+}
+
+html[dir="rtl"] .VPNavScreenMenuGroup .icon {
+  margin-inline: 2px 0 !important;
+  transform: var(--mh-nav-group-shut) !important;
+}
+
+html[dir="rtl"] .VPNavScreenMenuGroup.open > .icon,
+html[dir="rtl"] .VPNavScreenMenuGroup .open > .icon {
+  transform: var(--mh-nav-group-open) !important;
+}
+
+html[dir="rtl"] .VPNavScreenMenuGroup.open .button-icon {
+  transform: var(--mh-nav-screen-group-open) !important;
+}
+
+
 /* ------------------------------------------- Sidebar and nav bar ---- */
 
 /*
@@ -1124,7 +1508,15 @@ html .VPDoc:not(.has-sidebar) .content {
     max-width: calc(var(--vp-layout-max-width) - 64px) !important;
   }
 
-  html .VPNavBar.has-sidebar .title {
+  /*
+   * Scoped to the title block rather than to .title anywhere in the bar.
+   * .title is a class VitePress reuses: the language flyout's heading carries
+   * it too, and that lives inside .VPNavBar, so an unscoped version of this
+   * rule stripped the heading's padding with an !important nothing could
+   * outrank. It only did so on pages that have a sidebar, which is what made
+   * it look intermittent.
+   */
+  html .VPNavBar.has-sidebar .VPNavBarTitle .title {
     position: static !important;
     width: auto !important;
     padding: 0 !important;
@@ -1237,20 +1629,55 @@ html .VPFlyout .menu::before {
 }
 
 
-/* ------------------------------------------------------- Nav chevron ---- */
+/* --------------------------------------------- Up and down glyphs ---- */
+
+/*
+ * Down means down and up means up, in both directions of reading.
+ *
+ * VitePress ships one chevron glyph pointing right, and one arrow, and aims
+ * each of them with a rotation: rotate(90deg) is down, rotate(-90deg) is up.
+ * postcss-rtl mirrors rotations, which is what you want for a glyph that
+ * means "forward" and exactly what you do not want for one that means "down".
+ * It rewrote every down glyph to rotate(-90deg) on the Arabic pages and every
+ * up glyph to rotate(90deg), so the nav menus sat there with their arrows
+ * pointing up, opening one turned its arrow down, and the up and down keys in
+ * the search box's key hints were drawn the wrong way up.
+ *
+ * The two angles are held in custom properties, which is the same shield the
+ * external link arrows further down this sheet use: postcss-rtl cannot
+ * evaluate a var(), so there is no number left in the declaration for it to
+ * mirror, and one angle serves both builds.
+ *
+ * The [dir] is what outranks VitePress's own rule, which is [dir=rtl] plus
+ * the class and so two classes wide; html plus [dir] plus the class is one
+ * element more than that. Every page carries a dir, so it always matches.
+ *
+ * Left and right are left alone. Those are the glyphs a mirror is for.
+ */
+:root {
+  --mh-glyph-down: rotate(90deg);
+  --mh-glyph-up: rotate(-90deg);
+  /* The appearance switch's travel. A distance in a transform is mirrored the
+     same way an angle is, and the knob's track is mirrored with it, so the
+     Arabic build wants the negative — except inside the nav bar, which does
+     not mirror at all and overrides this with its own. */
+  --mh-glyph-knob: translateX(18px);
+}
+
+html[dir] .vpi-chevron-down,
+html[dir] .vpi-arrow-down {
+  transform: var(--mh-glyph-down);
+}
+
+html[dir] .vpi-chevron-up,
+html[dir] .vpi-arrow-up {
+  transform: var(--mh-glyph-up);
+}
 
 /*
  * The arrow beside a nav menu turns up while the menu is open and drops back
- * when it closes.
- *
- * It is not a "down" glyph: VitePress ships one chevron pointing right and
- * orients it with a transform, rotate(90deg) for down and rotate(-90deg) for
- * up, mirrored in RTL. Since transform is a single property, the open state
- * has to state the final angle rather than add to the closed one; rotate(180deg)
- * would point it left.
- *
- * The angle here is the LTR one. postcss-rtl mirrors rotations, so the Arabic
- * build gets rotate(90deg) and points up there too.
+ * when it closes. Since transform is a single property, the open state states
+ * the final angle rather than adding to the closed one.
  *
  * :hover covers the hover case and aria-expanded covers click and keyboard,
  * so it also tracks correctly for anyone not using a mouse.
@@ -1259,9 +1686,9 @@ html .VPFlyout .vpi-chevron-down {
   transition: transform 0.25s ease;
 }
 
-html .VPFlyout:hover .vpi-chevron-down,
-html .VPFlyout .button[aria-expanded="true"] .vpi-chevron-down {
-  transform: rotate(-90deg);
+html[dir] .VPFlyout:hover .vpi-chevron-down,
+html[dir] .VPFlyout .button[aria-expanded="true"] .vpi-chevron-down {
+  transform: var(--mh-glyph-up);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1389,6 +1816,904 @@ html .VPNavScreen .VPLink.vp-external-link-icon:hover::after {
 }
 
 
+/* -------------------------------------------------------- Custom blocks ---- */
+
+/*
+ * An icon beside the word, and a hairline around the box.
+ *
+ * VitePress leaves both off: a block is a tinted rectangle with a bold word
+ * at the top of it and a border already declared 1px solid transparent, so
+ * the four kinds are told apart by a wash of colour alone. That is the weakest signal on the
+ * page for the one element whose whole job is to say how much attention to
+ * pay, and it fails outright for a reader who cannot separate the tints.
+ *
+ * Icons are Hugeicons, the family the rest of this sheet already draws from,
+ * and the ones the shapes argue for: a circle for information, a bulb for a
+ * tip, a triangle for a warning, an octagon for danger. Triangle and octagon
+ * are the road-sign pair, so the two that matter carry the two shapes a
+ * reader already reads as caution and stop.
+ *
+ * Drawn as masks rather than background images, like every other icon here,
+ * so each takes its block's own text colour and follows the theme without
+ * needing a copy per palette.
+ *
+ * The border was already there at 1px and merely transparent, so this only
+ * points the four colour tokens at something visible. Each block takes its
+ * own colour muted to the -3 step, which is the tone VitePress reserves for
+ * exactly this, rather than the sheet's usual divider grey: a hairline that
+ * belongs to the block reads as part of it. Tip's is steel rather than the
+ * reader's accent, because that is what the top of this sheet decided a tip
+ * box should be — steel so it does not read as a warning — and the hairline
+ * follows the box it is drawn around.
+ */
+html .vp-doc .custom-block.info {
+  /* Hugeicons AlertCircleIcon */
+  --mh-block-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'%23000'%20stroke-width%3D'1.8'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Ccircle%20cx%3D'12'%20cy%3D'12'%20r%3D'10'%2F%3E%3Cpath%20d%3D'M12%208V12'%2F%3E%3Cpath%20d%3D'M12.125%2015.75H12M12.25%2015.75C12.25%2015.8881%2012.1381%2016%2012%2016C11.8619%2016%2011.75%2015.8881%2011.75%2015.75C11.75%2015.6119%2011.8619%2015.5%2012%2015.5C12.1381%2015.5%2012.25%2015.6119%2012.25%2015.75Z'%2F%3E%3C%2Fsvg%3E");
+}
+
+html .vp-doc .custom-block.tip {
+  /* Hugeicons LightbulbIcon */
+  --mh-block-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'%23000'%20stroke-width%3D'1.8'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M15.4812%2016.9043C15.48%2016.7344%2015.4793%2016.6494%2015.4796%2016.6252C15.4889%2015.5876%2015.6101%2015.2943%2016.3363%2014.553C16.3532%2014.5357%2016.5411%2014.35%2016.917%2013.9785C18.2007%2012.7095%2018.9961%2010.9476%2018.9961%209C18.9961%205.13401%2015.8621%202%2011.9961%202C8.1301%202%204.99609%205.13401%204.99609%209C4.99609%2010.948%205.79184%2012.7102%207.07601%2013.9792C7.46075%2014.3594%207.65312%2014.5495%207.67314%2014.5701C8.38589%2015.3019%208.50393%2015.5845%208.52348%2016.6059C8.52402%2016.6345%208.52402%2016.7241%208.52402%2016.9033C8.52402%2016.9931%208.52402%2017.038%208.52547%2017.0759C8.56516%2018.1209%209.40314%2018.9589%2010.4481%2018.9986C10.486%2019%2010.5309%2019%2010.6207%2019H13.4004C13.4759%2019%2013.5137%2019%2013.5456%2018.999C14.6056%2018.9652%2015.4549%2018.1098%2015.4812%2017.0495C15.482%2017.0176%2015.4817%2016.9799%2015.4812%2016.9043Z'%2F%3E%3Cpath%20d%3D'M9.99609%2019V20C9.99609%2021.1046%2010.8915%2022%2011.9961%2022C13.1007%2022%2013.9961%2021.1046%2013.9961%2020V19'%2F%3E%3Cpath%20d%3D'M8.49609%2016H15.4961'%2F%3E%3C%2Fsvg%3E");
+}
+
+html .vp-doc .custom-block.warning {
+  /* Hugeicons Alert02Icon */
+  --mh-block-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'%23000'%20stroke-width%3D'1.8'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M13.9248%2021H10.0752C5.44476%2021%203.12955%2021%202.27636%2019.4939C1.42317%2017.9879%202.60736%2015.9914%204.97574%2011.9985L6.90057%208.75333C9.17559%204.91778%2010.3131%203%2012%203C13.6869%203%2014.8244%204.91777%2017.0994%208.75332L19.0243%2011.9985C21.3926%2015.9914%2022.5768%2017.9879%2021.7236%2019.4939C20.8704%2021%2018.5552%2021%2013.9248%2021Z'%2F%3E%3Cpath%20d%3D'M12%209V13'%2F%3E%3Cpath%20d%3D'M12.125%2016.75H12M12.25%2016.75C12.25%2016.8881%2012.1381%2017%2012%2017C11.8619%2017%2011.75%2016.8881%2011.75%2016.75C11.75%2016.6119%2011.8619%2016.5%2012%2016.5C12.1381%2016.5%2012.25%2016.6119%2012.25%2016.75Z'%2F%3E%3C%2Fsvg%3E");
+}
+
+html .vp-doc .custom-block.danger {
+  /* Hugeicons OctagonAlertIcon */
+  --mh-block-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'%23000'%20stroke-width%3D'1.8'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M11.9922%208L11.9922%2012'%2F%3E%3Cpath%20d%3D'M12.1172%2015.75L11.9922%2015.75M12.2422%2015.75C12.2422%2015.8881%2012.1303%2016%2011.9922%2016C11.8541%2016%2011.7422%2015.8881%2011.7422%2015.75C11.7422%2015.6119%2011.8541%2015.5%2011.9922%2015.5C12.1303%2015.5%2012.2422%2015.6119%2012.2422%2015.75Z'%2F%3E%3Cpath%20d%3D'M13.5067%202C14.733%202%2015.3461%202%2015.8974%202.22836C16.4487%202.45672%2016.8823%202.89027%2017.7494%203.75736L20.2346%206.24264C21.1017%207.10973%2021.5353%207.54328%2021.7636%208.09459C21.992%208.6459%2021.992%209.25903%2021.992%2010.4853V13.5147C21.992%2014.741%2021.992%2015.3541%2021.7636%2015.9054C21.5353%2016.4567%2021.1017%2016.8903%2020.2346%2017.7574L17.7494%2020.2426C16.8823%2021.1097%2016.4487%2021.5433%2015.8974%2021.7716C15.3461%2022%2014.733%2022%2013.5067%2022H10.4773C9.25105%2022%208.63792%2022%208.08659%2021.7716C7.53527%2021.5433%207.10172%2021.1097%206.23462%2020.2426L3.74948%2017.7573C2.88242%2016.8903%202.44889%2016.4567%202.22054%2015.9054C1.99219%2015.3541%201.99219%2014.741%201.99219%2013.5148V10.4852C1.99219%209.259%201.99219%208.64589%202.22054%208.09458C2.44889%207.54328%202.88242%207.10974%203.74948%206.24265L6.23463%203.75743C7.10172%202.8903%207.53527%202.45674%208.08659%202.22837C8.63792%202%209.25105%202%2010.4773%202H13.5067Z'%2F%3E%3C%2Fsvg%3E");
+}
+
+html .vp-doc .custom-block.info .custom-block-title::before,
+html .vp-doc .custom-block.tip .custom-block-title::before,
+html .vp-doc .custom-block.warning .custom-block-title::before,
+html .vp-doc .custom-block.danger .custom-block-title::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  background-color: currentColor;
+  -webkit-mask: var(--mh-block-icon) no-repeat center / 100% 100%;
+  mask: var(--mh-block-icon) no-repeat center / 100% 100%;
+}
+
+/* A row rather than a line of text, so the icon sits on the word's centre.
+   gap rather than a margin: it needs no side and mirrors itself on an Arabic
+   page, where the icon belongs at the reading edge. */
+html .vp-doc .custom-block .custom-block-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/*
+ * Info takes the -1 step where the other three take -3, which looks like a
+ * mistake and is not. VitePress's coloured families run vivid to muted, so -3
+ * is the quiet end of each and the right weight for a hairline. Its grey
+ * family runs the other way, light to lighter, so -3 there came out lighter
+ * than the info box's own fill and the border was invisible while the other
+ * three were not. -1 is that family's quiet end.
+ */
+:root {
+  --vp-custom-block-info-border: var(--vp-c-default-1);
+  --vp-custom-block-tip-border: var(--vp-c-tip-3);
+  --vp-custom-block-warning-border: var(--vp-c-warning-3);
+  --vp-custom-block-danger-border: var(--vp-c-danger-3);
+}
+
+
+/* --------------------------------------------------------------- Tables ---- */
+
+/*
+ * A table fills the column it sits in.
+ *
+ * VitePress gives one `display: block` with `overflow-x: auto`, which is how
+ * it lets a wide table scroll instead of bursting the page. The cost is that
+ * the element stops being a table box: the rows inside it are wrapped in an
+ * anonymous one, and an anonymous table is sized to its contents. So the
+ * block runs the full width and the cells only take the part of it they need,
+ * leaving a band of empty page beside them — on the left of an Arabic page,
+ * because that is where a right to left table ends.
+ *
+ * A real table box at 100% has no such gap. What it gives up is the scroll,
+ * so this only applies from 640px up, where the column is wide enough to hold
+ * every table on the site: the widest wants 429px against a column of 592 at
+ * that width and 880 further up. Below 640 the block and its scroll stay,
+ * because a phone is where a property table genuinely cannot fit and where
+ * scrolling one beats breaking its identifiers across lines.
+ *
+ * overflow-wrap on the cells is the guard for a table wider than anything
+ * here today. It changes nothing while a column has room, and if one ever
+ * does not it breaks a long token rather than letting the table overhang the
+ * page.
+ */
+@media (min-width: 640px) {
+  html .vp-doc table {
+    display: table;
+    width: 100%;
+  }
+
+  html .vp-doc th,
+  html .vp-doc td {
+    overflow-wrap: anywhere;
+  }
+}
+
+
+/* ------------------------------------------------ Code block direction ---- */
+
+/*
+ * A code block reads left to right in every language.
+ *
+ * VitePress mirrors them on an Arabic page — it ships the rules itself, so
+ * this is its intent rather than postcss-rtl's doing — and for a block of
+ * prose that would be right. Code is not prose. A shell line, a path, a
+ * config key and a JSON brace all have a fixed order that is part of what
+ * they mean, and reversing the line is not a translation of it. Nobody types
+ * `cd ..` from the right.
+ *
+ * Only the blocks. Inline code inside a sentence is left alone: it is a Latin
+ * run in an Arabic paragraph, which the bidi algorithm already lays out
+ * correctly, and forcing a direction on it would drag its surrounding
+ * punctuation to the wrong end — the same trap the Arabic footer sentences
+ * are written around further down this sheet.
+ *
+ * `direction` on the block does the work and everything inside inherits it,
+ * so the offsets below can stay logical and still come out on the left and
+ * the right they have in English: the line numbers and their rule, the copy
+ * button and the language tag in the far corner, the diff markers.
+ *
+ * The selector pins a direction, which is what keeps postcss-rtl from
+ * mirroring the whole correction straight back.
+ */
+html[dir="rtl"] .vp-doc div[class*="language-"],
+html[dir="rtl"] .vp-doc .vp-code-group {
+  direction: ltr;
+}
+
+html[dir="rtl"] .vp-doc [class*="language-"] pre,
+html[dir="rtl"] .vp-doc [class*="language-"] code {
+  direction: ltr;
+  text-align: start;
+}
+
+/* The gutter and the hairline that divides it from the code. */
+html[dir="rtl"] .vp-doc div[class*="language-"].line-numbers-mode {
+  padding-inline: 32px 0;
+}
+
+html[dir="rtl"] .vp-doc .line-numbers-wrapper {
+  inset-inline: 0 auto;
+  border-inline-start: 0;
+  border-inline-end: 1px solid var(--vp-code-block-divider-color);
+}
+
+/* The two things pinned in the block's far corner, and the marker a diff line
+   carries in its near one. */
+html[dir="rtl"] .vp-doc [class*="language-"] > button.copy {
+  direction: ltr;
+  inset-inline: auto 12px;
+}
+
+html[dir="rtl"] .vp-doc [class*="language-"] > span.lang {
+  inset-inline: auto 8px;
+}
+
+html[dir="rtl"] .vp-doc [class*="language-"] code .diff::before {
+  inset-inline: 10px auto;
+}
+
+/* The "Copied" flag that slides out of the copy button. */
+html[dir="rtl"] .vp-doc [class*="language-"] > button.copy.copied::before,
+html[dir="rtl"] .vp-doc [class*="language-"] > button.copy:hover.copied::before {
+  transform: translate(calc(-100% - 1px));
+  border-inline-start: 1px solid var(--vp-code-copy-code-border-color);
+  border-inline-end: 0;
+  border-start-start-radius: 4px;
+  border-end-start-radius: 4px;
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+
+/* --------------------------------------------------- Code copy icon ---- */
+
+/*
+ * The copy button on a code block, swapped from VitePress's clipboard to
+ * Hugeicons' CopyIcon: two offset sheets rather than a board with a clip.
+ *
+ * VitePress paints the button through --vp-icon-copy on :root, so redefining
+ * the variable is enough; the button's own sizing, hover and copied states
+ * are left alone. Hugeicons ships the icon with stroke="currentColor", which
+ * a background-image cannot resolve, so the stroke is the same fixed grey
+ * VitePress used, readable on both the light and the dark code background.
+ */
+:root {
+  --vp-icon-copy: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'rgba%28128%2C128%2C128%2C1%29'%20stroke-width%3D'1.5'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M7%2011V9C7%205.70017%207%204.05025%208.02513%203.02513C9.05025%202%2010.7002%202%2014%202C17.2998%202%2018.9497%202%2019.9749%203.02513C21%204.05025%2021%205.70017%2021%209V11C21%2014.2998%2021%2015.9497%2019.9749%2016.9749C18.9497%2018%2017.2998%2018%2014%2018C10.7002%2018%209.05025%2018%208.02513%2016.9749C7%2015.9497%207%2014.2998%207%2011Z'%2F%3E%3Cpath%20d%3D'M3%206V15C3%2018.2998%203%2019.9497%204.02513%2020.9749C5.05025%2022%206.70017%2022%2010%2022H17'%2F%3E%3C%2Fsvg%3E");
+}
+
+
+/* ------------------------------------------------- Page meta strip ---- */
+
+/*
+ * The edit link and the last updated date, above the previous/next pager.
+ *
+ * VitePress leaves the two loose on the page, shoved to opposite ends by a
+ * space-between with nothing around them, which reads as two stray links
+ * rather than one row. They are a strip here: the alt surface behind a
+ * hairline, corners off the same token as everything else, the action at the
+ * start and the fact at the end. It is deliberately flat, because the pager
+ * directly below it is made of bordered boxes that are links, and this one is
+ * not a link target.
+ *
+ * Icons are Hugeicons: PencilEdit02Icon for the edit link, in place of
+ * VitePress's square-pen, and Calendar02Icon on the date, which had no icon
+ * at all. Both go in as masks rather than background images, which is how
+ * VitePress draws its own, so they take their colour from the text and need
+ * no light and dark variants.
+ *
+ * Everything positional is a logical property, so the strip mirrors itself on
+ * the Arabic pages rather than relying on postcss-rtl to rewrite it.
+ */
+:root {
+  --mh-icon-pencil-edit: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'%23000'%20stroke-width%3D'1.5'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M16.4249%204.60509L17.4149%203.6151C18.2351%202.79497%2019.5648%202.79497%2020.3849%203.6151C21.205%204.43524%2021.205%205.76493%2020.3849%206.58507L19.3949%207.57506M16.4249%204.60509L9.76558%2011.2644C9.25807%2011.772%208.89804%2012.4078%208.72397%2013.1041L8%2016L10.8959%2015.276C11.5922%2015.102%2012.228%2014.7419%2012.7356%2014.2344L19.3949%207.57506M16.4249%204.60509L19.3949%207.57506'%2F%3E%3Cpath%20d%3D'M18.9999%2013.5C18.9999%2016.7875%2018.9999%2018.4312%2018.092%2019.5376C17.9258%2019.7401%2017.7401%2019.9258%2017.5375%2020.092C16.4312%2021%2014.7874%2021%2011.4999%2021H11C7.22876%2021%205.34316%2021%204.17159%2019.8284C3.00003%2018.6569%203%2016.7712%203%2013V12.5C3%209.21252%203%207.56879%203.90794%206.46244C4.07417%206.2599%204.2599%206.07417%204.46244%205.90794C5.56879%205%207.21252%205%2010.5%205'%2F%3E%3C%2Fsvg%3E");
+  --mh-icon-calendar: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'%23000'%20stroke-width%3D'1.5'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M16%202V6M8%202V6'%2F%3E%3Cpath%20d%3D'M13%204H11C7.22876%204%205.34315%204%204.17157%205.17157C3%206.34315%203%208.22876%203%2012V14C3%2017.7712%203%2019.6569%204.17157%2020.8284C5.34315%2022%207.22876%2022%2011%2022H13C16.7712%2022%2018.6569%2022%2019.8284%2020.8284C21%2019.6569%2021%2017.7712%2021%2014V12C21%208.22876%2021%206.34315%2019.8284%205.17157C18.6569%204%2016.7712%204%2013%204Z'%2F%3E%3Cpath%20d%3D'M3%2010H21'%2F%3E%3Cpath%20d%3D'M11%2014H16M8%2014H8.00898M13%2018H8M16%2018H15.991'%2F%3E%3C%2Fsvg%3E");
+}
+
+html .VPDocFooter .edit-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 16px;
+  margin-bottom: 26px;
+  padding: 9px 14px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--mh-r-sm);
+  background-color: var(--vp-c-bg-alt);
+}
+
+/*
+ * The action reads stronger than the fact: the edit link is body text that
+ * takes the accent on hover, the date stays muted throughout.
+ */
+html .VPDocFooter .edit-info .edit-link-button {
+  line-height: 22px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--vp-c-text-1);
+}
+
+html .VPDocFooter .edit-info .edit-link-button:hover {
+  color: var(--vp-c-brand-1);
+}
+
+/*
+ * Overriding the margin needs this much selector: postcss-rtl splits
+ * VitePress's own margin-right into a [dir=ltr] and a [dir=rtl] pair, and
+ * those outweigh a two-class override.
+ */
+html .VPDocFooter .edit-info .edit-link-button .edit-link-icon {
+  width: 16px;
+  height: 16px;
+  margin-inline: 0 8px;
+  --icon: var(--mh-icon-pencil-edit);
+}
+
+html .VPDocFooter .edit-info .last-updated {
+  display: flex;
+  align-items: center;
+  color: var(--vp-c-text-2);
+}
+
+html .VPDocFooter .edit-info .last-updated::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin-inline: 0 8px;
+  background-color: currentColor;
+  -webkit-mask: var(--mh-icon-calendar) no-repeat center / 100% 100%;
+  mask: var(--mh-icon-calendar) no-repeat center / 100% 100%;
+}
+
+html .VPDocFooter .edit-info .VPLastUpdated {
+  line-height: 22px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/*
+ * The timestamp is its own bidi run. Without isolating it, a date sitting at
+ * the end of an Arabic line is reordered against the label it belongs to and
+ * the separator ends up on the wrong side of it. Isolation, rather than a
+ * forced direction, because the date is written in the page's language and an
+ * Arabic one is genuinely right to left.
+ */
+html .VPDocFooter .edit-info .VPLastUpdated time {
+  unicode-bidi: isolate;
+}
+
+/*
+ * No rule between the strip and the pager. The strip is a bounded box already,
+ * so a line a few pixels under it drew a second horizontal edge parallel to
+ * the first and the two read as a mistake rather than a division. The strip's
+ * own bottom margin carries the separation now.
+ */
+html .VPDocFooter .prev-next {
+  border-top: 0;
+  padding-top: 0;
+}
+
+
+/* ------------------------------------------------------ Site footer ---- */
+
+/*
+ * The band that closes a page.
+ *
+ * VitePress ends the document with a 1px rule drawn the full width of the
+ * viewport and two centred paragraphs set at the same size, the same weight
+ * and the same colour. That reads as a legal strip rather than as the end of
+ * a page: nothing in it is ranked, and the rule cuts the document off instead
+ * of finishing it. It then hides the whole thing on any page that carries a
+ * sidebar, which here is the contributing series and the SDK guide — the two
+ * longest reads on the site ended with nothing under the pager at all.
+ *
+ * Replaced with a band the page fades into, holding under a seam the places
+ * to go and the two things the site has to say, on every page. Nothing in it
+ * is boxed and nothing in it is ruled off twice: one seam divides the band,
+ * every link in it is underlined the same way, and the seam is the only line
+ * here that is allowed to stop before it reaches an end.
+ *
+ * No new colours either: the band is --vp-c-bg-alt, which is the sidebar and
+ * code surface and therefore moves with every background preset in both
+ * themes, and the accent in the lines is the reader's.
+ *
+ * Every !important here is on .VPFooter itself. VitePress writes its footer
+ * rules in a scoped block, so they compile to .VPFooter[data-v-hash], which
+ * is one point wider than html plus the class; the descendants below are all
+ * reachable on specificity alone and none of them carry one.
+ */
+html .VPFooter {
+  --mh-gutter-start: 0px;
+  --mh-gutter-end: 0px;
+  border-top: 0 !important;
+  padding-block: 44px 52px !important;
+  padding-inline:
+    calc(var(--mh-gutter-start) + 24px)
+    calc(var(--mh-gutter-end) + 24px) !important;
+  background-color: var(--vp-c-bg-alt) !important;
+}
+
+@media (min-width: 768px) {
+  html .VPFooter {
+    padding-block: 48px 60px !important;
+    padding-inline:
+      calc(var(--mh-gutter-start) + 32px)
+      calc(var(--mh-gutter-end) + 32px) !important;
+  }
+}
+
+/*
+ * Shown on a page with a sidebar, which VitePress hides outright. Its rule is
+ * .VPFooter.has-sidebar[data-v-hash], three classes against the two this can
+ * reach on specificity, so this is the one place in the section where an
+ * important sits on something other than a padding or a colour.
+ *
+ * Nothing moves to make room for it. Both columns beside the article are
+ * position: fixed and neither is in the flow, so a band arriving under the
+ * document does not shorten them, shift them or take a pixel off them: they
+ * stand where they stood the whole way down, and the reader meets the band
+ * at the end of the page the same way they do on a page without them.
+ */
+html .VPFooter.has-sidebar {
+  display: block !important;
+}
+
+/*
+ * Where the article is.
+ *
+ * The band runs the full width of the window whatever the gutters say — a
+ * background paints across padding, so these move what is in the band without
+ * ever opening a gap at either edge — but what is in it has to line up with
+ * the article above, and the article is not centred in the window on every
+ * page. VitePress insets .VPContent by the sidebar's width, and this sheet
+ * insets it again on the side the outline is pinned to, so the column sits up
+ * to half a rail off centre depending on which of the two the page has and
+ * how wide the window is.
+ *
+ * So the two gutters are restated here and the padding is written off them.
+ * They mirror the rules on .VPContent exactly — VitePress's own at 960 and
+ * 1440, this sheet's outline gutters at 1280 and 1440 — and the band tracks
+ * the article at every width instead of only at the ones where centring on
+ * the window happens to agree with it.
+ *
+ * Measured before this, on a page with an outline and no sidebar at 1280: the
+ * seam ran 24px in under the outline rail at its far end and stopped 56px
+ * short of the article at its near one. It reaches neither now.
+ *
+ * .has-sidebar is a class on the footer itself, so that half needs no :has.
+ * The outline is not, and .VPDoc is not an ancestor of the band, so that half
+ * has to be asked of the document.
+ */
+@media (min-width: 960px) {
+  html .VPFooter.has-sidebar {
+    --mh-gutter-start: var(--vp-sidebar-width);
+  }
+}
+
+@media (min-width: 1280px) {
+  html:has(.VPDoc.has-aside) .VPFooter {
+    --mh-gutter-end: var(--vp-sidebar-width);
+  }
+
+  /* The balancing gutter, and the same one .VPContent gets: a page with no
+     sidebar still has the outline's rail on the far side, and this is what
+     keeps its article centred rather than half a rail out. */
+  html:has(.VPDoc.has-aside) .VPFooter:not(.has-sidebar) {
+    --mh-gutter-start: var(--vp-sidebar-width);
+  }
+}
+
+/*
+ * Past 1440px both columns swallow the gutter between the layout shell and
+ * the edge of the window, so the figures stop being a flat width.
+ *
+ * The outline rule is deliberately a class wider than the sidebar rule above
+ * it rather than merely later: a page with both is the common case here, and
+ * its far side has to come out with the rail in it whichever order these two
+ * end up in.
+ */
+@media (min-width: 1440px) {
+  html .VPFooter.has-sidebar {
+    --mh-gutter-start: calc(
+      (100vw - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width)
+    );
+    --mh-gutter-end: calc((100vw - var(--vp-layout-max-width)) / 2);
+  }
+
+  html:has(.VPDoc.has-aside) .VPFooter {
+    --mh-gutter-end: calc(
+      (100vw - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width)
+    );
+  }
+
+  html:has(.VPDoc.has-aside) .VPFooter:not(.has-sidebar) {
+    --mh-gutter-start: calc(
+      (100vw - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width)
+    );
+  }
+}
+
+/*
+ * Where the page becomes the footer.
+ *
+ * Hung above the band rather than inside it: VitePress already leaves empty
+ * page under the last thing on it — measured at 154px on a document, 122px on
+ * a phone and 96px on a landing page — so the fade lands in space that was
+ * doing nothing and the footer is no taller for having it. The page darkens
+ * into the band over that distance and there is no line anywhere across the
+ * viewport.
+ *
+ * Taller than the smallest of those gaps, and deliberately so: the first 42%
+ * of it is fully transparent, which is 63px of nothing at the top. That keeps
+ * the ramp long and gentle everywhere without the tail of it ever veiling the
+ * last thing on the shortest page.
+ */
+html .VPFooter::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 100%;
+  height: 150px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 42%,
+    var(--vp-c-bg-alt) 100%
+  );
+  pointer-events: none;
+}
+
+/*
+ * Narrowed from the 1440px layout shell to the width of the article above it.
+ *
+ * Both documentation layouts centre their text column in the viewport, with
+ * and without the outline, and so does the landing page, so a centred band on
+ * the same measure lines up with the page in every case. --mh-doc-plain is
+ * the token the text column is capped with, so the reader's width setting
+ * moves the two together instead of leaving the footer behind.
+ *
+ * Everything sits under the seam, on one row: the two statements at the start
+ * and the places to go at the end. It wraps on a narrow screen, where the
+ * statements take the first line and the destinations drop under them.
+ */
+html .VPFooter .container {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 32px;
+  max-width: var(--mh-doc-plain);
+  padding-top: 30px;
+  text-align: start;
+}
+
+/*
+ * The seam.
+ *
+ * The long rule in the footer, and it never reaches an edge: it fades out
+ * well before both ends of the measure, with the reader's accent carried
+ * across its middle. That is the same idea as the notch cut out of the nav
+ * bar's underline further down this sheet — a line here is allowed to stop —
+ * and it is why the band can be ruled off without drawing a second hard edge
+ * across the page under the one the wash above it deliberately has not got.
+ *
+ * It sits clear of the top of the band rather than on it — 44px down on a
+ * phone, 48px on a wide screen — so it reads as ruling the footer's own
+ * content off and not as the cut the wash was put there to avoid.
+ *
+ * Both gradients are symmetric about the centre, so postcss-rtl flipping
+ * `to right` for Arabic produces exactly the same line.
+ *
+ * The :has keeps it off an empty band: drop both strings from the theme
+ * config and there is nothing to rule off, so nothing is drawn.
+ */
+html .VPFooter .container:has(.message, .copyright)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  inset-inline: 0;
+  height: 1px;
+  background:
+    linear-gradient(
+      to right,
+      rgba(var(--mh-accent-rgb), 0) 32%,
+      rgba(var(--mh-accent-rgb), 0.3) 50%,
+      rgba(var(--mh-accent-rgb), 0) 68%
+    ),
+    linear-gradient(
+      to right,
+      transparent 0,
+      var(--vp-c-divider) 15%,
+      var(--vp-c-divider) 85%,
+      transparent 100%
+    );
+}
+
+/*
+ * The places to go, at the end of the row.
+ *
+ * order puts them there rather than a direction, because VitePress prints the
+ * message before the copyright and this wants them the other way round. It is
+ * the container's space-between that holds them at the end, which means that
+ * once the row wraps and the destinations have a line to themselves they
+ * return to the start of it and sit under the sentences rather than out on
+ * their own across a phone. That is the wanted behaviour, so there is no auto
+ * margin fighting it.
+ *
+ * Nothing here is a physical direction, so the pair follows the page and
+ * lands on the left of an Arabic one with nothing for postcss-rtl to mirror.
+ */
+html .VPFooter .message {
+  order: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+/* The gap is wide because nothing encloses either link any more: two short
+   labels at the old chip spacing read as one phrase once the boxes come off
+   them. */
+html .VPFooter .mh-foot-go {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 28px;
+}
+
+/*
+ * Two kinds of link, drawn one way.
+ *
+ * These are destinations rather than words inside a sentence, so they stand
+ * on their own — and on nothing else. There is no chip around them: at this
+ * size a hairline box reads as a button the reader cannot press, and a pair
+ * of them at the end of a quiet band was the loudest thing in it.
+ *
+ * What is left is the underline every other link in the band already carries,
+ * written once for all of them further down. A footer with four links in it
+ * marks a link exactly one way, and the rank between the two kinds is left to
+ * what was already carrying it — a point of size, a step of weight, and which
+ * end of the row a link sits at — rather than to a second treatment invented
+ * for these two.
+ *
+ * Only the box is written here. inline-flex so the heart can sit in the line
+ * as a pseudo-element with a gap of its own rather than as a character, and
+ * the padding is hit area and nothing else: a text underline follows the
+ * words, so padding no longer moves it.
+ */
+html .VPFooter .mh-foot-go a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-block: 6px;
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+/* Hugeicons FavouriteIcon, drawn as a mask so it takes the link's colour and
+   turns with it under the pointer. Same construction as the release banner's
+   icon, at the 1.5 stroke Hugeicons ships, which holds at this size on a
+   surface rather than on a solid colour. */
+html .VPFooter .mh-foot-support::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'%23000'%20stroke-width%3D'1.8'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M19.4626%203.99415C16.7809%202.34923%2014.4404%203.01211%2013.0344%204.06801C12.4578%204.50096%2012.1696%204.71743%2012%204.71743C11.8304%204.71743%2011.5422%204.50096%2010.9656%204.06801C9.55962%203.01211%207.21909%202.34923%204.53744%203.99415C1.01807%206.15294%200.221721%2013.2749%208.33953%2019.2834C9.88572%2020.4278%2010.6588%2021%2012%2021C13.3412%2021%2014.1143%2020.4278%2015.6605%2019.2834C23.7783%2013.2749%2022.9819%206.15294%2019.4626%203.99415Z'%2F%3E%3C%2Fsvg%3E")
+    no-repeat center / 100% 100%;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'%23000'%20stroke-width%3D'1.8'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M19.4626%203.99415C16.7809%202.34923%2014.4404%203.01211%2013.0344%204.06801C12.4578%204.50096%2012.1696%204.71743%2012%204.71743C11.8304%204.71743%2011.5422%204.50096%2010.9656%204.06801C9.55962%203.01211%207.21909%202.34923%204.53744%203.99415C1.01807%206.15294%200.221721%2013.2749%208.33953%2019.2834C9.88572%2020.4278%2010.6588%2021%2012%2021C13.3412%2021%2014.1143%2020.4278%2015.6605%2019.2834C23.7783%2013.2749%2022.9819%206.15294%2019.4626%203.99415Z'%2F%3E%3C%2Fsvg%3E")
+    no-repeat center / 100% 100%;
+}
+
+/*
+ * Every link in the band, drawn the same way: the two destinations at the end
+ * of the row, and the licence and Triternion inside the sentences at the
+ * start of it.
+ *
+ * An underline at rest, because colour alone would not tell a reader who
+ * cannot see the colour that the words are a link, but softened to the
+ * dimmest text tone rather than drawn in the text colour, and only up to full
+ * strength under the pointer — where the words take the accent and the line
+ * follows them to it.
+ *
+ * The tone is --vp-c-text-3 and not --vp-c-divider, which is what a hairline
+ * in this sheet usually is: at #e2e2e3 on the light band the divider was too
+ * close to invisible to be the thing marking a link, and an underline nobody
+ * can see is the same as no underline. The link text itself is -1, a step up
+ * from the -2 the sentences are set in, so it also reads darker than the
+ * words around it.
+ */
+html .VPFooter .mh-foot-go a,
+html .VPFooter .mh-foot-licence a,
+html .VPFooter .copyright a {
+  color: var(--vp-c-text-1);
+  text-decoration: underline;
+  text-decoration-color: var(--vp-c-text-3);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease;
+}
+
+html .VPFooter .mh-foot-go a:hover,
+html .VPFooter .mh-foot-licence a:hover,
+html .VPFooter .copyright a:hover {
+  color: var(--vp-c-brand-1);
+  text-decoration-color: currentColor;
+}
+
+/*
+ * The two statements, at the start of the row: the attribution and then the
+ * licence, one per line. A column rather than two paragraphs because VitePress
+ * gives the footer exactly two slots and both of these belong in the second.
+ *
+ * min-width: 0 because a flex item will not shrink below the width of its
+ * longest unbreakable run by default, which on a narrow screen pushed the
+ * band wider than the page instead of wrapping the sentence.
+ *
+ * --vp-c-text-2 rather than the -3 they would rather be. Measured on the
+ * default light background, -3 lands at 2.96:1 against the band, which is
+ * under the 4.5:1 body text needs, and neither of these is a line to make
+ * anyone squint at. The rank is carried by size, by which side of the seam a
+ * line is on, and by the leading — a point under the destinations and loose
+ * enough that two sentences settle rather than stack — instead of by fading
+ * them out.
+ */
+html .VPFooter .copyright {
+  order: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  min-width: 0;
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--vp-c-text-2);
+}
+
+/* Offset wide enough to clear the underline, which sits three pixels under
+   the words and would otherwise be crossed by the ring. The radius follows
+   the reader's corner setting, so the ring is the one square thing on a
+   rounded page only when they have asked for square. */
+html .VPFooter .container a:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 4px;
+  border-radius: var(--mh-r-sm);
+}
+
+
+/* --------------------------------------------------- Language switcher ---- */
+
+/*
+ * Air between the rows, in every menu that opens out of the bar.
+ *
+ * VitePress stacks its menu links flush. A hovered row's fill then runs
+ * straight into the rows above and below it with nothing between them, which
+ * is least forgivable in the language menu, where each row also carries a
+ * flag and so is an object with an edge of its own — but it is the same row
+ * and the same fill in all of them, so they all get the same rhythm.
+ *
+ * A column with a gap rather than a margin on each row, so the space between
+ * a group's heading and its first link is the same as the space between two
+ * links. A heading is a row like the others here: the language menu's is
+ * drawn as the one option that cannot be chosen, further down this section.
+ * Four pixels: enough to part a 32px row from its neighbour, little enough
+ * that a list of six still reads as one list.
+ *
+ * Three selectors because a menu is built three ways. .items is what VitePress
+ * wraps a flat list in and what the language switcher fills from its own
+ * slot; .VPMenuGroup is a titled group inside one of those; .group is the
+ * shape the overflow menu behind the "..." uses instead. The gaps between
+ * whole groups are left alone — those already have a rule and a dozen pixels
+ * of padding to separate them, and adding four more would only blur what the
+ * rule is for.
+ */
+html .VPNav .VPMenu .items,
+html .VPNav .VPMenu .VPMenuGroup,
+html .VPNav .VPMenu .group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/*
+ * The menu's own heading is the current language, and the list under it is
+ * everything else. The heading's padding is restated here rather than left to
+ * VitePress, for two reasons.
+ *
+ * The first is what broke it: the nav bar's sidebar reset further up this
+ * file used to zero `padding` on any `.title` inside `.VPNavBar`, and this
+ * heading is one. That is fixed at the source now, and this rule is the belt
+ * to its braces.
+ *
+ * The second is that VitePress writes the padding asymmetrically, so
+ * postcss-rtl splits it into a [dir=ltr] rule and a [dir=rtl] rule and keeps
+ * no unconditional one. A logical property is left alone by postcss-rtl, so
+ * this applies whatever dir currently says and mirrors itself on the Arabic
+ * pages without a second rule.
+ */
+html .VPNavBarTranslations .items .title {
+  padding-block: 0;
+  padding-inline: 12px 24px;
+}
+
+/*
+ * With a flag on every row, both the heading and the links are a fixed box
+ * plus a label on the same gap, so the text lines up because the rows are
+ * built the same way rather than because two paddings happen to agree.
+ */
+html .VPNavBarTranslations .items .title,
+html .VPNavBarTranslations .items .VPMenuLink .link,
+html .VPNavScreenTranslations .list .link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+html .VPNavBarTranslations .items .title::before,
+html .VPNavBarTranslations .items .VPMenuLink .link::before,
+html .VPNavScreenTranslations .list .link::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 16px;
+  height: 12px;
+  border-radius: 2px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* Japan is a white field, and several of the others are mostly white at the
+     edges. Without an outline they dissolve into the menu surface. */
+  box-shadow: 0 0 0 1px var(--vp-c-divider);
+}
+
+/*
+ * Matched on the locale segment of the link, because the order of the list
+ * changes with the language being read: the current one is the heading and
+ * drops out of the list below it, so nothing here can be counted positionally.
+ * The paths carry the site base, which is fixed at /docs/ in config.mts.
+ */
+html[lang="en"] .VPNavBarTranslations .items .title::before,
+html .VPNavBarTranslations .items a[href^="/docs/en/"]::before,
+html .VPNavScreenTranslations .list a[href^="/docs/en/"]::before {
+  background-image: url("/docs/flags/en.svg");
+}
+
+html[lang="ar"] .VPNavBarTranslations .items .title::before,
+html .VPNavBarTranslations .items a[href^="/docs/ar/"]::before,
+html .VPNavScreenTranslations .list a[href^="/docs/ar/"]::before {
+  background-image: url("/docs/flags/ar.svg");
+}
+
+html[lang="fr"] .VPNavBarTranslations .items .title::before,
+html .VPNavBarTranslations .items a[href^="/docs/fr/"]::before,
+html .VPNavScreenTranslations .list a[href^="/docs/fr/"]::before {
+  background-image: url("/docs/flags/fr.svg");
+}
+
+html[lang="ja"] .VPNavBarTranslations .items .title::before,
+html .VPNavBarTranslations .items a[href^="/docs/ja/"]::before,
+html .VPNavScreenTranslations .list a[href^="/docs/ja/"]::before {
+  background-image: url("/docs/flags/ja.svg");
+}
+
+html[lang="ru"] .VPNavBarTranslations .items .title::before,
+html .VPNavBarTranslations .items a[href^="/docs/ru/"]::before,
+html .VPNavScreenTranslations .list a[href^="/docs/ru/"]::before {
+  background-image: url("/docs/flags/ru.svg");
+}
+
+html[lang="zh"] .VPNavBarTranslations .items .title::before,
+html .VPNavBarTranslations .items a[href^="/docs/zh/"]::before,
+html .VPNavScreenTranslations .list a[href^="/docs/zh/"]::before {
+  background-image: url("/docs/flags/zh.svg");
+}
+
+/*
+ * The language being read is the menu's heading rather than one of its links,
+ * so it is the one row here that cannot be chosen. It is drawn as a disabled
+ * option to say so: a shade darker than the menu behind it, the weight of the
+ * links below it rather than the bold VitePress gives it, text one step
+ * muted, the flag a touch faded, and neither a pointer response nor a text
+ * selection.
+ *
+ * A light touch on purpose. The dimmest text token with the flag drained to
+ * grey read as switched off rather than as where you are, and on a dark panel
+ * it went close to unreadable. Sitting first, a shade quieter than the
+ * options under it and inert to the pointer, says it well enough.
+ */
+html .VPNavBarTranslations .items .title {
+  font-weight: 500;
+  color: var(--vp-c-text-2);
+  cursor: default;
+  /* A wash rather than a surface. --vp-c-bg-alt was the obvious token but it
+     is a whole step down from the menu's --vp-c-bg-elv, which on the dark
+     panel read as a hole cut in the menu rather than a row of it. A little
+     black over whatever the menu is sitting on darkens it just enough to
+     separate the row, and it does not care what the background setting has
+     been changed to.
+
+     The two themes need different amounts of it. The same alpha that is
+     barely there against a near-black panel is a grey slab against white, so
+     the light value is a third of the dark one. It fills the same width and
+     takes the same corner as the pill a link shows on hover, which is the
+     shape this menu already uses to mark a row. */
+  background-color: rgba(0, 0, 0, 0.055);
+  border-radius: var(--mh-r-sm);
+  /* Nothing here is a target, so there is nothing worth dragging a selection
+     across either. The same reasoning as the notice bar and the images. */
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+html.dark .VPNavBarTranslations .items .title {
+  background-color: rgba(0, 0, 0, 0.16);
+}
+
+html .VPNavBarTranslations .items .title::before {
+  opacity: 0.85;
+}
+
+
 /* ------------------------------------------------------ Social icons ---- */
 
 /*
@@ -1421,27 +2746,86 @@ html .VPSocialLink > [class^="vpi-social-"] {
  * :has() picks out only the pages that actually have an outline; a page
  * without one keeps the full width.
  */
+/*
+ * The space above the first thing in either column.
+ *
+ * Both rails start under the bar and both should start their contents the
+ * same distance below it. VitePress does not: it pads the outline clear of
+ * the bar and then some, and lets the sidebar begin almost against it, so the
+ * two lists sat 22px out of step across the page. One figure now, read by
+ * both, so they cannot drift apart again.
+ */
+:root {
+  --mh-rail-gap: 32px;
+}
+
 @media (min-width: 960px) {
   html .VPDoc.has-aside .aside {
     max-width: 0;
     padding-left: 0;
   }
 
+  /*
+   * The left column takes the same gap, less the 10px its own first group
+   * already carries — that padding is VitePress's, it sits inside the column
+   * rather than above it, and subtracting it here is what puts the first
+   * sidebar link on the same line as "On this page" rather than ten pixels
+   * under it. Measured: both land 32px below the bar.
+   */
+  html .VPSidebar {
+    /* Important because VitePress sets this inside a scoped block, landing as
+       .VPSidebar[data-v-hash] at one class more than html plus the class. */
+    padding-top: calc(
+      var(--vp-nav-height) + var(--mh-rail-gap) - 10px
+    ) !important;
+  }
+
   html .VPDoc.has-aside .aside-container {
-    top: 0;
+    /*
+     * The same edge the left column is pinned to, and not the top of the
+     * window.
+     *
+     * VitePress fixes .VPSidebar at --vp-layout-top-height, which is the
+     * release notice's height while the notice is up and 0px once it has been
+     * closed. This was pinned at 0 instead, and its clip and its padding are
+     * both measured down from its own top edge — so with the notice up, the
+     * rail started drawing 34px above where the nav bar ends and its surface
+     * showed through the frosted bar, and the outline's first heading sat the
+     * same 34px too high, under the bar rather than below it. Reading from the
+     * token puts the rail on the left column's edge, and the two figures below
+     * come out right on their own.
+     */
+    top: var(--vp-layout-top-height, 0px);
     bottom: 0;
     inset-inline-end: 0;
+    /*
+     * The same layer the left column is on, which at this width is 25: above
+     * the footer band at 10 and below the nav bar at 30.
+     *
+     * VitePress leaves the outline on the automatic layer, and an automatic
+     * layer is painted in tree order, so the band — which comes after it in
+     * the document and carries a z-index of its own — was drawn over the
+     * bottom of the rail once the reader reached the end of the page. The
+     * rail's hairline stopped dead where the band began, and on a page with a
+     * long outline the last few headings went under it. The left column never
+     * had the problem because VitePress gives it this token; the right one
+     * now reads from the same one, so both stand in front of the band and
+     * neither is covered by it.
+     */
+    z-index: var(--vp-z-index-sidebar);
     width: var(--vp-sidebar-width);
     height: auto;
     /* Outer side keeps the left column's 32px; the inner side is 20px
        because the outline runs longer strings than a sidebar link, and an
        even 32px clipped headings that used to fit. Measured: 32px both sides
        overflowed the longest item by 2px. */
-    padding: calc(var(--vp-nav-height) + 32px) 32px 96px 20px;
+    padding: calc(var(--vp-nav-height) + var(--mh-rail-gap)) 32px 96px 20px;
     background-color: var(--vp-c-bg-alt);
     border-inline-start: 1px solid var(--vp-c-divider);
-    /* Same reason as the left column: fixed at top 0, so without this its
-       background would sit behind the frosted nav bar. */
+    /* Same as the left column: the rail is pinned above the bar, so without
+       this its background would sit behind the frosted bar and show through
+       it. Measured from the rail's own top edge, which the rule above puts at
+       the bar's. */
     clip-path: inset(var(--vp-nav-height) 0 0 0);
   }
 
@@ -1571,8 +2955,10 @@ html .VPDoc.has-aside .aside-content {
   --mh-read-ease: var(--mh-read-duration) cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Outside the width blocks: the article breathes at every size. */
-html .VPContent {
+/* Outside the width blocks: the article breathes at every size, and the band
+   under it is padded off the same gutters, so the two move as one. */
+html .VPContent,
+html .VPFooter {
   transition: padding var(--mh-read-ease);
 }
 
@@ -1622,6 +3008,24 @@ html .VPContent {
    */
   html[data-mh-read="on"]:has(.VPDoc) .VPContent.has-sidebar {
     padding-inline: 0 !important;
+  }
+
+  /*
+   * And the band goes with it, out to the same edges the article now runs to.
+   *
+   * Written on the padding rather than on the two gutter tokens it is
+   * normally built from. The token that sets the near gutter on a page with
+   * an outline and no sidebar is carried by a selector one class wider than
+   * anything this one can reach, so setting it here would lose and the band
+   * would stay behind while the article moved. Overriding the padding outright
+   * cannot lose: it is important against important, and this is the more
+   * specific of the two.
+   *
+   * One rule for both cases. Below 1280 an outline page has no gutters to
+   * clear anyway, so restating 32px there changes nothing.
+   */
+  html[data-mh-read="on"]:has(.VPDoc) .VPFooter {
+    padding-inline: 32px !important;
   }
 }
 
@@ -1920,13 +3324,17 @@ html .vp-doc .mh-donate-note {
     background-color: var(--vp-c-divider);
   }
 
+  /* Logical, so postcss-rtl leaves the pair alone. The two segments are the
+     same width and pinned to opposite ends, so mirroring them was invisible,
+     but the bar does not mirror any more and a segment named ::before should
+     be the one at the start of it in both builds. */
   html:not([data-mh-read="on"]):has(.mh-read)
     .VPNavBar:not(.home.top)::before {
-    left: 0;
+    inset-inline-start: 0;
   }
 
   html:not([data-mh-read="on"]):has(.mh-read)
     .VPNavBar:not(.home.top)::after {
-    right: 0;
+    inset-inline-end: 0;
   }
 }

@@ -24,7 +24,8 @@
 
 ## 模组 {#modding}
 
-- [津巴布韦 编辑器公告](https://store.steampowered.com/news/app/629760/view/3147450638822972795) — 发布帖子，2021 年 12 月
+- [Epic Games Store 上的 MORDHAU Editor](https://store.epicgames.com/p/mordhau--editor) — 编辑器本体，免费，也是唯一的分发渠道
+- [Mordhau 编辑器发布公告](https://store.steampowered.com/news/app/629760/view/3147450638822972795) — 发布帖子，2021 年 12 月
 - [mod.io](https://mod.io) — Mordhau 用于分发模组的平台
 - [不真实的引擎文档](https://dev.epicgames.com/documentation/en-us/unreal-engine) — 编辑器是 UE4 的版本，因此大多数通用 UE 材料都适用
 

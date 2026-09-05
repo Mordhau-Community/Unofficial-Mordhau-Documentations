@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
+import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import { useData } from "vitepress";
+import { landingCopies, normalizeLandingLocale } from "./landing-locales";
 
 /*
  * Read mode strips the page back to the article.
@@ -14,7 +15,19 @@ import { useData } from "vitepress";
  * column all move off a single attribute and cannot fall out of step.
  */
 
-const { frontmatter, page } = useData();
+const { frontmatter, lang, page } = useData();
+
+/*
+ * The button's three strings, in the language of the page. They live with the
+ * rest of the theme's copy in landing-locales.ts, which is where the release
+ * banner reads its own from.
+ *
+ * The label's width matters as well as its text: the nav bar's underline is
+ * notched to exactly the button's width, and the notch is measured from the
+ * rendered element rather than assumed, so a longer word in another language
+ * widens the notch to match without anything here knowing about it.
+ */
+const copy = computed(() => landingCopies[normalizeLandingLocale(lang.value)]);
 
 /*
  * Documentation pages only. A landing page has no sidebar and no outline for
@@ -62,15 +75,50 @@ const root = ref<HTMLElement | null>(null);
  * the notch has to be exactly as wide as the button. That width depends on the
  * label, the font and the locale, so it is measured rather than assumed and
  * published for the stylesheet to read.
+ *
+ * Off the rect, not off offsetWidth, because offsetWidth is rounded to a whole
+ * pixel and a button is rarely a whole number of pixels wide. The notch is cut
+ * symmetrically about the centre, so every rounding error is halved and then
+ * applied to both shoulders at once: at 107.313px published as 107, the two
+ * segments each ran 0.16px further onto the Arabic button than the design's
+ * one pixel, which is a hair of extra line at both corners; at 125.547px
+ * published as 126 the Japanese one fell 0.23px short and left a hair of gap
+ * instead. Neither is wrong enough to name, and both are visible once you
+ * know to look.
+ *
+ * With the true width published the arithmetic closes: the button is centred,
+ * so its near edge sits at (bar - width) / 2, and a segment of
+ * 50% - width / 2 + 1px ends exactly one pixel past it, in every language.
  */
 function measure() {
   const button = root.value?.querySelector(".mh-read") as HTMLElement | null;
   if (!button) return;
   document.documentElement.style.setProperty(
     "--mh-read-w",
-    button.offsetWidth + "px"
+    button.getBoundingClientRect().width + "px"
   );
 }
+
+/*
+ * Watched, rather than measured at the few moments it seemed likely to change.
+ *
+ * The width used to be taken on mount, once more when the display face
+ * finished loading, and on every window resize. Those are three of the
+ * occasions the button changes width and not all of them: switching language
+ * is another, and VitePress switches language without unmounting anything, so
+ * the label became Режим чтения or 阅读模式 while the published width stayed
+ * at whatever the locale before it had measured. The notch was then cut for
+ * the wrong word — 20px too narrow going from English to Russian, 17px too
+ * wide going to Chinese — and the underline either ran over the button's
+ * shoulders or stopped short of them with a gap at each corner.
+ *
+ * One observer on the button covers every cause at once, including the three
+ * the listeners covered and the ones they did not: a browser zoom, a reader's
+ * larger default type, a face that swaps in late. It delivers an observation
+ * as soon as it starts watching, so there is no first measurement to take by
+ * hand either.
+ */
+let observer: ResizeObserver | undefined;
 
 onMounted(() => {
   // The pre-paint script in config.mts has already stamped the attribute from
@@ -80,14 +128,14 @@ onMounted(() => {
   pref.value = document.documentElement.getAttribute("data-mh-read") === "on";
   apply(on.value);
 
-  // After paint, and again once the display face has actually loaded, since
-  // the fallback font measures differently.
-  nextTick(measure);
-  document.fonts?.ready.then(measure).catch(() => {});
-  window.addEventListener("resize", measure);
+  const button = root.value?.querySelector(".mh-read");
+  if (button) {
+    observer = new ResizeObserver(measure);
+    observer.observe(button);
+  }
 });
 
-onUnmounted(() => window.removeEventListener("resize", measure));
+onUnmounted(() => observer?.disconnect());
 
 // Covers pressing the button and walking onto a page where read mode does not
 // apply, which is the same thing as far as the document is concerned.
@@ -109,11 +157,7 @@ watch(on, apply);
       :aria-pressed="on"
       draggable="false"
       @dragstart.prevent
-      :title="
-        on
-          ? 'Bring the navigation and sidebars back'
-          : 'Hide the navigation and sidebars'
-      "
+      :title="on ? copy.readModeShow : copy.readModeHide"
       @click="toggle"
     >
       <svg
@@ -136,7 +180,7 @@ watch(on, apply);
           d="M12 7.2c1.6-1.3 3.7-1.8 6.6-1.5a.9.9 0 0 1 .8.9v9.9a.9.9 0 0 1-1 .9c-2.5-.3-4.5.2-6.4 1.4"
         />
       </svg>
-      <span class="mh-read-label">Read Mode</span>
+      <span class="mh-read-label">{{ copy.readMode }}</span>
     </button>
   </div>
 </template>

@@ -34,19 +34,21 @@ export interface LandingCopy {
   correctionBody: string;
   announcement: string;
   closeAnnouncement: string;
+  readMode: string;
+  readModeHide: string;
+  readModeShow: string;
 }
 
 export const localeOptions: Array<{
   locale: LandingLocale;
-  code: string;
   label: string;
 }> = [
-  { locale: "en", code: "EN", label: "English" },
-  { locale: "ar", code: "AR", label: "العربية" },
-  { locale: "fr", code: "FR", label: "Français" },
-  { locale: "ja", code: "JA", label: "日本語" },
-  { locale: "ru", code: "RU", label: "Русский" },
-  { locale: "zh", code: "ZH", label: "中文" },
+  { locale: "en", label: "English" },
+  { locale: "ar", label: "العربية" },
+  { locale: "fr", label: "Français" },
+  { locale: "ja", label: "日本語" },
+  { locale: "ru", label: "Русский" },
+  { locale: "zh", label: "中文" },
 ];
 
 const landingGuidePaths = [
@@ -190,6 +192,9 @@ export const landingCopies: Record<LandingLocale, LandingCopy> = {
     announcement:
       "is here — the guides are stable, and corrections are always welcome.",
     closeAnnouncement: "Close",
+    readMode: "Read Mode",
+    readModeHide: "Hide the navigation and sidebars",
+    readModeShow: "Bring the navigation and sidebars back",
   },
 
   ar: {
@@ -309,6 +314,9 @@ export const landingCopies: Record<LandingLocale, LandingCopy> = {
     announcement:
       "متاح الآن — الأدلة مستقرة، ونرحب دائمًا بالتصحيحات.",
     closeAnnouncement: "إغلاق",
+    readMode: "وضع القراءة",
+    readModeHide: "إخفاء شريط التنقل والأشرطة الجانبية",
+    readModeShow: "إعادة شريط التنقل والأشرطة الجانبية",
   },
 
   fr: {
@@ -412,6 +420,9 @@ export const landingCopies: Record<LandingLocale, LandingCopy> = {
     announcement:
       "est disponible — les guides sont stables et les corrections sont toujours les bienvenues.",
     closeAnnouncement: "Fermer",
+    readMode: "Mode lecture",
+    readModeHide: "Masquer la navigation et les panneaux latéraux",
+    readModeShow: "Rétablir la navigation et les panneaux latéraux",
   },
 
   ja: {
@@ -515,6 +526,9 @@ export const landingCopies: Record<LandingLocale, LandingCopy> = {
     announcement:
       "を公開しました — ガイドは安定版となり、修正提案もいつでも歓迎します。",
     closeAnnouncement: "閉じる",
+    readMode: "リーディングモード",
+    readModeHide: "ナビゲーションとサイドバーを隠す",
+    readModeShow: "ナビゲーションとサイドバーを戻す",
   },
 
   ru: {
@@ -618,6 +632,9 @@ export const landingCopies: Record<LandingLocale, LandingCopy> = {
     announcement:
       "уже доступна — руководства стабильны, а исправления всегда приветствуются.",
     closeAnnouncement: "Закрыть",
+    readMode: "Режим чтения",
+    readModeHide: "Скрыть навигацию и боковые панели",
+    readModeShow: "Вернуть навигацию и боковые панели",
   },
 
   zh: {
@@ -721,5 +738,8 @@ export const landingCopies: Record<LandingLocale, LandingCopy> = {
     announcement:
       "现已发布——指南已进入稳定版本，也始终欢迎修正建议。",
     closeAnnouncement: "关闭",
+    readMode: "阅读模式",
+    readModeHide: "隐藏导航栏和侧边栏",
+    readModeShow: "恢复导航栏和侧边栏",
   },
 };

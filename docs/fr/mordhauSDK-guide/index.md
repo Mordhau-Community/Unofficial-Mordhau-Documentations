@@ -16,9 +16,25 @@ Cette page est une orientation et non un didacticiel complet.Le modding Mordhau 
 
 Les mods sont distribués via **mod.io**, qui est également ce que lit le navigateur de mods du jeu.Les joueurs s'y abonnent et le jeu télécharge le contenu.
 
+## Dans ce guide {#in-this-guide}
+
+- [Acteurs](/fr/mordhauSDK-guide/actors) — ce que vous placez dans un niveau, et les acteurs propres à Mordhau dont toute carte a besoin : points d'apparition, points de capture, objectifs à pousser
+- [Blueprints](/fr/mordhauSDK-guide/blueprints) — comment les Blueprints du jeu sont organisés, lesquels sous-classer, et les quelques-uns qui comptent vraiment
+
 ## Comment l'obtenir {#getting-it}
 
-Vous devez posséder Mordhau.L'éditeur est un téléchargement distinct qui apparaît dans votre bibliothèque Steam sous **Outils** : remplacez le filtre de bibliothèque par Outils ou recherchez "Mordhau" avec les outils inclus et installez-le à partir de là.
+L'éditeur **n'est pas sur Steam**. C'est un produit distinct et gratuit sur l'**Epic Games Store**, et vous l'installez via l'Epic Games Launcher :
+
+1. Ouvrez la [page MORDHAU Editor sur l'Epic Games Store](https://store.epicgames.com/p/mordhau--editor), connectez-vous avec un compte Epic et récupérez-le — c'est gratuit.
+2. Ouvrez l'Epic Games Launcher, trouvez **MORDHAU Editor** dans votre **Bibliothèque** et installez-le depuis là.
+
+Qu'il soit sur Epic plutôt que sur Steam n'est pas une préférence de Triternion : l'éditeur est une version de l'Unreal Editor, et la licence du moteur d'Epic n'autorise la distribution des versions de l'éditeur que via l'Epic Games Store.
+
+L'éditeur se récupère séparément du jeu et n'est pas lié à votre copie Steam — il vous faut toujours Mordhau lui-même pour jouer à ce que vous créez. Il est livré avec quelques cartes et modes de jeu d'exemple pour démarrer.
+
+::: warning
+D'anciens guides vous disent de chercher l'éditeur sous **Outils** dans votre bibliothèque Steam. Il n'y a rien là-bas — l'éditeur de Mordhau n'a jamais été distribué ailleurs que sur l'Epic Games Store.
+:::
 
 ::: tip
 Il est grand.Il s'agit d'un éditeur Unreal Engine complet ainsi que de la bibliothèque d'actifs du jeu, doncprévoyez beaucoup plus d'espace disque que le jeu lui-même n'en prend et attendez-vous à ce que le premier lancement reste longtemps à compiler des shaders.C'est normal et c'est plus rapide ensuite.
@@ -38,10 +54,10 @@ Si vous n'avez jamais ouvert Unreal auparavant, suivez d'abord un didacticiel g�
 
 En gros, la création d'une carte se déroule comme suit :
 
-1. Installez l'éditeur à partir des outils Steam et laissez-le terminer son premier lancement.
+1. Installez l'éditeur depuis l'Epic Games Store et laissez-le terminer son premier lancement.
 2. Créez un nouveau niveau ou ouvrez l'une des cartes fournies pour voir comment il est assemblé.
-3. Construisez votre géométrie, votre éclairage et vos points d'apparition.
-4. Configurez le mode de jeu et les objectifs pour les modes que vous souhaitez qu'il prenne en charge.
+3. Construisez votre géométrie, votre éclairage et vos [points d'apparition](/fr/mordhauSDK-guide/actors#spawns-mordhauplayerstart).
+4. Configurez le [mode de jeu](/fr/mordhauSDK-guide/blueprints) et les [objectifs](/fr/mordhauSDK-guide/actors) pour les modes que vous souhaitez prendre en charge, un sous-niveau par mode.
 5. Testez-le localement.
 6. Emballez-le et téléchargez-le sur mod.io.
 7. Chargez-le sur un [serveur dédié](/fr/dedicated-server-guide/) pour que d'autres personnes puissent y jouer.
