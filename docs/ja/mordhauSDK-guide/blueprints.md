@@ -4,9 +4,9 @@
 
 何かを開く前に持っておきたい全体像はこうです。
 
-- **C++ クラス** — Triternion が書き、ゲームにコンパイル済み。`MordhauGameMode`、`ControlPoint`、`MordhauPlayerStart`、`MordhauWeapon` など。編集はできません。
-- **Blueprint アセット** — Content Browser の `/Game/Mordhau/Blueprints/…` にあり、公式マップとモードが実際に使っているのはこちら。`BP_なんとか` という名前です。
-- **あなたの Blueprint** — それらのサブクラスで、自分の Mod フォルダーに置くもの。作るものはすべてこれです。
+- **C++ クラス**： Triternion が書き、ゲームにコンパイル済み。`MordhauGameMode`、`ControlPoint`、`MordhauPlayerStart`、`MordhauWeapon` など。編集はできません。
+- **Blueprint アセット**： Content Browser の `/Game/Mordhau/Blueprints/…` にあり、公式マップとモードが実際に使っているのはこちら。`BP_なんとか` という名前です。
+- **あなたの Blueprint**： それらのサブクラスで、自分の Mod フォルダーに置くもの。作るものはすべてこれです。
 
 自分のフォルダーで作業するのは整理整頓の話ではありません。ゲーム側の Blueprint を直接書き換えると、同じことをした他のすべての Mod と衝突する Mod ができあがります。
 
@@ -48,12 +48,12 @@
 
 そして、カスタム挙動のフックになる関数とイベント。
 
-- `IsSpawnpointAllowed(PlayerStart, Controller)` と `GetSpawnpointPreference(PlayerStart, Controller)` — スポーン選択。[`MordhauPlayerStart`](/ja/mordhauSDK-guide/actors#spawns-mordhauplayerstart) 側のイベントと対になります
-- `OnAfterLogin`, `OnBeforeLogout` — プレイヤーの参加と退出
-- `OnMessageBroadcasted`, `OnRconStringCommand` — チャットと RCON。管理コマンドに反応させたいときに使えます
-- `GetNextMap`, `GetNextMaps`, `VoteLevel` — ローテーションと投票
+- `IsSpawnpointAllowed(PlayerStart, Controller)` と `GetSpawnpointPreference(PlayerStart, Controller)`： スポーン選択。[`MordhauPlayerStart`](/ja/mordhauSDK-guide/actors#spawns-mordhauplayerstart) 側のイベントと対になります
+- `OnAfterLogin`, `OnBeforeLogout`： プレイヤーの参加と退出
+- `OnMessageBroadcasted`, `OnRconStringCommand`： チャットと RCON。管理コマンドに反応させたいときに使えます
+- `GetNextMap`, `GetNextMaps`, `VoteLevel`： ローテーションと投票
 
-## サブレベル — モードごとに 1 レベル {#sublevels}
+## サブレベル： モードごとに 1 レベル {#sublevels}
 
 Mordhau のマップは 1 つのレベルではありません。ジオメトリを持つ **ベースレベル** と、そのモードのスポーンと目標物を持つ **モードごとのサブレベル** です。どのモードかをゲームに伝えるのは、サブレベル名の接頭辞です。
 
@@ -70,7 +70,7 @@ Mordhau のマップは 1 つのレベルではありません。ジオメトリ
 
 エディターでの作業の流れ：
 
-1. マップ本体を普通のレベルとして作る — ジオメトリ、ライティング、小物。
+1. マップ本体を普通のレベルとして作る、 ジオメトリ、ライティング、小物。
 2. モードごとに空のレベルを作り、接頭辞を先頭にした名前を付ける：`SKM_CabbageLand`。
 3. それを開き、**Levels** ウィンドウを開いて、パーシスタントレベルのストリーミング方式を **Always Loaded** にする。新しいサブレベルを作るたびに Blueprint-only に戻るので、毎回設定します。
 4. **Add Existing** → ベースマップを追加し、サブレベルの下にジオメトリが読み込まれるようにする。
@@ -85,7 +85,7 @@ Mordhau のマップは 1 つのレベルではありません。ジオメトリ
 この接頭辞リストにないモードについては、コミュニティ製の [MetaMod](https://mod.io/g/mordhau/m/metamod) がマップの対応範囲を広げます。上の手順は [Mordhau Modding Wiki](https://github.com/Net-Slayer/MordhauModsWiki) を要約したもので、向こうにはスクリーンショットがあります。
 :::
 
-## メタデータ — マップの正体をゲームに伝える {#metadata-how-the-game-knows-what-your-map-is}
+## メタデータ： マップの正体をゲームに伝える {#metadata-how-the-game-knows-what-your-map-is}
 
 メニュー表示に必要なものは、2 つの小さな Blueprintable クラスが持っています。忘れやすく、忘れるとマップに名前も画像も付きません。
 
@@ -110,7 +110,7 @@ Mordhau のマップは 1 つのレベルではありません。ジオメトリ
 
 ## レベルブループリント {#the-level-blueprint}
 
-どのレベルにも 1 つあり、Mordhau では `MordhauLevelScriptActor` を継承しています。*そのマップだけ* のスクリプティング — 一定スコアで開く扉、ポイント陥落で崩れる橋 — の置き場所です。
+どのレベルにも 1 つあり、Mordhau では `MordhauLevelScriptActor` を継承しています。*そのマップだけ* のスクリプティング（一定スコアで開く扉、ポイント陥落で崩れる橋）の置き場所です。
 
 マップ単位の仕組みを起動する場所でもあります。たとえばコミュニティ製の[ランダムスポーンシステム](https://github.com/WaGi-Coding/TakiRandomSpawnForMordhau)は、コントローラーをレベルブループリントに置いて `Event BeginPlay` に接続して導入します。
 
@@ -131,12 +131,12 @@ Mordhau のマップは 1 つのレベルではありません。ジオメトリ
 
 ## 5 つだけ覚えるなら {#if-you-only-learn-five}
 
-1. **自分のゲームモード Blueprint** — 一番近い公式モードから派生させる
-2. **`MordhauPlayerStart`** — スポーンがなければマップではない
-3. **`ControlPoint`** とバナー — Frontline と Invasion の目標物レイヤーそのもの
-4. **`MapMetaData` と `GameModeMetadata`** — マップが自分を名乗る方法
-5. **レベルブループリント** — そのマップならではの一点物のスクリプティング
+1. **自分のゲームモード Blueprint**： 一番近い公式モードから派生させる
+2. **`MordhauPlayerStart`**： スポーンがなければマップではない
+3. **`ControlPoint`** とバナー： Frontline と Invasion の目標物レイヤーそのもの
+4. **`MapMetaData` と `GameModeMetadata`**： マップが自分を名乗る方法
+5. **レベルブループリント**： そのマップならではの一点物のスクリプティング
 
 ## このページの完成に力を貸してください {#help-us-finish-this-page}
 
-Mordhau の Mod 制作を通しで解説した本格的なマニュアルは、まだ誰も書いていません。このページも、あるべき手順書ではなく地図にとどまっています。モードやマップを公開したことがあるなら、あなたが知っていること — どのプロパティが本当に効くのか、パッケージ化で何が壊れるのか、公式マップの分かりにくい作り — がまさに欠けている部分です。[issue を立てる](https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations/issues)か、[Discord](https://discord.gg/zuX58yRV84) に走り書きを貼ってください。整形はこちらでやります。
+Mordhau の Mod 制作を通しで解説した本格的なマニュアルは、まだ誰も書いていません。このページも、あるべき手順書ではなく地図にとどまっています。モードやマップを公開したことがあるなら、あなたが知っていること（どのプロパティが本当に効くのか、パッケージ化で何が壊れるのか、公式マップの分かりにくい作り）がまさに欠けている部分です。[issue を立てる](https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations/issues)か、[Discord](https://discord.gg/zuX58yRV84) に走り書きを貼ってください。整形はこちらでやります。

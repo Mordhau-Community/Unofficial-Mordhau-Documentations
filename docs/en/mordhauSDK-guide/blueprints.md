@@ -4,9 +4,9 @@ A **Blueprint** is Unreal's visual scripting: a class you build in a graph inste
 
 That is the mental model worth having before you open anything:
 
-- **C++ classes** — written by Triternion, compiled into the game. `MordhauGameMode`, `ControlPoint`, `MordhauPlayerStart`, `MordhauWeapon`. You cannot edit these.
-- **Blueprint assets** — live under `/Game/Mordhau/Blueprints/…` in the Content Browser, and are what the shipped maps and modes actually use. Named `BP_Something`.
-- **Your Blueprints** — subclasses of theirs, living in your own mod folder. This is everything you make.
+- **C++ classes**: written by Triternion, compiled into the game. `MordhauGameMode`, `ControlPoint`, `MordhauPlayerStart`, `MordhauWeapon`. You cannot edit these.
+- **Blueprint assets**: live under `/Game/Mordhau/Blueprints/…` in the Content Browser, and are what the shipped maps and modes actually use. Named `BP_Something`.
+- **Your Blueprints**: subclasses of theirs, living in your own mod folder. This is everything you make.
 
 Keeping your work in your own folder is not just tidiness. Editing the game's Blueprints in place makes a mod that conflicts with every other mod that did the same.
 
@@ -16,7 +16,7 @@ Paths and property names below are taken from the game's classes, community tool
 
 ## The game mode is the first Blueprint you will touch
 
-Every mode is a pair: a **GameMode** that owns the rules and runs on the server, and a **GameState** that holds what all clients need to see — the clock, the scores, the objective status.
+Every mode is a pair: a **GameMode** that owns the rules and runs on the server, and a **GameState** that holds what all clients need to see: the clock, the scores, and the objective status.
 
 | Mode | Blueprints, under `/Game/Mordhau/Blueprints/GameModes/` |
 | --- | --- |
@@ -26,7 +26,7 @@ Every mode is a pair: a **GameMode** that owns the rules and runs on the server,
 | Frontline | `Battle/BP_FrontlineGameMode` |
 | Horde | `Horde/BP_HordeGameMode` |
 
-The rest follow the same `BP_<Mode>GameMode` / `BP_<Mode>GameState` naming — check the folder rather than guessing.
+The rest follow the same `BP_<Mode>GameMode` / `BP_<Mode>GameState` naming, check the folder rather than guessing.
 
 These are the same classes a server admin edits in `Game.ini`, which is why `[/Game/Mordhau/Blueprints/GameModes/BP_DeathmatchGameMode.BP_DeathmatchGameMode_C]` looks familiar if you have read the [dedicated server guide](/en/dedicated-server-guide/). Config keys and Blueprint properties are the same properties.
 
@@ -48,12 +48,12 @@ Whatever mode you subclass, these come with it. They are the levers most custom 
 
 And the functions and events worth knowing, because they are the hooks for custom behaviour:
 
-- `IsSpawnpointAllowed(PlayerStart, Controller)` and `GetSpawnpointPreference(PlayerStart, Controller)` — the spawn selection pass, paired with the events on [`MordhauPlayerStart`](/en/mordhauSDK-guide/actors#spawns-mordhauplayerstart)
-- `OnAfterLogin`, `OnBeforeLogout` — players joining and leaving
-- `OnMessageBroadcasted`, `OnRconStringCommand` — chat and RCON, useful if your mode should react to admin commands
-- `GetNextMap`, `GetNextMaps`, `VoteLevel` — rotation and voting
+- `IsSpawnpointAllowed(PlayerStart, Controller)` and `GetSpawnpointPreference(PlayerStart, Controller)`: the spawn selection pass, paired with the events on [`MordhauPlayerStart`](/en/mordhauSDK-guide/actors#spawns-mordhauplayerstart)
+- `OnAfterLogin`, `OnBeforeLogout`: players joining and leaving
+- `OnMessageBroadcasted`, `OnRconStringCommand`: chat and RCON, useful if your mode should react to admin commands
+- `GetNextMap`, `GetNextMaps`, `VoteLevel`: rotation and voting
 
-## Sublevels — one level per game mode {#sublevels}
+## Sublevels: one level per game mode {#sublevels}
 
 A Mordhau map is not one level. It is a **base level** holding the geometry, and one **sublevel per game mode** holding that mode's spawns and objectives. The sublevel's name prefix is what tells the game which mode it is.
 
@@ -70,11 +70,11 @@ A Mordhau map is not one level. It is a **base level** holding the geometry, and
 
 The shape of the work, in the Editor:
 
-1. Build the map itself as an ordinary level — geometry, lighting, props.
+1. Build the map itself as an ordinary level, geometry, lighting, props.
 2. Create an empty level per mode, named prefix-first: `SKM_CabbageLand`.
 3. Open it, open the **Levels** window, and set the persistent level's streaming method to **Always Loaded**. It reverts to Blueprint-only every time you make a new sublevel, so set it every time.
 4. **Add Existing** → your base map, so the sublevel loads the geometry underneath it.
-5. Double-click the persistent level so it turns blue again — blue is what you are editing — and lock the base level to avoid editing it by accident.
+5. Double-click the persistent level so it turns blue again (blue is what you are editing) and lock the base level to avoid editing it by accident.
 6. Place that mode's game mode, spawns and objectives.
 
 Then `changemap SKM_CabbageLand` loads it.
@@ -85,7 +85,7 @@ This layout is why the [placement warning](/en/mordhauSDK-guide/actors) matters 
 For modes outside that prefix list, the community's [MetaMod](https://mod.io/g/mordhau/m/metamod) extends what a map can support. The sublevel walkthrough above is condensed from the [Mordhau Modding Wiki](https://github.com/Net-Slayer/MordhauModsWiki), which has the screenshots.
 :::
 
-## Metadata — how the game knows what your map is {#metadata-how-the-game-knows-what-your-map-is}
+## Metadata: how the game knows what your map is {#metadata-how-the-game-knows-what-your-map-is}
 
 Two small Blueprintable classes carry everything the menus display. They are easy to forget and then your map has no name and no picture.
 
@@ -110,7 +110,7 @@ Making a genuinely new mode means a `GameModeMetadata` subclass with your own pr
 
 ## The Level Blueprint
 
-Each level has one, and in Mordhau it derives from `MordhauLevelScriptActor`. It is the right place for scripting that belongs to *this map only* — a door that opens at a score threshold, a bridge that collapses once a point falls.
+Each level has one, and in Mordhau it derives from `MordhauLevelScriptActor`. It is the right place for scripting that belongs to *this map only*: a door that opens at a score threshold, or a bridge that collapses once a point falls.
 
 It is also where map-level systems get started. The community [random spawn system](https://github.com/WaGi-Coding/TakiRandomSpawnForMordhau), for example, is installed by dropping its controller into the Level Blueprint and wiring it to `Event BeginPlay`.
 
@@ -131,12 +131,12 @@ A custom weapon is largely a numbers exercise once you have duplicated an existi
 
 ## If you only learn five
 
-1. **Your game mode Blueprint** — subclassed from the closest shipped mode
-2. **`MordhauPlayerStart`** — no spawns, no map
-3. **`ControlPoint`** and its banners — the whole objective layer for Frontline and Invasion
-4. **`MapMetaData` and `GameModeMetadata`** — how your map identifies itself
-5. **The Level Blueprint** — for the one-off scripting that makes a map yours
+1. **Your game mode Blueprint**: subclassed from the closest shipped mode
+2. **`MordhauPlayerStart`**: no spawns, no map
+3. **`ControlPoint`** and its banners: the whole objective layer for Frontline and Invasion
+4. **`MapMetaData` and `GameModeMetadata`**: how your map identifies itself
+5. **The Level Blueprint**: for the one-off scripting that makes a map yours
 
 ## Help us finish this page
 
-Nobody has written a proper end-to-end Mordhau modding manual, and this page is a map of the territory rather than the walkthrough it should be. If you have shipped a mode or a map, the things you know — which properties actually matter, what breaks in packaging, what the shipped maps do that isn't obvious — are exactly what is missing. [Open an issue](https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations/issues), or paste rough notes into the [Discord](https://discord.gg/zuX58yRV84) and we will do the formatting.
+Nobody has written a proper end-to-end Mordhau modding manual, and this page is a map of the territory rather than the walkthrough it should be. If you have shipped a mode or a map, the things you know (which properties actually matter, what breaks in packaging, what the shipped maps do that isn't obvious) are exactly what is missing. [Open an issue](https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations/issues), or paste rough notes into the [Discord](https://discord.gg/zuX58yRV84) and we will do the formatting.

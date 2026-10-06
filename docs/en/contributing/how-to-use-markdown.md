@@ -132,7 +132,7 @@ Save screenshots as `.webp` where you can. They are a fraction of the size of PN
 
 ## Adding a new page
 
-Creating the file is only half of it — a page nobody can navigate to may as well not exist.
+Creating the file is only half of it, a page nobody can navigate to may as well not exist.
 
 1. Create the `.md` file in the right folder under `docs/`.
 2. Open `.vitepress/config.mts`.
@@ -144,7 +144,7 @@ If your page belongs in every language, add the English one first and leave the 
 ## House style
 
 - One `#` heading per page, at the top, and it should match what the sidebar calls the page.
-- Do not skip heading levels — an `###` should sit under an `##`, not directly under the `#`.
+- Do not skip heading levels: an `###` should sit under an `##`, not directly under the `#`.
 - Put a blank line before and after headings, lists, code blocks and callouts. Markdown is forgiving about this until suddenly it is not.
 - Use backticks for file names, commands, config keys and values. `Game.ini`, not "Game.ini".
 - Let Prettier handle line wrapping. Do not add manual line breaks to keep lines short.

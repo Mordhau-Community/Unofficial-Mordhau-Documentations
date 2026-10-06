@@ -8,7 +8,7 @@ aside: false
 
 Mordhau est bien documenté en tant que jeu à jouer et à peine documenté en tant que jeu à jouer.
 courir.Tout après rejoindre un serveur : en héberger un, l'administrer, créer
-pour cela, ou le réparer lorsqu'il se casse - n'a aucune référence officielle maintenue.
+pour cela, ou le réparer lorsqu'il se casse, n'a aucune référence officielle maintenue.
 
 ## Où sont les lacunes {#where-the-gaps-are}
 

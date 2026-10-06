@@ -16,7 +16,7 @@ C'est le bon choix en cas de fautes de frappe, d'un lien rompu, d'une phrase mal
 
 ## 3. Travaillez localement {#3-work-locally}
 
-Une fois que vous modifiez plus d'un fichier - ou ajoutez une page ou touchez la barre latérale - cela vaut la peine de configurer le projet sur votre ordinateur afin que vous puissiez voir le résultat avant de l'envoyer.Le [présentation](/fr/contributing/) parcourt le clone et le serveur de développement.
+Une fois que vous modifiez plus d'un fichier, ou ajoutez une page ou touchez la barre latérale, cela vaut la peine de configurer le projet sur votre ordinateur afin que vous puissiez voir le résultat avant de l'envoyer.Le [présentation](/fr/contributing/) parcourt le clone et le serveur de développement.
 
 Travaillez localement lorsque vous êtes :
 

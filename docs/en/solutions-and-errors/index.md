@@ -32,7 +32,7 @@ Work through it in this order:
 3. Are all three ports forwarded on the router, as **UDP**, to the right internal IP?
 4. Did the machine's local IP change? DHCP reassigns addresses and the forwarding rules then point at nothing. Give the server a static local IP or a DHCP reservation.
 
-If it works on your own network but not from outside, and the forwarding is definitely right, your ISP may have you behind CGNAT. You cannot host through that, and no amount of configuration will change it — you need a VPS.
+If it works on your own network but not from outside, and the forwarding is definitely right, your ISP may have you behind CGNAT. You cannot host through that, and no amount of configuration will change it. You need a VPS.
 
 ### Config changes do nothing
 
@@ -62,11 +62,11 @@ If it still refuses, you edited the password while the server was running and it
 
 ### RCON will not connect
 
-**Connection refused** — RCON is not listening. `RconPort` needs to be set in `Game.ini` and the server restarted.
+**Connection refused**: RCON is not listening. `RconPort` needs to be set in `Game.ini` and the server restarted.
 
-**Connection times out** — firewall. Note the RCON port is **TCP**, unlike the other three, so a rule that covers the game ports will not cover it.
+**Connection times out**: firewall. Note the RCON port is **TCP**, unlike the other three, so a rule that covers the game ports will not cover it.
 
-**Authentication failed** — wrong password. If you left `RconPassword` blank the server generated a random one at startup that you have no way of knowing. Set it explicitly and restart.
+**Authentication failed**: wrong password. If you left `RconPassword` blank the server generated a random one at startup that you have no way of knowing. Set it explicitly and restart.
 
 More detail on the [RCON page](/en/rcon-guide/).
 
@@ -82,7 +82,7 @@ Mordhau clients cannot join a server on a different version. After a patch, re-r
 
 ### Performance is bad with a full server
 
-Check `NetServerMaxTickRate` in `Engine.ini`. If it is set higher than the hardware can sustain, the server falls behind and everyone gets rubber-banding — a stable 60 feels much better than an unstable 120.
+Check `NetServerMaxTickRate` in `Engine.ini`. If it is set higher than the hardware can sustain, the server falls behind and everyone gets rubber-banding. A stable 60 feels much better than an unstable 120.
 
 Mordhau is largely single-thread bound, so single-core clock speed matters more than core count. A cheap VPS with many slow cores is a poor fit.
 
@@ -94,7 +94,7 @@ This section is thinner than the server one, because most of us here run servers
 
 ### The game will not start
 
-1. Verify the game files through Steam — right click Mordhau, Properties, Installed Files, Verify integrity.
+1. Verify the game files through Steam, right click Mordhau, Properties, Installed Files, Verify integrity.
 2. Update your graphics drivers.
 3. Reboot. Genuinely, for anti-cheat problems this fixes it more often than it should.
 
@@ -109,12 +109,12 @@ Mordhau uses Easy Anti-Cheat, and most launch failures trace back to it.
 ### Disconnected during a match
 
 - If it is one specific server, it is that server, not you.
-- If it is every server, test your connection generally. Wi-Fi is a frequent culprit — try a cable if you can.
+- If it is every server, test your connection generally. Wi-Fi is a frequent culprit, try a cable if you can.
 - Packet loss shows up as rubber-banding and hits that do not register before it shows up as a disconnect.
 
 ### Poor frame rate
 
-Lower shadows and view distance first, they cost the most for the least visual difference. Frontline with a full server is the worst case in the game — if it only stutters there, that is the load, not a fault.
+Lower shadows and view distance first. They cost the most for the least visual difference. Frontline with a full server is the worst case in the game. If it only stutters there, that is the load, not a fault.
 
 ## Still stuck
 

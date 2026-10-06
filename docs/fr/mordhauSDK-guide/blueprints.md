@@ -4,9 +4,9 @@ Un **Blueprint** est le scripting visuel d'Unreal : une classe que vous construi
 
 C'est le modèle mental à avoir avant d'ouvrir quoi que ce soit :
 
-- **Les classes C++** — écrites par Triternion, compilées dans le jeu. `MordhauGameMode`, `ControlPoint`, `MordhauPlayerStart`, `MordhauWeapon`. Vous ne pouvez pas les modifier.
-- **Les assets Blueprint** — dans `/Game/Mordhau/Blueprints/…` du Content Browser, ce sont eux que les cartes et les modes officiels utilisent réellement. Nommés `BP_Quelquechose`.
-- **Vos Blueprints** — des sous-classes des leurs, rangées dans votre propre dossier de mod. C'est tout ce que vous créez.
+- **Les classes C++**: écrites par Triternion, compilées dans le jeu. `MordhauGameMode`, `ControlPoint`, `MordhauPlayerStart`, `MordhauWeapon`. Vous ne pouvez pas les modifier.
+- **Les assets Blueprint**: dans `/Game/Mordhau/Blueprints/…` du Content Browser, ce sont eux que les cartes et les modes officiels utilisent réellement. Nommés `BP_Quelquechose`.
+- **Vos Blueprints**: des sous-classes des leurs, rangées dans votre propre dossier de mod. C'est tout ce que vous créez.
 
 Garder votre travail dans votre propre dossier n'est pas qu'une question de rangement. Modifier les Blueprints du jeu sur place produit un mod qui entre en conflit avec tous les autres mods ayant fait pareil.
 
@@ -16,7 +16,7 @@ Les chemins et noms de propriétés ci-dessous proviennent des classes du jeu, d
 
 ## Le mode de jeu est le premier Blueprint que vous toucherez {#the-game-mode-is-the-first-blueprint-you-will-touch}
 
-Chaque mode est une paire : un **GameMode** qui détient les règles et tourne sur le serveur, et un **GameState** qui porte ce que tous les clients doivent voir — le chronomètre, les scores, l'état des objectifs.
+Chaque mode est une paire : un **GameMode** qui détient les règles et tourne sur le serveur, et un **GameState** qui porte ce que tous les clients doivent voir, le chronomètre, les scores, l'état des objectifs.
 
 | Mode | Blueprints, sous `/Game/Mordhau/Blueprints/GameModes/` |
 | --- | --- |
@@ -26,7 +26,7 @@ Chaque mode est une paire : un **GameMode** qui détient les règles et tourne s
 | Frontline | `Battle/BP_FrontlineGameMode` |
 | Horde | `Horde/BP_HordeGameMode` |
 
-Les autres suivent le même nommage `BP_<Mode>GameMode` / `BP_<Mode>GameState` — allez voir le dossier plutôt que de deviner.
+Les autres suivent le même nommage `BP_<Mode>GameMode` / `BP_<Mode>GameState`, allez voir le dossier plutôt que de deviner.
 
 Ce sont les mêmes classes qu'un administrateur édite dans `Game.ini`, ce qui explique pourquoi `[/Game/Mordhau/Blueprints/GameModes/BP_DeathmatchGameMode.BP_DeathmatchGameMode_C]` vous semblera familier si vous avez lu le [guide du serveur dédié](/fr/dedicated-server-guide/). Les clés de configuration et les propriétés Blueprint sont les mêmes propriétés.
 
@@ -48,12 +48,12 @@ Quel que soit le mode que vous sous-classez, tout ceci vient avec. Ce sont les l
 
 Et les fonctions et événements à connaître, parce que ce sont les points d'accroche des comportements personnalisés :
 
-- `IsSpawnpointAllowed(PlayerStart, Controller)` et `GetSpawnpointPreference(PlayerStart, Controller)` — la sélection du point d'apparition, en tandem avec les événements de [`MordhauPlayerStart`](/fr/mordhauSDK-guide/actors#spawns-mordhauplayerstart)
-- `OnAfterLogin`, `OnBeforeLogout` — arrivées et départs des joueurs
-- `OnMessageBroadcasted`, `OnRconStringCommand` — chat et RCON, utiles si votre mode doit réagir à des commandes d'admin
-- `GetNextMap`, `GetNextMaps`, `VoteLevel` — rotation et vote
+- `IsSpawnpointAllowed(PlayerStart, Controller)` et `GetSpawnpointPreference(PlayerStart, Controller)`: la sélection du point d'apparition, en tandem avec les événements de [`MordhauPlayerStart`](/fr/mordhauSDK-guide/actors#spawns-mordhauplayerstart)
+- `OnAfterLogin`, `OnBeforeLogout`: arrivées et départs des joueurs
+- `OnMessageBroadcasted`, `OnRconStringCommand`: chat et RCON, utiles si votre mode doit réagir à des commandes d'admin
+- `GetNextMap`, `GetNextMaps`, `VoteLevel`: rotation et vote
 
-## Sous-niveaux — un niveau par mode de jeu {#sublevels}
+## Sous-niveaux: un niveau par mode de jeu {#sublevels}
 
 Une carte Mordhau n'est pas un seul niveau. C'est un **niveau de base** qui porte la géométrie, et un **sous-niveau par mode de jeu** qui porte les points d'apparition et les objectifs de ce mode. C'est le préfixe du nom du sous-niveau qui indique au jeu de quel mode il s'agit.
 
@@ -70,11 +70,11 @@ Une carte Mordhau n'est pas un seul niveau. C'est un **niveau de base** qui port
 
 Le déroulé du travail, dans l'éditeur :
 
-1. Construisez la carte elle-même comme un niveau ordinaire — géométrie, éclairage, props.
+1. Construisez la carte elle-même comme un niveau ordinaire, géométrie, éclairage, props.
 2. Créez un niveau vide par mode, préfixe d'abord : `SKM_CabbageLand`.
 3. Ouvrez-le, ouvrez la fenêtre **Levels**, et passez la méthode de streaming du niveau persistant sur **Always Loaded**. Elle revient à Blueprint-only à chaque nouveau sous-niveau, donc refaites-le à chaque fois.
 4. **Add Existing** → votre carte de base, pour que le sous-niveau charge la géométrie en dessous.
-5. Double-cliquez sur le niveau persistant pour qu'il repasse en bleu — le bleu est ce que vous éditez — et verrouillez le niveau de base pour ne pas l'éditer par accident.
+5. Double-cliquez sur le niveau persistant pour qu'il repasse en bleu (le bleu est ce que vous éditez) et verrouillez le niveau de base pour ne pas l'éditer par accident.
 6. Placez le mode de jeu, les points d'apparition et les objectifs de ce mode.
 
 Ensuite, `changemap SKM_CabbageLand` le charge.
@@ -85,7 +85,7 @@ Cette structure est précisément la raison pour laquelle l'[avertissement sur l
 Pour des modes hors de cette liste de préfixes, le [MetaMod](https://mod.io/g/mordhau/m/metamod) communautaire étend ce qu'une carte peut prendre en charge. Le déroulé ci-dessus est condensé depuis le [Mordhau Modding Wiki](https://github.com/Net-Slayer/MordhauModsWiki), qui a les captures d'écran.
 :::
 
-## Métadonnées — comment le jeu sait ce qu'est votre carte {#metadata-how-the-game-knows-what-your-map-is}
+## Métadonnées: comment le jeu sait ce qu'est votre carte {#metadata-how-the-game-knows-what-your-map-is}
 
 Deux petites classes Blueprintables portent tout ce que les menus affichent. On les oublie facilement, et la carte se retrouve alors sans nom ni image.
 
@@ -110,7 +110,7 @@ Créer un mode réellement nouveau implique donc une sous-classe de `GameModeMet
 
 ## Le Level Blueprint {#the-level-blueprint}
 
-Chaque niveau en a un, et dans Mordhau il dérive de `MordhauLevelScriptActor`. C'est le bon endroit pour le scripting qui n'appartient qu'à *cette carte* — une porte qui s'ouvre à un certain score, un pont qui s'effondre quand un point tombe.
+Chaque niveau en a un, et dans Mordhau il dérive de `MordhauLevelScriptActor`. C'est le bon endroit pour le scripting qui n'appartient qu'à *cette carte*, une porte qui s'ouvre à un certain score, un pont qui s'effondre quand un point tombe.
 
 C'est aussi là que démarrent les systèmes propres à la carte. Le [système d'apparition aléatoire](https://github.com/WaGi-Coding/TakiRandomSpawnForMordhau) communautaire, par exemple, s'installe en déposant son contrôleur dans le Level Blueprint et en le reliant à `Event BeginPlay`.
 
@@ -131,12 +131,12 @@ Une arme personnalisée est surtout un exercice de chiffres une fois que vous en
 
 ## Si vous n'en apprenez que cinq {#if-you-only-learn-five}
 
-1. **Votre Blueprint de mode de jeu** — sous-classé depuis le mode officiel le plus proche
-2. **`MordhauPlayerStart`** — pas de points d'apparition, pas de carte
-3. **`ControlPoint`** et ses bannières — toute la couche objectif de Frontline et d'Invasion
-4. **`MapMetaData` et `GameModeMetadata`** — comment votre carte se présente
-5. **Le Level Blueprint** — pour le scripting ponctuel qui rend une carte unique
+1. **Votre Blueprint de mode de jeu**: sous-classé depuis le mode officiel le plus proche
+2. **`MordhauPlayerStart`**: pas de points d'apparition, pas de carte
+3. **`ControlPoint`** et ses bannières: toute la couche objectif de Frontline et d'Invasion
+4. **`MapMetaData` et `GameModeMetadata`**: comment votre carte se présente
+5. **Le Level Blueprint**: pour le scripting ponctuel qui rend une carte unique
 
 ## Aidez-nous à finir cette page {#help-us-finish-this-page}
 
-Personne n'a écrit de manuel de modding Mordhau de bout en bout, et cette page est une carte du territoire plutôt que le guide pas-à-pas qu'elle devrait être. Si vous avez publié un mode ou une carte, ce que vous savez — quelles propriétés comptent vraiment, ce qui casse au packaging, ce que font les cartes officielles et qui n'a rien d'évident — est exactement ce qui manque. [Ouvrez une issue](https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations/issues), ou collez vos notes brutes sur le [Discord](https://discord.gg/zuX58yRV84) : nous ferons la mise en forme.
+Personne n'a écrit de manuel de modding Mordhau de bout en bout, et cette page est une carte du territoire plutôt que le guide pas-à-pas qu'elle devrait être. Si vous avez publié un mode ou une carte, ce que vous savez (quelles propriétés comptent vraiment, ce qui casse au packaging, ce que font les cartes officielles et qui n'a rien d'évident) est exactement ce qui manque. [Ouvrez une issue](https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations/issues), ou collez vos notes brutes sur le [Discord](https://discord.gg/zuX58yRV84) : nous ferons la mise en forme.

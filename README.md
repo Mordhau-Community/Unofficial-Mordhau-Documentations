@@ -51,7 +51,7 @@ To build the documentation for production, use the following command:
 npm run docs:build
 ```
 
-The static files are generated in `.vitepress/dist/docs`. That folder is not committed — Netlify runs the build itself on every push to `main`. To check the built output before you push:
+The static files are generated in `.vitepress/dist/docs`. That folder is not committed. Netlify runs the build itself on every push to `main`. To check the built output before you push:
 
 ```bash
 npm run docs:preview
@@ -142,7 +142,7 @@ Example: `docs/fr` for French, `docs/ar` for Arabic.
 
 3- Update the configuration in `.vitepress/config.mts` to include the new language.
 
-Please do not submit machine translated pages — we have no way to review a language none of us read.
+Please do not submit machine translated pages. We have no way to review a language none of us read.
 
 ## 📬 Questions or Suggestions?
 

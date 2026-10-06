@@ -51,14 +51,14 @@ Ne réutilisez pas votre `AdminPassword` ici et n'utilisez rien de court.RCON es
 Redémarrez le serveur.Vous pouvez également remplacer le port sur la ligne de commande si vous préférez :
 
 ```bash
-./MordhauServer.sh Mordhau FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -RconPort=7778 -log
+./MordhauServer.sh FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -RconPort=7778 -log
 ```
 
 ## Ouverture du port {#opening-the-port}
 
 Le port RCON est **TCP**, contrairement aux ports de jeu, de balise et de requête.qui sont tous UDP.Une règle de pare-feu qui couvre les trois autres ne couvrira pas celle-ci.
 
-Ne le transférez que si vous avez réellement besoin d'atteindre RCON depuis l'extérieur de la machine.Si vous administrez quand même le serveur via SSH, laissez le port fermé à Internet et connectez-vous à `127.0.0.1` depuis la boîte – c'est strictement plus sûr et ne vous coûte rien.
+Ne le transférez que si vous avez réellement besoin d'atteindre RCON depuis l'extérieur de la machine.Si vous administrez quand même le serveur via SSH, laissez le port fermé à Internet et connectez-vous à `127.0.0.1` depuis la boîte, c'est strictement plus sûr et ne vous coûte rien.
 
 ## Connexion {#connecting}
 
@@ -74,7 +74,7 @@ Cela vous amène à une invite interactive.Pour lancer une seule commande et qui
 mcrcon -H 127.0.0.1 -P 7778 -p your-rcon-password "playerlist"
 ```
 
-Des clients graphiques existent également si vous préférez avoir une fenêtre plutôt qu'un terminal - la plupart des outils Source RCON à usage général fonctionnent correctement avec Mordhau.
+Des clients graphiques existent également si vous préférez avoir une fenêtre plutôt qu'un terminal, la plupart des outils Source RCON à usage général fonctionnent correctement avec Mordhau.
 
 ## Commandes {#commands}
 

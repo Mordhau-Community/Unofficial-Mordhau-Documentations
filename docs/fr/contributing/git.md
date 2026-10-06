@@ -1,6 +1,6 @@
 # Qu'est-ce que Git ? {#what-is-git}
 
-Git conserve l'historique d'un dossier.Chaque fois que vous enregistrez un point de contrôle – un *commit* – il enregistre ce qui a changé, quand et qui l'a fait.Vous pouvez revenir à n'importe quel point de contrôle antérieur et deux personnes peuvent travailler sur le même dossier en même temps sans s'écraser mutuellement.
+Git conserve l'historique d'un dossier.Chaque fois que vous enregistrez un point de contrôle (un *commit*) il enregistre ce qui a changé, quand et qui l'a fait.Vous pouvez revenir à n'importe quel point de contrôle antérieur et deux personnes peuvent travailler sur le même dossier en même temps sans s'écraser mutuellement.
 
 Cela n'a rien à voir avec Mordhau.Il s'agit d'un outil général, utilisé pour presque tous les projets logiciels existants, et nous l'utilisons ici car ces documents sont un dossier de fichiers texte que de nombreuses personnes modifient.
 
@@ -12,19 +12,19 @@ Git et GitHub sont deux choses différentes.Git est le programme sur votre ordin
 
 Vous rencontrerez constamment ce vocabulaire, il vaut donc la peine de vous y prendre tôt.
 
-**Dépôt** (ou dépôt) — le dossier du projet, ainsi que l'intégralité de son historique.Ce site est un référentiel.
+**Dépôt** (ou dépôt): le dossier du projet, ainsi que l'intégralité de son historique.Ce site est un référentiel.
 
-**Clone** — téléchargez une copie d'un référentiel, de l'historique et tout.
+**Clone**: téléchargez une copie d'un référentiel, de l'historique et tout.
 
-**Commit** — un point de contrôle enregistré, avec un message décrivant ce que vous avez modifié.
+**Commit**: un point de contrôle enregistré, avec un message décrivant ce que vous avez modifié.
 
-**Branche** — une ligne de travail distincte.Vous effectuez vos modifications sur votre propre branche afin que la branche principale continue de fonctionner pendant que vous êtes à mi-chemin.
+**Branche**: une ligne de travail distincte.Vous effectuez vos modifications sur votre propre branche afin que la branche principale continue de fonctionner pendant que vous êtes à mi-chemin.
 
-**Push** — envoyez vos commits depuis votre machine jusqu'à GitHub.
+**Push**: envoyez vos commits depuis votre machine jusqu'à GitHub.
 
-**Pull** — annule les engagements pris par d'autres personnes.
+**Pull**: annule les engagements pris par d'autres personnes.
 
-**Fusionner** — combinez une branche dans une autre.
+**Fusionner**: combinez une branche dans une autre.
 
 ## Les cinq commandes dont vous avez réellement besoin {#the-five-commands-you-actually-need}
 
@@ -71,7 +71,7 @@ git checkout -b my-new-branch
 
 Les messages d'erreur Git sont notoirement inutiles.Rien de ce que vous faites localement n’est irrécupérable tant que vous n’avez pas supprimé le dossier, alors ne paniquez pas.
 
-- [Le livre officiel Git](https://git-scm.com/book/en/v2) — gratuit, et les deux premiers chapitres couvrent tout ce qui précède plus en profondeur
-- [Oh merde, Git !?!](https://ohshitgit.com/) — réponses courtes à « J'ai fait quelque chose de mal, comment puis-je l'annuler »
+- [Le livre officiel Git](https://git-scm.com/book/en/v2): gratuit, et les deux premiers chapitres couvrent tout ce qui précède plus en profondeur
+- [Oh merde, Git !?!](https://ohshitgit.com/): réponses courtes à « J'ai fait quelque chose de mal, comment puis-je l'annuler »
 
 Ou demandez dans le[Discord](https://discord.gg/zuX58yRV84).Quelqu'un a rencontré la même erreur.

@@ -12,10 +12,10 @@
 
 入口は 2 つ、どちらも Unreal 標準です。
 
-- **Place Actors** パネル — エンジン標準のもの向け：ライト、ボリューム、ジオメトリ、カメラ。
-- **Content Browser** — Mordhau が同梱しているもの向け。クラスまたは Blueprint を検索し、ビューポートへドラッグします。
+- **Place Actors** パネル： エンジン標準のもの向け：ライト、ボリューム、ジオメトリ、カメラ。
+- **Content Browser**： Mordhau が同梱しているもの向け。クラスまたは Blueprint を検索し、ビューポートへドラッグします。
 
-レベルに置いたら選択します。右側の **Details** パネルにプロパティが並びます。ここで値を変えても変わるのは *その配置済みのコピーだけ* — クラスではなくインスタンスです。目標物の作業はまさにこれで、同じ `ControlPoint` を 5 つ置き、コピーごとに名前・キャプチャー範囲・前提ポイントを変えていきます。
+レベルに置いたら選択します。右側の **Details** パネルにプロパティが並びます。ここで値を変えても変わるのは *その配置済みのコピーだけ*： クラスではなくインスタンスです。目標物の作業はまさにこれで、同じ `ControlPoint` を 5 つ置き、コピーごとに名前・キャプチャー範囲・前提ポイントを変えていきます。
 
 そのアクターを使うすべての場所に変更を効かせたいなら、それはもうインスタンスの設定ではありません。[Blueprint のサブクラス](/ja/mordhauSDK-guide/blueprints)が必要です。
 
@@ -25,7 +25,7 @@ Mordhau のマップはベースレベル 1 つと、ゲームモードごとの
 ベースレベルを選んだまま Frontline のキャプチャーポイントを置くのが典型的な初心者のミスです。そうすると、そのベースマップを読み込む全モードに目標物が存在してしまいます。ビューポートで右クリック → **Move Selected Actors to Level** で後からでも直せます。[サブレベルの構成](/ja/mordhauSDK-guide/blueprints#sublevels)は Blueprints のページにあります。
 :::
 
-## スポーン地点 — `MordhauPlayerStart` {#spawns-mordhauplayerstart}
+## スポーン地点： `MordhauPlayerStart` {#spawns-mordhauplayerstart}
 
 UE4 の `PlayerStart` を置き換えるクラスです。どのマップでも、各モードのサブレベルごとに必要になります。
 
@@ -37,12 +37,12 @@ UE4 の `PlayerStart` を置き換えるクラスです。どのマップでも�
 
 さらに、Blueprint サブクラスで実装できるイベントが 2 つあります。
 
-- `IsAllowedSpawnFor(Controller)` — そのプレイヤーがこのスポーンを使ってよいかを返す
-- `GetSpawnPreferenceFor(Controller)` — スコアを返す。モードは高いスコアのスポーンを優先します
+- `IsAllowedSpawnFor(Controller)`： そのプレイヤーがこのスポーンを使ってよいかを返す
+- `GetSpawnPreferenceFor(Controller)`： スコアを返す。モードは高いスコアのスポーンを優先します
 
 これらを呼ぶのはゲームモード側で、`IsSpawnpointAllowed` と `GetSpawnpointPreference` を通します。分隊の近くに湧く、敵から遠い場所に湧くといった独自のスポーンロジックは、この 2 つのイベントに書きます。
 
-## 占領目標 — `ControlPoint` {#capture-objectives-controlpoint}
+## 占領目標： `ControlPoint` {#capture-objectives-controlpoint}
 
 Frontline と Invasion のポイントを支えるアクターです。目標物としてのロジックはほぼ内蔵済みで、マップ作者は主にプロパティを埋めます。
 
@@ -62,7 +62,7 @@ Frontline と Invasion のポイントを支えるアクターです。目標物
 
 `CapturePointBanner` にはスタティックメッシュ版とスケルタルメッシュ版があります（`StaticMeshCapturePointBanner`、`SkeletalMeshCapturePointBanner`）。配置したうえで、ポイントの `Banners` 配列に追加してください。`bBannersDoNotAnimateCaptureProgress` を立てない限り、占領進行に合わせてアニメーションします。
 
-## 押す目標 — `PushableActor` {#push-objectives-pushableactor}
+## 押す目標： `PushableActor` {#push-objectives-pushableactor}
 
 荷車、破城槌など、チームが経路に沿って押していくもの。
 
@@ -76,19 +76,19 @@ Frontline と Invasion のポイントを支えるアクターです。目標物
 | `Progress` | 経路上の 0〜1。`SetProgress` でスクリプトから動かせます |
 | `ProgressStepToAwardScoreFor`, `ScoreAwardedPerProgressStep` | 押した分のスコア |
 
-## Mordhau らしく振る舞うメッシュ — `MordhauActor` ファミリー {#meshes-that-behave-like-mordhaus-the-mordhauactor-family}
+## Mordhau らしく振る舞うメッシュ： `MordhauActor` ファミリー {#meshes-that-behave-like-mordhaus-the-mordhauactor-family}
 
 `MordhauActor` は戦闘に絡む小物の基底クラスです。素の `AActor` に対して `DamageableComponent` と打撃音のプロパティ（`ThudSound`、ピッチと音量の範囲）が加わっており、これがあるかどうかで「Mordhau の手応え」か「無反応」かが分かれます。
 
-- `StaticMeshMordhauActor` — ダメージを受けられるスタティックメッシュ。プレイヤーが叩いたり壊したりできるべきものには、素の `StaticMeshActor` ではなくこちらを使います。
-- `SkeletalMeshMordhauActor` — スケルタルメッシュ版。
-- `LODStaticMeshActor` — Mordhau 独自の LOD コンポーネントを使うスタティックメッシュ。マップが重くなってきたときに効いてきます。
+- `StaticMeshMordhauActor`： ダメージを受けられるスタティックメッシュ。プレイヤーが叩いたり壊したりできるべきものには、素の `StaticMeshActor` ではなくこちらを使います。
+- `SkeletalMeshMordhauActor`： スケルタルメッシュ版。
+- `LODStaticMeshActor`： Mordhau 独自の LOD コンポーネントを使うスタティックメッシュ。マップが重くなってきたときに効いてきます。
 
-## 揺れる小物 — `EnvironmentMovable` {#props-that-move-environmentmovable}
+## 揺れる小物： `EnvironmentMovable` {#props-that-move-environmentmovable}
 
 旗、吊り看板、ロープなど、硬直して見えてはいけないものの揺れ。`SwayingComponent` を指定し、ロール／ピッチ／ヨーの `Frequency`、`Magnitude`、`Speed` のベクターを設定するか、`InitializeMovable` で一括設定します。
 
-## 時限エリア — `MasterField` と `SubField` {#timed-areas-masterfield-and-subfield}
+## 時限エリア： `MasterField` と `SubField` {#timed-areas-masterfield-and-subfield}
 
 `MasterField` は `SubField` ボリュームの集合を保持し、ひとつのまとまりとして駆動します：`FieldLifeTime`、`FieldDeactivationTime`、`FieldFadeOutTime`、対象クラスの `CollisionFilter`、そして `CreateField`、`BeginFieldDeactivation`、`DeactivateAndDestroyField` の各イベント。`FieldSpawnComponent` はフィールド内に物を配置する部分で、地面へのスナップ（`bSnapLocationToGround`、`SnapGroundRadius`、`MaxAllowedRotation`）と任意の視線チェックを持ちます。
 

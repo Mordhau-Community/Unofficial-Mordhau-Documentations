@@ -5,7 +5,7 @@ If you would rather not run [your own server](/en/dedicated-server-guide/), thes
 The hosts below are the ones the Mordhau community has used over the years.
 
 ::: info
-We are not affiliated with any of them and none of these are affiliate links. Prices, regions and quality change over time — shop around, and ask in the [Discord](https://discord.gg/zuX58yRV84) how a host is doing lately before you commit to a long rental.
+We are not affiliated with any of them and none of these are affiliate links. Prices, regions and quality change over time, shop around, and ask in the [Discord](https://discord.gg/zuX58yRV84) how a host is doing lately before you commit to a long rental.
 :::
 
 ## Providers
@@ -46,4 +46,4 @@ A few things worth checking before you pay for six months up front:
 
 ## Or host it yourself
 
-It is free, and it is not especially hard — the [dedicated server guide](/en/dedicated-server-guide/) walks through the whole thing. You need a machine that stays powered on and the ability to forward three ports. If you already have a VPS or a spare box, that is most of the work done.
+It is free, and it is not especially hard, the [dedicated server guide](/en/dedicated-server-guide/) walks through the whole thing. You need a machine that stays powered on and the ability to forward three ports. If you already have a VPS or a spare box, that is most of the work done.

@@ -52,7 +52,7 @@ rapide.`TDM_` sur une liste de cartes de serveurs.
 ### Escarmouche {#skirmish}
 
 Basé sur un tour, et il n’y a pas de réapparition.Meurs et tu restes assis, ce qui
-change immédiatement la façon dont les gens jouent - personne n'échange sa vie contre une mise à mort quand cela
+change immédiatement la façon dont les gens jouent, personne n'échange sa vie contre une mise à mort quand cela
 est le seul.Les rounds sont courts et le rythme se rapproche davantage d'une série de petits
 engagements qu'à la mêlée de Frontline.`SKM_` sur une liste de cartes de serveurs.
 

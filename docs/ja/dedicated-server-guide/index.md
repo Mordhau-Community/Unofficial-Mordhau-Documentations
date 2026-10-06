@@ -167,11 +167,11 @@ NetServerMaxTickRate=60
 ::: コードグループ
 
 ```powershell [Windows]
-.\MordhauServer.exe Mordhau FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
+.\MordhauServer.exe FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
 ```
 
 ```bash [Linux]
-./MordhauServer.sh Mordhau FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
+./MordhauServer.sh FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
 ```
 
 :::
@@ -190,7 +190,7 @@ NetServerMaxTickRate=60
 Linux では、`screen` または `tmux` で実行します (あるいは、systemd ユニットを作成するとよいでしょう)。そうすれば、SSH セッションを閉じても存続します。
 
 ```bash
-screen -dmS mordhau ./MordhauServer.sh Mordhau FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
+screen -dmS mordhau ./MordhauServer.sh FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
 ```
 
 ## ポート {#ports}

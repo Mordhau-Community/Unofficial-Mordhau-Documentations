@@ -1,6 +1,6 @@
 # What is Git?
 
-Git keeps a history of a folder. Every time you save a checkpoint — a *commit* — it records what changed, when, and who did it. You can go back to any earlier checkpoint, and two people can work on the same folder at once without overwriting each other.
+Git keeps a history of a folder. Every time you save a checkpoint (a *commit*) it records what changed, when, and who did it. You can go back to any earlier checkpoint, and two people can work on the same folder at once without overwriting each other.
 
 It has nothing to do with Mordhau. It is a general tool, used for almost every software project in existence, and we use it here because these docs are a folder of text files that a lot of people edit.
 
@@ -12,19 +12,19 @@ Git and GitHub are two different things. Git is the program on your computer. Gi
 
 You will run into this vocabulary constantly, so it is worth getting straight early.
 
-**Repository** (or repo) — the project folder, plus its entire history. This site is one repository.
+**Repository** (or repo): the project folder, plus its entire history. This site is one repository.
 
-**Clone** — download a copy of a repository, history and all.
+**Clone**: download a copy of a repository, history and all.
 
-**Commit** — a saved checkpoint, with a message describing what you changed.
+**Commit**: a saved checkpoint, with a message describing what you changed.
 
-**Branch** — a separate line of work. You make your changes on your own branch so that the main one keeps working while you are halfway through.
+**Branch**: a separate line of work. You make your changes on your own branch so that the main one keeps working while you are halfway through.
 
-**Push** — send your commits from your machine up to GitHub.
+**Push**: send your commits from your machine up to GitHub.
 
-**Pull** — bring down commits other people have made.
+**Pull**: bring down commits other people have made.
 
-**Merge** — combine one branch into another.
+**Merge**: combine one branch into another.
 
 ## The five commands you actually need
 
@@ -71,7 +71,7 @@ git checkout -b my-new-branch
 
 Git error messages are famously unhelpful. Nothing you do locally is unrecoverable as long as you have not deleted the folder, so do not panic.
 
-- [The official Git book](https://git-scm.com/book/en/v2) — free, and the first two chapters cover everything above in more depth
-- [Oh Shit, Git!?!](https://ohshitgit.com/) — short answers to "I did something wrong, how do I undo it"
+- [The official Git book](https://git-scm.com/book/en/v2): free, and the first two chapters cover everything above in more depth
+- [Oh Shit, Git!?!](https://ohshitgit.com/): short answers to "I did something wrong, how do I undo it"
 
 Or ask in the [Discord](https://discord.gg/zuX58yRV84). Someone has hit the same error.

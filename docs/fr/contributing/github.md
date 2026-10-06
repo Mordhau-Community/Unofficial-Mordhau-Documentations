@@ -8,7 +8,7 @@ Si la différence entre Git et GitHub n'est pas encore claire, lisez d'abord [Qu
 
 ## Obtenir un compte {#getting-an-account}
 
-Gratuit.Inscrivez-vous sur [github.com](https://github.com) avec une adresse e-mail et un nom d'utilisateur – le nom d'utilisateur est public et apparaît sur tout ce que vous contribuez, alors choisissez-en un par lequel vous êtes heureux d'être connu.
+Gratuit.Inscrivez-vous sur [github.com](https://github.com) avec une adresse e-mail et un nom d'utilisateur: le nom d'utilisateur est public et apparaît sur tout ce que vous contribuez, alors choisissez-en un par lequel vous êtes heureux d'être connu.
 
 Activez l'authentification à deux facteurs lorsque vous êtes dans les paramètres.GitHub l'exige de toute façon pour les contributeurs.
 
@@ -28,11 +28,11 @@ Soit dans le navigateur, soit en clonant votre fork et en travaillant localement
 
 Une demande d'extraction est une demande visant à extraire vos modifications dans le référentiel d'origine.GitHubmontre exactement ce que vous avez modifié, ligne par ligne, et donne à chacun un endroit pour en discuter avant que quoi que ce soit ne soit fusionné.
 
-Rédigez une description indiquant ce que vous avez modifié et pourquoi.Si cela résout un problème, mentionnez le numéro du problème – l’écriture de `Fixes #42` ferme automatiquement ce problème une fois la demande d’extraction fusionnée.
+Rédigez une description indiquant ce que vous avez modifié et pourquoi.Si cela résout un problème, mentionnez le numéro du problème, l’écriture de `Fixes #42` ferme automatiquement ce problème une fois la demande d’extraction fusionnée.
 
 ### 4. Répondre à l'avis {#4-respond-to-review}
 
-Quelqu'un le lira.Ils peuvent demander des changements.Poussez un autre commit vers la même branche et la demande d'extraction se met à jour d'elle-même - vous n'en ouvrez pas une nouvelle.
+Quelqu'un le lira.Ils peuvent demander des changements.Poussez un autre commit vers la même branche et la demande d'extraction se met à jour d'elle-même, vous n'en ouvrez pas une nouvelle.
 
 Une fois approuvé et fusionné, Netlify reconstruit le site et votre modification est active en quelques minutes.
 

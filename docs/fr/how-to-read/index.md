@@ -79,7 +79,7 @@ Lorsqu'une étape est différente sur Windows et Linux, vous obtenez des onglets
 
 Les valeurs que vous devez remplacer sont nommées pour ce qu'elles sont.`RconPassword=a-different-long-password` signifie mettre le vôtremot de passe là-bas, pas cette chaîne littérale.
 
-`Inline code` marque les noms de fichiers, les clés de configuration, les commandes et les chemins – tout ce où les caractères exacts comptent.
+`Inline code` marque les noms de fichiers, les clés de configuration, les commandes et les chemins, tout ce où les caractères exacts comptent.
 
 ## Suivant un guide {#following-a-guide}
 

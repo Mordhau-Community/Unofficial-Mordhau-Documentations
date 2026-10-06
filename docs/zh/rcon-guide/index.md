@@ -45,20 +45,20 @@ RconPort=7778
 ::: warning
 如果将 `RconPassword` 留空，服务器会在启动时生成一个随机值，这意味着您不会知道它。自己设置吧。
 
-不要在这里重复使用您的 `AdminPassword`，也不要使用任何短的东西。RCON 是一种未加密的协议 - 任何拥有密码并可以访问该端口的人都可以完全控制您的服务器。
+不要在这里重复使用您的 `AdminPassword`，也不要使用任何短的东西。RCON 是一种未加密的协议， 任何拥有密码并可以访问该端口的人都可以完全控制您的服务器。
 :::
 
 重新启动服务器。如果您愿意，您还可以在命令行上覆盖端口：
 
 ```bash
-./MordhauServer.sh Mordhau FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -RconPort=7778 -log
+./MordhauServer.sh FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -RconPort=7778 -log
 ```
 
 ## 打开端口 {#opening-the-port}
 
 RCON 端口是 **TCP**，与游戏不同，信标和查询端口都是UDP。涵盖其他三项的防火墙规则不会涵盖这一项。
 
-仅当您确实需要从机器外部访问 RCON 时才转发它。如果您无论如何都通过 SSH 管理服务器，请将端口对互联网关闭并从盒子上连接到 `127.0.0.1` — 这绝对更安全，而且不需要任何成本。
+仅当您确实需要从机器外部访问 RCON 时才转发它。如果您无论如何都通过 SSH 管理服务器，请将端口对互联网关闭并从盒子上连接到 `127.0.0.1`， 这绝对更安全，而且不需要任何成本。
 
 ## 连接 {#connecting}
 
@@ -74,7 +74,7 @@ mcrcon -H 127.0.0.1 -P 7778 -p your-rcon-password
 mcrcon -H 127.0.0.1 -P 7778 -p your-rcon-password "playerlist"
 ```
 
-如果您更愿意拥有一个窗口而不是终端，那么图形客户端也存在 - 大多数通用 Source RCON 工具都可以在 Mordhau 上正常工作。
+如果您更愿意拥有一个窗口而不是终端，那么图形客户端也存在， 大多数通用 Source RCON 工具都可以在 Mordhau 上正常工作。
 
 ## 命令 {#commands}
 
@@ -146,7 +146,7 @@ addbots 8
 
 ## 无法连接时 {#when-it-will-not-connect}
 
-**连接被拒绝。** RCON 未监听。检查 `RconPort` 是否在 `Game.ini` 中设置，并且您在编辑后重新启动了服务器 - 使用 `-log` 您将在控制台输出中看到 RCON 启动。
+**连接被拒绝。** RCON 未监听。检查 `RconPort` 是否在 `Game.ini` 中设置，并且您在编辑后重新启动了服务器， 使用 `-log` 您将在控制台输出中看到 RCON 启动。
 
 **连接超时。** 防火墙正在占用它。请记住端口是 TCP。
 

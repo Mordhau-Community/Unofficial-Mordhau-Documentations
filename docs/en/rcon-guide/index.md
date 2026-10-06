@@ -1,6 +1,6 @@
 # RCON Guide
 
-RCON stands for *remote console*. It lets you send commands to your Mordhau server over the network, from outside the game — so you can change the map, kick someone, or check who is on, without launching Mordhau and joining first.
+RCON stands for *remote console*. It lets you send commands to your Mordhau server over the network, from outside the game, so you can change the map, kick someone, or check who is on, without launching Mordhau and joining first.
 
 If you run a server, this is the tool you will end up using most.
 
@@ -45,20 +45,20 @@ Stop the server before you edit `Game.ini`. It rewrites the file from memory on 
 ::: warning
 If you leave `RconPassword` empty the server generates a random one at startup, which means you will not know it. Set it yourself.
 
-Do not reuse your `AdminPassword` here, and do not use anything short. RCON is an unencrypted protocol — anyone who has the password and can reach the port has full control of your server.
+Do not reuse your `AdminPassword` here, and do not use anything short. RCON is an unencrypted protocol. Anyone who has the password and can reach the port has full control of your server.
 :::
 
 Restart the server. You can also override the port on the command line if you prefer:
 
 ```bash
-./MordhauServer.sh Mordhau FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -RconPort=7778 -log
+./MordhauServer.sh FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -RconPort=7778 -log
 ```
 
 ## Opening the port
 
 The RCON port is **TCP**, unlike the game, beacon and query ports which are all UDP. A firewall rule that covers the other three will not cover this one.
 
-Only forward it if you actually need to reach RCON from outside the machine. If you administer the server over SSH anyway, leave the port closed to the internet and connect to `127.0.0.1` from on the box — that is strictly safer, and costs you nothing.
+Only forward it if you actually need to reach RCON from outside the machine. If you administer the server over SSH anyway, leave the port closed to the internet and connect to `127.0.0.1` from on the box. That is strictly safer, and costs you nothing.
 
 ## Connecting
 
@@ -74,7 +74,7 @@ That drops you into an interactive prompt. To fire a single command and exit:
 mcrcon -H 127.0.0.1 -P 7778 -p your-rcon-password "playerlist"
 ```
 
-Graphical clients exist too if you would rather have a window than a terminal — most of the general purpose Source RCON tools work fine against Mordhau.
+Graphical clients exist too if you would rather have a window than a terminal, most of the general purpose Source RCON tools work fine against Mordhau.
 
 ## Commands
 
@@ -146,7 +146,7 @@ addbots 8
 
 ## When it will not connect
 
-**Connection refused.** RCON is not listening. Check `RconPort` is set in `Game.ini`, and that you restarted the server after editing it — with `-log` you will see RCON start up in the console output.
+**Connection refused.** RCON is not listening. Check `RconPort` is set in `Game.ini`, and restart the server after editing it. With `-log`, you will see RCON start up in the console output.
 
 **Connection times out.** A firewall is eating it. Remember the port is TCP.
 

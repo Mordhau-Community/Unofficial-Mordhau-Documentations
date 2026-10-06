@@ -4,7 +4,7 @@ This site is written by the people who use it. Every page on it started as
 someone working something out and then taking the time to write it down.
 
 This page is the local setup, start to finish. You do not need any of it to fix
-a typo or report something that is wrong — [contribution methods](/en/contributing/methods) covers the quicker routes, and none of them
+a typo or report something that is wrong, [contribution methods](/en/contributing/methods) covers the quicker routes, and none of them
 involve a terminal. Read the [terms and rules](/en/contributing/terms-rules)
 before you open a pull request either way.
 
@@ -13,7 +13,7 @@ before you open a pull request either way.
 - [Node.js](https://nodejs.org/en) 18 or newer
 - [Git](https://git-scm.com/downloads)
 - A [GitHub](https://github.com) account
-- An editor — the repository is set up for [VS Code](https://code.visualstudio.com/)
+- An editor: the repository is set up for [VS Code](https://code.visualstudio.com/)
 
 [Required tools](/en/contributing/tools) has the install notes and the
 first-run configuration for each of them.
@@ -36,7 +36,7 @@ npm run docs:dev
 ```
 
 It prints the address it is serving on, usually `http://localhost:5173`. Leave
-it running — pages reload as you save.
+it running, pages reload as you save.
 
 ## Make your change
 
@@ -77,5 +77,5 @@ GitHub offers to open a pull request from that branch the next time you visit
 the repository. Say what changed and why.
 
 If the review comes back asking for something, push another commit to the same
-branch — the pull request updates itself. Once it is merged, Netlify rebuilds
+branch, so the pull request updates itself. Once it is merged, Netlify rebuilds
 and publishes the site, which takes a minute or two.
