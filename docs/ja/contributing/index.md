@@ -13,7 +13,7 @@
 - [Node.js](https://nodejs.org/en) 18 以降
 - [ツイート](https://git-scm.com/downloads)
 - A[GitHub](https://github.com) アカウント
-- エディタ — リポジトリは [VS Code](https://code.visualstudio.com/)
+- エディタ： リポジトリは [VS Code](https://code.visualstudio.com/)
 
 [必要なツール](/ja/contributing/tools) には、それぞれのインストール ノートと
 の初回実行構成が含まれています。

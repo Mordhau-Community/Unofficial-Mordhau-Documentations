@@ -3,18 +3,18 @@
 Mordhau Le combat de Mordhau ressemble à un écrasement de boutons pendant environ vos dix premières heures, puis soudainement, ce n'est plus le cas.Cette page explique ce qui se passe réellement en dessous, à peu près dans l'ordre qui mérite d'être appris.
 
 ::: warning
-Les chiffres exacts – coûts d’endurance, timing windows – sont ajustés par patchs.Considérez ici les chiffres spécifiques comme approximatifs et les concepts comme fiables.Si vous en repérez un qui est obsolète, [corriger](https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations/issues).
+Les chiffres exacts (coûts d’endurance, timing windows) sont ajustés par patchs.Considérez ici les chiffres spécifiques comme approximatifs et les concepts comme fiables.Si vous en repérez un qui est obsolète, [corriger](https://github.com/Mordhau-Community/Unofficial-Mordhau-Documentations/issues).
 :::
 
 ## Les trois attaques {#the-three-attacks}
 
 Tout ce que vous lancez est l'une des trois choses suivantes :
 
-**Frappe** — une balançoire horizontale.Le côté d'où il vient dépend de la manière dont vous déplacez la souris lorsque vous la démarrez.
+**Frappe**: une balançoire horizontale.Le côté d'où il vient dépend de la manière dont vous déplacez la souris lorsque vous la démarrez.
 
-**Overhead** — descend d'en haut.Arc plus court, plus difficile à faire glisser, gênant dans les espaces restreints car il accroche les plafonds et les coéquipiers.
+**Overhead**: descend d'en haut.Arc plus court, plus difficile à faire glisser, gênant dans les espaces restreints car il accroche les plafonds et les coéquipiers.
 
-**Stab** — une poussée.Étroit, rapide et passe par des interstices où une balançoire heurterait un mur.
+**Stab**: une poussée.Étroit, rapide et passe par des interstices où une balançoire heurterait un mur.
 
 Chaque attaque se déroule en trois phases : **remontage** lorsque l'arme est retirée, **relâchement** lorsqu'elle peut réellement blesser quelqu'un, et **récupération** lorsque vous êtes coincé à la ranger.Presque tous les mécanismes ci-dessous consistent à manipuler l'un de ces trois windows.
 
@@ -40,11 +40,11 @@ Le chambrage fait la même chose qu'une parade et vous redonne l'initiative en m
 
 L'attaque rapide que vous obtenez immédiatement après une parade réussie.Il sort plus rapidement qu'un swing normal, ce qui fait que la parade vaut la peine plutôt que de simplement reculer.
 
-Deux choses à savoir : une riposte ne peut pas être feinte ou transformée, elle est donc engagée au moment où vous la lancez.En échange, il porte une hyper-armure, ce qui signifie que vous ne serez pas ébranlé par le coup de quelqu'un d'autre – utile lorsque vous êtes en infériorité numérique, puisque vous pouvez échanger plutôt que d'être interrompu pour toujours.
+Deux choses à savoir : une riposte ne peut pas être feinte ou transformée, elle est donc engagée au moment où vous la lancez.En échange, il porte une hyper-armure, ce qui signifie que vous ne serez pas ébranlé par le coup de quelqu'un d'autre, utile lorsque vous êtes en infériorité numérique, puisque vous pouvez échanger plutôt que d'être interrompu pour toujours.
 
 ### Coup de pied {#kick}
 
-Le coup de pied bat une parade tenue.Contre quelqu'un qui se tortille – assis derrière son bloc en attente – un coup de pied l'ouvre et vous achète un coup franc.
+Le coup de pied bat une parade tenue.Contre quelqu'un qui se tortille (assis derrière son bloc en attente) un coup de pied l'ouvre et vous achète un coup franc.
 
 C'est lent, et si vous le lancez sur quelqu'un quine bloque pas, vous serez puni pour cela.
 
@@ -82,7 +82,7 @@ L'endurance est la ressource derrière tout cela.Il se vide lorsque vous :
 - ratez complètement un coup
 - sautez
 
-À zéro, vous êtes désarmé - votre arme vous tombe des mains et vous êtes sans défense assez longtemps pour être tué.Perdre un combat dans Mordhau est généralement une perte d'endurance avant une perte de santé.
+À zéro, vous êtes désarmé, votre arme vous tombe des mains et vous êtes sans défense assez longtemps pour être tué.Perdre un combat dans Mordhau est généralement une perte d'endurance avant une perte de santé.
 
 La conséquence pratique est que le swing perd constamment face au swing délibéré.Chaque échec est une endurance que vous avez payée pour rien.
 

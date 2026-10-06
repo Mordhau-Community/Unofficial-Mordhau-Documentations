@@ -41,11 +41,11 @@ npm run docs:preview  # serve what the build produced, to check it before pushin
 
 最も触れる可能性の高い部分:
 
-**`themeConfig.nav`** — 上部のバーにわたるリンク。
+**`themeConfig.nav`**： 上部のバーにわたるリンク。
 
-**`themeConfig.sidebar`** — 左側のナビゲーション。パス接頭辞によってキー設定されるため、`"/en/contributing/"` ブロックはそのパスの下のページにのみ表示されます。
+**`themeConfig.sidebar`**： 左側のナビゲーション。パス接頭辞によってキー設定されるため、`"/en/contributing/"` ブロックはそのパスの下のページにのみ表示されます。
 
-**`locales`** — 言語ごとに 1 つのエントリ。それぞれに独自の `nav` および `sidebar` に加えて、`dir` または `ltr` または `rtl` があります。
+**`locales`**： 言語ごとに 1 つのエントリ。それぞれに独自の `nav` および `sidebar` に加えて、`dir` または `ltr` または `rtl` があります。
 
 サイドバーにページを追加すると、次のようになります:
 
@@ -56,7 +56,7 @@ npm run docs:preview  # serve what the build produced, to check it before pushin
 }
 ```
 
-`link` は、ファイル パスではなく、URL です。— `docs/` プレフィックスと末尾の `.md` はありません。
+`link` は、ファイル パスではなく、URL です。、  `docs/` プレフィックスと末尾の `.md` はありません。
 
 ::: warning
 開発サーバーの実行中に設定を保存すると、開発サーバー自体が再起動されます。エラーで停止した場合は、最後の数行を読んでください。ほとんどの場合、カンマが抜けているか、閉じられていない括弧があり、行番号がわかります。

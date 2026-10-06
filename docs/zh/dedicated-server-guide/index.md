@@ -65,7 +65,7 @@ SteamCMD 是一个 32 位程序。在 64 位 Linux 安装中，只有存在 32 �
 
 ## 首次推出 {#first-launch}
 
-不带任何参数启动服务器一次。它还无法播放——关键是它会写出配置文件，然后你就停止它。
+不带任何参数启动服务器一次。它还无法播放， 关键是它会写出配置文件，然后你就停止它。
 
 ::: 代码组
 
@@ -158,7 +158,7 @@ MapRotation=SKM_Grad
 NetServerMaxTickRate=60
 ```
 
-越高越流畅，但 CPU 成本也越高。除非您知道机器可以跟上，否则不要提高它 - 无法保持其滴答率的服务器感觉比稳定的较低服务器要糟糕得多。
+越高越流畅，但 CPU 成本也越高。除非您知道机器可以跟上，否则不要提高它， 无法保持其滴答率的服务器感觉比稳定的较低服务器要糟糕得多。
 
 ## 正确启动服务器 {#starting-the-server-properly}
 
@@ -167,11 +167,11 @@ NetServerMaxTickRate=60
 ::: 代码组
 
 ```powershell [Windows]
-.\MordhauServer.exe Mordhau FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
+.\MordhauServer.exe FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
 ```
 
 ```bash [Linux]
-./MordhauServer.sh Mordhau FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
+./MordhauServer.sh FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
 ```
 
 :::
@@ -187,10 +187,10 @@ NetServerMaxTickRate=60
 |`-RconPort` |RCON 监听器，参见 [RCON 向导](/zh/rcon-guide/) |
 |`-log` |打印到控制台而不仅仅是打印到文件 |
 
-在 Linux 上，在 `screen` 或 `tmux` 下运行它 - 或者更好，编写一个 systemd 单元 - 这样它就可以在你关闭 SSH 会话后继续存在：
+在 Linux 上，在 `screen` 或 `tmux` 下运行它， 或者更好，编写一个 systemd 单元， 这样它就可以在你关闭 SSH 会话后继续存在：
 
 ```bash
-screen -dmS mordhau ./MordhauServer.sh Mordhau FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
+screen -dmS mordhau ./MordhauServer.sh FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
 ```
 
 ## 港口 {#ports}
@@ -202,7 +202,7 @@ screen -dmS mordhau ./MordhauServer.sh Mordhau FFA_ThePit -Port=7777 -BeaconPort
 |27015 | 27015UDP |Steam 查询 |
 |您的 RCON 端口 |TCP |远程控制台，仅当您启用它时 |
 
-所有三个 UDP 端口都必须打开并转发，而不仅仅是游戏端口。如果信标或查询端口被阻止，您的服务器运行得很好，并且永远不会出现在浏览器中 - 这是人们最常见的问题。
+所有三个 UDP 端口都必须打开并转发，而不仅仅是游戏端口。如果信标或查询端口被阻止，您的服务器运行得很好，并且永远不会出现在浏览器中， 这是人们最常见的问题。
 
 在同一台机器上运行多个服务器？给每个人自己的一组，间隔开：
 
@@ -214,11 +214,11 @@ screen -dmS mordhau ./MordhauServer.sh Mordhau FFA_ThePit -Port=7777 -BeaconPort
 
 在游戏内浏览器中查找您的服务器名称。如果不存在，请按顺序完成此操作：
 
-**浏览器中根本没有任何内容。**几乎总是信标或查询端口。检查你的转发规则，并检查机器本身的防火墙——Windows 防火墙在第一次运行时会阻止服务器，提示很容易点击过去。
+**浏览器中根本没有任何内容。**几乎总是信标或查询端口。检查你的转发规则，并检查机器本身的防火墙： Windows 防火墙在第一次运行时会阻止服务器，提示很容易点击过去。
 
 **可见，但无人连接。** 游戏端口。相同的检查，端口 7777。
 
-**在本地网络上很好，在外面看不见。** 您的路由器没有转发，或者您的 ISP 让您位于 CGNAT 后面 - 在这种情况下，您根本无法通过该连接进行托管，并且需要 VPS。
+**在本地网络上很好，在外面看不见。** 您的路由器没有转发，或者您的 ISP 让您位于 CGNAT 后面： 在这种情况下，您根本无法通过该连接进行托管，并且需要 VPS。
 
 **配置更改没有任何作用。** 您在服务器运行时编辑了文件。停止，编辑，开始。
 

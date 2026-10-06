@@ -51,7 +51,7 @@ RconPort=7778
 サーバーを再起動します。必要に応じて、コマンド ラインでポートをオーバーライドすることもできます。
 
 ```bash
-./MordhauServer.sh Mordhau FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -RconPort=7778 -log
+./MordhauServer.sh FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -RconPort=7778 -log
 ```
 
 ## ポートを開く {#opening-the-port}

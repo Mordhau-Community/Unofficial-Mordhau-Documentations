@@ -4,7 +4,7 @@ Vous n'avez pas besoin de grand-chose pour travailler sur ces documents.Tout ce 
 
 ## Node.js {#nodejs}
 
-VitePress s'exécute sur Node, celui-ci n'est donc pas facultatif.Téléchargez la version **LTS** à partir de [nodejs.org](https://nodejs.org/en) — tout ce qui fonctionne à partir du nœud 18 et supérieur.
+VitePress s'exécute sur Node, celui-ci n'est donc pas facultatif.Téléchargez la version **LTS** à partir de [nodejs.org](https://nodejs.org/en), tout ce qui fonctionne à partir du nœud 18 et supérieur.
 
 Une fois le programme d'installation terminé, ouvrez un terminal et vérifiez-le :
 
@@ -49,7 +49,7 @@ Activez **Formater lors de l'enregistrement** dans les paramètres VS Code.Prett
 
 Gratuit, et vous en avez besoin pour ouvrir une pull request.Inscrivez-vous sur [github.com](https://github.com).
 
-Si vous envisagez d'effectuer des opérations push depuis votre ordinateur plutôt que de modifier dans le navigateur, configurez également une clé SSH - le [son propre parcours](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) de GitHub le couvre mieux que nous.
+Si vous envisagez d'effectuer des opérations push depuis votre ordinateur plutôt que de modifier dans le navigateur, configurez également une clé SSH, le [son propre parcours](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) de GitHub le couvre mieux que nous.
 
 ## Ce dont vous n'avez pas besoin {#what-you-do-not-need}
 

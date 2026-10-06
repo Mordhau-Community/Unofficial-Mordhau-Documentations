@@ -52,7 +52,7 @@ quick. `TDM_` on a server map list.
 ### Skirmish
 
 Round based, and there are no respawns. Die and you sit the round out, which
-changes how people play immediately — nobody trades a life for a kill when it
+changes how people play immediately. Nobody trades a life for a kill when it
 is their only one. Rounds are short and the pace is closer to a series of small
 engagements than to Frontline's scrum. `SKM_` on a server map list.
 

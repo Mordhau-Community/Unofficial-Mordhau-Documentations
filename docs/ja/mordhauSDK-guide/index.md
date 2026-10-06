@@ -10,16 +10,16 @@ Triternion は、2021 年 12 月 14 日にリリースされました。コミ�
 
 ## 作れるもの {#what-you-can-make}
 
-- **マップ** - 既存モードの新しいレベル
-- **ゲームモード** - カスタムルールと目標
-- **装飾品とアセット** — ゲームに持ち込まれるモデルとマテリアル
+- **マップ**： 既存モードの新しいレベル
+- **ゲームモード**： カスタムルールと目標
+- **装飾品とアセット**： ゲームに持ち込まれるモデルとマテリアル
 
 Mod は **mod.io** を通じて配布され、ゲーム内の Mod ブラウザーはそこから読み取ります。プレイヤーはそこでサブスクライブし、ゲームがコンテンツをダウンロードします。
 
 ## このガイドの内容 {#in-this-guide}
 
-- [アクター](/ja/mordhauSDK-guide/actors) — レベルに配置するもの全般と、どのマップにも必要な Mordhau 固有のアクター：スポーン地点、キャプチャーポイント、押す目標
-- [ブループリント](/ja/mordhauSDK-guide/blueprints) — ゲーム側の Blueprint がどう整理されているか、どれをサブクラス化するか、そして特に重要な少数
+- [アクター](/ja/mordhauSDK-guide/actors)： レベルに配置するもの全般と、どのマップにも必要な Mordhau 固有のアクター：スポーン地点、キャプチャーポイント、押す目標
+- [ブループリント](/ja/mordhauSDK-guide/blueprints)： ゲーム側の Blueprint がどう整理されているか、どれをサブクラス化するか、そして特に重要な少数
 
 ## 入手方法 {#getting-it}
 
@@ -69,9 +69,9 @@ Steam ではなく Epic にあるのは Triternion の好みではありませ�
 書き留められることはほとんどないため、Mordhau の改造に関する知識のほとんどは会話の中にあります。
 
 - Discord** の **Mordhau モッディング コミュニティは、実際にマップを作成する人々が話す場所です。そこで聞いてください。YouTube の
-- [Mordhauの特長 マッピング&モディングチュートリアルシリーズ](https://www.youtube.com/watch?v=kA_BYvN4cfA) - 基本をカバーするコミュニティ ビデオ シリーズ
-- [mod.io](https://mod.io) - 他の人が公開したものを参照し、セットアップについてどのように説明されているかを確認します
-- [Unreal Engine ドキュメント](https://dev.epicgames.com/documentation/en-us/unreal-engine) - 問題ではなく実際にエンジンに関する質問であるすべてについてMordhau の質問
+- [Mordhauの特長 マッピング&モディングチュートリアルシリーズ](https://www.youtube.com/watch?v=kA_BYvN4cfA)： 基本をカバーするコミュニティ ビデオ シリーズ
+- [mod.io](https://mod.io)： 他の人が公開したものを参照し、セットアップについてどのように説明されているかを確認します
+- [Unreal Engine ドキュメント](https://dev.epicgames.com/documentation/en-us/unreal-engine)： 問題ではなく実際にエンジンに関する質問であるすべてについてMordhau の質問
 - 私たち独自の [Discord](https://discord.gg/zuX58yRV84)
 
 ## このページの完成にご協力ください {#help-us-finish-this-page}

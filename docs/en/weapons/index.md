@@ -12,7 +12,7 @@ is a series of trades rather than a shopping list: heavier armour means a
 cheaper weapon, more perks mean less armour.
 
 This page is about how to think about that trade. What each individual weapon
-does in numbers is a separate job, and one this page does not yet do — see
+does in numbers is a separate job, and one this page does not yet do, see
 [what this page still needs](#what-this-page-still-needs) at the bottom.
 
 ## The families
@@ -97,6 +97,6 @@ damage, windup and release timings, point costs, or armour values.
 Those need someone who can test them in game and record what they actually
 measure, because they shift with patches and a confidently wrong table is worse
 than no table. If you have run these tests, that is a genuinely valuable
-contribution — [how to contribute](/en/contributing/) covers how to send it,
+contribution, [how to contribute](/en/contributing/) covers how to send it,
 and the [accuracy rules](/en/contributing/terms-rules) cover marking anything
 you could not verify.

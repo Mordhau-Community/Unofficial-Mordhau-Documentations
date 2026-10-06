@@ -12,7 +12,7 @@ est une série de métiers plutôt qu'une liste de courses : une armure plus lou
 arme moins chère, plus d'avantages signifient moins d'armure.
 
 Cette page explique comment réfléchir à ce commerce.Qu'est-ce que chaque arme individuelle
-ce que fait en chiffres est un travail distinct, et celui que cette page ne fait pas encore - voir
+ce que fait en chiffres est un travail distinct, et celui que cette page ne fait pas encore, voir
 [ce dont cette page a encore besoin](#what-this-page-still-needs) en bas.
 
 ## Les familles {#the-families}
@@ -97,6 +97,6 @@ les dégâts, les délais de liquidation et de libération, les coûts en points
 Ceux-ci ont besoin de quelqu'un qui puisse les tester en jeu et enregistrer ce qu'ils ont réellement
 mesure, car ils changent avec les correctifs et une mauvaise table en toute confiance est pire
 que pas de table.Si vous avez effectué ces tests, c'est un outil vraiment précieux
-contribution — [comment contribuer](/fr/contributing/) explique comment l'envoyer,
+contribution, [comment contribuer](/fr/contributing/) explique comment l'envoyer,
 et le couvercle [règles de précision](/fr/contributing/terms-rules) marquant n'importe quoi
 vous n'avez pas pu vérifier.

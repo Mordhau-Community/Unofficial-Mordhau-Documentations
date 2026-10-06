@@ -32,7 +32,7 @@ Parcourez-le dans cet ordre :
 3. Les trois ports du routeur sont-ils redirigés, en tant que **UDP**, vers la bonne adresse IP interne ?
 4. L'adresse IP locale de la machine a-t-elle changé ?DHCPréaffecte les adresses et les règles de transfert ne pointent alors vers rien.Donnez au serveur une adresse IP locale statique ou une réservation DHCP.
 
-Si cela fonctionne sur votre propre réseau mais pas de l'extérieur et que le transfert est définitivement correct, votre FAI peut vous mettre derrière CGNAT.Vous ne pouvez pas héberger via cela, et aucune configuration ne le changera – vous avez besoin d’un VPS.
+Si cela fonctionne sur votre propre réseau mais pas de l'extérieur et que le transfert est définitivement correct, votre FAI peut vous mettre derrière CGNAT.Vous ne pouvez pas héberger via cela, et aucune configuration ne le changera, vous avez besoin d’un VPS.
 
 ### Les modifications de configuration ne font rien {#config-changes-do-nothing}
 
@@ -62,11 +62,11 @@ S'il refuse toujours,vous avez modifié le mot de passe pendant que le serveur �
 
 ### RCON ne se connectera pas {#rcon-will-not-connect}
 
-**Connexion refusée** — RCON n'écoute pas.`RconPort` doit être défini dans `Game.ini` et le serveur redémarré.
+**Connexion refusée**: RCON n'écoute pas.`RconPort` doit être défini dans `Game.ini` et le serveur redémarré.
 
-**Expiration du délai de connexion** — pare-feu.Notez que le port RCON est **TCP**, contrairement aux trois autres, donc une règle qui couvre les ports de jeu ne le couvrira pas.
+**Expiration du délai de connexion**: pare-feu.Notez que le port RCON est **TCP**, contrairement aux trois autres, donc une règle qui couvre les ports de jeu ne le couvrira pas.
 
-**Échec de l'authentification** — mot de passe erroné.Si vous avez laissé `RconPassword` vide, le serveur en a généré un aléatoire au démarrage que vous n'avez aucun moyen de connaître.Définissez-le explicitement et redémarrez.
+**Échec de l'authentification**: mot de passe erroné.Si vous avez laissé `RconPassword` vide, le serveur en a généré un aléatoire au démarrage que vous n'avez aucun moyen de connaître.Définissez-le explicitement et redémarrez.
 
 Plus de détails sur le [Page RCON](/fr/rcon-guide/).
 
@@ -82,7 +82,7 @@ Mordhau Les clients ne peuvent pas rejoindre un serveur sur une version différe
 
 ### Les performances sont mauvaises avec un serveur complet {#performance-is-bad-with-a-full-server}
 
-Vérifiez `NetServerMaxTickRate` dans `Engine.ini`.S'il est réglé à une valeur supérieure à ce que le matériel peut supporter, le serveur prend du retard et tout le monde est mis à l'écart - un 60 stable se sent bien mieux qu'un 120 instable.
+Vérifiez `NetServerMaxTickRate` dans `Engine.ini`.S'il est réglé à une valeur supérieure à ce que le matériel peut supporter, le serveur prend du retard et tout le monde est mis à l'écart, un 60 stable se sent bien mieux qu'un 120 instable.
 
 Mordhau est en grande partie lié à un seul thread, donc la vitesse d'horloge d'un seul cœur compte plus que le nombre de cœurs.Un VPS bon marché avec de nombreux cœurs lents ne convient pas.
 
@@ -94,7 +94,7 @@ Cette section est plus fine que celle du serveur, car la plupart d'entre nous ic
 
 ### Le jeu ne démarre pas {#the-game-will-not-start}
 
-1. Vérifiez les fichiers du jeu via Steam — cliquez avec le bouton droit sur Mordhau, Propriétés, Fichiers installés, Vérifier l'intégrité.
+1. Vérifiez les fichiers du jeu via Steam, cliquez avec le bouton droit sur Mordhau, Propriétés, Fichiers installés, Vérifier l'intégrité.
 2. Mettez à jour vos pilotes graphiques.
 3. Redémarrez.En réalité, pour les problèmes anti-triche, cela résout le problème plus souvent qu'il ne le devrait.
 
@@ -109,7 +109,7 @@ Mordhau utilise Easy Anti-Cheat et la plupart des échecs de lancement y remonte
 ### Déconnecté lors d'un match {#disconnected-during-a-match}
 
 - S'il s'agit d'un serveur spécifique, c'est ce serveur, pas vous.
-- S'il s'agit de tous les serveurs, testez votre connexion de manière générale.Le Wi-Fi est un coupable fréquent – essayez un câble si vous le pouvez.
+- S'il s'agit de tous les serveurs, testez votre connexion de manière générale.Le Wi-Fi est un coupable fréquent, essayez un câble si vous le pouvez.
 - La perte de paquets se manifeste sous la forme d'un élastique et de hits qui ne sont pas enregistrés avant d'apparaître comme une déconnexion.
 
 ### Mauvaise fréquence d'images {#poor-frame-rate}

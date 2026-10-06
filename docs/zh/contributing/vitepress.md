@@ -2,7 +2,7 @@
 
 VitePress 是将这个存储库变成一个网站的东西。您编写 Markdown 文件，VitePress 将它们呈现为带有导航、搜索和已附加主题的 HTML 页面。
 
-您不需要理解它来编写文档。当您想要更改某些结构时，可以使用此页面 - 将页面添加到侧边栏、添加语言或找出开发服务器抱怨的原因。
+您不需要理解它来编写文档。当您想要更改某些结构时，可以使用此页面， 将页面添加到侧边栏、添加语言或找出开发服务器抱怨的原因。
 
 ## 项目如何组合在一起 {#how-the-project-fits-together}
 
@@ -32,7 +32,7 @@ npm run docs:preview  # serve what the build produced, to check it before pushin
 `docs:dev` 是您将使用的命令。每次保存文件时，它都会在浏览器中重新加载页面。
 
 ::: tip
-开发服务器在启动时打印它正在监听的地址，通常是 `http://localhost:5173`。使用它打印的任何内容，而不是假设一个端口——如果该端口被占用，它会选择一个不同的端口。
+开发服务器在启动时打印它正在监听的地址，通常是 `http://localhost:5173`。使用它打印的任何内容，而不是假设一个端口， 如果该端口被占用，它会选择一个不同的端口。
 :::
 
 ## 配置文件 {#the-config-file}
@@ -41,11 +41,11 @@ npm run docs:preview  # serve what the build produced, to check it before pushin
 
 您最有可能接触的部分：
 
-**`themeConfig.nav`** - 顶部栏上的链接。
+**`themeConfig.nav`**： 顶部栏上的链接。
 
-**`themeConfig.sidebar`** — 左侧导航。它由路径前缀键入，因此 `"/en/contributing/"` 块仅显示在该路径下的页面上。
+**`themeConfig.sidebar`**： 左侧导航。它由路径前缀键入，因此 `"/en/contributing/"` 块仅显示在该路径下的页面上。
 
-**`locales`** — 每种语言一个条目。每个都有自己的 `nav` 和 `sidebar`，加上 `ltr` 或 `rtl` 的 `dir`。
+**`locales`**： 每种语言一个条目。每个都有自己的 `nav` 和 `sidebar`，加上 `ltr` 或 `rtl` 的 `dir`。
 
 将页面添加到侧边栏如下所示：
 
@@ -56,10 +56,10 @@ npm run docs:preview  # serve what the build produced, to check it before pushin
 }
 ```
 
-`link` 是 URL，而不是文件路径 —没有 `docs/` 前缀，末尾也没有 `.md`。
+`link` 是 URL，而不是文件路径， 没有 `docs/` 前缀，末尾也没有 `.md`。
 
 ::: warning
-在开发服务器运行时保存配置并自行重新启动。如果它因错误而停止，请阅读最后几行 - 它几乎总是缺少逗号或未闭合的括号，它会告诉您行号。
+在开发服务器运行时保存配置并自行重新启动。如果它因错误而停止，请阅读最后几行， 它几乎总是缺少逗号或未闭合的括号，它会告诉您行号。
 :::
 
 ## 从右到左语言 {#right-to-left-languages}
@@ -70,8 +70,8 @@ npm run docs:preview  # serve what the build produced, to check it before pushin
 
 Netlify 正在监视 `main` 分支。合并触发 `npm run docs:build`，并发布生成的站点。这需要一两分钟。
 
-构建输出进入 `.vitepress/dist/` 并故意不提交 - 它每次都是从 Markdown 重新生成，因此提交它只会产生冲突。
+构建输出进入 `.vitepress/dist/` 并故意不提交， 它每次都是从 Markdown 重新生成，因此提交它只会产生冲突。
 
 ## 了解更多 {#learning-more}
 
-[虚拟新闻文档](https://vitepress.dev) 详尽且可读。[标记下延](https://vitepress.dev/guide/markdown) 页面特别列出了比我们在这里使用的更多内容 - 如果您想要某个功能并想知道它是否存在，它可能就在该页面上。
+[虚拟新闻文档](https://vitepress.dev) 详尽且可读。[标记下延](https://vitepress.dev/guide/markdown) 页面特别列出了比我们在这里使用的更多内容： 如果您想要某个功能并想知道它是否存在，它可能就在该页面上。

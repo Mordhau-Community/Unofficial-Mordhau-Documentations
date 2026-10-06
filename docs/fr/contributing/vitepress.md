@@ -32,7 +32,7 @@ npm run docs:preview  # serve what the build produced, to check it before pushin
 `docs:dev` est celle que vous utiliserez.Il recharge la page dans votre navigateur à chaque fois que vous enregistrez un fichier.
 
 ::: tip
-Le serveur de développement imprime l'adresse sur laquelle il écoute lorsqu'il démarre, généralement `http://localhost:5173`.Utilisez ce qu'il imprime plutôt que de supposer un port - il en choisit un autre si ce port est pris.
+Le serveur de développement imprime l'adresse sur laquelle il écoute lorsqu'il démarre, généralement `http://localhost:5173`.Utilisez ce qu'il imprime plutôt que de supposer un port, il en choisit un autre si ce port est pris.
 :::
 
 ## Le fichier de configuration {#the-config-file}
@@ -41,11 +41,11 @@ Le serveur de développement imprime l'adresse sur laquelle il écoute lorsqu'il
 
 Les parties que vous êtes le plus susceptible de toucher :
 
-**`themeConfig.nav`** — les liens sur la barre supérieure.
+**`themeConfig.nav`**: les liens sur la barre supérieure.
 
-**`themeConfig.sidebar`** — la navigation de gauche.Il est saisi par préfixe de chemin, de sorte que le bloc `"/en/contributing/"` ne s'affiche que sur les pages situées sous ce chemin.
+**`themeConfig.sidebar`**: la navigation de gauche.Il est saisi par préfixe de chemin, de sorte que le bloc `"/en/contributing/"` ne s'affiche que sur les pages situées sous ce chemin.
 
-**`locales`** — une entrée par langue.Chacun a ses propres `nav` et `sidebar`, plus un `dir` de `ltr` ou `rtl`.
+**`locales`**: une entrée par langue.Chacun a ses propres `nav` et `sidebar`, plus un `dir` de `ltr` ou `rtl`.
 
 L'ajout d'une page à la barre latérale ressemble à ceci :
 
@@ -56,10 +56,10 @@ L'ajout d'une page à la barre latérale ressemble à ceci :
 }
 ```
 
-Le `link` est l'URL, pas le chemin du fichier - nonPréfixe `docs/` et pas de `.md` à la fin.
+Le `link` est l'URL, pas le chemin du fichier, nonPréfixe `docs/` et pas de `.md` à la fin.
 
 ::: warning
-Enregistrez la configuration pendant que le serveur de développement est en cours d'exécution et qu'il se redémarre.S'il s'arrête avec une erreur, lisez les dernières lignes – il s'agit presque toujours d'une virgule manquante ou d'un crochet non fermé, et il vous indique le numéro de ligne.
+Enregistrez la configuration pendant que le serveur de développement est en cours d'exécution et qu'il se redémarre.S'il s'arrête avec une erreur, lisez les dernières lignes, il s'agit presque toujours d'une virgule manquante ou d'un crochet non fermé, et il vous indique le numéro de ligne.
 :::
 
 ## Langues de droite à gauche {#right-to-left-languages}
@@ -70,8 +70,8 @@ Les paramètres régionaux arabes définissent `dir: "rtl"` et `postcss-rtl` ref
 
 Netlify surveille la branche `main`.Une fusion déclenche `npm run docs:build` et le site généré est publié.Cela prend une minute ou deux.
 
-La sortie de construction va dans `.vitepress/dist/` et n'est délibérément pas validée - elle est régénérée à partir du Markdown à chaque fois, donc sa validation ne ferait que créer des conflits.
+La sortie de construction va dans `.vitepress/dist/` et n'est délibérément pas validée, elle est régénérée à partir du Markdown à chaque fois, donc sa validation ne ferait que créer des conflits.
 
 ## En savoir plus {#learning-more}
 
-Le [VitePress documentation](https://vitepress.dev) est complet et lisible.La page [Extensions Markdown](https://vitepress.dev/guide/markdown) en particulier en répertorie plus que ce que nous utilisons ici – si vous voulez une fonctionnalité et vous demandez si elle existe, elle se trouve probablement sur cette page.
+Le [VitePress documentation](https://vitepress.dev) est complet et lisible.La page [Extensions Markdown](https://vitepress.dev/guide/markdown) en particulier en répertorie plus que ce que nous utilisons ici, si vous voulez une fonctionnalité et vous demandez si elle existe, elle se trouve probablement sur cette page.

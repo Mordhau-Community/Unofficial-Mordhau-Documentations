@@ -4,7 +4,7 @@ You do not need much to work on these docs. Everything listed here is free and r
 
 ## Node.js
 
-VitePress runs on Node, so this one is not optional. Download the **LTS** build from [nodejs.org](https://nodejs.org/en) — anything from Node 18 upwards works.
+VitePress runs on Node, so this one is not optional. Download the **LTS** build from [nodejs.org](https://nodejs.org/en). Anything from Node 18 upwards works.
 
 Once the installer is done, open a terminal and check it:
 
@@ -49,7 +49,7 @@ Turn on **Format on Save** in VS Code settings. Prettier will then clean up your
 
 Free, and you need one to open a pull request. Sign up at [github.com](https://github.com).
 
-If you plan to push from your machine rather than editing in the browser, set up an SSH key as well — GitHub's [own walkthrough](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) covers it better than we could.
+If you plan to push from your machine rather than editing in the browser, set up an SSH key as well, GitHub's [own walkthrough](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) covers it better than we could.
 
 ## What you do not need
 

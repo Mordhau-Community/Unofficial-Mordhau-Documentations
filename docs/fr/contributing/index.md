@@ -4,7 +4,7 @@ Ce site est écrit par les personnes qui l'utilisent.Chaque page commençait par
 quelqu'un qui travaille sur quelque chose et prend ensuite le temps de l'écrire.
 
 Cette page est la configuration locale, du début à la fin.Vous n'en avez pas besoin pour réparer
-une faute de frappe ou signaler quelque chose qui ne va pas - [méthodes de contribution](/fr/contributing/methods) couvre les itinéraires les plus rapides, et aucun d'entre eux
+une faute de frappe ou signaler quelque chose qui ne va pas, [méthodes de contribution](/fr/contributing/methods) couvre les itinéraires les plus rapides, et aucun d'entre eux
 implique un terminal.Lire le [termes et règles](/fr/contributing/terms-rules)
 avant d'ouvrir une pull request de toute façon.
 
@@ -13,7 +13,7 @@ avant d'ouvrir une pull request de toute façon.
 - [Node.js](https://nodejs.org/en) 18 ou version ultérieure
 - [Git](https://git-scm.com/downloads)
 - Un compte [GitHub](https://github.com)
-- Un éditeur — le référentiel est configuré pour [VS Code](https://code.visualstudio.com/)
+- Un éditeur: le référentiel est configuré pour [VS Code](https://code.visualstudio.com/)
 
 [Outils nécessaires](/fr/contributing/tools) contient les notes d'installation et le
 configuration de première exécution pour chacun d’eux.
@@ -77,5 +77,5 @@ GitHub propose d'ouvrir une pull request de cette succursale lors de votre proch
 le référentiel.Dites ce qui a changé et pourquoi.
 
 Si l'avis revient pour demander quelque chose, poussez un autre commit vers le même
-branch - la demande d'extraction se met à jour d'elle-même.Une fois fusionné, Netlify reconstruit
+branch, la demande d'extraction se met à jour d'elle-même.Une fois fusionné, Netlify reconstruit
 et publie le site, ce qui prend une minute ou deux.

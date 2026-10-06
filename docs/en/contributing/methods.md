@@ -16,7 +16,7 @@ This is the right choice for typos, a broken link, a sentence that reads badly, 
 
 ## 3. Work locally
 
-Once you are changing more than one file — or adding a page, or touching the sidebar — it is worth setting the project up on your machine so you can see the result before you send it. The [introduction](/en/contributing/) walks through the clone and the dev server.
+Once you are changing more than one file (or adding a page, or touching the sidebar) it is worth setting the project up on your machine so you can see the result before you send it. The [introduction](/en/contributing/) walks through the clone and the dev server.
 
 Work locally when you are:
 
@@ -29,7 +29,7 @@ Work locally when you are:
 
 The site already runs in English, Arabic, French, Japanese, Russian and Chinese, but most of the translated folders are far behind the English ones. Filling in a page in a language you actually speak is one of the most valuable things you can do here.
 
-Translations live in `docs/<language>/`, mirroring the English structure. Copy the English file to the matching path in your language folder and translate the body. Leave the frontmatter keys alone — only translate the values.
+Translations live in `docs/<language>/`, mirroring the English structure. Copy the English file to the matching path in your language folder and translate the body. Leave the frontmatter keys alone. Only translate the values.
 
 ::: warning
 Please do not submit machine translated pages. A rough page written by someone who speaks the language beats a fluent looking one that gets the technical terms wrong, and we have no way to review a language none of us read.

@@ -7,8 +7,8 @@ aside: false
 # Mordhau Lack
 
 Mordhau is well documented as a game to play and barely documented as a game to
-run. Everything past joining a server — hosting one, administering it, building
-for it, or fixing it when it breaks — has no maintained official reference.
+run. Everything past joining a server, hosting one, administering it, building
+for it, or fixing it when it breaks, has no maintained official reference.
 
 ## Where the gaps are
 

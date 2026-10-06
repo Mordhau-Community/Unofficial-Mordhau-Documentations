@@ -46,4 +46,4 @@ Quelques éléments à vérifier avant de payer six mois d'avance :
 
 ## Ou hébergez-le vous-même {#or-host-it-yourself}
 
-C'est gratuit et ce n'est pas particulièrement difficile — le [guide du serveur dédié](/fr/dedicated-server-guide/) parcourt tout le processus.Vous avez besoin d’une machine qui reste sous tension et capable de transférer trois ports.Si vous disposez déjà d’un VPS ou d’un boîtier de rechange, c’est l’essentiel du travail effectué.
+C'est gratuit et ce n'est pas particulièrement difficile, le [guide du serveur dédié](/fr/dedicated-server-guide/) parcourt tout le processus.Vous avez besoin d’une machine qui reste sous tension et capable de transférer trois ports.Si vous disposez déjà d’un VPS ou d’un boîtier de rechange, c’est l’essentiel du travail effectué.

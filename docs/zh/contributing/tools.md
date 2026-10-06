@@ -4,7 +4,7 @@
 
 ## Node.js {#nodejs}
 
-VitePress 在 Node 上运行，所以这一项不是可选的。从 [nodejs.org](https://nodejs.org/en) 下载 **LTS** 版本 - Node 18 以上的任何版本都可以。
+VitePress 在 Node 上运行，所以这一项不是可选的。从 [nodejs.org](https://nodejs.org/en) 下载 **LTS** 版本： Node 18 以上的任何版本都可以。
 
 安装程序完成后，打开终端并检查它：
 
@@ -49,7 +49,7 @@ git config --global user.email "you@example.com"
 
 免费，您需要一个来打开拉取请求。注册地址为 [github.com](https://github.com)。
 
-如果您打算从计算机推送而不是在浏览器中编辑，请设置 SSH 密钥 — GitHub 的 [自己走过](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) 比我们更好地介绍了它。
+如果您打算从计算机推送而不是在浏览器中编辑，请设置 SSH 密钥， GitHub 的 [自己走过](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) 比我们更好地介绍了它。
 
 ## 你不需要什么 {#what-you-do-not-need}
 

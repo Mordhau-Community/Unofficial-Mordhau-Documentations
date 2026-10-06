@@ -4,7 +4,7 @@
 
 ## Node.js {#nodejs}
 
-VitePress يعمل على Node، لذلك هذا ليس اختياريًا. قم بتنزيل الإصدار **LTS** من [nodejs.org](https://nodejs.org/en) — أي شيء بدءًا من Node 18 فما فوق يعمل.
+VitePress يعمل على Node، لذلك هذا ليس اختياريًا. قم بتنزيل الإصدار **LTS** من [nodejs.org](https://nodejs.org/en): أي شيء بدءًا من Node 18 فما فوق يعمل.
 
 بمجرد الانتهاء من التثبيت، افتح الوحدة الطرفية وتحقق منها:
 
@@ -49,7 +49,7 @@ git config --global user.email "you@example.com"
 
 مجاني، وتحتاج إلى واحد لفتح طلب سحب. قم بالتسجيل في [github.com](https://github.com).
 
-إذا كنت تخطط للدفع من جهازك بدلاً من التحرير في المتصفح، فقم بإعداد مفتاح SSH أيضًا - GitHub يغطيه [سيرة خاصة](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) بشكل أفضل مما نستطيع.
+إذا كنت تخطط للدفع من جهازك بدلاً من التحرير في المتصفح، فقم بإعداد مفتاح SSH أيضًا، GitHub يغطيه [سيرة خاصة](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) بشكل أفضل مما نستطيع.
 
 ## ما لا تحتاجه {#what-you-do-not-need}
 

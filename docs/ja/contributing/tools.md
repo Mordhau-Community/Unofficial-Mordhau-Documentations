@@ -49,7 +49,7 @@ VS Code 設定で **保存時にフォーマット** をオンにします。Pre
 
 無料で、プル リクエストを開くにはアカウントが必要です。[github.com](https://github.com) にサインアップしてください。
 
-ブラウザで編集するのではなく、マシンからプッシュする予定がある場合は、SSH キーもセットアップしてください — GitHub の [ウォークスルー](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) は、これについて私たちよりも詳しく説明しています。
+ブラウザで編集するのではなく、マシンからプッシュする予定がある場合は、SSH キーもセットアップしてください、 GitHub の [ウォークスルー](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) は、これについて私たちよりも詳しく説明しています。
 
 ## 不要なもの {#what-you-do-not-need}
 

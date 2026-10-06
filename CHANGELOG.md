@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [1.1.1] (06 / 10 / 2026)
+
+### Fixed
+
+- Removed the invalid standalone `Mordhau` argument from dedicated-server launch
+  commands and equivalent RCON examples in all six languages.
+
+
 ## [1.1.0] (05 / 09 / 2026)
 
 ### Added
@@ -52,16 +60,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   viewport and two centred paragraphs at the same size, weight and colour, so
   nothing in it was ranked and the line closed the page instead of finishing
   it. The rule is gone: the page darkens into the alt surface over 150px, hung
-  in the empty space that already sat under the last thing on a page — 154px
-  on a document, 122px on a phone, 96px on a landing page — so the footer is
+  in the empty space that already sat under the last thing on a page (154px
+  on a document, 122px on a phone, and 96px on a landing page), so the footer is
   no taller for having it. Inside, a seam rules the band's own content off and
   everything sits under it on one row: the attribution and the licence stacked
   at the start, the places to go at the end. The seam is one hairline that
   fades out before both ends of the measure, the reader's accent laid across
-  its middle at three tenths, and it sits clear of the top of the band — 44px
-  down on a phone, 48px on a wide screen — so it reads as ruling the footer
+  its middle at three tenths, and it sits clear of the top of the band (44px
+  down on a phone and 48px on a wide screen), so it reads as ruling the footer
   off rather than as the cut the wash was put there to avoid. It is the notch
-  in the nav bar's underline again — a line here is allowed to stop. The band
+  in the nav bar's underline again. A line here is allowed to stop. The band
   is capped at the width of the text column above it and centred, off the same
   token, so the reader's width setting moves the two together instead of
   leaving the footer spanning 1440px under a 720px page, and it is generous
@@ -84,7 +92,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   window: --vp-sidebar-width where there is a sidebar, the same again on the
   side the outline is pinned to, and the layout shell's share of the window
   past 1440px, which is what the content area is inset by in each of those
-  cases. Only the contents move — a background paints across padding, so the
+  cases. Only the contents move. A background paints across padding, so the
   band still runs edge to edge. Centred on the window it would miss: at 1024
   with a sidebar the article sits 136px right of the middle, and at 1280 with
   an outline and no sidebar the seam would run 24px in under the outline rail
@@ -94,7 +102,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Every link in the footer is drawn the same way, and none of them is a box.
   Disclaimer and Support the docs are places to go, so they stand on their own
-  — and on nothing else: they take the same underline the licence and
+  and on nothing else: they take the same underline the licence and
   Triternion carry inside the sentences beside them, because colour alone does
   not mark a link, softened to the dimmest text tone at rest and up to full
   strength under the pointer, where the words take the accent and the line
@@ -114,7 +122,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The footer is written in the language of the page. Its four strings were one
   English set served to all six locales, so an Arabic, Japanese or Chinese
   page closed in English, and the Disclaimer link pointed at the English page
-  whatever you were reading — the one link on the site that put you back into
+  whatever you were reading, the one link on the site that put you back into
   a language you had just left. Each locale carries its own now, and the two
   destinations reuse the labels the nav bar already had for them rather than
   translating the same two words a second time. The sentences are stored as
@@ -158,9 +166,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   once: 107.31px published as 107 ran the Arabic segments a sixth of a pixel
   too far onto the button and left a hair of extra line at each corner, and
   125.55px published as 126 left the Japanese ones a quarter of a pixel short
-  and a hair of gap instead. Taken off the rect the arithmetic closes — the
+  and a hair of gap instead. Taken off the rect the arithmetic closes. The
   button is centred, so a segment of half the bar less half the button plus a
-  pixel ends exactly one pixel past its edge — and the overlap now measures
+  pixel ends exactly one pixel past its edge, and the overlap now measures
   1.000px in all six languages, against 0.78 to 1.16 before.
 
 - The isolate on those two sentences went with the English in them.
@@ -172,7 +180,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   4.0" and the attribution read as ".Mordhau".
 
 - The Arabic footer is written so that problem cannot arise, because nothing
-  in the markup can move a stop that follows its run in logical order — an
+  in the markup can move a stop that follows its run in logical order, an
   isolate or a right to left mark puts it in exactly the same place. Each line
   opens on an Arabic word and closes on one, and carries a single full stop,
   at its end, after Arabic. The two clauses of the attribution are joined with
@@ -230,16 +238,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   direction does most of that, because every row in it is a flex container and
   a flex row lays its items along the inline axis. The rest is about two dozen
   physical offsets that postcss-rtl had already mirrored for the Arabic build
-  — the title block's pin, which edge each flyout hangs from, the appearance
+, the title block's pin, which edge each flyout hangs from, the appearance
   knob, the hamburger's three states, every negative margin that pulls a group
-  flush to an edge — restated at their English values in logical properties,
+  flush to an edge, restated at their English values in logical properties,
   which postcss-rtl leaves alone, and with the transforms behind custom
   properties, which it cannot evaluate and so cannot flip.
 
 - The two columns beside a documentation page start their contents on the same
   line. VitePress pads the outline clear of the nav bar and then some, and
   lets the sidebar begin almost against it, so the first sidebar link sat 22px
-  above "On this page" across the width of the window — 10px under the bar
+  above "On this page" across the width of the window, 10px under the bar
   against the outline's 32. Both read one figure now, so they cannot drift
   apart again: measured at 960, 1440 and 1920, with the release notice up and
   closed and on the Arabic pages, each column's first line lands exactly 32px
@@ -248,12 +256,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - An info, tip, warning or danger box carries an icon beside its word and a
   hairline around its edge. VitePress leaves both off: a block was a tinted
   rectangle with a bold word at the top of it, so the four kinds were told
-  apart by a wash of colour alone — the weakest signal on the page for the one
+  apart by a wash of colour alone, the weakest signal on the page for the one
   element whose whole job is to say how much attention to pay, and no signal
   at all to a reader who cannot separate the tints. The icons are Hugeicons,
   the family the rest of the theme draws from, and the ones the shapes argue
   for: a circle for information, a bulb for a tip, a triangle for a warning,
-  an octagon for danger — the last two being the road-sign pair, so the two
+  an octagon for danger, the last two being the road-sign pair, so the two
   that matter carry the two shapes a reader already reads as caution and stop.
   Drawn as masks like every other icon here, so each takes its block's own
   text colour. The border was already declared at 1px and merely transparent,
@@ -265,7 +273,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   horizontal scroll, which is how a wide one is kept from bursting the page,
   but it costs the element its table box: the rows inside are wrapped in an
   anonymous table, an anonymous table is sized to its contents, and the rest
-  of the column was left empty beside it — on the left of an Arabic page,
+  of the column was left empty beside it, on the left of an Arabic page,
   which is where a right to left table ends. From 640px up they are real
   tables at full width. Below that the block and its scroll stay, because a
   phone is where a property table genuinely will not fit and where scrolling
@@ -280,9 +288,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   on the panel and not on the box around it, which is the deliberate half of
   it: the box is what hangs a menu off its button, and turning that round
   would swing every panel to the wrong side of the thing that opened it.
-  Three corrections this release had been making inside a panel — the indent
-  on an external item, the language heading's padding, the appearance row's
-  margin — are gone with it rather than reversed a second time.
+  Three corrections this release had been making inside a panel are gone: the
+  indent on an external item, the language heading's padding, and the appearance
+  row's margin. They are not reversed a second time.
 
   The switch is the one exception, in the bar and in the overflow menu alike.
   It is a control rather than a sentence: a track with two ends and a knob
@@ -315,7 +323,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   rather than stacking them flush. A hovered row's fill used to run straight
   into the rows above and below it with nothing between them, which was least
   forgivable in the language menu, where each row carries a flag and so is an
-  object with an edge of its own — but it is the same row and the same fill in
+  object with an edge of its own, but it is the same row and the same fill in
   all of them. A group's heading takes the same gap as its links, because a
   heading is a row like the rest here. Measured across the five menus in both
   languages: four pixels between rows, and the twenty-four to twenty-nine
@@ -333,8 +341,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Code blocks read right to left on the Arabic pages. VitePress mirrors them
-  deliberately — it ships the rules itself rather than leaving them to the
-  right-to-left build — and for a block of prose that would be right, but a
+  deliberately. It ships the rules itself rather than leaving them to the
+  right-to-left build. For a block of prose that would be right, but a
   shell line, a path, a config key and a JSON brace all have a fixed order
   that is part of what they mean. Reversing the line is not a translation of
   it, and nobody types `cd ..` from the right. They run left to right in every
@@ -346,7 +354,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Every down arrow pointed up on the Arabic pages, and every up arrow pointed
   down. VitePress draws one chevron glyph pointing right and one arrow, and
-  aims each with a rotation — 90 degrees is down, minus 90 is up — and
+  aims each with a rotation (90 degrees is down, minus 90 is up) and
   postcss-rtl mirrors a rotation, which is what a glyph meaning "forward"
   wants and the opposite of what one meaning "down" wants. So the nav menus
   sat with their arrows pointing up, opening one turned its arrow down, and
@@ -428,7 +436,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   full stop closing an English run is a neutral character that resolves to the
   far side of it: the licence line read ".Licensed under CC BY-SA 4.0" and the
   attribution ".Mordhau © Triternion". Both sentences carry dir="ltr" now,
-  which isolates them rather than forcing the paragraph — each still sits
+  which isolates them rather than forcing the paragraph. Each still sits
   where the paragraph puts it, and only its own characters are laid out left
   to right.
 

@@ -27,7 +27,7 @@ Markdown est utilisé dans divers contextes en raison de sa simplicité et de sa
 
 Markdown utilise une syntaxe de texte brut avec des caractères spéciaux pour définir le formatage.Voici quelques exemples :
 
-### 1- Titres : {#1-headings}
+### 1:  Titres : {#1-headings}
 
 ```md
 # Heading 1
@@ -39,7 +39,7 @@ Markdown utilise une syntaxe de texte brut avec des caractères spéciaux pour d
 
 Un titre est une ligne commençant par un à six caractères `#`.Un `#` est le titre de la page, `##` est une section, `###` est une sous-section.Laissez une ligne vide après.
 
-### 2- Accentuation : {#2-emphasis}
+### 2:  Accentuation : {#2-emphasis}
 
 ```md
 *italic* or _italic_
@@ -48,7 +48,7 @@ Un titre est une ligne commençant par un à six caractères `#`.Un `#` est le t
 ~~struck through~~
 ```
 
-### 3- Listes : {#3-lists}
+### 3:  Listes : {#3-lists}
 
 ```md
 - first item
@@ -62,13 +62,13 @@ Un titre est une ligne commençant par un à six caractères `#`.Un `#` est le t
 
 Les listes numérotées se renumérotent elles-mêmes, vous pouvez donc écrire `1.` sur chaque ligne etMarkdown comptera toujours correctement.
 
-### 4- Liens : {#4-links}
+### 4:  Liens : {#4-links}
 
 ```md
 [text people click](https://example.com)
 ```
 
-### 5- Images : {#5-images}
+### 5:  Images : {#5-images}
 
 ```md
 ![description of the image](/path/to/image.webp)
@@ -76,9 +76,9 @@ Les listes numérotées se renumérotent elles-mêmes, vous pouvez donc écrire 
 
 La description entre crochets est ce que les lecteurs d'écran annoncent et ce qui s'affiche si l'image ne se charge pas, alors écrivez quelque chose de réel ici.
 
-### 6- Code : {#6-code}
+### 6:  Code : {#6-code}
 
-Enveloppez quelques mots dans des guillemets simples pour les marquer comme code - utile pour les noms de fichiers, les commandes et les clés de configuration.Pour toute période plus longue, utilisez trois guillemets et nommez la langue :
+Enveloppez quelques mots dans des guillemets simples pour les marquer comme code, utile pour les noms de fichiers, les commandes et les clés de configuration.Pour toute période plus longue, utilisez trois guillemets et nommez la langue :
 
 ````md
 ```bash
@@ -86,13 +86,13 @@ node -v
 ```
 ````
 
-### 7- Citations : {#7-quotes}
+### 7:  Citations : {#7-quotes}
 
 ```md
 > Anything after a > is a quote block.
 ```
 
-### 8- Tableaux : {#8-tables}
+### 8:  Tableaux : {#8-tables}
 
 ```md
 | Setting | Meaning |

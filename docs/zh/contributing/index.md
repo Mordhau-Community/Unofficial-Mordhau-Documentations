@@ -4,7 +4,7 @@
 开头，有人在研究一些东西，然后花时间把它写下来。
 
 此页面是本地设置，从头到尾。您不需要任何它来修复
-拼写错误或报告错误的内容 - [缴款方法](/zh/contributing/methods) 涵盖更快的路线，并且
+拼写错误或报告错误的内容， [缴款方法](/zh/contributing/methods) 涵盖更快的路线，并且
 都不涉及终端。在以任何方式打开拉取请求之前，请先阅读 [条款和规则](/zh/contributing/terms-rules)
 。
 
@@ -13,7 +13,7 @@
 - [Node.js](https://nodejs.org/en) 18 或更新版本
 - [图形](https://git-scm.com/downloads)
 - A[GitHub](https://github.com) 帐户
-- 编辑器 - 存储库是为 [VS Code](https://code.visualstudio.com/)
+- 编辑器： 存储库是为 [VS Code](https://code.visualstudio.com/)
 
 [所需工具](/zh/contributing/tools) 设置的，其中包含每个安装说明和
 首次运行配置。
@@ -36,7 +36,7 @@ npm run docs:dev
 ```
 
 它打印地址它的服务位置通常为 `http://localhost:5173`。让
-保持运行 — 保存时页面会重新加载。
+保持运行， 保存时页面会重新加载。
 
 ## 进行更改 {#make-your-change}
 
@@ -77,5 +77,5 @@ GitHub 提供在您下次访问时从该分支打开拉取请求
 存储库。说出发生了什么变化以及原因。
 
 如果审查返回要求某些内容，请将另一个提交推送到同一个
-分支 - 拉取请求会自行更新。合并后，Netlify 会重建
+分支， 拉取请求会自行更新。合并后，Netlify 会重建
 并发布站点，这需要一两分钟的时间。

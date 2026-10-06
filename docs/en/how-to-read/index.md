@@ -12,7 +12,7 @@ A short page about how this site is put together, so you can find things quickly
 
 The top bar splits into two halves.
 
-**Informations** is about the project — who we are, why Mordhau needed this, and how to contribute.
+**Informations** is about the project: who we are, why Mordhau needed this, and how to contribute.
 
 **Guides** is the documentation itself, and it is grouped by who it is for. Player guides cover the game. Developer and modder guides cover running servers, RCON, the SDK, and what to do when something breaks.
 
@@ -26,7 +26,7 @@ The magnifying glass in the top bar, or <kbd>Ctrl</kbd> + <kbd>K</kbd>, searches
 
 ## Languages
 
-The language icon switches language. Not every page exists in every language yet — English is the most complete, and the others are being filled in as people translate them. If a page has not been translated you will land back on the English version.
+The language icon switches language. Not every page exists in every language yet. English is the most complete, and the others are being filled in as people translate them. If a page has not been translated you will land back on the English version.
 
 Filling one of those gaps is genuinely useful, and [contributing a translation](/en/contributing/methods) does not require any technical knowledge beyond speaking the language.
 
@@ -37,7 +37,7 @@ outline, leaving just the article. Press it again to bring them back.
 
 ## What the boxes mean
 
-Coloured panels appear throughout the guides and they are not decoration — the colour tells you how much attention to pay.
+Coloured panels appear throughout the guides and they are not decoration. The colour tells you how much attention to pay.
 
 ::: info
 Background. Useful to know, but you can carry on without it.
@@ -63,7 +63,7 @@ Anything in a grey block is meant to be typed or pasted exactly as written:
 ./steamcmd.sh +login anonymous +app_update 629800 validate +quit
 ```
 
-Where a step is different on Windows and Linux, you get tabs. Click the one that matches your machine — the tabs are not two halves of the same instruction, they are the same instruction written twice.
+Where a step is different on Windows and Linux, you get tabs. Click the one that matches your machine. The tabs are not two halves of the same instruction. They are the same instruction written twice.
 
 ::: code-group
 
@@ -79,7 +79,7 @@ Where a step is different on Windows and Linux, you get tabs. Click the one that
 
 Values you need to replace are named for what they are. `RconPassword=a-different-long-password` means put your own password there, not that literal string.
 
-`Inline code` marks file names, config keys, commands and paths — anything where the exact characters matter.
+`Inline code` marks file names, config keys, commands and paths, anything where the exact characters matter.
 
 ## Following a guide
 

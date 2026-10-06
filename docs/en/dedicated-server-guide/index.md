@@ -65,7 +65,7 @@ Put `+force_install_dir` **before** `+login`. SteamCMD processes arguments in or
 
 ## First launch
 
-Start the server once with no arguments. It will not be playable yet — the point is that it writes out its config files, and then you stop it.
+Start the server once with no arguments. It will not be playable yet. The point is that it writes out its config files, and then you stop it.
 
 ::: code-group
 
@@ -158,7 +158,7 @@ Optional. The setting most owners end up touching is the tick rate:
 NetServerMaxTickRate=60
 ```
 
-Higher is smoother and costs more CPU. Do not raise it unless you know the machine can keep up — a server that cannot hold its tick rate feels considerably worse than a lower one that is stable.
+Higher is smoother and costs more CPU. Do not raise it unless you know the machine can keep up. A server that cannot hold its tick rate feels considerably worse than a lower one that is stable.
 
 ## Starting the server properly
 
@@ -167,11 +167,11 @@ Now start it with a map and the ports:
 ::: code-group
 
 ```powershell [Windows]
-.\MordhauServer.exe Mordhau FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
+.\MordhauServer.exe FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
 ```
 
 ```bash [Linux]
-./MordhauServer.sh Mordhau FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
+./MordhauServer.sh FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
 ```
 
 :::
@@ -187,10 +187,10 @@ Put that in a `.bat` file on Windows or a shell script on Linux so you are not r
 | `-RconPort` | RCON listener, see the [RCON guide](/en/rcon-guide/) |
 | `-log` | Print to the console rather than only to a file |
 
-On Linux, run it under `screen` or `tmux` — or better, write a systemd unit — so it survives you closing the SSH session:
+On Linux, run it under `screen` or `tmux` (or better, write a systemd unit) so it survives you closing the SSH session:
 
 ```bash
-screen -dmS mordhau ./MordhauServer.sh Mordhau FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
+screen -dmS mordhau ./MordhauServer.sh FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
 ```
 
 ## Ports
@@ -202,7 +202,7 @@ screen -dmS mordhau ./MordhauServer.sh Mordhau FFA_ThePit -Port=7777 -BeaconPort
 | 27015 | UDP | Steam query |
 | your RCON port | TCP | Remote console, only if you enable it |
 
-All three UDP ports have to be open and forwarded, not just the game port. If the beacon or query port is blocked, your server runs perfectly well and simply never appears in the browser — which is the single most common thing people ask about.
+All three UDP ports have to be open and forwarded, not just the game port. If the beacon or query port is blocked, your server runs perfectly well and simply never appears in the browser, which is the single most common thing people ask about.
 
 Running more than one server on the same machine? Give each its own set, spaced apart:
 
@@ -214,11 +214,11 @@ Running more than one server on the same machine? Give each its own set, spaced 
 
 Look for your server name in the in-game browser. If it is not there, work through this in order:
 
-**Nothing in the browser at all.** Almost always the beacon or query port. Check your forwarding rules, and check the firewall on the machine itself — Windows Firewall blocks the server on first run and the prompt is easy to click past.
+**Nothing in the browser at all.** Almost always the beacon or query port. Check your forwarding rules, and check the firewall on the machine itself. Windows Firewall blocks the server on first run and the prompt is easy to click past.
 
 **Visible, but nobody can connect.** The game port. Same checks, port 7777.
 
-**Fine on the local network, invisible outside.** Your router is not forwarding, or your ISP has you behind CGNAT — in which case you cannot host from that connection at all and will need a VPS.
+**Fine on the local network, invisible outside.** Your router is not forwarding, or your ISP has you behind CGNAT, so you cannot host from that connection at all and will need a VPS.
 
 **Config changes did nothing.** You edited the file while the server was running. Stop it, edit, start.
 

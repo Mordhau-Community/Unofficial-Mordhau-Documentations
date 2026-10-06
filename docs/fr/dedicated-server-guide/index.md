@@ -65,7 +65,7 @@ Mettre `+force_install_dir` **avant** `+login`.SteamCMD traite les arguments dan
 
 ## Premier lancement {#first-launch}
 
-Démarrez le serveur une fois sans argument.Il ne sera pas encore jouable – le fait est qu’il écrit ses fichiers de configuration, puis vous l’arrêtez.
+Démarrez le serveur une fois sans argument.Il ne sera pas encore jouable, le fait est qu’il écrit ses fichiers de configuration, puis vous l’arrêtez.
 
 ::: groupe de codes
 
@@ -167,11 +167,11 @@ Démarrez-le maintenant avec une carte et les ports :
 ::: code-group
 
 ```powershell [Windows]
-.\MordhauServer.exe Mordhau FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
+.\MordhauServer.exe FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
 ```
 
 ```bash [Linux]
-./MordhauServer.sh Mordhau FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
+./MordhauServer.sh FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
 ```
 
 :::
@@ -187,10 +187,10 @@ Mettez cela dans un fichier `.bat` sur Windows ou unscript shell sur Linux afin 
 |`-RconPort` |Écouteur RCON, voir le [Guide RCON](/fr/rcon-guide/) |
 |`-log` |Imprimez sur la console plutôt que uniquement dans un fichier |
 
-Sur Linux, exécutez-le sous `screen` ou `tmux` — ou mieux, écrivez une unité systemd — pour qu'il survive à la fermeture de la session SSH :
+Sur Linux, exécutez-le sous `screen` ou `tmux` (ou mieux, écrivez une unité systemd) pour qu'il survive à la fermeture de la session SSH :
 
 ```bash
-screen -dmS mordhau ./MordhauServer.sh Mordhau FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
+screen -dmS mordhau ./MordhauServer.sh FFA_ThePit -Port=7777 -BeaconPort=15000 -QueryPort=27015 -log
 ```
 
 ## Ports {#ports}
@@ -202,7 +202,7 @@ screen -dmS mordhau ./MordhauServer.sh Mordhau FFA_ThePit -Port=7777 -BeaconPort
 |27015 |UDP |Requête Steam |
 |votre port RCON |TCP |Console distante, uniquement si vous l'activez |
 
-Les trois ports UDP doivent être ouverts et transférés, pas seulement le port de jeu.Si la balise ou le port de requête est bloqué, votre serveur fonctionne parfaitement et n’apparaît tout simplement jamais dans le navigateur – ce qui est la question la plus courante que les gens posent.
+Les trois ports UDP doivent être ouverts et transférés, pas seulement le port de jeu.Si la balise ou le port de requête est bloqué, votre serveur fonctionne parfaitement et n’apparaît tout simplement jamais dans le navigateur, ce qui est la question la plus courante que les gens posent.
 
 Vous exécutez plusieurs serveurs sur la même machine ?Donnez à chacun son propre ensemble, espacé :
 
@@ -218,7 +218,7 @@ Recherchez le nom de votre serveur dans le navigateur du jeu.S'il n'y est pas, p
 
 **Visible, mais personne ne peut se connecter.** Le port de jeu.Mêmes vérifications, port 7777.
 
-**Très bien sur le réseau local, invisible à l'extérieur.** Votre routeur ne transmet pas, ou votre FAI vous a derrière CGNAT — auquel cas vous ne pouvez pas du tout héberger à partir de cette connexion et vous aurez besoin d'un VPS.
+**Très bien sur le réseau local, invisible à l'extérieur.** Votre routeur ne transmet pas, ou votre FAI vous a derrière CGNAT, auquel cas vous ne pouvez pas du tout héberger à partir de cette connexion et vous aurez besoin d'un VPS.
 
 **Les modifications de configuration n'ont rien fait.** Vous avez modifié le fichier pendant que le serveur était en cours d'exécution.Arrêtez-le, modifiez, démarrez.
 
